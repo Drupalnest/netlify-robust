@@ -8,13 +8,13 @@ const Index = () => {
 
   return (
     <div>
-      {authenticated ? (
+      {/* {authenticated ? (
         <Teams />
       ) : (
         <Login onLogin={() => setAuthenticated(true)} />
-      )}
-
-      <App />
+      )} */}
+      <Teams />
+      {/* <App /> */}
     </div>
   );
 };
