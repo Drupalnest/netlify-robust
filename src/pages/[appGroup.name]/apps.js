@@ -547,7 +547,7 @@ const TeamApps = () => {
     <Layout>
       <div style={{ marginTop: "120px" }}>
         <Buttons />
-        <div style={{ marginTop: "90px" }}>
+        <div style={{ marginTop: "50px" }}>
           <div className="dialog-off-canvas-main-canvas toolbar-icon-9 adminimal-admin-toolbar toolbar-tray-open toolbar-horizontal toolbar-fixed toolbar-loading fontyourface path--entity-team-collection user-logged-in path-teams">
             <div className="page">
               <div className="page__tasks">
@@ -577,7 +577,7 @@ const TeamApps = () => {
                 </div>
               </div>
 
-              <div className="container py-5">
+              <div className="container py-3">
                 <div className="row">
                   <div className="page__content col-md">
                     <div className="container table-responsive  ">

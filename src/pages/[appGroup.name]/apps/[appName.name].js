@@ -10,6 +10,8 @@ import {
   appDetails,
 } from "../../../redux/store";
 
+import "../../../style/popup.css"
+
 //import "../../../styles/popup.css";
 import { Link, navigate } from "gatsby";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
@@ -97,83 +99,6 @@ const ViewApp = () => {
     }
   };
 
-  // function customFormatTimestamp(timestamp) {
-  //   if (!timestamp) {
-  //     return "N/A";
-  //   }
-
-  //   const customDate = new Date(parseInt(timestamp));
-  //   if (!isNaN(customDate)) {
-  //     const now = new Date();
-  //     const diff = now - customDate;
-
-  //     const seconds = Math.floor(diff / 1000);
-  //     const minutes = Math.floor(seconds / 60);
-  //     const hours = Math.floor(minutes / 60);
-  //     const days = Math.floor(hours / 24);
-  //     const weeks = Math.floor(days / 7);
-  //     const months = Math.floor(days / 30); // Approximation, not precise
-
-  //     if (months >= 1) {
-  //       return `${months} months ago `;
-  //     } else if (weeks >= 1) {
-  //       const remainingDays = days % 7;
-  //       return `${weeks} weeks ${remainingDays} days ago `;
-  //     } else {
-  //       return `${days} days ago `;
-  //     }
-  //   } else {
-  //     return "Invalid Date";
-  //   }
-  // }
-
-  // function customFormatTimestamps(timestamp) {
-  //   if (!timestamp) {
-  //     return "N/A";
-  //   }
-
-  //   const customDate = new Date(parseInt(timestamp));
-  //   if (!isNaN(customDate)) {
-  //     const now = new Date();
-  //     const diff = now - customDate;
-
-  //     const seconds = Math.floor(diff / 1000);
-  //     const minutes = Math.floor(seconds / 60);
-  //     const hours = Math.floor(minutes / 60);
-  //     const days = Math.floor(hours / 24);
-  //     const weeks = Math.floor(days / 7);
-  //     const months = Math.floor(days / 30); // Approximation, not precise
-  //     const years = Math.floor(months / 12);
-
-  //     if (years >= 1) {
-  //       const remainingMonths = months % 12;
-  //       const remainingWeeks = Math.floor((days % 30) / 7);
-  //       const remainingDays = days % 7;
-  //       return `${years} years ${remainingMonths} months ${remainingWeeks} weeks ${remainingDays} days ago`;
-  //     } else if (months >= 1) {
-  //       const remainingWeeks = Math.floor((days % 30) / 7);
-  //       const remainingDays = days % 7;
-  //       return `${months} months ${remainingWeeks} weeks ${remainingDays} days ago`;
-  //     } else if (weeks >= 1) {
-  //       const remainingDays = days % 7;
-  //       return `${weeks} weeks ${remainingDays} days ago`;
-  //     } else if (days >= 1) {
-  //       const remainingHours = hours % 24;
-  //       return `${days} days ${remainingHours} hours ago`;
-  //     } else if (hours >= 1) {
-  //       const remainingMinutes = minutes % 60;
-  //       return `${hours} hours ${remainingMinutes} minutes ago`;
-  //     } else if (minutes >= 1) {
-  //       const remainingSeconds = seconds % 60;
-  //       return `${minutes} minutes ${remainingSeconds} seconds ago`;
-  //     } else {
-  //       return `${seconds} seconds ago`;
-  //     }
-  //   } else {
-  //     return "Invalid Date";
-  //   }
-  // }
-
   function customFormatTimestamp(timestamp) {
     if (!timestamp) {
       return "N/A";
@@ -248,130 +173,6 @@ const ViewApp = () => {
       return "Invalid Date";
     }
   }
-
-  // const timestamp = 1674551460000; // Example timestamp (Aug 21 2023 12:11:00 PM UTC)
-  // const formattedTimestamp = customFormatTDate(timestamp);
-
-  // console.log(formattedTimestamp); // Output: "Aug 21, 2023, 12:11:00 PM (UTC)"
-
-  // function customFormatTDate(timestamp) {
-  //   if (!timestamp) {
-  //     return "N/A";
-  //   }
-
-  //   const customDate = new Date(parseInt(timestamp));
-
-  //   if (isNaN(customDate)) {
-  //     return "Invalid Date";
-  //   }
-
-  //   const now = new Date();
-  //   const diff = now - customDate;
-
-  //   const seconds = Math.floor(Math.abs(diff) / 1000);
-  //   const minutes = Math.floor(seconds / 60);
-  //   const hours = Math.floor(minutes / 60);
-  //   const days = Math.floor(hours / 24);
-  //   const weeks = Math.floor(days / 7);
-  //   const months = Math.floor(days / 30); // Approximation, not precise
-  //   const years = Math.floor(months / 12);
-
-  //   const timeZone = "UTC"; // Specify the time zone as 'UTC'
-
-  //   if (years >= 1) {
-  //     const remainingMonths = months % 12;
-  //     const remainingWeeks = Math.floor((days % 30) / 7);
-  //     const remainingDays = days % 7;
-  //     return `${years} years ${remainingMonths} months  (${timeZone})`;
-  //   } else if (months >= 1) {
-  //     const remainingWeeks = Math.floor((days % 30) / 7);
-  //     const remainingDays = days % 7;
-  //     return `${months} months ${remainingWeeks} weeks  (${timeZone})`;
-  //   } else if (weeks >= 1) {
-  //     const remainingDays = days % 7;
-  //     return `${weeks} weeks ${remainingDays} days ago (${timeZone})`;
-  //   } else if (days >= 1) {
-  //     const remainingHours = hours % 24;
-  //     return `${days} days ${remainingHours} hours ago (${timeZone})`;
-  //   } else if (hours >= 1) {
-  //     const remainingMinutes = minutes % 60;
-  //     return `${hours} hours ${remainingMinutes} minutes ago (${timeZone})`;
-  //   } else if (minutes >= 1) {
-  //     const remainingSeconds = seconds % 60;
-  //     return `${minutes} minutes ${remainingSeconds} seconds ago (${timeZone})`;
-  //   } else {
-  //     return `${seconds} seconds ago (${timeZone})`;
-  //   }
-  // }
-
-  // function customFormatDateTimetamp(timestamp) {
-  //   const customDate = new Date(parseInt(timestamp));
-
-  //   if (isNaN(customDate)) {
-  //     return "Invalid Date";
-  //   }
-
-  //   const now = new Date();
-  //   const diff = now - customDate;
-
-  //   const seconds = Math.floor(Math.abs(diff) / 1000);
-  //   const minutes = Math.floor(seconds / 60);
-  //   const hours = Math.floor(minutes / 60);
-  //   const days = Math.floor(hours / 24);
-  //   const weeks = Math.floor(days / 7);
-  //   const months = Math.floor(days / 30); // Approximation, not precise
-
-  //   const options = {
-  //     year: "numeric",
-  //     month: "short",
-  //     day: "numeric",
-  //     hour: "numeric",
-  //     minute: "numeric",
-  //     second: "numeric",
-  //     timeZone: "UTC", // Specify the timeZone as 'UTC'
-  //   };
-  //   const dateObject = customDate;
-
-  //   if (months >= 1) {
-  //     return `${new Intl.DateTimeFormat("en-US", options).format(
-  //       dateObject
-  //     )} (UTC) in ${months} months `;
-  //   } else if (weeks >= 1) {
-  //     const remainingDays = days % 7;
-  //     return `${new Intl.DateTimeFormat("en-US", options).format(
-  //       dateObject
-  //     )} (UTC) in ${weeks} weeks and ${remainingDays} days `;
-  //   } else {
-  //     return `${new Intl.DateTimeFormat("en-US", options).format(
-  //       dateObject
-  //     )} (UTC) in ${days} days `;
-  //   }
-  // }
-
-  //   function customFormatDateTimetamp(timestamp) {
-  //     const customDate = new Date(parseInt(timestamp));
-
-  //     if (isNaN(customDate)) {
-  //         return "Invalid Date";
-  //     }
-
-  //     const now = new Date();
-  //     const diff = customDate - now;
-
-  //     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  //     const weeks = Math.floor(days / 7);
-  //     const months = Math.floor(weeks / 4.4); // Approximately 4 weeks in a month
-
-  //     const remainingWeeks = weeks % 8;
-
-  //     return `${months} months and ${remainingWeeks} weeks`;
-  // }
-
-  // const timestamp = Date.now() + (365 * 24 * 60 * 60 * 1000); // Assuming expiration is 1 year from now
-
-  // const formattedDate = customFormatDateTimetamp(timestamp);
-
-  // console.log(formattedDate);
 
   function customFormatDateTimetamp(timestamp) {
     const customDate = new Date(parseInt(timestamp));
@@ -474,8 +275,6 @@ const ViewApp = () => {
         !credential.apiProducts ? true : credential.apiProducts.length === 0
     );
 
-    // Sort credentials by their createdAt timestamp in descending order
-
     credentialsWithNoApiProducts?.sort(
       (cred1, cred2) => parseInt(cred2.createdAt) - parseInt(cred1.createdAt)
     );
@@ -491,7 +290,6 @@ const ViewApp = () => {
       !credential.apiProducts ? true : credential.apiProducts.length === 0
   );
 
-  // Sort credentials by their createdAt timestamp in descending order
   credentialsWithNoApiProducts?.sort(
     (cred1, cred2) => parseInt(cred2.createdAt) - parseInt(cred1.createdAt)
   );
@@ -510,7 +308,7 @@ const ViewApp = () => {
       : [];
 
     if (apiProducts.length > 0) {
-      break; // Stop the loop if apiProducts are found
+      break;
     }
   }
 
@@ -565,7 +363,7 @@ const ViewApp = () => {
   };
 
   const hideKey = (key) => {
-    return "•".repeat(30);
+    return "•".repeat(15);
   };
 
   const handleRemovekey = async (teamName, appName, consumerKey) => {
@@ -756,52 +554,53 @@ const ViewApp = () => {
                               </div>
                             </div>
 
+
+
+
+
                             {showPopup && (
-                              <div className="popup-overlay d-flex justify-content-center align-items-center">
-                                <div className="popup container">
+                              <div className="popup-overlay">
+                                <div className="popup">
                                   <span className="close" onClick={togglePopup}>
                                     &times;
                                   </span>
                                   <div className="popup-content">
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <h2>Add Key</h2>
-                                        <p>
-                                          Do you really want to create a new API
-                                          key for this team app?
-                                        </p>
-                                        <label>
-                                          Set an expiry date:
-                                          <select className="form-select">
-                                            <option>1 Year</option>
-                                            {/* Add other options here */}
-                                          </select>
-                                        </label>
-                                      </div>
-                                      <div className="col-lg-6 d-flex justify-content-lg-end align-items-lg-start">
-                                        <div className="popup-buttons">
-                                          <button
-                                            className="popup-button btn btn-secondary"
-                                            onClick={togglePopup}
-                                          >
-                                            Cancel
-                                          </button>
-                                          {showConfirmButton && (
-                                            <button
-                                              className="popup-button btn btn-primary"
-                                              onClick={handleAddAPIProduct}
-                                            >
-                                              Confirm
-                                            </button>
-                                          )}
-                                        </div>
-                                      </div>
+                                    <h2>Add Key</h2>
+                                    <p>
+                                      Do you really want to create a new API key
+                                      for this team app?
+                                    </p>
+                                    <label>
+                                      Set an expiry date:
+                                      <select>
+                                        <option>1 Year</option>
+                                        {/* Add other options here */}
+                                      </select>
+                                    </label>
+                                    <div className="popup-buttons">
+                                      <button
+                                        className="popup-button cancel-button"
+                                        onClick={togglePopup}
+                                      >
+                                        Cancel
+                                      </button>
+                                      {showConfirmButton && (
+                                        <button
+                                          className="all-buttons-color text-white  btn btn-md "
+                                          onClick={handleAddAPIProduct}
+                                        >
+                                          Confirm
+                                        </button>
+                                      )}
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             )}
 
+                            
+                            
+                            
                             <div
                               className="card-body  pb-0"
                               //style={{ border: "7px solid green" }}
@@ -814,28 +613,30 @@ const ViewApp = () => {
                                         credential.consumerKey;
                                       return (
                                         <fieldset
-                                          className="items--inline app-credential d-flex flex-wrap"
+                                          className="items--inline app-credential d-flex flex-wrap  border-bottom m-1 "
                                           key={index}
-                                         // style={{ border: "4px solid blue" }}
+                                          style={{ border: "4px solid green" }}
                                         >
                                           <div
                                             className="fieldset-wrapper d-flex "
-                                            //style={{border: "7px solid yellow"}}
-                                              
-                                            
+                                            style={{
+                                              border: "4px solid yellow",
+                                            }}
                                           >
                                             <div
-                                              className="wrapper--primary app-details-wrapper "
+                                              className="w-200 "
                                               style={{
-                                                //border: "4px solid blue",
+                                                border: "2px solid blue",
                                                 //width: "40%",
                                                 fontSize: "15px",
                                               }}
                                             >
-                                              <div className="item-property d-flex  m-1">
-                                                <label className="flex-shrink-0">
-                                                  Consumer Key
-                                                </label>
+                                              <div className="item-property d-flex m-1 ">
+                                                <div style={{ width: "145px" }}>
+                                                  <label className="flex-shrink-0">
+                                                    Consumer Key
+                                                  </label>
+                                                </div>
                                                 <div className="secret field__item d-flex flex-grow-1">
                                                   {showconsumerkey[
                                                     credential.consumerKey
@@ -864,7 +665,7 @@ const ViewApp = () => {
                                                         <VisibilityOffOutlinedIcon
                                                           style={{
                                                             color: "#002a5c",
-                                                            fontSize: 'inherit'
+                                                            fontSize: "inherit",
                                                           }}
                                                         />
                                                       </Link>
@@ -873,7 +674,7 @@ const ViewApp = () => {
                                                         <RemoveRedEyeOutlinedIcon
                                                           style={{
                                                             color: "#002a5c",
-                                                            fontSize: 'inherit'
+                                                            fontSize: "inherit",
                                                           }}
                                                         />
                                                       </Link>
@@ -892,7 +693,7 @@ const ViewApp = () => {
                                                       <ContentCopyOutlinedIcon
                                                         style={{
                                                           color: "#002a5c",
-                                                          fontSize: 'inherit'
+                                                          fontSize: "inherit",
                                                         }}
                                                       />
                                                     </button>
@@ -904,7 +705,9 @@ const ViewApp = () => {
                                               </div>
 
                                               <div className="item-property d-flex r m-1">
-                                                <label>Consumer Secret</label>
+                                                <div style={{ width: "145px" }}>
+                                                  <label>Consumer Secret</label>
+                                                </div>
                                                 <div className="secret field__item d-flex">
                                                   {showSecrets[
                                                     credential.consumerSecret
@@ -976,8 +779,10 @@ const ViewApp = () => {
                                                 </div>
                                               </div>
 
-                                              <div className="item-property  m-1">
-                                                <label> Issued </label>
+                                              <div className="item-property  d-flex m-1">
+                                                <div style={{ width: "145px" }}>
+                                                  <label> Issued </label>
+                                                </div>
 
                                                 {credential.issuedAt
                                                   ? customFormatTDate(
@@ -986,8 +791,10 @@ const ViewApp = () => {
                                                   : "N/A"}
                                               </div>
 
-                                              <div className="item-property  m-1">
-                                                <label> Expires </label>{" "}
+                                              <div className="item-property  d-flex m-1">
+                                                <div style={{ width: "145px" }}>
+                                                  <label> Expires </label>
+                                                </div>
                                                 {credential.expiresAt
                                                   ? customFormatDateTimetamp(
                                                       credential.expiresAt
@@ -995,40 +802,53 @@ const ViewApp = () => {
                                                   : "N/A"}
                                               </div>
 
-                                              <div className="item-property  m-1">
-                                                <label> Key Status </label>
-                                                <span className="badge badge-success">
-                                                  {credential.status}
-                                                </span>
+                                              <div className=" d-flex m-1 ">
+                                                <div style={{ width: "120px" }}>
+                                                  <label> Key Status </label>
+                                                </div>
+                                                <div>
+                                                  <span
+                                                    className="badge badge-success"
+                                                    style={{
+                                                      marginLeft: "10px",
+                                                    }}
+                                                  >
+                                                    {credential.status}
+                                                  </span>
+                                                </div>
                                               </div>
                                             </div>
 
+                                            
+                                            
                                             <div
                                               className="item-property"
                                               // style={{ marginLeft: "45px" }}
-                                              style={{
-                                               // border: "5px solid pink",
-                                                //display: "flex",
-                                                //flexDirection: "column",
-                                                //width: "60%",
-                                              }}
+                                              style={
+                                                {
+                                                  // border: "5px solid pink",
+                                                  //display: "flex",
+                                                  //flexDirection: "column",
+                                                  //width: "60%",
+                                                }
+                                              }
                                             >
                                               <div
                                                 className="dropbutton-widget"
                                                 style={{
-                                                  marginLeft: "470px",
+                                                  marginLeft: "495px",
                                                   //border: "2px solid green",
                                                 }}
                                               >
                                                 <div
                                                   style={{
                                                     display: "flex",
-                                                    alignItems: "center",
+                                                    //alignItems: "center",
                                                     //border:"2px solid red"
                                                   }}
                                                 >
                                                   <button
-                                                    className="custom-button all-buttons-color text-white"
+                                                    className="custom-button all-buttons-color text-white border btn btn-sm m-0 border-0"
                                                     onClick={() =>
                                                       handleRevokeKey(
                                                         teamName,
@@ -1053,14 +873,16 @@ const ViewApp = () => {
                                                           credentialKey
                                                         )
                                                       }
-                                                      className="custom-button all-buttons-color text-white"
+                                                      className="all-buttons-color text-white  border border-0 m-0"
                                                       style={{
-                                                        width: "40px",
+                                                        width: "25px",
                                                         height: "35px",
                                                         display: "flex",
                                                         alignItems: "center",
                                                         justifyContent:
                                                           "center",
+                                                        backgroundColor:
+                                                          "F46223",
                                                       }}
                                                     >
                                                       {/* &#9660; */}
@@ -1097,11 +919,11 @@ const ViewApp = () => {
                                                     }}
                                                   >
                                                     <button
-                                                      className="custom-button all-buttons-color text-white"
-                                                      style={{
-                                                        width: "114px",
-                                                        textAlign: "left",
-                                                      }}
+                                                      className="custom-button all-buttons-color text-white btn btn-sm m-0"
+                                                      // style={{
+                                                      //   width: "114px",
+                                                      //   textAlign: "left",
+                                                      // }}
                                                       onClick={() => {
                                                         const removePath = `/${teamName}/apps/${appName}/remove?team=${teamName}&appName=${appName}&consumerKey=${credential.consumerKey}`;
                                                         setShowDropdown(false);
@@ -1124,7 +946,7 @@ const ViewApp = () => {
                                                 }
                                               >
                                                 <label
-                                                  style={{ marginLeft: "32px" }}
+                                                  style={{ marginLeft: "70px" }}
                                                 >
                                                   Products
                                                 </label>
@@ -1143,7 +965,13 @@ const ViewApp = () => {
                                                           key={productIndex}
                                                         >
                                                           <div className="api-product-list-row clearfix">
-                                                            <span className="api-product-name" style={{ marginLeft: "32px" }}>
+                                                            <span
+                                                              className="api-product-name"
+                                                              style={{
+                                                                marginLeft:
+                                                                  "70px",
+                                                              }}
+                                                            >
                                                               {
                                                                 product.apiproduct
                                                               }
@@ -1157,7 +985,6 @@ const ViewApp = () => {
                                                                   "#C5C5C5",
                                                                 marginLeft:
                                                                   "340px",
-                                                                  
                                                               }}
                                                             >
                                                               {product.status
@@ -1224,185 +1051,218 @@ const ViewApp = () => {
                                       if (credential.status === "revoked") {
                                         return (
                                           <fieldset
-                                            className="items--inline app-credential d-flex flex-wrap"
+                                            className="items--inline app-credentiald-flex flex-wrap  border-bottom m-1 "
                                             key={index}
-                                            //style={{ border: "5px solid red" }}
+                                            style={{ border: "5px solid red" }}
                                           >
                                             <legend>Credential</legend>
 
                                             <div className="fieldset-wrapper d-flex ">
                                               <div
-                                                className="wrapper--primary app-details-wrapper"
+                                                className="w-200"
                                                 style={{
-                                                  width: "40%",
-                                                  //border: "8px solid yellow",
+                                                  //width: "40%",
+                                                  fontSize: "15px",
+                                                  border: "8px solid yellow",
                                                 }}
                                               >
-                                                <div className="item-property d-flex">
-                                                  <label>Consumer Key</label>
-                                                  <div className="secret field__item">
-                                                    {showconsumerkey[
-                                                      credential.consumerKey
-                                                    ] ? (
-                                                      <div
-                                                        className="secret__value"
-                                                        style={{
-                                                          fontSize: "12px",
-                                                          overflow: "scroll",
-                                                          width: "220px", // or "scroll"
-                                                          // Adjust the height according to your design
-                                                        }}
-                                                      >
-                                                        {credential.consumerKey}
-                                                      </div>
+                                                
+                                                
+                                                <div className="item-property d-flex m-1 ">
+                                                <div style={{ width: "145px" }}>
+                                                  <label className="flex-shrink-0">
+                                                    Consumer Key
+                                                  </label>
+                                                </div>
+                                                <div className="secret field__item d-flex flex-grow-1">
+                                                  {showconsumerkey[
+                                                    credential.consumerKey
+                                                  ] ? (
+                                                    <div className="secret__value">
+                                                      {credential.consumerKey}
+                                                    </div>
+                                                  ) : (
+                                                    <div className="secret__value__hidden">
+                                                      {hideKey(
+                                                        credential.consumerKey
+                                                      )}
+                                                    </div>
+                                                  )}
+                                                  <br />
+                                                  <button
+                                                    className="secret__toggle"
+                                                    onClick={() =>
+                                                      toggleVisibility2(
+                                                        credential.consumerKey
+                                                      )
+                                                    }
+                                                  >
+                                                    {showKey1 ? (
+                                                      <Link className="secret__toggle__hide d-flex ">
+                                                        <VisibilityOffOutlinedIcon
+                                                          style={{
+                                                            color: "#002a5c",
+                                                            fontSize: "inherit",
+                                                          }}
+                                                        />
+                                                      </Link>
                                                     ) : (
-                                                      <div className="secret__value__hidden">
-                                                        {hideKey(
-                                                          credential.consumerKey
-                                                        )}
-                                                      </div>
+                                                      <Link className="secret__toggle__show">
+                                                        <RemoveRedEyeOutlinedIcon
+                                                          style={{
+                                                            color: "#002a5c",
+                                                            fontSize: "inherit",
+                                                          }}
+                                                        />
+                                                      </Link>
                                                     )}
-
-                                                    <br />
+                                                  </button>
+                                                  <div className="secret__copy d-flex align-items-center">
                                                     <button
-                                                      className="secret__toggle"
+                                                      className="secret__copy"
                                                       onClick={() =>
-                                                        toggleVisibility2(
+                                                        copyToClipboard(
                                                           credential.consumerKey
                                                         )
                                                       }
+                                                      title="Click to copy"
                                                     >
-                                                      {showKey1 ? (
-                                                        <Link className="secret__toggle__hide">
-                                                          {/* <i className="fas fa-eye-slash secret__toggle__hide" /> */}
-
-                                                          <VisibilityOffOutlinedIcon />
-                                                        </Link>
-                                                      ) : (
-                                                        <Link className="secret__toggle__show">
-                                                          {/* <i className="fas fa-eye secret__toggle__show" /> */}
-                                                          <RemoveRedEyeOutlinedIcon />
-                                                        </Link>
-                                                      )}
+                                                      <ContentCopyOutlinedIcon
+                                                        style={{
+                                                          color: "#002a5c",
+                                                          fontSize: "inherit",
+                                                        }}
+                                                      />
                                                     </button>
-                                                    <div className="secret__copy">
-                                                      <button
-                                                        className="secret__copy"
-                                                        onClick={() =>
-                                                          copyToClipboard(
-                                                            credential.consumerKey
-                                                          )
-                                                        }
-                                                        title="Click to copy"
-                                                      >
-                                                        {/* <i className="fas fa-paste" /> */}
-                                                        <ContentCopyOutlinedIcon />
-                                                      </button>
-                                                      <span className="copy-message">
-                                                        {copyMessage}
-                                                      </span>
-                                                    </div>
+                                                    <span className="copy-message">
+                                                      {copyMessage}
+                                                    </span>
                                                   </div>
                                                 </div>
+                                              </div>
 
-                                                <div className="item-property">
+                                              <div className="item-property d-flex r m-1">
+                                                <div style={{ width: "145px" }}>
                                                   <label>Consumer Secret</label>
-                                                  <div className="secret field__item">
-                                                    {showSecrets[
-                                                      credential.consumerSecret
-                                                    ] ? (
-                                                      <div
-                                                        className="secret__value"
-                                                        style={{
-                                                          border:
-                                                            "2px solid green",
-                                                          fontSize: "12px",
-                                                          overflow: "scroll",
-                                                          width: "220px", // or "scroll"
-                                                          // Adjust the height according to your design
-                                                        }}
-                                                      >
-                                                        {
-                                                          credential.consumerSecret
-                                                        }
-                                                      </div>
+                                                </div>
+                                                <div className="secret field__item d-flex">
+                                                  {showSecrets[
+                                                    credential.consumerSecret
+                                                  ] ? (
+                                                    <div className="secret__value ">
+                                                      {
+                                                        credential.consumerSecret
+                                                      }
+                                                    </div>
+                                                  ) : (
+                                                    <div className="secret__value__hidden">
+                                                      {hideKey(
+                                                        credential.consumerSecret
+                                                      )}
+                                                    </div>
+                                                  )}
+                                                  <br />
+                                                  <button
+                                                    className="secret__toggle"
+                                                    onClick={() =>
+                                                      toggleVisibility(
+                                                        credential.consumerSecret
+                                                      )
+                                                    }
+                                                  >
+                                                    {showKey ? (
+                                                      <Link className="secret__toggle__hide">
+                                                        <VisibilityOffOutlinedIcon
+                                                          style={{
+                                                            color: "#002a5c",
+                                                            fontSize: "inherit",
+                                                          }}
+                                                        />
+                                                      </Link>
                                                     ) : (
-                                                      <div className="secret__value__hidden">
-                                                        {hideKey(
-                                                          credential.consumerSecret
-                                                        )}
-                                                      </div>
+                                                      <Link className="secret__toggle__show">
+                                                        <RemoveRedEyeOutlinedIcon
+                                                          style={{
+                                                            color: "#002a5c",
+                                                            fontSize: "inherit",
+                                                          }}
+                                                        />
+                                                      </Link>
                                                     )}
-
-                                                    <br />
+                                                  </button>
+                                                  <div className="secret__copy">
                                                     <button
-                                                      className="secret__toggle"
+                                                      className="secret__copy"
                                                       onClick={() =>
-                                                        toggleVisibility(
+                                                        copyToClipboard(
                                                           credential.consumerSecret
                                                         )
                                                       }
-                                                      // style={{
-                                                      //   color: "green",
-                                                      //   height: "20px",
-                                                      //   width: "20px",
-                                                      // }}
+                                                      title="Click to copy"
                                                     >
-                                                      {showKey ? (
-                                                        <Link className="secret__toggle__hide">
-                                                          <VisibilityOffOutlinedIcon />
-                                                        </Link>
-                                                      ) : (
-                                                        <Link className="secret__toggle__show">
-                                                          <RemoveRedEyeOutlinedIcon />
-                                                        </Link>
-                                                      )}
+                                                      <ContentCopyOutlinedIcon
+                                                        style={{
+                                                          color: "#002a5c",
+                                                          background: "none",
+                                                          fontSize: "inherit",
+                                                        }}
+                                                      />
                                                     </button>
-                                                    <div className="secret__copy">
-                                                      <button
-                                                        className="secret__copy"
-                                                        onClick={() =>
-                                                          copyToClipboard(
-                                                            credential.consumerSecret
-                                                          )
-                                                        }
-                                                        title="Click to copy"
-                                                      >
-                                                        <ContentCopyOutlinedIcon />
-                                                      </button>
-                                                      <span className="copy-message">
-                                                        {copyMessage}
-                                                      </span>
-                                                    </div>
+
+                                                    <span className="copy-message">
+                                                      {copyMessage}
+                                                    </span>
                                                   </div>
                                                 </div>
+                                              </div>
 
-                                                <div className="item-property">
+         
+                                              <div className="item-property  d-flex m-1">
+                                                <div style={{ width: "145px" }}>
                                                   <label> Issued </label>
+                                                </div>
 
-                                                  {credential.issuedAt
-                                                    ? customFormatTDate(
-                                                        credential.issuedAt
-                                                      )
-                                                    : "N/A"}
+                                                {credential.issuedAt
+                                                  ? customFormatTDate(
+                                                      credential.issuedAt
+                                                    )
+                                                  : "N/A"}
+                                              </div>
+                                                
+                                              <div className="item-property  d-flex m-1">
+                                                <div style={{ width: "145px" }}>
+                                                  <label> Expires </label>
                                                 </div>
-                                                <div className="item-property">
-                                                  <label> Expires </label>{" "}
-                                                  {credential.expiresAt
-                                                    ? customFormatDateTimetamp(
-                                                        credential.expiresAt
-                                                      )
-                                                    : "N/A"}
-                                                </div>
-                                                <div className="item-property">
+                                                {credential.expiresAt
+                                                  ? customFormatDateTimetamp(
+                                                      credential.expiresAt
+                                                    )
+                                                  : "N/A"}
+                                              </div>
+                                               
+                                               
+                                              <div className=" d-flex m-1 ">
+                                                <div style={{ width: "120px" }}>
                                                   <label> Key Status </label>
-                                                  <span className="badge badge-success">
+                                                </div>
+                                                <div>
+                                                  <span
+                                                    className="badge badge-success"
+                                                    style={{
+                                                      marginLeft: "10px",
+                                                    }}
+                                                  >
                                                     {credential.status}
                                                   </span>
                                                 </div>
                                               </div>
+                                              </div>
                                               {/* API Products */}
 
+                                            
+                                            
+                                             
+                                             
                                               <div
                                                 className="item-property"
                                                 // style={{
@@ -1410,11 +1270,11 @@ const ViewApp = () => {
                                                 // }}
                                                 style={{
                                                   // border: "1px solid blue",
-                                                  display: "flex",
-                                                  flexDirection: "column",
+                                                  //display: "flex",
+                                                  //flexDirection: "column",
                                                   // border: "1px solid blue",
                                                   //marginRight: "70px",
-                                                  width: "60%",
+                                                  //width: "60%",
                                                 }}
                                               >
                                                 <div
@@ -1427,11 +1287,10 @@ const ViewApp = () => {
                                                     <div className="dropbutton">
                                                       <div>
                                                         <button
-                                                          className="button btn btn-primary"
+                                                          className="all-buttons-color text-white button btn btn-sm"
                                                           style={{
-                                                            padding: "5px 10px",
-                                                            width: "10px",
-                                                            fontSize: "12px",
+                                                            
+                                                            
 
                                                             marginLeft: "450px",
                                                           }}
@@ -1480,7 +1339,11 @@ const ViewApp = () => {
                                                             key={productIndex}
                                                           >
                                                             <div className="api-product-list-row clearfix">
-                                                              <span className="api-product-name">
+                                                              <span className="api-product-name"  style={{
+                                                                marginLeft:
+                                                                  "30px",
+                                                              }}
+                                                              >
                                                                 {
                                                                   product.apiproduct
                                                                 }
@@ -1491,7 +1354,7 @@ const ViewApp = () => {
                                                                   backgroundColor:
                                                                     "#C5C5C5",
                                                                   marginLeft:
-                                                                    "300px",
+                                                                    "320px",
                                                                 }}
                                                               >
                                                                 {product.status
@@ -1515,6 +1378,21 @@ const ViewApp = () => {
                                                   )}
                                                 </div>
                                               </div>
+
+
+
+
+                                            
+                                         
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
                                             </div>
                                           </fieldset>
                                         );

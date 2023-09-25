@@ -206,17 +206,17 @@ function RemovePage() {
             <div className="container-fluid px-0">
               <div className="contextual-region block block--pagetitle bg-lighter py-4">
                 <div className="container">
-                  <h1 className="js-quickedit-page-title page__title mb-0">
-                    Are you sure that you would like to remove{' '}
-                    <em  >{consumerKey}</em> from the appgroup?
-                  </h1>
+                  <h3 className="js-quickedit-page-title page__title mb-0">
+                    Are you sure that you would like to remove
+                    <em>{consumerKey}</em> from the appgroup?
+                  </h3>
                 </div>
               </div>
             </div>
           </div>
           <main className="main" role="main">
             <div className="page-layout-sidebar-default">
-              <div className="container py-5">
+              <div className="container py-3">
                 <div className="row">
                   <div className="page__content col-md">
                     <form
@@ -227,7 +227,7 @@ function RemovePage() {
                       <div className="form-actions js-form-wrapper form-wrapper">
                         <button
                           type="submit"
-                          className=" btn btn-md js-form-submit form-submit "
+                          className="all-buttons-color text-white btn btn-md js-form-submit form-submit "
                         >
                           Remove
                         </button>
