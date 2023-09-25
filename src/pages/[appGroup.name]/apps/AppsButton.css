@@ -1,0 +1,14 @@
+/* AppsButton.css */
+
+.apps-button-container {
+    margin-top: 20px;
+    text-align: center; /* Center the tabs horizontally */
+  
+    @media (max-width: 768px) {
+      /* Adjust styles for smaller screens */
+      text-align: left; /* Align tabs to the left on smaller screens */
+    }
+  }
+  
+  /* Add styles for other elements as needed */
+  

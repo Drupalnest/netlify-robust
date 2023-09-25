@@ -1,0 +1,27 @@
+body {
+  background-color: #ffffff;
+  font-family: "NexaBold", sans-serif;
+
+  font-display: swap;
+}
+@font-face {
+  font-family: "NexaBold";
+  src: url("Fonts/Poppins-Medium.otf");
+
+  font-weight: 500;
+  font-style: bold;
+}
+
+.custom-bg-indigo {
+  background-color: #ffffff; /* This is the hex code for indigo */
+}
+
+.all-buttons-color {
+  background-color: #002a5c;
+}
+
+
+.all-add-buttons {
+  background-color: #F46223;
+  font-size: 15px;
+}

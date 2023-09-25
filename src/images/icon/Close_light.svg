@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>03_Iconography/Default/Close_light</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="03_Iconography/Default/Close_light" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Bounds" fill="#FF0000" opacity="0" x="0" y="0" width="24" height="24"></rect>
+        <path d="M5.74984205,5.88703395 L18.2486436,18.3858355" id="Path-6" stroke="#FFFFFF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M5.74984205,18.3858355 L18.2486436,5.88703395" id="Path-6" stroke="#FFFFFF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+    </g>
+</svg>

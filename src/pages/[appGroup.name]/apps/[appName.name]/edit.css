@@ -1,0 +1,67 @@
+/* Modal Container */
+.modal-content {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+/* Close Icon */
+.close-icon {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: font-size 0.2s, transform 0.2s, cursor 0.2s;
+  }
+  
+  .close-icon:hover {
+    font-size: 24px; 
+    cursor: pointer; 
+    color: #ff0000; 
+  }
+  
+  
+  /* Modal Content Text */
+  p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Container */
+  .button-container-one {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  /* Confirm Button */
+  .confirm-button {
+    background-color: #494b49;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .confirm-button:hover {
+    background-color: #515852;
+  }
+  
+  /* Cancel Button */
+  .cancel-button {
+    background-color: #f44336;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancel-button:hover {
+    background-color: #d32f2f;
+  }
+  

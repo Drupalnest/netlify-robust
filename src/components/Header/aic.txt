@@ -1,0 +1,84 @@
+// {
+//     "appId": "6c42397c-6b2b-42d5-aa84-a42be1cf18e6",
+//     "attributes": [
+//       {
+//         "name": "api_product",
+//         "value": "s:8:\\\"sbuxtest\\\":s:8:\\\"sbuxtest\\\",s:10:\\\"helloworld\\\":s:10:\\\"helloworld\\\",s:4:\\\"july\\\":s:1:\\\"0\\\""
+//       }
+//     ],
+//     "companyName": "asd",
+//     "createdAt": 1690977290042,
+//     "createdBy": "kenpatolia@clearviewinfotech.com",
+//     "credentials": [
+//       {
+//         "apiProducts": [
+//           {
+//             "apiproduct": "dpi-spot-tender-offer-convoy",
+//             "status": "approved"
+//           },
+//           {
+//             "apiproduct": "test",
+//             "status": "approved"
+//           }
+//         ],
+//         "attributes": [],
+//         "consumerKey": "yJzchgshybtfnAPHeaP9UHpHv4FjN9oq",
+//         "consumerSecret": "vqwXZSLsycJ6TmDC",
+//         "expiresAt": -1,
+//         "issuedAt": 1691658102309,
+//         "scopes": [],
+//         "status": "revoked"
+//       },
+//       {
+//         "apiProducts": [
+//           {
+//             "apiproduct": "Test API",
+//             "status": "approved"
+//           },
+//           {
+//             "apiproduct": "dpi-spot-tender-offer-convoy",
+//             "status": "approved"
+//           },
+//           {
+//             "apiproduct": "helloworld",
+//             "status": "approved"
+//           },
+//           {
+//             "apiproduct": "sbuxtest",
+//             "status": "approved"
+//           },
+//           {
+//             "apiproduct": "TEST - Legacy Location",
+//             "status": "approved"
+//           },
+//           {
+//             "apiproduct": "customer",
+//             "status": "approved"
+//           },
+//           {
+//             "apiproduct": "product1",
+//             "status": "approved"
+//           },
+//           {
+//             "apiproduct": "test",
+//             "status": "approved"
+//           }
+//         ],
+//         "attributes": [],
+//         "consumerKey": "WWLWX8KvtfPX76BqctHxgtXZZmyoewMo",
+//         "consumerSecret": "QccGtXxMapMqIw3P",
+//         "expiresAt": -1,
+//         "issuedAt": 1691578542105,
+//         "scopes": [],
+//         "status": "approved"
+//       }
+//     ],
+//     "lastModifiedAt": 1691752028150,
+//     "lastModifiedBy": "kenpatolia@clearviewinfotech.com",
+//     "name": "aaaaaa",
+//     "scopes": [],
+//     "status": "approved"
+//   }
+
+
+//"value": "s:8:\\\"sbuxtest\\\":s:8:\\\"sbuxtest\\\",s:10:\\\"helloworld\\\":s:10:\\\"helloworld\\\",s:4:\\\"july\\\":s:1:\\\"0\\\""

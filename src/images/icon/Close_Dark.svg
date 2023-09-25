@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>03_Iconography/Default/Close_Dark</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="03_Iconography/Default/Close_Dark" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Bounds" fill="#FF0000" opacity="0" x="0" y="0" width="24" height="24"></rect>
+        <g id="Group-2" opacity="0.600000024" transform="translate(5.000000, 5.000000)" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75">
+            <path d="M0.749842052,0.887033946 L13.2486436,13.3858355" id="Path-6"></path>
+            <path d="M0.749842052,13.3858355 L13.2486436,0.887033946" id="Path-6"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>03_Iconography/Default/Drop_Down_Dark</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="03_Iconography/Default/Drop_Down_Dark" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Bounds" fill="#FF0000" opacity="0" x="0" y="0" width="24" height="24"></rect>
+        <polyline id="Path-5" stroke="#666666" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" transform="translate(12.078668, 11.959429) rotate(-90.000000) translate(-12.078668, -11.959429) " points="14.5577155 6.88076112 9.5192385 11.9192381 14.6380971 17.0380967"></polyline>
+    </g>
+</svg>

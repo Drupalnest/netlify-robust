@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="6px" viewBox="0 0 8 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>03_Iconography/Default/Drop_Down_Dark</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons" transform="translate(-236.000000, -84.000000)">
+            <g id="03_Iconography/Default/Drop_Down_Dark" transform="translate(234.000000, 81.000000)">
+                <rect id="Bounds" fill="#FF0000" fill-rule="evenodd" opacity="0" x="0" y="0" width="12" height="12"></rect>
+                <polyline id="Path-5" stroke="#666666" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" transform="translate(6.039334, 5.979714) rotate(-90.000000) translate(-6.039334, -5.979714) " points="7.27885774 3.44038056 4.75961925 5.95961906 7.31904854 8.51904835"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
