@@ -10,19 +10,19 @@ import {
 import { Link } from "gatsby";
 import { MDBBtn } from "mdbreact";
 
-const AppDropdownComponent = ({ teamName,appName }) => {
+const AppDropdownComponent = ({ teamName, appName }) => {
   const teams = useSelector((state) => state.teams.data);
   const [isIconUp, setIsIconUp] = useState(false);
   console.log("teams", teams);
   const isFetching = teams ? teams.isFetching : false;
   const dropdownRef = useRef(null);
 
-  console.log("appName,teamname",teamName,appName)
+  console.log("appName,teamname", teamName, appName);
 
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
-   //const teamName = teamDetails ? teamDetails.name : "";
-   //console.log("teamName", teamName);
+  //const teamName = teamDetails ? teamDetails.name : "";
+  //console.log("teamName", teamName);
 
   const apps = useSelector((state) => state.appsData.appsData);
   console.log("apps", apps);
@@ -73,7 +73,7 @@ const AppDropdownComponent = ({ teamName,appName }) => {
     };
   }, []);
 
-  const handleAppClick = ({appName}) => {
+  const handleAppClick = () => {
     dispatch(fetchAppDetails(teamName, appName));
   };
 
@@ -97,7 +97,7 @@ const AppDropdownComponent = ({ teamName,appName }) => {
             <Link
               className="text-white "
               to={`/${teamName}/apps/${appName}/edit`}
-              onClick={() => handleAppClick(appName)}
+              onClick={handleAppClick}
             >
               Edit
             </Link>
@@ -119,7 +119,7 @@ const AppDropdownComponent = ({ teamName,appName }) => {
         <div className={`dropdown-menu text-end   ${isOpen ? "show" : ""}`}>
           <Link
             to={`/${teamName}/apps/${appName}/delete`}
-            onClick={() => handleAppClick(appName)}
+            onClick={handleAppClick}
             className="dropdown-item"
           >
             Delete

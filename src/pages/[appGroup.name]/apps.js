@@ -664,7 +664,9 @@ const TeamApps = () => {
                                 <td className="rounded-3 text-center align-middle  border-bottom">
                                   <AppDropdownComponent
                                     teamName={teamName}
-                                    appName={appName.name}
+                                    appName={appName.name} 
+                                    //handleAppClick={handleAppClick} 
+
                                   />
                                 </td>
                               </tr>

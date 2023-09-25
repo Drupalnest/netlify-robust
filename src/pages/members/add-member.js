@@ -24,9 +24,7 @@ const AddMembers = () => {
   const [selectedRoles, setSelectedRoles] = useState(["member"]);
   const [suggestions, setSuggestions] = useState([]);
 
-  // const handleInputChange = (event) => {
-  //   const input = event.target.value;
-  //   setUsername(input);
+  
 
   // Filter suggestions based on input
   //   const filteredSuggestions = data.allUserUser.edges
@@ -180,6 +178,12 @@ const AddMembers = () => {
 
   console.log("admins", admins);
 
+
+  const handleInputChange = (event) => {
+    const input = event.target.value;
+    setUsername(input);
+  }
+
   return (
     <Layout>
       <div
@@ -280,7 +284,7 @@ const AddMembers = () => {
                           id="edit-username"
                           name="username"
                           value={username}
-                          //onChange={handleInputChange}
+                          onChange={handleInputChange}
                         />
 
                         {/* Render suggestions dropdown */}
