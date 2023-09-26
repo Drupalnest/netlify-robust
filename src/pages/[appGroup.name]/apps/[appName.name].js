@@ -626,12 +626,12 @@ const ViewApp = () => {
                                             <div
                                               className="w-200 "
                                               style={{
-                                                //border: "2px solid blue",
+                                                border: "2px solid blue",
                                                 //width: "40%",
                                                 fontSize: "15px",
                                               }}
                                             >
-                                              <div className="item-property d-flex m-1 ">
+                                              <div className="item-property d-flex m-1  ">
                                                 <div style={{ width: "145px" }}>
                                                   <label className="flex-shrink-0">
                                                     Consumer Key
@@ -795,23 +795,27 @@ const ViewApp = () => {
                                                 <div style={{ width: "145px" }}>
                                                   <label> Issued </label>
                                                 </div>
+                                                <div>
 
                                                 {credential.issuedAt
                                                   ? customFormatTDate(
                                                       credential.issuedAt
                                                     )
                                                   : "N/A"}
+                                                  </div>
                                               </div>
 
                                               <div className="item-property  d-flex m-1">
                                                 <div style={{ width: "145px" }}>
                                                   <label> Expires </label>
                                                 </div>
+                                                <div>
                                                 {credential.expiresAt
                                                   ? customFormatDateTimetamp(
                                                       credential.expiresAt
                                                     )
                                                   : "N/A"}
+                                                  </div>
                                               </div>
 
                                               <div className=" d-flex m-1 ">
@@ -1090,7 +1094,7 @@ const ViewApp = () => {
                                                         style={{
                                                           width: "280px",
                                                           fontSize: "15px",
-                                                          overflow: "auto"
+                                                          overflow: "auto",
                                                         }}
                                                       >
                                                         {credential.consumerKey}
@@ -1149,8 +1153,6 @@ const ViewApp = () => {
                                                   </div>
                                                 </div>
 
-                                               
-                                               
                                                 <div className="item-property d-flex m-1 border border-danger">
                                                   <div
                                                     style={{ width: "145px" }}
@@ -1194,7 +1196,6 @@ const ViewApp = () => {
                                                         <VisibilityOffOutlinedIcon
                                                           style={{
                                                             fontSize: "inherit",
-                                                           
                                                           }}
                                                         />
                                                       ) : (
