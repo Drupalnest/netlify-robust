@@ -1432,13 +1432,15 @@ const TeamList = () => {
 
   useEffect(() => {
     const admin = JSON.parse(localStorage.getItem("userData"));
-    const adminName = admin?.current_user?.name;
+    //const adminName = admin?.current_user?.name;
 
-    if (adminName) {
-      navigate("/teams");
-    } else {
-      navigate("/login");
-    }
+    const adminName = "ajay.gadhavana+1@gmail.com";
+
+    // if (adminName) {
+    //   navigate("/teams");
+    // } else {
+    //   navigate("/login");
+    // }
 
     const updatedFilteredTeams = appgroups
       ? appgroups

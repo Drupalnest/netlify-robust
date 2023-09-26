@@ -713,92 +713,177 @@
 
 
 
-import React, { useState } from "react";
 
-function Login(props) {
-  const [loading, setLoading] = useState(false);
-  const username = useFormInput("");
-  const password = useFormInput("");
-  const [error, setError] = useState(null);
 
-  // handle button click of login form
-  const handleLogin = () => {
-    setError(null);
-    setLoading(true);
-    // API something like http://example.com/user/login
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+
+// function Login(props) {
+//   const [loading, setLoading] = useState(false);
+//   const username = useFormInput("");
+//   const password = useFormInput("");
+//   const [error, setError] = useState(null);
+
+//   // handle button click of login form
+//   const handleLogin = () => {
+//     setError(null);
+//     setLoading(true);
+//     // API something like http://example.com/user/login
       
-    const API = "https://robustapihub.io/user/login?_format=json";
+//     const API = "https://robustapihub.io/user/login?_format=json";
       
-    fetch(API, {
-      method: "POST", // Assuming this is a POST request
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded", // Adjust this header if needed
-      },
-      body: `name=${username.value}&pass=${password.value}`,
-    })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
+//     fetch(API, {
+//       method: "POST", // Assuming this is a POST request
+//       headers: {
+//         "Content-Type": "application/x-www-form-urlencoded", // Adjust this header if needed
+//       },
+//       body: `name=${username.value}&pass=${password.value}`,
+//     })
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error(`HTTP error! status: ${response.status}`);
+//       }
+//       return response.json();
+//     })
     
-    .then((data) => {
-      // Handle the JSON data
-      sessionStorage.setItem("token", data.token);
-      sessionStorage.setItem("user", JSON.stringify(data.user));
-      props.history.push("/dashboard");
-    })
-    .catch((error) => {
-      setLoading(false);
-      setError(error.message); // Display the error message
+//     .then((data) => {
+//       // Handle the JSON data
+//       sessionStorage.setItem("token", data.token);
+//       sessionStorage.setItem("user", JSON.stringify(data.user));
+//       props.history.push("/dashboard");
+//     })
+//     .catch((error) => {
+//       setLoading(false);
+//       setError(error.message); // Display the error message
+//     });
+//   };
+  
+
+//   return (
+//     <div>
+//       Login
+//       <br />
+//       <br />
+//       <div>
+//         Username
+//         <br />
+//         <input type="text" {...username} autoComplete="new-password" />
+//       </div>
+//       <div style={{ marginTop: 10 }}>
+//         Password
+//         <br />
+//         <input type="password" {...password} autoComplete="new-password" />
+//       </div>
+//       {error && (
+//         <>
+//           <small style={{ color: "red" }}>{error}</small>
+//           <br />
+//         </>
+//       )}
+//       <br />
+//       <input
+//         type="button"
+//         value={loading ? "Loading..." : "Login"}
+//         onClick={handleLogin}
+//         disabled={loading}
+//       />
+//       <br />
+//     </div>
+//   );
+// }
+
+// const useFormInput = (initialValue) => {
+//   const [value, setValue] = useState(initialValue);
+
+//   const handleChange = (e) => {
+//     setValue(e.target.value);
+//   };
+//   return {
+//     value,
+//     onChange: handleChange,
+//   };
+// };
+
+// export default Login;
+
+
+
+
+
+import React, { useState } from 'react';
+import { DrupalProvider, useLazyLogin } from 'drupal-react-oauth-provider';
+
+const config = {
+  url: 'https://robustapihub.io/user/login?_format=json',
+};
+
+function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [login, { loading, error, data }] = useLazyLogin();
+
+  const handleLogin = () => {
+    login({
+      username, // Username input
+      password, // Password input
+      client_id: 'robustapi',
+      client_secret: 'rWwiXEq6EYbnYqHOLTwNZ1TFFntC5gi0',
+      grant_type: 'password',
+      scope: 'user', // Replace with appropriate Drupal role
     });
   };
-  
 
   return (
     <div>
-      Login
-      <br />
-      <br />
+      <h1>Login</h1>
       <div>
-        Username
-        <br />
-        <input type="text" {...username} autoComplete="new-password" />
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username"
+        />
       </div>
-      <div style={{ marginTop: 10 }}>
-        Password
-        <br />
-        <input type="password" {...password} autoComplete="new-password" />
+      <div>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
       </div>
-      {error && (
-        <>
-          <small style={{ color: "red" }}>{error}</small>
-          <br />
-        </>
-      )}
-      <br />
-      <input
-        type="button"
-        value={loading ? "Loading..." : "Login"}
-        onClick={handleLogin}
-        disabled={loading}
-      />
-      <br />
+      <button onClick={handleLogin} disabled={loading}>
+        {loading ? 'Logging in...' : 'Login'}
+      </button>
+      {error && <div style={{ color: 'red' }}>{error.message}</div>}
     </div>
   );
 }
 
-const useFormInput = (initialValue) => {
-  const [value, setValue] = useState(initialValue);
+function App() {
+  return (
+    <DrupalProvider config={config}>
+      <Login />
+    </DrupalProvider>
+  );
+}
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
-  return {
-    value,
-    onChange: handleChange,
-  };
-};
-
-export default Login;
+export default App;
