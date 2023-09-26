@@ -10,7 +10,9 @@ import {
   appDetails,
 } from "../../../redux/store";
 
-import "../../../style/popup.css"
+import "../../../style/popup.css";
+
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
 //import "../../../styles/popup.css";
 import { Link, navigate } from "gatsby";
@@ -23,16 +25,21 @@ import DropDownDark from "../../../images/DropDownDark.svg";
 
 const ViewApp = () => {
   const dispatch = useDispatch();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const [showDropdown, setShowDropdown] = useState({});
 
   const toggleDropdown = (credentialKey) => {
+    setDropdownOpen(!dropdownOpen);
     setShowDropdown((prevState) => ({
       ...prevState,
       [credentialKey]: !prevState[credentialKey],
     }));
   };
 
+  // const toggleDropdown = () => {
+  //   setDropdownOpen(!dropdownOpen);
+  // };
   const getImageSource = () => {
     if (showDropdown) {
       // Use the open dropdown icon (reversed)
@@ -554,10 +561,6 @@ const ViewApp = () => {
                               </div>
                             </div>
 
-
-
-
-
                             {showPopup && (
                               <div className="popup-overlay">
                                 <div className="popup">
@@ -598,9 +601,6 @@ const ViewApp = () => {
                               </div>
                             )}
 
-                            
-                            
-                            
                             <div
                               className="card-body  pb-0"
                               //style={{ border: "7px solid green" }}
@@ -615,18 +615,18 @@ const ViewApp = () => {
                                         <fieldset
                                           className="items--inline app-credential d-flex flex-wrap  border-bottom m-1 "
                                           key={index}
-                                          style={{ border: "4px solid green" }}
+                                          //style={{ border: "4px solid green" }}
                                         >
                                           <div
                                             className="fieldset-wrapper d-flex "
-                                            style={{
-                                              border: "4px solid yellow",
-                                            }}
+                                            // style={{
+                                            //   border: "4px solid yellow",
+                                            // }}
                                           >
                                             <div
                                               className="w-200 "
                                               style={{
-                                                border: "2px solid blue",
+                                                //border: "2px solid blue",
                                                 //width: "40%",
                                                 fontSize: "15px",
                                               }}
@@ -637,11 +637,17 @@ const ViewApp = () => {
                                                     Consumer Key
                                                   </label>
                                                 </div>
-                                                <div className="secret field__item d-flex flex-grow-1">
+                                                <div className="secret field__item d-flex  flex-grow-1 justify-content-around">
                                                   {showconsumerkey[
                                                     credential.consumerKey
                                                   ] ? (
-                                                    <div className="secret__value">
+                                                    <div
+                                                      className="secret__value "
+                                                      style={{
+                                                        width: "280px",
+                                                        fontSize: "15px",
+                                                      }}
+                                                    >
                                                       {credential.consumerKey}
                                                     </div>
                                                   ) : (
@@ -653,7 +659,7 @@ const ViewApp = () => {
                                                   )}
                                                   <br />
                                                   <button
-                                                    className="secret__toggle"
+                                                    className="secret__toggle all-add-buttons text-white border-0 m-0"
                                                     onClick={() =>
                                                       toggleVisibility2(
                                                         credential.consumerKey
@@ -661,28 +667,24 @@ const ViewApp = () => {
                                                     }
                                                   >
                                                     {showKey1 ? (
-                                                      <Link className="secret__toggle__hide d-flex ">
-                                                        <VisibilityOffOutlinedIcon
-                                                          style={{
-                                                            color: "#002a5c",
-                                                            fontSize: "inherit",
-                                                          }}
-                                                        />
-                                                      </Link>
+                                                      <VisibilityOffOutlinedIcon
+                                                        style={{
+                                                          fontSize: "inherit",
+                                                        }}
+                                                        className="all-add-buttons text-white border-0 m-0 "
+                                                      />
                                                     ) : (
-                                                      <Link className="secret__toggle__show">
-                                                        <RemoveRedEyeOutlinedIcon
-                                                          style={{
-                                                            color: "#002a5c",
-                                                            fontSize: "inherit",
-                                                          }}
-                                                        />
-                                                      </Link>
+                                                      <RemoveRedEyeOutlinedIcon
+                                                        className="all-add-buttons text-white border-0 m-0"
+                                                        style={{
+                                                          fontSize: "inherit",
+                                                        }}
+                                                      />
                                                     )}
                                                   </button>
-                                                  <div className="secret__copy d-flex align-items-center">
+                                                  <div className="secret__copy d-flex align-items-center ">
                                                     <button
-                                                      className="secret__copy"
+                                                      className="secret__copy all-add-buttons text-white border-0 m-0"
                                                       onClick={() =>
                                                         copyToClipboard(
                                                           credential.consumerKey
@@ -695,6 +697,7 @@ const ViewApp = () => {
                                                           color: "#002a5c",
                                                           fontSize: "inherit",
                                                         }}
+                                                        className="text-white"
                                                       />
                                                     </button>
                                                     <span className="copy-message">
@@ -708,11 +711,17 @@ const ViewApp = () => {
                                                 <div style={{ width: "145px" }}>
                                                   <label>Consumer Secret</label>
                                                 </div>
-                                                <div className="secret field__item d-flex">
+                                                <div className="secret field__item d-flex flex-grow-1 justify-content-around ">
                                                   {showSecrets[
                                                     credential.consumerSecret
                                                   ] ? (
-                                                    <div className="secret__value ">
+                                                    <div
+                                                      className="secret__value "
+                                                      style={{
+                                                        width: "280px",
+                                                        fontSize: "15px",
+                                                      }}
+                                                    >
                                                       {
                                                         credential.consumerSecret
                                                       }
@@ -726,7 +735,11 @@ const ViewApp = () => {
                                                   )}
                                                   <br />
                                                   <button
-                                                    className="secret__toggle"
+                                                    className="secret__toggle all-add-buttons align-items-center   text-white border-0 mx-3"
+                                                    style={{
+                                                      width: "20px",
+                                                      height: "20px",
+                                                    }}
                                                     onClick={() =>
                                                       toggleVisibility(
                                                         credential.consumerSecret
@@ -734,28 +747,26 @@ const ViewApp = () => {
                                                     }
                                                   >
                                                     {showKey ? (
-                                                      <Link className="secret__toggle__hide">
-                                                        <VisibilityOffOutlinedIcon
-                                                          style={{
-                                                            color: "#002a5c",
-                                                            fontSize: "inherit",
-                                                          }}
-                                                        />
-                                                      </Link>
+                                                      <VisibilityOffOutlinedIcon
+                                                        style={{
+                                                          fontSize: "inherit",
+                                                        }}
+                                                        className="all-add-buttons text-white border-0 "
+                                                      />
                                                     ) : (
-                                                      <Link className="secret__toggle__show">
-                                                        <RemoveRedEyeOutlinedIcon
-                                                          style={{
-                                                            color: "#002a5c",
-                                                            fontSize: "inherit",
-                                                          }}
-                                                        />
-                                                      </Link>
+                                                      <RemoveRedEyeOutlinedIcon
+                                                        style={{
+                                                          fontSize: "inherit",
+                                                          width: "15px",
+                                                          height: "15px",
+                                                        }}
+                                                        className="all-add-buttons text-white border-0 "
+                                                      />
                                                     )}
                                                   </button>
                                                   <div className="secret__copy">
                                                     <button
-                                                      className="secret__copy"
+                                                      className="secret__copy all-add-buttons text-white border-0 "
                                                       onClick={() =>
                                                         copyToClipboard(
                                                           credential.consumerSecret
@@ -764,6 +775,7 @@ const ViewApp = () => {
                                                       title="Click to copy"
                                                     >
                                                       <ContentCopyOutlinedIcon
+                                                        className="all-add-buttons text-white border-0 m-0"
                                                         style={{
                                                           color: "#002a5c",
                                                           background: "none",
@@ -819,8 +831,6 @@ const ViewApp = () => {
                                               </div>
                                             </div>
 
-                                            
-                                            
                                             <div
                                               className="item-property"
                                               // style={{ marginLeft: "45px" }}
@@ -873,7 +883,7 @@ const ViewApp = () => {
                                                           credentialKey
                                                         )
                                                       }
-                                                      className="all-buttons-color text-white  border border-0 m-0"
+                                                      className="all-add-buttons text-white border border-0 m-0"
                                                       style={{
                                                         width: "25px",
                                                         height: "35px",
@@ -881,24 +891,20 @@ const ViewApp = () => {
                                                         alignItems: "center",
                                                         justifyContent:
                                                           "center",
-                                                        backgroundColor:
-                                                          "F46223",
                                                       }}
                                                     >
                                                       {/* &#9660; */}
                                                       {/* {DropDownDark} */}
-                                                      <img
-                                                        src={getImageSource()}
-                                                        alt={
-                                                          showDropdown
-                                                            ? "Open Dropdown"
-                                                            : "Closed Dropdown"
-                                                        }
-                                                        style={{
-                                                          Width: "100%",
-                                                          Height: "100%",
-                                                        }}
-                                                      />
+                                                      <button
+                                                        onClick={toggleDropdown}
+                                                        className="all-add-buttons text-white border-0 m-0"
+                                                      >
+                                                        {dropdownOpen ? (
+                                                          <BsChevronUp />
+                                                        ) : (
+                                                          <BsChevronDown />
+                                                        )}
+                                                      </button>
                                                     </button>
                                                   </div>
                                                 </div>
@@ -919,7 +925,7 @@ const ViewApp = () => {
                                                     }}
                                                   >
                                                     <button
-                                                      className="custom-button all-buttons-color text-white btn btn-sm m-0"
+                                                      className="all-buttons-color text-white btn btn-sm m-0"
                                                       // style={{
                                                       //   width: "114px",
                                                       //   textAlign: "left",
@@ -1053,7 +1059,7 @@ const ViewApp = () => {
                                           <fieldset
                                             className="items--inline app-credentiald-flex flex-wrap  border-bottom m-1 "
                                             key={index}
-                                            style={{ border: "5px solid red" }}
+                                            //style={{ border: "5px solid red" }}
                                           >
                                             <legend>Credential</legend>
 
@@ -1063,219 +1069,229 @@ const ViewApp = () => {
                                                 style={{
                                                   //width: "40%",
                                                   fontSize: "15px",
-                                                  border: "8px solid yellow",
+                                                  //border: "8px solid yellow",
                                                 }}
                                               >
-                                                
-                                                
                                                 <div className="item-property d-flex m-1 ">
-                                                <div style={{ width: "145px" }}>
-                                                  <label className="flex-shrink-0">
-                                                    Consumer Key
-                                                  </label>
-                                                </div>
-                                                <div className="secret field__item d-flex flex-grow-1">
-                                                  {showconsumerkey[
-                                                    credential.consumerKey
-                                                  ] ? (
-                                                    <div className="secret__value">
-                                                      {credential.consumerKey}
-                                                    </div>
-                                                  ) : (
-                                                    <div className="secret__value__hidden">
-                                                      {hideKey(
-                                                        credential.consumerKey
-                                                      )}
-                                                    </div>
-                                                  )}
-                                                  <br />
-                                                  <button
-                                                    className="secret__toggle"
-                                                    onClick={() =>
-                                                      toggleVisibility2(
-                                                        credential.consumerKey
-                                                      )
-                                                    }
+                                                  <div
+                                                    style={{ width: "145px" }}
                                                   >
-                                                    {showKey1 ? (
-                                                      <Link className="secret__toggle__hide d-flex ">
-                                                        <VisibilityOffOutlinedIcon
-                                                          style={{
-                                                            color: "#002a5c",
-                                                            fontSize: "inherit",
-                                                          }}
-                                                        />
-                                                      </Link>
+                                                    <label className="flex-shrink-0">
+                                                      Consumer Key
+                                                    </label>
+                                                  </div>
+
+                                                  <div className="secret field__item d-flex flex-grow-1 justify-content-around   ">
+                                                    {showconsumerkey[
+                                                      credential.consumerKey
+                                                    ] ? (
+                                                      <div
+                                                        className="secret__value "
+                                                        style={{
+                                                          width: "280px",
+                                                          fontSize: "15px",
+                                                          overflow: "auto"
+                                                        }}
+                                                      >
+                                                        {credential.consumerKey}
+                                                      </div>
                                                     ) : (
-                                                      <Link className="secret__toggle__show">
-                                                        <RemoveRedEyeOutlinedIcon
-                                                          style={{
-                                                            color: "#002a5c",
-                                                            fontSize: "inherit",
-                                                          }}
-                                                        />
-                                                      </Link>
+                                                      <div className="secret__value__hidden">
+                                                        {hideKey(
+                                                          credential.consumerKey
+                                                        )}
+                                                      </div>
                                                     )}
-                                                  </button>
-                                                  <div className="secret__copy d-flex align-items-center">
+                                                    <br />
+
                                                     <button
-                                                      className="secret__copy"
+                                                      className="secret__toggle all-add-buttons text-white border-0 m-0 "
                                                       onClick={() =>
-                                                        copyToClipboard(
+                                                        toggleVisibility2(
                                                           credential.consumerKey
                                                         )
                                                       }
-                                                      title="Click to copy"
                                                     >
-                                                      <ContentCopyOutlinedIcon
-                                                        style={{
-                                                          color: "#002a5c",
-                                                          fontSize: "inherit",
-                                                        }}
-                                                      />
-                                                    </button>
-                                                    <span className="copy-message">
-                                                      {copyMessage}
-                                                    </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-
-                                              <div className="item-property d-flex r m-1">
-                                                <div style={{ width: "145px" }}>
-                                                  <label>Consumer Secret</label>
-                                                </div>
-                                                <div className="secret field__item d-flex">
-                                                  {showSecrets[
-                                                    credential.consumerSecret
-                                                  ] ? (
-                                                    <div className="secret__value ">
-                                                      {
-                                                        credential.consumerSecret
-                                                      }
-                                                    </div>
-                                                  ) : (
-                                                    <div className="secret__value__hidden">
-                                                      {hideKey(
-                                                        credential.consumerSecret
-                                                      )}
-                                                    </div>
-                                                  )}
-                                                  <br />
-                                                  <button
-                                                    className="secret__toggle"
-                                                    onClick={() =>
-                                                      toggleVisibility(
-                                                        credential.consumerSecret
-                                                      )
-                                                    }
-                                                  >
-                                                    {showKey ? (
-                                                      <Link className="secret__toggle__hide">
+                                                      {showKey1 ? (
                                                         <VisibilityOffOutlinedIcon
                                                           style={{
-                                                            color: "#002a5c",
                                                             fontSize: "inherit",
                                                           }}
                                                         />
-                                                      </Link>
-                                                    ) : (
-                                                      <Link className="secret__toggle__show">
+                                                      ) : (
                                                         <RemoveRedEyeOutlinedIcon
                                                           style={{
-                                                            color: "#002a5c",
                                                             fontSize: "inherit",
                                                           }}
                                                         />
-                                                      </Link>
+                                                      )}
+                                                    </button>
+                                                    <div className="secret__copy d-flex align-items-center ">
+                                                      <button
+                                                        className="secret__copy all-add-buttons text-white border-0 m-0"
+                                                        onClick={() =>
+                                                          copyToClipboard(
+                                                            credential.consumerKey
+                                                          )
+                                                        }
+                                                        title="Click to copy"
+                                                      >
+                                                        <ContentCopyOutlinedIcon
+                                                          style={{
+                                                            fontSize: "inherit",
+                                                          }}
+                                                        />
+                                                      </button>
+                                                      <span className="copy-message">
+                                                        {copyMessage}
+                                                      </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                               
+                                               
+                                                <div className="item-property d-flex m-1 border border-danger">
+                                                  <div
+                                                    style={{ width: "145px" }}
+                                                  >
+                                                    <label>
+                                                      Consumer Secret
+                                                    </label>
+                                                  </div>
+                                                  <div className="secret field__item d-flex flex-grow-1 justify-content-around ">
+                                                    {showSecrets[
+                                                      credential.consumerSecret
+                                                    ] ? (
+                                                      <div
+                                                        className="secret__value "
+                                                        style={{
+                                                          width: "280px",
+                                                          fontSize: "15px",
+                                                        }}
+                                                      >
+                                                        {
+                                                          credential.consumerSecret
+                                                        }
+                                                      </div>
+                                                    ) : (
+                                                      <div className="secret__value__hidden">
+                                                        {hideKey(
+                                                          credential.consumerSecret
+                                                        )}
+                                                      </div>
                                                     )}
-                                                  </button>
-                                                  <div className="secret__copy">
+                                                    <br />
                                                     <button
-                                                      className="secret__copy"
+                                                      className="secret__toggle all-add-buttons text-white border-0 mx-3"
                                                       onClick={() =>
-                                                        copyToClipboard(
+                                                        toggleVisibility(
                                                           credential.consumerSecret
                                                         )
                                                       }
-                                                      title="Click to copy"
                                                     >
-                                                      <ContentCopyOutlinedIcon
-                                                        style={{
-                                                          color: "#002a5c",
-                                                          background: "none",
-                                                          fontSize: "inherit",
-                                                        }}
-                                                      />
+                                                      {showKey ? (
+                                                        <VisibilityOffOutlinedIcon
+                                                          style={{
+                                                            fontSize: "inherit",
+                                                           
+                                                          }}
+                                                        />
+                                                      ) : (
+                                                        <RemoveRedEyeOutlinedIcon
+                                                          style={{
+                                                            fontSize: "inherit",
+                                                          }}
+                                                        />
+                                                      )}
                                                     </button>
+                                                    <div className="secret__copy">
+                                                      <button
+                                                        className="secret__copy all-add-buttons text-white border-0 m-0"
+                                                        onClick={() =>
+                                                          copyToClipboard(
+                                                            credential.consumerSecret
+                                                          )
+                                                        }
+                                                        title="Click to copy"
+                                                      >
+                                                        <ContentCopyOutlinedIcon
+                                                          style={{
+                                                            background: "none",
+                                                            fontSize: "inherit",
+                                                          }}
+                                                        />
+                                                      </button>
 
-                                                    <span className="copy-message">
-                                                      {copyMessage}
+                                                      <span className="copy-message">
+                                                        {copyMessage}
+                                                      </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                                <div className="item-property  d-flex m-1">
+                                                  <div
+                                                    style={{ width: "145px" }}
+                                                  >
+                                                    <label> Issued </label>
+                                                  </div>
+
+                                                  {credential.issuedAt
+                                                    ? customFormatTDate(
+                                                        credential.issuedAt
+                                                      )
+                                                    : "N/A"}
+                                                </div>
+
+                                                <div className="item-property  d-flex m-1">
+                                                  <div
+                                                    style={{ width: "145px" }}
+                                                  >
+                                                    <label> Expires </label>
+                                                  </div>
+                                                  {credential.expiresAt
+                                                    ? customFormatDateTimetamp(
+                                                        credential.expiresAt
+                                                      )
+                                                    : "N/A"}
+                                                </div>
+
+                                                <div className=" d-flex m-1 ">
+                                                  <div
+                                                    style={{ width: "120px" }}
+                                                  >
+                                                    <label> Key Status </label>
+                                                  </div>
+                                                  <div>
+                                                    <span
+                                                      className="badge badge-success"
+                                                      style={{
+                                                        marginLeft: "10px",
+                                                      }}
+                                                    >
+                                                      {credential.status}
                                                     </span>
                                                   </div>
                                                 </div>
                                               </div>
-
-         
-                                              <div className="item-property  d-flex m-1">
-                                                <div style={{ width: "145px" }}>
-                                                  <label> Issued </label>
-                                                </div>
-
-                                                {credential.issuedAt
-                                                  ? customFormatTDate(
-                                                      credential.issuedAt
-                                                    )
-                                                  : "N/A"}
-                                              </div>
-                                                
-                                              <div className="item-property  d-flex m-1">
-                                                <div style={{ width: "145px" }}>
-                                                  <label> Expires </label>
-                                                </div>
-                                                {credential.expiresAt
-                                                  ? customFormatDateTimetamp(
-                                                      credential.expiresAt
-                                                    )
-                                                  : "N/A"}
-                                              </div>
-                                               
-                                               
-                                              <div className=" d-flex m-1 ">
-                                                <div style={{ width: "120px" }}>
-                                                  <label> Key Status </label>
-                                                </div>
-                                                <div>
-                                                  <span
-                                                    className="badge badge-success"
-                                                    style={{
-                                                      marginLeft: "10px",
-                                                    }}
-                                                  >
-                                                    {credential.status}
-                                                  </span>
-                                                </div>
-                                              </div>
-                                              </div>
                                               {/* API Products */}
 
-                                            
-                                            
-                                             
-                                             
                                               <div
                                                 className="item-property"
                                                 // style={{
                                                 //   border: "1px solid blue",
                                                 // }}
-                                                style={{
-                                                  // border: "1px solid blue",
-                                                  //display: "flex",
-                                                  //flexDirection: "column",
-                                                  // border: "1px solid blue",
-                                                  //marginRight: "70px",
-                                                  //width: "60%",
-                                                }}
+                                                style={
+                                                  {
+                                                    // border: "1px solid blue",
+                                                    //display: "flex",
+                                                    //flexDirection: "column",
+                                                    // border: "1px solid blue",
+                                                    //marginRight: "70px",
+                                                    //width: "60%",
+                                                  }
+                                                }
                                               >
                                                 <div
                                                   className="dropbutton-wrapper"
@@ -1289,9 +1305,6 @@ const ViewApp = () => {
                                                         <button
                                                           className="all-buttons-color text-white button btn btn-sm"
                                                           style={{
-                                                            
-                                                            
-
                                                             marginLeft: "450px",
                                                           }}
                                                           onClick={() =>
@@ -1339,10 +1352,12 @@ const ViewApp = () => {
                                                             key={productIndex}
                                                           >
                                                             <div className="api-product-list-row clearfix">
-                                                              <span className="api-product-name"  style={{
-                                                                marginLeft:
-                                                                  "30px",
-                                                              }}
+                                                              <span
+                                                                className="api-product-name"
+                                                                style={{
+                                                                  marginLeft:
+                                                                    "30px",
+                                                                }}
                                                               >
                                                                 {
                                                                   product.apiproduct
@@ -1378,21 +1393,6 @@ const ViewApp = () => {
                                                   )}
                                                 </div>
                                               </div>
-
-
-
-
-                                            
-                                         
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
                                             </div>
                                           </fieldset>
                                         );

@@ -967,7 +967,7 @@ const EditApps = () => {
   if (!appDetailsData || (appDetailsData && isFetching)) {
     return (
       <Layout>
-        <div style={{marginTop:"110px"}}>
+        <div style={{ marginTop: "110px" }}>
           <AppsButton />
           <div className="page">
             <div className="page__content-above">
@@ -988,9 +988,9 @@ const EditApps = () => {
   }
   return (
     <Layout>
-     <div style={{marginTop:"110px"}}>
-      <AppsButton />
-    
+      <div style={{ marginTop: "110px" }}>
+        <AppsButton />
+
         <div
           className="dialog-off-canvas-main-canvas"
           data-off-canvas-main-canvas=""
@@ -1002,9 +1002,7 @@ const EditApps = () => {
                   <div />
                   <div className="container">
                     <h3 className="js-quickedit-page-title page__title mb-0">
-                      Edit
-                      &nbsp;{appDetailsData.name}&nbsp;
-                      team app
+                      Edit &nbsp;{appDetailsData.name}&nbsp; team app
                     </h3>
                   </div>
                 </div>
@@ -1022,11 +1020,11 @@ const EditApps = () => {
                             <label className="js-form-required form-required">
                               Team App name
                               <sup>
-                              <i
-                                className="fas fa-asterisk text-danger form-required__indicator"
-                                style={{ fontSize: "0.7em" }}
-                              />
-                            </sup>
+                                <i
+                                  className="fas fa-asterisk text-danger form-required__indicator"
+                                  style={{ fontSize: "0.7em" }}
+                                />
+                              </sup>
                             </label>
                             <input
                               className="js-text-full text-full required form-control"
@@ -1209,7 +1207,7 @@ const EditApps = () => {
                                   </div>
                                 </Modal> */}
 
-                                <Modal
+                                {/* <Modal
                                   isOpen={isRemoveModalOpen}
                                   onRequestClose={() =>
                                     setIsRemoveModalOpen(false)
@@ -1279,6 +1277,69 @@ const EditApps = () => {
                                       className="ui-widget-overlay ui-front"
                                       style={{ zIndex: "9998" }}
                                     ></div>
+                                  </div>
+                                </Modal> */}
+
+                                <Modal
+                                  isOpen={isRemoveModalOpen}
+                                  onRequestClose={() =>
+                                    setIsRemoveModalOpen(false)
+                                  }
+                                  style={{
+                                    content: {
+                                      top: "50%",
+                                      left: "50%",
+                                      right: "auto",
+                                      bottom: "auto",
+                                      marginRight: "-50%",
+                                      transform: "translate(-50%, -50%)",
+                                      border: "none",
+                                    },
+                                  }}
+                                >
+                                  <div className="modal-dialog">
+                                    <div className="modal-content">
+                                      <div className="modal-header">
+                                        <h5 className="modal-title">
+                                          Confirmation
+                                        </h5>
+                                        <button
+                                          type="button"
+                                          className="btn-close"
+                                          data-bs-dismiss="modal"
+                                          aria-label="Close"
+                                          onClick={() =>
+                                            setIsRemoveModalOpen(false)
+                                          }
+                                        >
+                                          <span aria-hidden="true">
+                                            &times;
+                                          </span>
+                                        </button>
+                                      </div>
+                                      <div className="modal-body">
+                                        Are you sure you would like to remove
+                                        this API product?
+                                      </div>
+                                      <div className="modal-footer">
+                                        <button
+                                          type="button"
+                                          className="all-buttons-color text-white btn btn-md"
+                                          onClick={handleRemoveConfirmation}
+                                        >
+                                          Confirm
+                                        </button>
+                                        <button
+                                          type="button"
+                                          className="btn btn-md  btn-outline-primary "
+                                          onClick={() =>
+                                            setIsRemoveModalOpen(false)
+                                          }
+                                        >
+                                          Cancel
+                                        </button>
+                                      </div>
+                                    </div>
                                   </div>
                                 </Modal>
 
@@ -1456,7 +1517,6 @@ const EditApps = () => {
           </div>
         </div>
       </div>
-     
     </Layout>
   );
 };

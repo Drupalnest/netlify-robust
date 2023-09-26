@@ -20,8 +20,18 @@ body {
   background-color: #002a5c;
 }
 
-
 .all-add-buttons {
-  background-color: #F46223;
+  background-color: #f46223;
   font-size: 15px;
 }
+
+/* .hover-effect :hover {
+  background-color: #002a5c;
+  color:"white"
+} */
+
+.navbar-nav .nav-item:hover {
+  border-bottom: 1px solid #000; /* Add your desired border color here */
+}
+
+

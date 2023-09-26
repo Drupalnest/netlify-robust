@@ -412,6 +412,10 @@
 // export default Buttons;
 
 
+
+
+
+
 import React, { useEffect, useState } from "react";
 import { fetchApps, fetchTeams } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -463,58 +467,53 @@ const Buttons = () => {
         <ul className="nav nav-tabs  ">
           <li className="nav-item">
             <button
-              className={`btn text-white mx-2  btn-md ${
+              className={`btn all-buttons-color text-white mx-2  btn-md ${
                 currentPage === `/${teamName}` ? "active" : ""
               }`}
               onClick={handleViewClick}
-              style={{ backgroundColor: "#002A5C" }}
             >
               View
             </button>
           </li>
           <li className="nav-item">
             <button
-              className={`btn  text-white mx-2 btn-md ${
+              className={`btn all-buttons-color  text-white mx-2 btn-md ${
                 currentPage === `/${teamName}/edit` ? "active" : ""
               }`}
               onClick={handleEditClick}
-              style={{ backgroundColor: "#002A5C" }}
             >
               Edit
             </button>
           </li>
           <li className="nav-item">
             <button
-              className={`btn text-white mx-2 btn-md ${
+              className={`btn all-buttons-color  text-white mx-2 btn-md ${
                 currentPage === `/${teamName}/delete` ? "active" : ""
               }`}
               onClick={handleDeleteClick}
-              style={{ backgroundColor: "#002A5C" }}
             >
               Delete
             </button>
           </li>
           <li className="nav-item">
             <button
-              className={`btn text-white mx-2 btn-md ${
+              className={`btn all-buttons-color  text-white mx-2 btn-md ${
                 currentPage === `/${teamName}/members` ? "active" : ""
               }`}
               onClick={handleMemberClick}
-              style={{ backgroundColor: "#002A5C" }}
             >
               Members
             </button>
           </li>
           <li className="nav-item">
             <button
-              className={`btn text-white mx-2 btn-md ${
+              className={`btn all-buttons-color  text-white mx-2 btn-md ${
                 currentPage === `/${teamName}/apps` ? "active" : ""
               }`}
               onClick={() => {
                 handleAppsClick();
                 handleFetchApps(teamName);
               }}
-              style={{ backgroundColor: "#002A5C" }}
             >
               Appgroups Apps
             </button>
