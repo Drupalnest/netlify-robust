@@ -2078,7 +2078,7 @@ const AddTeam = () => {
   const [selectedAttributes, setSelectedAttributes] = useState([]);
   const [checkedAttributes, setCheckedAttributes] = useState([]);
 
-  const admin = JSON.parse(localStorage.getItem("userData"));
+  const admin = JSON.parse(sessionStorage.getItem("userData"));
   const adminName = admin.current_user.name;
 
   console.log("adminName", adminName);
