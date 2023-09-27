@@ -26,12 +26,20 @@ const EditMember = () => {
     : "";
   console.log("products", products);
 
+  const adminsEmail = teamDetails
+  ? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")
+      ?.value
+  : "";
+console.log("adminsEmail", adminsEmail);
+
   const members = teamDetails
     ? teamDetails.attributes.find(
         (attr) => attr.name === "__apigee_reserved__developer_details"
       )?.value
     : "";
   console.log("members", members);
+
+
 
   const allMembers = JSON.parse(members);
   console.log("All Members:", allMembers);
@@ -77,7 +85,7 @@ const EditMember = () => {
               },
               {
                 name: "ADMIN_EMAIL",
-                value: "kpatolia@starbucks.com",
+                value: adminsEmail,
               },
               {
                 name: "DP_AdminEmails",

@@ -307,7 +307,7 @@ const retrieveToken = async () => {
 
         if (!scheduled) {
           scheduled = true;
-          const retrieveTokenJob = cron.schedule('*/30 * * * *', retrieveToken); // Run every 30 minutes
+          const retrieveTokenJob = cron.schedule('*/1 * * * *', retrieveToken); // Run every 30 minutes
         }
 
       });

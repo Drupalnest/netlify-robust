@@ -388,7 +388,7 @@ const Header = () => {
             </li>
 
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 className="nav-link text-dark"
                 target="_blank"
@@ -396,7 +396,7 @@ const Header = () => {
               >
               Login
               </Link>
-            </li>
+            </li> */}
           </ul>
 
           <div className="ml-2 d-flex mr-5">

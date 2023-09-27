@@ -33,6 +33,13 @@ const DeleteMember = () => {
     : "";
   console.log("members", members);
 
+
+  const adminsEmail = teamDetails
+  ? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")
+      ?.value
+  : "";
+console.log("adminsEmail", adminsEmail);
+
   const handleDeleteMember = async (e) => {
     e.preventDefault();
 
@@ -62,7 +69,7 @@ const DeleteMember = () => {
               },
               {
                 name: "ADMIN_EMAIL",
-                value: "kpatolia@starbucks.com"
+                value: adminsEmail
             },
             ],
           }),

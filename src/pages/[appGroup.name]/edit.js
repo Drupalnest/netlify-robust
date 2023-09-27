@@ -518,7 +518,7 @@ const UpdateCompanyName = () => {
               },
               {
                 name: "ADMIN_EMAIL",
-                value: "kpatolia@starbucks.com",
+                value: adminsEmail,
               },
               {
                 name: "DP_AdminEmails",
@@ -586,6 +586,16 @@ const UpdateCompanyName = () => {
         ?.value
     : "";
   console.log("admins", admins);
+
+
+  const adminsEmail = teamDetails
+  ? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")
+      ?.value
+  : "";
+console.log("adminsEmail", adminsEmail);
+
+
+  
 
   const filteredData = namesArray
     ? namesArray.filter((attr) => attr !== "0")
