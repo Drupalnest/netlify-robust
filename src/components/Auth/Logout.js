@@ -378,132 +378,434 @@
 
 // export default Logout;
 
+// import React from "react";
+// import axios from "axios";
+// import { Link, navigate } from "gatsby";
+// import Cookies from "js-cookie";
+
+// const Logout = () => {
+//   const oauthToken = JSON.parse(localStorage.getItem("userData"));
+
+//   const csrf = oauthToken ? oauthToken.csrf_token : null;
+//   console.log("csrf", csrf);
+//   const logout = oauthToken ? oauthToken.logout_token : null;
+//   console.log("logout", logout);
+
+//   // const handleLogout = async () => {
+//   //   try {
+//   //     const oauthToken = JSON.parse(localStorage.getItem("userData"));
+//   //     const logout = oauthToken.logout_token;
+//   //     const csrf = oauthToken.csrf_token;
+
+//   //     // // Retrieve the session cookie
+//   //     // const sessionCookie = Cookies.get('SESS1e21079a51c3510c9d34056c895d1852');
+//   //     // console.log("sessionCookie",sessionCookie)
+
+//   //     const response = await axios.post(
+//   //       `https://robustapihub.io/user/logout?_format=json&token=${logout}`,
+//   //       null,
+//   //       {
+//   //         headers: {
+//   //           // Cookie: `SESS1e21079a51c3510c9d34056c895d1852=${sessionCookie}`,
+//   //           "Content-Type": "application/json",
+//   //           "Access-Control-Allow-Origin": "*",
+//   //           "Access-Control-Allow-Methods": "POST",
+//   //           "Access-Control-Allow-Headers": "Content-Type, Authorization",
+//   //         },
+//   //       }
+//   //     );
+
+//   //     if (response.status === 204) {
+//   //       //Cookies.remove('userData', { path: '/teams' });
+//   //       localStorage.removeItem("userData");
+//   //       navigate("/");
+//   //     } else if (response.status === 403) {
+//   //       console.error("Logout failed with status 403 Forbidden");
+//   //       alert("You don't have permission to perform this action.");
+//   //     } else {
+//   //       throw new Error(`Logout failed with status: ${response.status}`);
+//   //     }
+//   //   } catch (error) {
+//   //     console.error("Error during Drupal logout:", error);
+//   //     alert("An error occurred during logout.");
+//   //   }
+//   // };
+//   // const handleLogout = async () => {
+//   //   try {
+//   //     const response = await fetch("https://robustapihub.io/user/logout?_format=json", {
+//   //       method: "POST",
+//   //       headers: {
+//   //         "Content-Type": "application/json",
+//   //       },
+//   //     });
+
+//   //     if (response.ok) {
+//   //       localStorage.removeItem("userData");
+//   //       alert("Logout successful");
+//   //     } else {
+//   //       const errorData = await response.json();
+//   //       alert(`Logout failed. Error: ${errorData.message}`);
+//   //     }
+//   //   } catch (error) {
+//   //     console.error("Error:", error);
+//   //     alert("An error occurred while logging out.");
+//   //   }
+//   // };
+
+//   // const handleLogout = async () => {
+//   //   try {
+//   //     const oauthToken = JSON.parse(localStorage.getItem("userData"));
+//   //     const csrfToken = oauthToken.csrf_token;
+//   //     const logoutToken = oauthToken.logout_token;
+
+//   //     const url = `https://robustapihub.io/user/logout?_format=json`;
+//   //     const response = await fetch(url, {
+//   //       method: "POST",
+//   //       headers: {
+//   //         "Content-Type": "application/json",
+//   //         "X-CSRF-Token": csrfToken,
+//   //         "X-Logout-Token": logoutToken,
+//   //       },
+//   //       credentials: "include",
+//   //     });
+
+//   //     if (response.ok) {
+//   //       localStorage.removeItem("userData");
+//   //       alert("Logout successful");
+//   //     } else {
+//   //       const errorData = await response.json();
+//   //       alert(`Logout failed. Error: ${errorData.message}`);
+//   //     }
+//   //   } catch (error) {
+//   //     console.error("Error:", error);
+//   //     alert("An error occurred while logging out.");
+//   //   }
+//   // };
+
+//   const handleLogout = async () => {
+//     try {
+//       const oauthToken = JSON.parse(localStorage.getItem("userData"));
+//       const csrfToken = oauthToken ? oauthToken.csrf_token : null;
+//       const logoutToken = oauthToken ? oauthToken.logout_token : null;
+
+//       const url = `https://robustapihub.io/user/logout?_format=json&token=${logoutToken}`;
+//       const response = await fetch(url, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         credentials: "include",
+//       });
+
+//       if (response.ok) {
+//         localStorage.removeItem("userData");
+//         alert("Logout successful");
+//       } else {
+//         const errorData = await response.json();
+//         alert(`Logout failed. Error: ${errorData.message}`);
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert("An error occurred while logging out.");
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <div onClick={handleLogout}>Logout</div>
+//     </div>
+//   );
+// };
+
+// export default Logout;
+
+// // import React from "react";
+// // import { navigate } from "gatsby";
+
+// // const Logout = () => {
+// //   const handleLogout = () => {
+// //     try {
+// //       const oauthToken = JSON.parse(localStorage.getItem("userData"));
+// //       const logout = oauthToken.logout_token;
+// //       const name = oauthToken.current_user.name;
+
+// //       const xhr = new XMLHttpRequest();
+
+// //       xhr.open("POST", `https://robustapihub.io/user/logout?_format=json&token=${logout}`);
+// //       xhr.setRequestHeader("Content-Type", "application/json");
+// //       xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+// //       xhr.setRequestHeader("Access-Control-Allow-Methods", "POST");
+// //       xhr.setRequestHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+// //       xhr.onload = function() {
+// //         if (xhr.status === 204) {
+// //           localStorage.removeItem("userData");
+// //           navigate("/login");
+// //         } else if (xhr.status === 403) {
+// //           console.error("Logout failed with status 403 Forbidden");
+// //           alert("You don't have permission to perform this action.");
+// //         } else {
+// //           throw new Error(`Logout failed with status: ${xhr.status}`);
+// //         }
+// //       };
+
+// //       xhr.onerror = function() {
+// //         console.error("Error during Drupal logout");
+// //         alert("An error occurred during logout.");
+// //       };
+
+// //       xhr.send();
+// //     } catch (error) {
+// //       console.error("Error during Drupal logout:", error);
+// //       alert("An error occurred during logout.");
+// //     }
+// //   };
+
+// //   return (
+// //     <div>
+// //       <button onClick={handleLogout}>Logout</button>
+// //     </div>
+// //   );
+// // };
+
+// // export default Logout;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from "react";
+// import axios from "axios";
+// import { Link, navigate } from "gatsby";
+// import Cookies from "js-cookie";
+
+// const Logout = () => {
+//   const oauthToken = JSON.parse(localStorage.getItem("userData"));
+
+//   // const csrf = oauthToken ? oauthToken.csrf_token : null;
+//   // console.log("csrf", csrf);
+//   // const logout = oauthToken ? oauthToken.logout_token : null;
+//   // console.log("logout", logout);
+
+//   // const handleLogout = async () => {
+//   //   try {
+//   //     const oauthToken = JSON.parse(localStorage.getItem("userData"));
+//   //     const logout = oauthToken.logout_token;
+//   //     const csrf = oauthToken.csrf_token;
+
+//   //     // // Retrieve the session cookie
+//   //     // const sessionCookie = Cookies.get('SESS1e21079a51c3510c9d34056c895d1852');
+//   //     // console.log("sessionCookie",sessionCookie)
+
+//   //     const response = await axios.post(
+//   //       `https://robustapihub.io/user/logout?_format=json&token=${logout}`,
+//   //       null,
+//   //       {
+//   //         headers: {
+//   //           // Cookie: `SESS1e21079a51c3510c9d34056c895d1852=${sessionCookie}`,
+//   //           "Content-Type": "application/json",
+//   //           "Access-Control-Allow-Origin": "*",
+//   //           "Access-Control-Allow-Methods": "POST",
+//   //           "Access-Control-Allow-Headers": "Content-Type, Authorization",
+//   //         },
+//   //       }
+//   //     );
+
+//   //     if (response.status === 204) {
+//   //       //Cookies.remove('userData', { path: '/teams' });
+//   //       localStorage.removeItem("userData");
+//   //       navigate("/");
+//   //     } else if (response.status === 403) {
+//   //       console.error("Logout failed with status 403 Forbidden");
+//   //       alert("You don't have permission to perform this action.");
+//   //     } else {
+//   //       throw new Error(`Logout failed with status: ${response.status}`);
+//   //     }
+//   //   } catch (error) {
+//   //     console.error("Error during Drupal logout:", error);
+//   //     alert("An error occurred during logout.");
+//   //   }
+//   // };
+//   // const handleLogout = async () => {
+//   //   try {
+//   //     const response = await fetch("https://robustapihub.io/user/logout?_format=json", {
+//   //       method: "POST",
+//   //       headers: {
+//   //         "Content-Type": "application/json",
+//   //       },
+//   //     });
+
+//   //     if (response.ok) {
+//   //       localStorage.removeItem("userData");
+//   //       alert("Logout successful");
+//   //     } else {
+//   //       const errorData = await response.json();
+//   //       alert(`Logout failed. Error: ${errorData.message}`);
+//   //     }
+//   //   } catch (error) {
+//   //     console.error("Error:", error);
+//   //     alert("An error occurred while logging out.");
+//   //   }
+//   // };
+
+//   // const handleLogout = async () => {
+//   //   try {
+//   //     const oauthToken = JSON.parse(localStorage.getItem("userData"));
+//   //     const csrfToken = oauthToken.csrf_token;
+//   //     const logoutToken = oauthToken.logout_token;
+
+//   //     const url = `https://robustapihub.io/user/logout?_format=json`;
+//   //     const response = await fetch(url, {
+//   //       method: "POST",
+//   //       headers: {
+//   //         "Content-Type": "application/json",
+//   //         "X-CSRF-Token": csrfToken,
+//   //         "X-Logout-Token": logoutToken,
+//   //       },
+//   //       credentials: "include",
+//   //     });
+
+//   //     if (response.ok) {
+//   //       localStorage.removeItem("userData");
+//   //       alert("Logout successful");
+//   //     } else {
+//   //       const errorData = await response.json();
+//   //       alert(`Logout failed. Error: ${errorData.message}`);
+//   //     }
+//   //   } catch (error) {
+//   //     console.error("Error:", error);
+//   //     alert("An error occurred while logging out.");
+//   //   }
+//   // };
+
+//   const handleLogout = async () => {
+//     try {
+//       const oauthToken = JSON.parse(localStorage.getItem("userData"));
+//       const csrfToken = oauthToken ? oauthToken.csrf_token : null;
+//       const logoutToken = oauthToken ? oauthToken.logout_token : null;
+
+//       const url = `https://robustapihub.io/user/logout?_format=json&token=${logoutToken}`;
+//       const response = await fetch(url, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         credentials: "include",
+//       });
+
+//       if (response.ok) {
+//         localStorage.removeItem("userData");
+//         alert("Logout successful");
+//       } else {
+//         const errorData = await response.json();
+//         alert(`Logout failed. Error: ${errorData.message}`);
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert("An error occurred while logging out.");
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <div onClick={handleLogout}>Logout</div>
+//     </div>
+//   );
+// };
+
+// export default Logout;
+
+// // import React from "react";
+// // import { navigate } from "gatsby";
+
+// // const Logout = () => {
+// //   const handleLogout = () => {
+// //     try {
+// //       const oauthToken = JSON.parse(localStorage.getItem("userData"));
+// //       const logout = oauthToken.logout_token;
+// //       const name = oauthToken.current_user.name;
+
+// //       const xhr = new XMLHttpRequest();
+
+// //       xhr.open("POST", `https://robustapihub.io/user/logout?_format=json&token=${logout}`);
+// //       xhr.setRequestHeader("Content-Type", "application/json");
+// //       xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+// //       xhr.setRequestHeader("Access-Control-Allow-Methods", "POST");
+// //       xhr.setRequestHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+// //       xhr.onload = function() {
+// //         if (xhr.status === 204) {
+// //           localStorage.removeItem("userData");
+// //           navigate("/login");
+// //         } else if (xhr.status === 403) {
+// //           console.error("Logout failed with status 403 Forbidden");
+// //           alert("You don't have permission to perform this action.");
+// //         } else {
+// //           throw new Error(`Logout failed with status: ${xhr.status}`);
+// //         }
+// //       };
+
+// //       xhr.onerror = function() {
+// //         console.error("Error during Drupal logout");
+// //         alert("An error occurred during logout.");
+// //       };
+
+// //       xhr.send();
+// //     } catch (error) {
+// //       console.error("Error during Drupal logout:", error);
+// //       alert("An error occurred during logout.");
+// //     }
+// //   };
+
+// //   return (
+// //     <div>
+// //       <button onClick={handleLogout}>Logout</button>
+// //     </div>
+// //   );
+// // };
+
+// // export default Logout;
+
+
+
+
+
+
+import { navigate } from "gatsby";
 import React from "react";
-import axios from "axios";
-import { Link, navigate } from "gatsby";
-import Cookies from "js-cookie";
 
 const Logout = () => {
-  const oauthToken = JSON.parse(localStorage.getItem("userData"));
-
-  const csrf = oauthToken ? oauthToken.csrf_token : null;
-  console.log("csrf", csrf);
-  const logout = oauthToken ? oauthToken.logout_token : null;
-  console.log("logout", logout);
-
-  // const handleLogout = async () => {
-  //   try {
-  //     const oauthToken = JSON.parse(localStorage.getItem("userData"));
-  //     const logout = oauthToken.logout_token;
-  //     const csrf = oauthToken.csrf_token;
-
-  //     // // Retrieve the session cookie
-  //     // const sessionCookie = Cookies.get('SESS1e21079a51c3510c9d34056c895d1852');
-  //     // console.log("sessionCookie",sessionCookie)
-
-  //     const response = await axios.post(
-  //       `https://robustapihub.io/user/logout?_format=json&token=${logout}`,
-  //       null,
-  //       {
-  //         headers: {
-  //           // Cookie: `SESS1e21079a51c3510c9d34056c895d1852=${sessionCookie}`,
-  //           "Content-Type": "application/json",
-  //           "Access-Control-Allow-Origin": "*",
-  //           "Access-Control-Allow-Methods": "POST",
-  //           "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  //         },
-  //       }
-  //     );
-
-  //     if (response.status === 204) {
-  //       //Cookies.remove('userData', { path: '/teams' });
-  //       localStorage.removeItem("userData");
-  //       navigate("/");
-  //     } else if (response.status === 403) {
-  //       console.error("Logout failed with status 403 Forbidden");
-  //       alert("You don't have permission to perform this action.");
-  //     } else {
-  //       throw new Error(`Logout failed with status: ${response.status}`);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during Drupal logout:", error);
-  //     alert("An error occurred during logout.");
-  //   }
-  // };
-  // const handleLogout = async () => {
-  //   try {
-  //     const response = await fetch("https://robustapihub.io/user/logout?_format=json", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     if (response.ok) {
-  //       localStorage.removeItem("userData");
-  //       alert("Logout successful");
-  //     } else {
-  //       const errorData = await response.json();
-  //       alert(`Logout failed. Error: ${errorData.message}`);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     alert("An error occurred while logging out.");
-  //   }
-  // };
-
-  // const handleLogout = async () => {
-  //   try {
-  //     const oauthToken = JSON.parse(localStorage.getItem("userData"));
-  //     const csrfToken = oauthToken.csrf_token;
-  //     const logoutToken = oauthToken.logout_token;
-
-  //     const url = `https://robustapihub.io/user/logout?_format=json`;
-  //     const response = await fetch(url, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "X-CSRF-Token": csrfToken,
-  //         "X-Logout-Token": logoutToken,
-  //       },
-  //       credentials: "include",
-  //     });
-
-  //     if (response.ok) {
-  //       localStorage.removeItem("userData");
-  //       alert("Logout successful");
-  //     } else {
-  //       const errorData = await response.json();
-  //       alert(`Logout failed. Error: ${errorData.message}`);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     alert("An error occurred while logging out.");
-  //   }
-  // };
-
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
-      const oauthToken = JSON.parse(localStorage.getItem("userData"));
-      const csrfToken = oauthToken ? oauthToken.csrf_token : null;
-      const logoutToken = oauthToken ? oauthToken.logout_token : null;
+      // Assuming you have a response object (you'll get this from your API)
+      // const response = await fetch("your_logout_endpoint_here", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${localStorage.getItem("userData")}`
+      //   }
+      // });
 
-      const url = `https://robustapihub.io/user/logout?_format=json&token=${logoutToken}`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        localStorage.removeItem("userData");
-        alert("Logout successful");
-      } else {
-        const errorData = await response.json();
-        alert(`Logout failed. Error: ${errorData.message}`);
-      }
+      // Assuming response.ok for success and response.json() for error data
+      // if (response.ok) {
+      sessionStorage.removeItem("userData");
+      alert("Logout successful");
+      navigate("/login")
+      // } else {
+      //   const errorData = await response.json();
+      //   alert(`Logout failed. Error: ${errorData.message}`);
+      // }
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while logging out.");
@@ -518,54 +820,3 @@ const Logout = () => {
 };
 
 export default Logout;
-
-// import React from "react";
-// import { navigate } from "gatsby";
-
-// const Logout = () => {
-//   const handleLogout = () => {
-//     try {
-//       const oauthToken = JSON.parse(localStorage.getItem("userData"));
-//       const logout = oauthToken.logout_token;
-//       const name = oauthToken.current_user.name;
-
-//       const xhr = new XMLHttpRequest();
-
-//       xhr.open("POST", `https://robustapihub.io/user/logout?_format=json&token=${logout}`);
-//       xhr.setRequestHeader("Content-Type", "application/json");
-//       xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-//       xhr.setRequestHeader("Access-Control-Allow-Methods", "POST");
-//       xhr.setRequestHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-//       xhr.onload = function() {
-//         if (xhr.status === 204) {
-//           localStorage.removeItem("userData");
-//           navigate("/login");
-//         } else if (xhr.status === 403) {
-//           console.error("Logout failed with status 403 Forbidden");
-//           alert("You don't have permission to perform this action.");
-//         } else {
-//           throw new Error(`Logout failed with status: ${xhr.status}`);
-//         }
-//       };
-
-//       xhr.onerror = function() {
-//         console.error("Error during Drupal logout");
-//         alert("An error occurred during logout.");
-//       };
-
-//       xhr.send();
-//     } catch (error) {
-//       console.error("Error during Drupal logout:", error);
-//       alert("An error occurred during logout.");
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <button onClick={handleLogout}>Logout</button>
-//     </div>
-//   );
-// };
-
-// export default Logout;

@@ -80,12 +80,12 @@ const AppDropdownComponent = ({ teamName, appName }) => {
   return (
     <div className="d-flex justify-content-end">
       <div
-        className={`dropdown  text-white  ${isOpen ? "show" : ""}`}
+        className={`dropdown  text-white rounded ${isOpen ? "show" : ""}`}
         ref={dropdownRef}
       >
         <div className="">
           <button
-            className="btn btn-sm m-0"
+            className="btn btn-sm m-0 rounded"
             style={{
               backgroundColor: "#002A5C",
               fontSize: "14px",
@@ -103,7 +103,7 @@ const AppDropdownComponent = ({ teamName, appName }) => {
             </Link>
           </button>
           <button
-            className="btn btn-sm align-items-center  border border-5 m-0 p-2"
+            className="btn btn-sm align-items-center rounded border border-5 m-0 p-2"
             onClick={toggleDropdown}
             style={{ backgroundColor: "#F46223" }}
           >

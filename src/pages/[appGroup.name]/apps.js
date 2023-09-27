@@ -461,7 +461,7 @@ const TeamApps = () => {
                     <div className="d-flex justify-content-center mt-3 ">
                       <Link
                         to={`/${teamName}/apps/add-apps`}
-                        className="all-add-buttons button button-action btn btn-md text-white "
+                        className="all-add-buttons button rounded button-action btn btn-md text-white "
                       >
                         Add appgroups app
                       </Link>
@@ -529,9 +529,9 @@ const TeamApps = () => {
                 <div className="container-fluid px-0">
                   <div className="contextual-region block block--pagetitle bg-lighter py-4">
                     <div className="container">
-                      <h1 className="js-quickedit-page-title page__title mb-0">
+                      <h3 className="js-quickedit-page-title page__title mb-0">
                         Loading appgroup apps...
-                      </h1>
+                      </h3>
                     </div>
                   </div>
                 </div>

@@ -240,7 +240,7 @@ const AppsButton = () => {
         <ul className="nav nav-tabs  ">
           <li className="nav-item">
             <button
-              className={`btn text-white mx-2  btn-md ${
+              className={`btn text-white mx-2 rounded btn-md ${
                 currentPage === `/${teamName}` ? "active" : ""
               }`}
               onClick={handleViewClick}
@@ -251,7 +251,7 @@ const AppsButton = () => {
           </li>
           <li className="nav-item">
             <button
-              className={`btn  text-white mx-2 btn-md ${
+              className={`btn  text-white rounded mx-2 btn-md ${
                 currentPage === `/${teamName}/edit` ? "active" : ""
               }`}
               onClick={handleEditClick}
@@ -262,7 +262,7 @@ const AppsButton = () => {
           </li>
           <li className="nav-item">
             <button
-              className={`btn text-white mx-2 btn-md ${
+              className={`btn text-white rounded mx-2 btn-md ${
                 currentPage === `/${teamName}/delete` ? "active" : ""
               }`}
               onClick={handleDeleteClick}
@@ -274,7 +274,7 @@ const AppsButton = () => {
          
           <li className="nav-item">
             <button
-              className={`btn text-white mx-2 btn-md ${
+              className={`btn text-white rounded mx-2 btn-md ${
                 currentPage === `/${teamName}/apps` ? "active" : ""
               }`}
               

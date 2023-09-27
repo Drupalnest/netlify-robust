@@ -602,8 +602,11 @@ const ViewApp = () => {
                             )}
 
                             <div
-                              className="card-body  pb-0"
-                              //style={{ border: "7px solid green" }}
+                              className="card-body  "
+                              style={{
+                                //border: "7px solid green",
+                                fontSize: "16px",
+                              }}
                             >
                               {appDetailsData.credentials?.length > 0 ? (
                                 appDetailsData.credentials.map(
@@ -613,410 +616,416 @@ const ViewApp = () => {
                                         credential.consumerKey;
                                       return (
                                         <fieldset
-                                          className="items--inline app-credential d-flex flex-wrap  border-bottom m-1 "
+                                          className=" d-flex  container mb-2 border-bottom "
                                           key={index}
                                           //style={{ border: "4px solid green" }}
                                         >
                                           <div
-                                            className="fieldset-wrapper d-flex "
-                                            // style={{
-                                            //   border: "4px solid yellow",
-                                            // }}
-                                          >
-                                            <div
-                                              className="w-200 "
-                                              style={{
-                                                border: "2px solid blue",
+                                            className="w-50 "
+                                            style={
+                                              {
+                                                //border: "2px solid blue",
                                                 //width: "40%",
-                                                fontSize: "15px",
-                                              }}
-                                            >
-                                              <div className="item-property d-flex m-1  ">
-                                                <div style={{ width: "145px" }}>
-                                                  <label className="flex-shrink-0">
-                                                    Consumer Key
-                                                  </label>
-                                                </div>
-                                                <div className="secret field__item d-flex  flex-grow-1 justify-content-around">
-                                                  {showconsumerkey[
-                                                    credential.consumerKey
-                                                  ] ? (
-                                                    <div
-                                                      className="secret__value "
-                                                      style={{
-                                                        width: "280px",
-                                                        fontSize: "15px",
-                                                      }}
-                                                    >
-                                                      {credential.consumerKey}
-                                                    </div>
-                                                  ) : (
-                                                    <div className="secret__value__hidden">
-                                                      {hideKey(
-                                                        credential.consumerKey
-                                                      )}
-                                                    </div>
-                                                  )}
-                                                  <br />
-                                                  <button
-                                                    className="secret__toggle all-add-buttons text-white border-0 m-0"
-                                                    onClick={() =>
-                                                      toggleVisibility2(
-                                                        credential.consumerKey
-                                                      )
-                                                    }
-                                                  >
-                                                    {showKey1 ? (
-                                                      <VisibilityOffOutlinedIcon
-                                                        style={{
-                                                          fontSize: "inherit",
-                                                        }}
-                                                        className="all-add-buttons text-white border-0 m-0 "
-                                                      />
-                                                    ) : (
-                                                      <RemoveRedEyeOutlinedIcon
-                                                        className="all-add-buttons text-white border-0 m-0"
-                                                        style={{
-                                                          fontSize: "inherit",
-                                                        }}
-                                                      />
-                                                    )}
-                                                  </button>
-                                                  <div className="secret__copy d-flex align-items-center ">
-                                                    <button
-                                                      className="secret__copy all-add-buttons text-white border-0 m-0"
-                                                      onClick={() =>
-                                                        copyToClipboard(
-                                                          credential.consumerKey
-                                                        )
-                                                      }
-                                                      title="Click to copy"
-                                                    >
-                                                      <ContentCopyOutlinedIcon
-                                                        style={{
-                                                          color: "#002a5c",
-                                                          fontSize: "inherit",
-                                                        }}
-                                                        className="text-white"
-                                                      />
-                                                    </button>
-                                                    <span className="copy-message">
-                                                      {copyMessage}
-                                                    </span>
-                                                  </div>
-                                                </div>
+                                                //fontSize: "15px",
+                                              }
+                                            }
+                                          >
+                                            <div className="d-flex flex-row justify-content-between ">
+                                              <div
+                                                className=""
+                                                style={{ width: "160px" }}
+                                              >
+                                                <label className="fw-bold">
+                                                  Consumer Key
+                                                </label>
                                               </div>
 
-                                              <div className="item-property d-flex r m-1">
-                                                <div style={{ width: "145px" }}>
-                                                  <label>Consumer Secret</label>
-                                                </div>
-                                                <div className="secret field__item d-flex flex-grow-1 justify-content-around ">
-                                                  {showSecrets[
-                                                    credential.consumerSecret
-                                                  ] ? (
-                                                    <div
-                                                      className="secret__value "
-                                                      style={{
-                                                        width: "280px",
-                                                        fontSize: "15px",
-                                                      }}
-                                                    >
-                                                      {
-                                                        credential.consumerSecret
-                                                      }
-                                                    </div>
-                                                  ) : (
-                                                    <div className="secret__value__hidden">
-                                                      {hideKey(
-                                                        credential.consumerSecret
-                                                      )}
-                                                    </div>
-                                                  )}
-                                                  <br />
-                                                  <button
-                                                    className="secret__toggle all-add-buttons align-items-center   text-white border-0 mx-3"
+                                              <div className=" d-flex flex-row">
+                                                {showconsumerkey[
+                                                  credential.consumerKey
+                                                ] ? (
+                                                  <div
+                                                    className="text-center"
                                                     style={{
-                                                      width: "20px",
-                                                      height: "20px",
+                                                      maxHeight: "35px",
+                                                      overflowY: "auto",
+                                                      width: "200px",
                                                     }}
-                                                    onClick={() =>
-                                                      toggleVisibility(
-                                                        credential.consumerSecret
-                                                      )
-                                                    }
                                                   >
-                                                    {showKey ? (
-                                                      <VisibilityOffOutlinedIcon
-                                                        style={{
-                                                          fontSize: "inherit",
-                                                        }}
-                                                        className="all-add-buttons text-white border-0 "
-                                                      />
-                                                    ) : (
-                                                      <RemoveRedEyeOutlinedIcon
-                                                        style={{
-                                                          fontSize: "inherit",
-                                                          width: "15px",
-                                                          height: "15px",
-                                                        }}
-                                                        className="all-add-buttons text-white border-0 "
-                                                      />
-                                                    )}
-                                                  </button>
-                                                  <div className="secret__copy">
-                                                    <button
-                                                      className="secret__copy all-add-buttons text-white border-0 "
-                                                      onClick={() =>
-                                                        copyToClipboard(
-                                                          credential.consumerSecret
-                                                        )
-                                                      }
-                                                      title="Click to copy"
-                                                    >
-                                                      <ContentCopyOutlinedIcon
-                                                        className="all-add-buttons text-white border-0 m-0"
-                                                        style={{
-                                                          color: "#002a5c",
-                                                          background: "none",
-                                                          fontSize: "inherit",
-                                                        }}
-                                                      />
-                                                    </button>
-
-                                                    <span className="copy-message">
-                                                      {copyMessage}
-                                                    </span>
+                                                    {credential.consumerKey}
                                                   </div>
-                                                </div>
+                                                ) : (
+                                                  <div className="">
+                                                    {hideKey(
+                                                      credential.consumerKey
+                                                    )}
+                                                  </div>
+                                                )}
                                               </div>
 
-                                              <div className="item-property  d-flex m-1">
-                                                <div style={{ width: "145px" }}>
-                                                  <label> Issued </label>
-                                                </div>
-                                                <div>
+                                              <div className="d-flex flex-row justify-content-between ">
+                                                <span
+                                                  className="mx-3"
+                                                  style={{
+                                                    cursor: "pointer",
+                                                  }}
+                                                  onClick={() =>
+                                                    toggleVisibility2(
+                                                      credential.consumerKey
+                                                    )
+                                                  }
+                                                >
+                                                  {showKey1 ? (
+                                                    <VisibilityOffOutlinedIcon
+                                                      style={{
+                                                        fontSize: "1.2rem",
+                                                        color: "#f46223",
+                                                      }}
+                                                    />
+                                                  ) : (
+                                                    <RemoveRedEyeOutlinedIcon
+                                                      style={{
+                                                        fontSize: "1.2rem",
+                                                        color: "#f46223",
+                                                      }}
+                                                    />
+                                                  )}
+                                                </span>
 
+                                                <span
+                                                  onClick={() =>
+                                                    copyToClipboard(
+                                                      credential.consumerKey
+                                                    )
+                                                  }
+                                                  style={{
+                                                    cursor: "pointer",
+                                                  }}
+                                                  title="Click to copy"
+                                                >
+                                                  <ContentCopyOutlinedIcon
+                                                    style={{
+                                                      fontSize: "1.2rem",
+                                                      color: "#f46223",
+                                                    }}
+                                                  />
+                                                </span>
+                                                <span>{copyMessage}</span>
+                                              </div>
+                                            </div>
+
+                                            <div className="d-flex flex-row justify-content-between ">
+                                              <div
+                                                className=""
+                                                style={{ width: "160px" }}
+                                              >
+                                                <label className="fw-bold">
+                                                  Consumer Secret
+                                                </label>
+                                              </div>
+
+                                              <div className=" d-flex flex-row ">
+                                                {showSecrets[
+                                                  credential.consumerSecret
+                                                ] ? (
+                                                  <div
+                                                    className="text-center"
+                                                    style={{
+                                                      maxHeight: "30px",
+                                                      overflowY: "auto",
+                                                      width: "200px",
+                                                    }}
+                                                  >
+                                                    {credential.consumerSecret}
+                                                  </div>
+                                                ) : (
+                                                  <div className="">
+                                                    {hideKey(
+                                                      credential.consumerSecret
+                                                    )}
+                                                  </div>
+                                                )}
+                                              </div>
+
+                                              <div className="d-flex flex-row justify-content-between ">
+                                                <span
+                                                  className="mx-3"
+                                                  style={{
+                                                    cursor: "pointer",
+                                                  }}
+                                                  onClick={() =>
+                                                    toggleVisibility(
+                                                      credential.consumerSecret
+                                                    )
+                                                  }
+                                                >
+                                                  {showKey1 ? (
+                                                    <VisibilityOffOutlinedIcon
+                                                      style={{
+                                                        fontSize: "1.2rem",
+                                                        color: "#f46223",
+                                                      }}
+                                                    />
+                                                  ) : (
+                                                    <RemoveRedEyeOutlinedIcon
+                                                      style={{
+                                                        fontSize: "1.2rem",
+                                                        color: "#f46223",
+                                                      }}
+                                                    />
+                                                  )}
+                                                </span>
+
+                                                <span
+                                                  onClick={() =>
+                                                    copyToClipboard(
+                                                      credential.consumerSecret
+                                                    )
+                                                  }
+                                                  style={{
+                                                    cursor: "pointer",
+                                                  }}
+                                                  title="Click to copy"
+                                                >
+                                                  <ContentCopyOutlinedIcon
+                                                    style={{
+                                                      fontSize: "1.2rem",
+                                                      color: "#f46223",
+                                                    }}
+                                                  />
+                                                </span>
+                                                <span>{copyMessage}</span>
+                                              </div>
+                                            </div>
+
+                                            <div className="d-flex flex-row ">
+                                              <div
+                                                className=""
+                                                style={{ width: "185px" }}
+                                              >
+                                                <label> Issued </label>
+                                              </div>
+                                              <div className="ml-5">
                                                 {credential.issuedAt
                                                   ? customFormatTDate(
                                                       credential.issuedAt
                                                     )
                                                   : "N/A"}
-                                                  </div>
                                               </div>
+                                            </div>
 
-                                              <div className="item-property  d-flex m-1">
-                                                <div style={{ width: "145px" }}>
-                                                  <label> Expires </label>
-                                                </div>
-                                                <div>
+                                            <div className="d-flex flex-row justify-content-between">
+                                              <div
+                                                className=""
+                                                style={{
+                                                  width: "160px",
+                                                }}
+                                              >
+                                                <label> Expires </label>
+                                              </div>
+                                              <div
+                                                style={{
+                                                  marginLeft: "135px",
+                                                }}
+                                              >
                                                 {credential.expiresAt
                                                   ? customFormatDateTimetamp(
                                                       credential.expiresAt
                                                     )
                                                   : "N/A"}
-                                                  </div>
-                                              </div>
-
-                                              <div className=" d-flex m-1 ">
-                                                <div style={{ width: "120px" }}>
-                                                  <label> Key Status </label>
-                                                </div>
-                                                <div>
-                                                  <span
-                                                    className="badge badge-success"
-                                                    style={{
-                                                      marginLeft: "10px",
-                                                    }}
-                                                  >
-                                                    {credential.status}
-                                                  </span>
-                                                </div>
                                               </div>
                                             </div>
 
+                                            <div className=" d-flex flex-row justify-content-start ">
+                                              <div
+                                                style={{ width: "190px" }}
+                                                className=""
+                                              >
+                                                <label> Key Status </label>
+                                              </div>
+                                              <div
+                                                className="justify-content-start "
+                                                style={{
+                                                  marginLeft: "50px",
+                                                }}
+                                              >
+                                                <span className="badge badge-success">
+                                                  {credential.status}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <div
+                                            className="item-property w-50   "
+                                            // style={{ marginLeft: "45px" }}
+                                            style={
+                                              {
+                                                // border: "5px solid pink",
+                                                //display: "flex",
+                                                //flexDirection: "column",
+                                                //width: "60%",
+                                              }
+                                            }
+                                          >
                                             <div
-                                              className="item-property"
-                                              // style={{ marginLeft: "45px" }}
+                                              className=""
                                               style={
                                                 {
-                                                  // border: "5px solid pink",
-                                                  //display: "flex",
-                                                  //flexDirection: "column",
-                                                  //width: "60%",
+                                                  //marginLeft: "465px",
+                                                  //border: "5px solid green",
                                                 }
                                               }
                                             >
                                               <div
-                                                className="dropbutton-widget"
-                                                style={{
-                                                  marginLeft: "495px",
-                                                  //border: "2px solid green",
-                                                }}
-                                              >
-                                                <div
-                                                  style={{
-                                                    display: "flex",
-                                                    //alignItems: "center",
-                                                    //border:"2px solid red"
-                                                  }}
-                                                >
-                                                  <button
-                                                    className="custom-button all-buttons-color text-white border btn btn-sm m-0 border-0"
-                                                    onClick={() =>
-                                                      handleRevokeKey(
-                                                        teamName,
-                                                        appDetailsData.name,
-                                                        credential.consumerKey
-                                                      )
-                                                    }
-                                                  >
-                                                    Revoke
-                                                  </button>
-
-                                                  <div
-                                                    style={{
-                                                      position: "relative",
-                                                    }}
-                                                  >
-                                                    <button
-                                                      // className="dropdown-toggle"
-
-                                                      onClick={() =>
-                                                        toggleDropdown(
-                                                          credentialKey
-                                                        )
-                                                      }
-                                                      className="all-add-buttons text-white border border-0 m-0"
-                                                      style={{
-                                                        width: "25px",
-                                                        height: "35px",
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        justifyContent:
-                                                          "center",
-                                                      }}
-                                                    >
-                                                      {/* &#9660; */}
-                                                      {/* {DropDownDark} */}
-                                                      <button
-                                                        onClick={toggleDropdown}
-                                                        className="all-add-buttons text-white border-0 m-0"
-                                                      >
-                                                        {dropdownOpen ? (
-                                                          <BsChevronUp />
-                                                        ) : (
-                                                          <BsChevronDown />
-                                                        )}
-                                                      </button>
-                                                    </button>
-                                                  </div>
-                                                </div>
-
-                                                {showDropdown[
-                                                  credentialKey
-                                                ] && (
-                                                  <div
-                                                    className="dropdown-content"
-                                                    style={{
-                                                      position: "absolute",
-
-                                                      width: "114px",
-                                                      textAlign: "left",
-                                                      //border: "1px solid blue",
-                                                      overflow: "auto",
-                                                      zIndex: 1, // Ensure the dropdown appears above other content
-                                                    }}
-                                                  >
-                                                    <button
-                                                      className="all-buttons-color text-white btn btn-sm m-0"
-                                                      // style={{
-                                                      //   width: "114px",
-                                                      //   textAlign: "left",
-                                                      // }}
-                                                      onClick={() => {
-                                                        const removePath = `/${teamName}/apps/${appName}/remove?team=${teamName}&appName=${appName}&consumerKey=${credential.consumerKey}`;
-                                                        setShowDropdown(false);
-                                                        navigate(removePath);
-                                                      }}
-                                                    >
-                                                      Delete
-                                                    </button>
-                                                  </div>
-                                                )}
-                                              </div>
-                                              <div
-                                                className="wrapper--secondary"
+                                                className="d-flex justify-content-end  "
                                                 style={
                                                   {
-                                                    //marginRight: "200px",
-                                                    //border: "1px solid red",
-                                                    //width: "600px",
+                                                    //display: "flex",
+                                                    //alignItems: "center",
+                                                    //border:"2px solid red"
                                                   }
                                                 }
                                               >
-                                                <label
-                                                  style={{ marginLeft: "70px" }}
+                                                <button
+                                                  className="custom-button all-buttons-color text-white border btn btn-sm m-0 border-0"
+                                                  onClick={() =>
+                                                    handleRevokeKey(
+                                                      teamName,
+                                                      appDetailsData.name,
+                                                      credential.consumerKey
+                                                    )
+                                                  }
                                                 >
-                                                  Products
-                                                </label>
-                                                {credential &&
-                                                credential.apiProducts &&
-                                                credential.apiProducts.length >
-                                                  0 ? (
-                                                  <div>
-                                                    {credential.apiProducts.map(
-                                                      (
-                                                        product,
-                                                        productIndex
-                                                      ) => (
-                                                        <div
-                                                          className="api-product-list-row clearfix"
-                                                          key={productIndex}
-                                                        >
-                                                          <div className="api-product-list-row clearfix">
-                                                            <span
-                                                              className="api-product-name"
-                                                              style={{
-                                                                marginLeft:
-                                                                  "70px",
-                                                              }}
-                                                            >
-                                                              {
-                                                                product.apiproduct
-                                                              }
-                                                            </span>
+                                                  Revoke
+                                                </button>
 
-                                                            <span
-                                                              className="badge badge-success"
-                                                              style={{
-                                                                //  border:"1px solid red",
-                                                                backgroundColor:
-                                                                  "#C5C5C5",
-                                                                marginLeft:
-                                                                  "340px",
-                                                              }}
-                                                            >
+                                                <div
+                                                  style={{
+                                                    position: "relative",
+                                                  }}
+                                                >
+                                                  <button
+                                                    // className="dropdown-toggle"
+
+                                                    onClick={() =>
+                                                      toggleDropdown(
+                                                        credentialKey
+                                                      )
+                                                    }
+                                                    className="all-add-buttons text-white border border-0 m-0"
+                                                    style={{
+                                                      width: "25px",
+                                                      height: "35px",
+                                                      display: "flex",
+                                                      alignItems: "center",
+                                                      justifyContent: "center",
+                                                    }}
+                                                  >
+                                                    {/* &#9660; */}
+                                                    {/* {DropDownDark} */}
+                                                    <button
+                                                      onClick={toggleDropdown}
+                                                      className="all-add-buttons text-white border-0 m-0"
+                                                    >
+                                                      {dropdownOpen ? (
+                                                        <BsChevronUp />
+                                                      ) : (
+                                                        <BsChevronDown />
+                                                      )}
+                                                    </button>
+                                                  </button>
+                                                </div>
+                                              </div>
+
+                                              {showDropdown[credentialKey] && (
+                                                <div
+                                                  className=" d-flex justify-content-end "
+                                                  style={
+                                                    {
+                                                      //position: "absolute",
+                                                      //width: "114px",
+                                                      //textAlign: "left",
+                                                      //border: "1px solid blue",
+                                                      //overflow: "auto",
+                                                      //zIndex: 1, // Ensure the dropdown appears above other content
+                                                    }
+                                                  }
+                                                >
+                                                  <button
+                                                    className="all-buttons-color text-white btn btn-sm mr-4 m-0"
+                                                    style={{
+                                                      // width: "114px",
+                                                      //textAlign: "left",
+                                                      position: "absolute",
+                                                      zIndex: 1,
+                                                    }}
+                                                    onClick={() => {
+                                                      const removePath = `/${teamName}/apps/${appName}/remove?team=${teamName}&appName=${appName}&consumerKey=${credential.consumerKey}`;
+                                                      setShowDropdown(false);
+                                                      navigate(removePath);
+                                                    }}
+                                                  >
+                                                    Delete
+                                                  </button>
+                                                </div>
+                                              )}
+                                            </div>
+
+                                            <div
+                                              className=""
+                                              style={
+                                                {
+                                                  //marginRight: "200px",
+                                                  //border: "1px solid red",
+                                                  //width: "600px",
+                                                }
+                                              }
+                                            >
+                                              <label
+                                                className="ml-5"
+                                                //style={{ marginLeft: "70px" }}
+                                              >
+                                                Products
+                                              </label>
+                                              {credential &&
+                                              credential.apiProducts &&
+                                              credential.apiProducts.length >
+                                                0 ? (
+                                                <div className="">
+                                                  {credential.apiProducts.map(
+                                                    (product, productIndex) => (
+                                                      <div
+                                                        className=" "
+                                                        key={productIndex}
+                                                      >
+                                                        <div className=" d-flex justify-content-between   ">
+                                                          <span className="ml-5">
+                                                            {product.apiproduct}
+                                                          </span>
+
+                                                          <div className="mr-5">
+                                                            <span className="badge badge-success ">
                                                               {product.status
                                                                 ? "Enabled"
                                                                 : "Disabled"}
                                                             </span>
                                                           </div>
                                                         </div>
-                                                      )
-                                                    )}
-                                                  </div>
-                                                ) : (
-                                                  <p
-                                                    style={{
-                                                      marginLeft: "32px",
-                                                    }}
-                                                  >
-                                                    No API products found for
-                                                    this credential.
-                                                  </p>
-                                                )}
-                                              </div>
+                                                      </div>
+                                                    )
+                                                  )}
+                                                </div>
+                                              ) : (
+                                                <p
+                                                  style={{
+                                                    marginLeft: "32px",
+                                                  }}
+                                                >
+                                                  No API products found for this
+                                                  credential.
+                                                </p>
+                                              )}
                                             </div>
                                           </div>
                                         </fieldset>
@@ -1053,6 +1062,7 @@ const ViewApp = () => {
                               <div
                                 className="card-body pb-0"
                                 // style={{ border: "7px solid green" }}
+                                style={{ fontSize: "16px" }}
                               >
                                 {/* Iterate over revoked credentials */}
                                 {appDetailsData.credentials?.length > 0 ? (
@@ -1069,47 +1079,54 @@ const ViewApp = () => {
 
                                             <div className="fieldset-wrapper d-flex ">
                                               <div
-                                                className="w-200"
-                                                style={{
-                                                  //width: "40%",
-                                                  fontSize: "15px",
-                                                  //border: "8px solid yellow",
-                                                }}
+                                                className="w-50 "
+                                                style={
+                                                  {
+                                                    //border: "2px solid blue",
+                                                    //width: "40%",
+                                                    //fontSize: "15px",
+                                                  }
+                                                }
                                               >
-                                                <div className="item-property d-flex m-1 ">
+                                                <div className="d-flex flex-row justify-content-between ">
                                                   <div
-                                                    style={{ width: "145px" }}
+                                                    className=""
+                                                    style={{ width: "160px" }}
                                                   >
-                                                    <label className="flex-shrink-0">
+                                                    <label className="fw-bold">
                                                       Consumer Key
                                                     </label>
                                                   </div>
 
-                                                  <div className="secret field__item d-flex flex-grow-1 justify-content-around   ">
+                                                  <div className=" d-flex flex-row">
                                                     {showconsumerkey[
                                                       credential.consumerKey
                                                     ] ? (
                                                       <div
-                                                        className="secret__value "
+                                                        className="text-center"
                                                         style={{
-                                                          width: "280px",
-                                                          fontSize: "15px",
-                                                          overflow: "auto",
+                                                          maxHeight: "35px",
+                                                          overflowY: "auto",
+                                                          width: "200px",
                                                         }}
                                                       >
                                                         {credential.consumerKey}
                                                       </div>
                                                     ) : (
-                                                      <div className="secret__value__hidden">
+                                                      <div className="">
                                                         {hideKey(
                                                           credential.consumerKey
                                                         )}
                                                       </div>
                                                     )}
-                                                    <br />
+                                                  </div>
 
-                                                    <button
-                                                      className="secret__toggle all-add-buttons text-white border-0 m-0 "
+                                                  <div className="d-flex flex-row justify-content-between ">
+                                                    <span
+                                                      className="mx-3"
+                                                      style={{
+                                                        cursor: "pointer",
+                                                      }}
                                                       onClick={() =>
                                                         toggleVisibility2(
                                                           credential.consumerKey
@@ -1119,57 +1136,62 @@ const ViewApp = () => {
                                                       {showKey1 ? (
                                                         <VisibilityOffOutlinedIcon
                                                           style={{
-                                                            fontSize: "inherit",
+                                                            fontSize: "1.2rem",
+                                                            color: "#f46223",
                                                           }}
                                                         />
                                                       ) : (
                                                         <RemoveRedEyeOutlinedIcon
                                                           style={{
-                                                            fontSize: "inherit",
+                                                            fontSize: "1.2rem",
+                                                            color: "#f46223",
                                                           }}
                                                         />
                                                       )}
-                                                    </button>
-                                                    <div className="secret__copy d-flex align-items-center ">
-                                                      <button
-                                                        className="secret__copy all-add-buttons text-white border-0 m-0"
-                                                        onClick={() =>
-                                                          copyToClipboard(
-                                                            credential.consumerKey
-                                                          )
-                                                        }
-                                                        title="Click to copy"
-                                                      >
-                                                        <ContentCopyOutlinedIcon
-                                                          style={{
-                                                            fontSize: "inherit",
-                                                          }}
-                                                        />
-                                                      </button>
-                                                      <span className="copy-message">
-                                                        {copyMessage}
-                                                      </span>
-                                                    </div>
+                                                    </span>
+
+                                                    <span
+                                                      onClick={() =>
+                                                        copyToClipboard(
+                                                          credential.consumerKey
+                                                        )
+                                                      }
+                                                      style={{
+                                                        cursor: "pointer",
+                                                      }}
+                                                      title="Click to copy"
+                                                    >
+                                                      <ContentCopyOutlinedIcon
+                                                        style={{
+                                                          fontSize: "1.2rem",
+                                                          color: "#f46223",
+                                                        }}
+                                                      />
+                                                    </span>
+                                                    <span>{copyMessage}</span>
                                                   </div>
                                                 </div>
 
-                                                <div className="item-property d-flex m-1 border border-danger">
+                                                <div className="d-flex flex-row justify-content-between ">
                                                   <div
-                                                    style={{ width: "145px" }}
+                                                    className=""
+                                                    style={{ width: "160px" }}
                                                   >
-                                                    <label>
+                                                    <label className="fw-bold">
                                                       Consumer Secret
                                                     </label>
                                                   </div>
-                                                  <div className="secret field__item d-flex flex-grow-1 justify-content-around ">
+
+                                                  <div className=" d-flex flex-row ">
                                                     {showSecrets[
                                                       credential.consumerSecret
                                                     ] ? (
                                                       <div
-                                                        className="secret__value "
+                                                        className="text-center"
                                                         style={{
-                                                          width: "280px",
-                                                          fontSize: "15px",
+                                                          maxHeight: "30px",
+                                                          overflowY: "auto",
+                                                          width: "200px",
                                                         }}
                                                       >
                                                         {
@@ -1177,100 +1199,115 @@ const ViewApp = () => {
                                                         }
                                                       </div>
                                                     ) : (
-                                                      <div className="secret__value__hidden">
+                                                      <div className="">
                                                         {hideKey(
                                                           credential.consumerSecret
                                                         )}
                                                       </div>
                                                     )}
-                                                    <br />
-                                                    <button
-                                                      className="secret__toggle all-add-buttons text-white border-0 mx-3"
+                                                  </div>
+
+                                                  <div className="d-flex flex-row justify-content-between ">
+                                                    <span
+                                                      className="mx-3"
+                                                      style={{
+                                                        cursor: "pointer",
+                                                      }}
                                                       onClick={() =>
                                                         toggleVisibility(
                                                           credential.consumerSecret
                                                         )
                                                       }
                                                     >
-                                                      {showKey ? (
+                                                      {showKey1 ? (
                                                         <VisibilityOffOutlinedIcon
                                                           style={{
-                                                            fontSize: "inherit",
+                                                            fontSize: "1.2rem",
+                                                            color: "#f46223",
                                                           }}
                                                         />
                                                       ) : (
                                                         <RemoveRedEyeOutlinedIcon
                                                           style={{
-                                                            fontSize: "inherit",
+                                                            fontSize: "1.2rem",
+                                                            color: "#f46223",
                                                           }}
                                                         />
                                                       )}
-                                                    </button>
-                                                    <div className="secret__copy">
-                                                      <button
-                                                        className="secret__copy all-add-buttons text-white border-0 m-0"
-                                                        onClick={() =>
-                                                          copyToClipboard(
-                                                            credential.consumerSecret
-                                                          )
-                                                        }
-                                                        title="Click to copy"
-                                                      >
-                                                        <ContentCopyOutlinedIcon
-                                                          style={{
-                                                            background: "none",
-                                                            fontSize: "inherit",
-                                                          }}
-                                                        />
-                                                      </button>
+                                                    </span>
 
-                                                      <span className="copy-message">
-                                                        {copyMessage}
-                                                      </span>
-                                                    </div>
+                                                    <span
+                                                      onClick={() =>
+                                                        copyToClipboard(
+                                                          credential.consumerSecret
+                                                        )
+                                                      }
+                                                      style={{
+                                                        cursor: "pointer",
+                                                      }}
+                                                      title="Click to copy"
+                                                    >
+                                                      <ContentCopyOutlinedIcon
+                                                        style={{
+                                                          fontSize: "1.2rem",
+                                                          color: "#f46223",
+                                                        }}
+                                                      />
+                                                    </span>
+                                                    <span>{copyMessage}</span>
                                                   </div>
                                                 </div>
 
-                                                <div className="item-property  d-flex m-1">
+                                                <div className="d-flex flex-row ">
                                                   <div
-                                                    style={{ width: "145px" }}
+                                                    className=""
+                                                    style={{ width: "190px" }}
                                                   >
                                                     <label> Issued </label>
                                                   </div>
-
-                                                  {credential.issuedAt
-                                                    ? customFormatTDate(
-                                                        credential.issuedAt
-                                                      )
-                                                    : "N/A"}
+                                                  <div className="ml-5">
+                                                    {credential.issuedAt
+                                                      ? customFormatTDate(
+                                                          credential.issuedAt
+                                                        )
+                                                      : "N/A"}
+                                                  </div>
                                                 </div>
 
-                                                <div className="item-property  d-flex m-1">
+                                                <div className="d-flex flex-row justify-content-between">
                                                   <div
-                                                    style={{ width: "145px" }}
+                                                    className=""
+                                                    style={{ width: "160px" }}
                                                   >
                                                     <label> Expires </label>
                                                   </div>
-                                                  {credential.expiresAt
-                                                    ? customFormatDateTimetamp(
-                                                        credential.expiresAt
-                                                      )
-                                                    : "N/A"}
+                                                  <div
+                                                    style={{
+                                                      marginLeft: "135px",
+                                                    }}
+                                                  >
+                                                    {credential.expiresAt
+                                                      ? customFormatDateTimetamp(
+                                                          credential.expiresAt
+                                                        )
+                                                      : "N/A"}
+                                                  </div>
                                                 </div>
 
-                                                <div className=" d-flex m-1 ">
+                                                <div className=" d-flex flex-row justify-content-start ">
                                                   <div
-                                                    style={{ width: "120px" }}
+                                                    style={{ width: "190px" }}
+                                                    className=""
                                                   >
                                                     <label> Key Status </label>
                                                   </div>
-                                                  <div>
-                                                    <span
-                                                      className="badge badge-success"
-                                                      style={{
-                                                        marginLeft: "10px",
-                                                      }}
-                                                    >
+                                                  <div
+                                                    className="justify-content-start"
+                                                    style={{
+                                                      marginLeft: "55px",
+                                                    }}
+                                                  >
+                                                    <span className="badge badge-success">
                                                       {credential.status}
                                                     </span>
                                                   </div>
@@ -1279,13 +1316,10 @@ const ViewApp = () => {
                                               {/* API Products */}
 
                                               <div
-                                                className="item-property"
-                                                // style={{
-                                                //   border: "1px solid blue",
-                                                // }}
+                                                className="item-property w-50"
                                                 style={
                                                   {
-                                                    // border: "1px solid blue",
+                                                    //border: "1px solid red",
                                                     //display: "flex",
                                                     //flexDirection: "column",
                                                     // border: "1px solid blue",
@@ -1295,7 +1329,7 @@ const ViewApp = () => {
                                                 }
                                               >
                                                 <div
-                                                  className="dropbutton-wrapper"
+                                                  className="dropbutton-wrapper d-flex justify-content-end "
                                                   // style={{
                                                   //   border: "8px solid blue",
                                                   // }}
@@ -1304,10 +1338,10 @@ const ViewApp = () => {
                                                     <div className="dropbutton">
                                                       <div>
                                                         <button
-                                                          className="all-buttons-color text-white button btn btn-sm"
-                                                          style={{
-                                                            marginLeft: "450px",
-                                                          }}
+                                                          className="custom-button all-buttons-color text-white border btn btn-sm m-0 border-0"
+                                                          // style={{
+                                                          //   marginLeft: "450px",
+                                                          // }}
                                                           onClick={() =>
                                                             handleRemovekey(
                                                               teamName,
@@ -1331,11 +1365,7 @@ const ViewApp = () => {
                                                     }
                                                   }
                                                 >
-                                                  <label
-                                                    style={{
-                                                      marginLeft: "32px",
-                                                    }}
-                                                  >
+                                                  <label className="ml-5">
                                                     Products
                                                   </label>
                                                   {credential &&
@@ -1349,45 +1379,30 @@ const ViewApp = () => {
                                                           productIndex
                                                         ) => (
                                                           <div
-                                                            className="api-product-list-row clearfix"
+                                                            className=" "
                                                             key={productIndex}
                                                           >
-                                                            <div className="api-product-list-row clearfix">
-                                                              <span
-                                                                className="api-product-name"
-                                                                style={{
-                                                                  marginLeft:
-                                                                    "30px",
-                                                                }}
-                                                              >
+                                                            <div className=" d-flex justify-content-between   ">
+                                                              <span className="ml-5">
                                                                 {
                                                                   product.apiproduct
                                                                 }
                                                               </span>
-                                                              <span
-                                                                className="badge badge-success"
-                                                                style={{
-                                                                  backgroundColor:
-                                                                    "#C5C5C5",
-                                                                  marginLeft:
-                                                                    "320px",
-                                                                }}
-                                                              >
-                                                                {product.status
-                                                                  ? "Enabled"
-                                                                  : "Disabled"}
-                                                              </span>
+
+                                                              <div className="mr-5">
+                                                                <span className="badge badge-success ">
+                                                                  {product.status
+                                                                    ? "Enabled"
+                                                                    : "Disabled"}
+                                                                </span>
+                                                              </div>
                                                             </div>
                                                           </div>
                                                         )
                                                       )}
                                                     </div>
                                                   ) : (
-                                                    <p
-                                                      style={{
-                                                        marginLeft: "32px",
-                                                      }}
-                                                    >
+                                                    <p className="ml-5">
                                                       No API products found for
                                                       this credential.
                                                     </p>

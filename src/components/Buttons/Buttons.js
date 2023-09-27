@@ -467,7 +467,7 @@ const Buttons = () => {
         <ul className="nav nav-tabs  ">
           <li className="nav-item">
             <button
-              className={`btn all-buttons-color text-white mx-2  btn-md ${
+              className={`btn all-buttons-color rounded text-white mx-2  btn-md ${
                 currentPage === `/${teamName}` ? "active" : ""
               }`}
               onClick={handleViewClick}
@@ -477,7 +477,7 @@ const Buttons = () => {
           </li>
           <li className="nav-item">
             <button
-              className={`btn all-buttons-color  text-white mx-2 btn-md ${
+              className={`btn all-buttons-color rounded text-white mx-2 btn-md ${
                 currentPage === `/${teamName}/edit` ? "active" : ""
               }`}
               onClick={handleEditClick}
@@ -487,7 +487,7 @@ const Buttons = () => {
           </li>
           <li className="nav-item">
             <button
-              className={`btn all-buttons-color  text-white mx-2 btn-md ${
+              className={`btn all-buttons-color rounded  text-white mx-2 btn-md ${
                 currentPage === `/${teamName}/delete` ? "active" : ""
               }`}
               onClick={handleDeleteClick}
@@ -497,7 +497,7 @@ const Buttons = () => {
           </li>
           <li className="nav-item">
             <button
-              className={`btn all-buttons-color  text-white mx-2 btn-md ${
+              className={`btn all-buttons-color rounded  text-white mx-2 btn-md ${
                 currentPage === `/${teamName}/members` ? "active" : ""
               }`}
               onClick={handleMemberClick}
@@ -507,7 +507,7 @@ const Buttons = () => {
           </li>
           <li className="nav-item">
             <button
-              className={`btn all-buttons-color  text-white mx-2 btn-md ${
+              className={`btn all-buttons-color rounded text-white mx-2 btn-md ${
                 currentPage === `/${teamName}/apps` ? "active" : ""
               }`}
               onClick={() => {

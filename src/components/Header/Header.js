@@ -363,7 +363,7 @@ const Header = () => {
 
           <ul className="navbar-nav ml-auto mr-5 ">
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="#">
+              <Link className="hover-effect nav-link text-dark" to="#">
                 My Apps
               </Link>
             </li>

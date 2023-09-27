@@ -192,8 +192,8 @@ const DeleteTeam = () => {
               </div>
             </div>
           </div>
-          <div className="dialog-off-canvas-main-canvas">
-            <div className="container">
+          <div className="dialog-off-canvas-main-canvas ">
+            <div className="container ">
               <form
                 className="team-delete-form team-confirm-form confirmation"
                 onSubmit={handleFormSubmit}

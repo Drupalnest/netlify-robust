@@ -53,7 +53,7 @@ const Members = ({}) => {
                       <div className="my-4">
                         <Link
                           to="/members/add-member/"
-                          className="button button-action btn btn-md text-white"
+                          className="button button-action btn rounded btn-md text-white"
                           style={{ backgroundColor: "#F46223" }}
                         >
                           Add Members

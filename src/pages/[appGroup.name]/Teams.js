@@ -1431,16 +1431,16 @@ const TeamList = () => {
   }, []);
 
   useEffect(() => {
-    const admin = JSON.parse(localStorage.getItem("userData"));
-    //const adminName = admin?.current_user?.name;
+    const admin = JSON.parse(sessionStorage.getItem("userData"));
+    const adminName = admin?.current_user?.name;
 
-    const adminName = "ajay.gadhavana+1@gmail.com";
+    //const adminName = "ajay.gadhavana+1@gmail.com";
 
-    // if (adminName) {
-    //   navigate("/teams");
-    // } else {
-    //   navigate("/login");
-    // }
+    if (adminName) {
+      navigate("/teams");
+    } else {
+      navigate("/login");
+    }
 
     const updatedFilteredTeams = appgroups
       ? appgroups
@@ -1515,7 +1515,7 @@ const TeamList = () => {
                     <div className="d-flex justify-content-center mt-3 ">
                       <Link
                         to="/add-team"
-                        className="button button-action btn btn-md text-white "
+                        className="button button-action btn rounded btn-md text-white "
                         style={{ backgroundColor: "#F46223", fontSize: "15px" }}
                       >
                         Add Appgroup
@@ -1633,7 +1633,7 @@ const TeamList = () => {
                   className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
                 >
                   <button
-                    className="page-link text-white"
+                    className="page-link  text-white "
                     onClick={() => paginate(currentPage - 1)}
                     style={{
                       backgroundColor: "#002A5C",
@@ -1648,12 +1648,15 @@ const TeamList = () => {
                   <li
                     key={index}
                     className={`page-item ${
-                      currentPage === index + 1 ? "active" : ""
+                      currentPage === index + 1 ? "active " : ""
                     }`}
+                    
                   >
                     <button
-                      className="page-link"
+                      className="page-link "
                       onClick={() => paginate(index + 1)}
+                      
+                      
                     >
                       {index + 1}
                     </button>

@@ -2055,8 +2055,11 @@ import Layout from "../components/Layout";
 import { apiProducts } from "../redux/store";
 import Cookies from "js-cookie";
 
+import { Toast } from "react-bootstrap";
+
 const AddTeam = () => {
   const dispatch = useDispatch();
+  const [showToast, setShowToast] = useState(false);
 
   const myToken = Cookies.get("BEARER_TOKEN");
   console.log("myToken", myToken);
@@ -2147,7 +2150,9 @@ const AddTeam = () => {
       );
 
       if (response.ok) {
-        alert("Appgroup Created successfully!");
+        console.log("Setting showToast to true");
+        setShowToast(true);
+
         navigate("/teams");
       } else {
         alert("Failed to create appgroup");
@@ -2239,6 +2244,24 @@ const AddTeam = () => {
             <h3>Add Appgroup</h3>
           </div>
         </div>
+
+        <Toast
+          onClose={() => setShowToast(false)}
+          show={showToast}
+          delay={3000}
+          autohide
+          style={{
+            top:"20rem",
+            position: "fixed",
+            bottom: "1rem",
+            right: "1rem",
+          }}
+        >
+          <Toast.Header>
+            <strong className="mr-auto">Success</strong>
+          </Toast.Header>
+          <Toast.Body>Appgroup Created successfully!</Toast.Body>
+        </Toast>
 
         <div>
           <div className="container py-2">

@@ -74,12 +74,12 @@ const MembersDropDown = ({ member }) => {
   return (
     <div className="d-flex justify-content-center">
       <div
-        className={`dropdown  text-white d-flex ${isOpen ? "show" : ""}`}
+        className={`dropdown  rounded text-white d-flex ${isOpen ? "show" : ""}`}
         ref={dropdownRef}
       >
         <div className="">
           <button
-            className="btn btn-sm m-0"
+            className="btn btn-sm m-0 rounded"
             style={{
               backgroundColor: "#002A5C",
               fontSize: "14px",

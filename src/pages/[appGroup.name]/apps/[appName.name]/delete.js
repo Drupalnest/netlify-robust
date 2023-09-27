@@ -480,7 +480,7 @@ const DeleteApps = () => {
             {/* ... Rest of the code ... */}
           </div>
           <div className="dialog-off-canvas-main-canvas">
-            <div className="container">
+            <div className="container my-4">
               <form
                 className="team-delete-form team-confirm-form confirmation"
                 onSubmit={handleFormSubmit}
