@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 import axios from "axios";
 
 import Cookies from 'js-cookie';
-const bearerToken = Cookies.get('accessToken'); // Assuming 'accessToken' is the cookie name
+
 
 
 // Actions
@@ -36,7 +36,7 @@ const FETCH_API_PRODUCTS_FAILURE ="FETCH_API_PRODUCTS_FAILURE"
 const SELECT_TEAM = "SELECT_TEAM";
 
 
-
+const bearerToken = Cookies.get('accessToken'); 
 
 // export const selectTeam = (team) => {
 //   return {

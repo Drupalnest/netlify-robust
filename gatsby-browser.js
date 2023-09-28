@@ -15,13 +15,13 @@ import { store, persistor } from "./src/redux/store";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 //   import '@fortawesome/fontawesome-free/css/all.min.css';
-//   import 'bootstrap-css-only/css/bootstrap.min.css';
-//   import 'mdbreact/dist/css/mdb.css';
-//   import 'bootstrap/dist/css/bootstrap.min.css';
-//   import "react-toastify/dist/ReactToastify.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
 
-//   import 'bootstrap/dist/css/bootstrap.min.css';
-// //import 'bootstrap/dist/js/bootstrap.bundle.min';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import Cookies from "js-cookie";
 
@@ -50,46 +50,22 @@ export const wrapRootElement = ({ element }) => (
 //   }
 // };
 
-// const fetchNewAccessToken = async () => {
-//   try {
-//     const response = await fetch("http://localhost:5000/getAccessToken");
-//     const data = await response.json();
-
-//     // Set the new access token in the cookie
-//     const expirationTime = new Date(new Date().getTime() + 1 * 60 * 1000); // 1 minute
-//     Cookies.set('accessToken', data.accessToken, { expires: expirationTime });
-
-//     // Schedule the next fetch after 1 minute
-//     setTimeout(fetchNewAccessToken, 1 * 60 * 1000);
-//   } catch (error) {
-//     console.error('Error:', error);
-//   }
-// };
-
-// export const onClientEntry = async () => {
-//   try {
-//     await fetchNewAccessToken();
-//   } catch (error) {
-//     console.error('Error:', error);
-//   }
-// };
-
 const fetchNewAccessToken = async () => {
   try {
     const response = await fetch("http://localhost:5000/getAccessToken");
     const data = await response.json();
 
     // Set the new access token in the cookie
-    const expirationTime = new Date(new Date().getTime() + 40 * 60 * 1000); // 40 minutes
-
+    //const expirationTime = new Date(new Date().getTime() + 1 * 60 * 1000); // 1 minute
     Cookies.set("accessToken", data.accessToken, {
-      expires: expirationTime,
       sameSite: "None",
       secure: true,
     });
+    // const expirationTime = new Date(new Date().getTime() + 1 * 60 * 1000); // 1 minute
+    // Cookies.set('accessToken', data.accessToken, { expires: expirationTime });
 
-    // Schedule the next fetch after 40 minutes
-    setTimeout(fetchNewAccessToken, 40 * 60 * 1000);
+    // Schedule the next fetch after 1 minute
+    setTimeout(fetchNewAccessToken, 1 * 60 * 1000);
   } catch (error) {
     console.error("Error:", error);
   }
@@ -102,3 +78,32 @@ export const onClientEntry = async () => {
     console.error("Error:", error);
   }
 };
+
+// const fetchNewAccessToken = async () => {
+//   try {
+//     const response = await fetch("http://localhost:5000/getAccessToken");
+//     const data = await response.json();
+
+//     // Set the new access token in the cookie
+//     const expirationTime = new Date(new Date().getTime() + 40 * 60 * 1000); // 40 minutes
+
+//     Cookies.set("accessToken", data.accessToken, {
+//       expires: expirationTime,
+//       sameSite: "None",
+//       secure: true,
+//     });
+
+//     // Schedule the next fetch after 40 minutes
+//     setTimeout(fetchNewAccessToken, 40 * 60 * 1000);
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
+
+// export const onClientEntry = async () => {
+//   try {
+//     await fetchNewAccessToken();
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
