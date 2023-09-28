@@ -4,6 +4,7 @@ import TeamsPage from "../components/teamDetails/TeamDetails";
 
 const App = () => (
   <Router>
+  
     <TeamsPage path="/:[appGroup.name]" />
     {/* <TeamsPage path="/members/:members" /> */}
   </Router>
