@@ -2054,12 +2054,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
 import { apiProducts } from "../redux/store";
 import Cookies from "js-cookie";
+import SuccessToast from "../components/Toast/Success";
+import ErrorToast from "../components/Toast/Error";
 
-import { Toast } from "react-bootstrap";
 
 const AddTeam = () => {
   const dispatch = useDispatch();
-  const [showToast, setShowToast] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
+
+
 
   const myToken = Cookies.get("BEARER_TOKEN");
   console.log("myToken", myToken);
@@ -2151,14 +2155,16 @@ const AddTeam = () => {
 
       if (response.ok) {
         console.log("Setting showToast to true");
-        setShowToast(true);
-
+        //alert("Failed to create appgroup");
+        setShowSuccessToast(true);
+     
         navigate("/teams");
       } else {
-        alert("Failed to create appgroup");
+        setShowErrorToast(true);
+        //alert("Failed to create appgroup");
       }
     } catch (error) {
-      alert("An error occurred while creating appgroup");
+      setShowErrorToast(true);
     }
   };
 
@@ -2245,23 +2251,7 @@ const AddTeam = () => {
           </div>
         </div>
 
-        <Toast
-          onClose={() => setShowToast(false)}
-          show={showToast}
-          delay={3000}
-          autohide
-          style={{
-            top:"20rem",
-            position: "fixed",
-            bottom: "1rem",
-            right: "1rem",
-          }}
-        >
-          <Toast.Header>
-            <strong className="mr-auto">Success</strong>
-          </Toast.Header>
-          <Toast.Body>Appgroup Created successfully!</Toast.Body>
-        </Toast>
+        
 
         <div>
           <div className="container py-2">
@@ -2369,6 +2359,15 @@ const AddTeam = () => {
           </div>
         </div>
       </div>
+
+
+       {/* Show success toast */}
+       {showSuccessToast && <SuccessToast message="Appgroup created successfully!" />}
+      
+      {/* Show error toast */}
+      {showErrorToast && <ErrorToast message="Failed to create appgroup" />}
+
+      {showErrorToast && <ErrorToast message="An error occurred while creating appgroup" />}
     </Layout>
   );
 };

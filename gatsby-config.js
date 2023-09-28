@@ -10,9 +10,11 @@ require('dotenv').config({
 
 module.exports = {
 
-  flags: {
-    DEV_SSR: false
-  },
+  // flags: {
+  //   DEV_SSR: false
+  // },
+
+  
  // plugins: [`gatsby-plugin-material-ui`],
 
   siteMetadata: {
