@@ -24,7 +24,7 @@ import { store, persistor } from './src/redux/store';
   import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-
+import Cookies from 'js-cookie';
 
 
 // import { ToastContainer } from 'react-toastify';
@@ -40,3 +40,42 @@ export const wrapRootElement = ({ element }) => (
 );
 
 
+
+
+// export const onClientEntry = async () => {
+//   try {
+//     const response = await fetch("http://localhost:5000/getAccessToken");
+//     const data = await response.json();
+
+//     // Set the access token in a cookie to expire in 30 minutes
+//     const expirationTime = new Date(new Date().getTime() + 30 * 60 * 1000); // 30 minutes
+//     Cookies.set('accessToken', data.accessToken, { expires: expirationTime });
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// };
+
+
+const fetchNewAccessToken = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/getAccessToken");
+    const data = await response.json();
+
+    // Set the new access token in the cookie
+    const expirationTime = new Date(new Date().getTime() + 1 * 60 * 1000); // 1 minute
+    Cookies.set('accessToken', data.accessToken, { expires: expirationTime });
+    
+    // Schedule the next fetch after 1 minute
+    setTimeout(fetchNewAccessToken, 1 * 60 * 1000);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+export const onClientEntry = async () => {
+  try {
+    await fetchNewAccessToken();
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
