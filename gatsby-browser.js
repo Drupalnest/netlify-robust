@@ -56,17 +56,45 @@ export const wrapRootElement = ({ element }) => (
 // };
 
 
+// const fetchNewAccessToken = async () => {
+//   try {
+//     const response = await fetch("http://localhost:5000/getAccessToken");
+//     const data = await response.json();
+
+//     // Set the new access token in the cookie
+//     const expirationTime = new Date(new Date().getTime() + 1 * 60 * 1000); // 1 minute
+//     Cookies.set('accessToken', data.accessToken, { expires: expirationTime });
+    
+//     // Schedule the next fetch after 1 minute
+//     setTimeout(fetchNewAccessToken, 1 * 60 * 1000);
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// };
+
+// export const onClientEntry = async () => {
+//   try {
+//     await fetchNewAccessToken();
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// };
+
+
+
+
+
 const fetchNewAccessToken = async () => {
   try {
     const response = await fetch("http://localhost:5000/getAccessToken");
     const data = await response.json();
 
     // Set the new access token in the cookie
-    const expirationTime = new Date(new Date().getTime() + 1 * 60 * 1000); // 1 minute
+    const expirationTime = new Date(new Date().getTime() + 40 * 60 * 1000); // 40 minutes
     Cookies.set('accessToken', data.accessToken, { expires: expirationTime });
     
-    // Schedule the next fetch after 1 minute
-    setTimeout(fetchNewAccessToken, 1 * 60 * 1000);
+    // Schedule the next fetch after 40 minutes
+    setTimeout(fetchNewAccessToken, 40 * 60 * 1000);
   } catch (error) {
     console.error('Error:', error);
   }
