@@ -458,6 +458,51 @@
 
 // export default TeamDetails;
 
+
+
+
+
+
+// import React, { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useLocation } from "@reach/router";
+// import { fetchTeamDetails } from "../../redux/store";
+// import View from "../../pages/[appGroup.name]/view";
+
+// const TeamsPage = () => {
+//   const location = useLocation();
+//   const teamDetails = useSelector((state) => state.teamDetails);
+//   const teamname = teamDetails.teamName;
+//   console.log("teamName", teamname);
+
+//   // const searchParams = new URLSearchParams(location.search);
+//   // const teamname = searchParams.get("teamname");
+
+//   const dispatch = useDispatch();
+
+//   console.log("teamname", teamname);
+//   useEffect(() => {
+//     if (teamname) {
+//       // Fetch team details using the team name from the query parameter
+//       dispatch(fetchTeamDetails(teamname));
+//     }
+//   }, [dispatch, teamname]);
+
+//   if (!teamDetails || Object.keys(teamDetails).length === 0) {
+//     return <div>No team details available for {teamname}.</div>;
+//   }
+
+//   return (
+//     <div>
+//       <View />
+//     </div>
+//   );
+// };
+
+// export default TeamsPage;
+
+
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "@reach/router";
@@ -467,18 +512,12 @@ import View from "../../pages/[appGroup.name]/view";
 const TeamsPage = () => {
   const location = useLocation();
   const teamDetails = useSelector((state) => state.teamDetails);
-  const teamname = teamDetails.teamName;
-  console.log("teamName", teamname);
-
-  // const searchParams = new URLSearchParams(location.search);
-  // const teamname = searchParams.get("teamname");
+  const teamname = teamDetails ? teamDetails.teamName : null;
 
   const dispatch = useDispatch();
 
-  console.log("teamname", teamname);
   useEffect(() => {
     if (teamname) {
-      // Fetch team details using the team name from the query parameter
       dispatch(fetchTeamDetails(teamname));
     }
   }, [dispatch, teamname]);
@@ -495,6 +534,15 @@ const TeamsPage = () => {
 };
 
 export default TeamsPage;
+
+
+
+
+
+
+
+
+
 
 // import React, { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
