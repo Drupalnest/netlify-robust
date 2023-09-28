@@ -118,6 +118,8 @@ import { deleteTeam } from "../../redux/store";
 import { Link, navigate } from "gatsby";
 import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
+import Cookies from 'js-cookie';
+const bearerToken = Cookies.get('accessToken')
 
 const DeleteTeam = () => {
   const [appGroupName, setAppGroupName] = useState("");

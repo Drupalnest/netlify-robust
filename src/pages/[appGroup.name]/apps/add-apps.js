@@ -43,7 +43,7 @@
 //           method: "POST",
 //           headers: {
 //             "Content-Type": "application/json",
-//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//             Authorization: `Bearer ${bearerToken}`,
 //           },
 //           body: JSON.stringify({
 //             name: appName,
@@ -484,7 +484,7 @@
 //           method: "POST",
 //           headers: {
 //             "Content-Type": "application/json",
-//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//             Authorization: `Bearer ${bearerToken}`,
 //           },
 //           body: JSON.stringify({
 //             name: appName,
@@ -521,7 +521,7 @@
 //   const url = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}`;
 
 //   const headers = {
-//     Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//     Authorization: `Bearer ${bearerToken}`,
 //   };
 
 //   async function fetchData() {
@@ -549,7 +549,7 @@
 //     }
 
 //     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
-//     const bearerToken = process.env.BEARER_TOKEN;
+//     const bearerToken = bearerToken;
 
 //     const requestBody = {
 //       apiProducts: selected_apiProduct,
@@ -917,6 +917,8 @@ import axios from "axios";
 import { Link, navigate } from "gatsby";
 import Header from "../../../components/Header/Header";
 import { fetchApps, fetchAppDetails } from "../../../redux/store";
+import Cookies from 'js-cookie';
+
 
 const AddApps = () => {
   const dispatch = useDispatch();
@@ -927,6 +929,8 @@ const AddApps = () => {
   const [consumerKey, setConsumerKey] = useState(null);
   const [selected_apiProduct, setSelectedApiProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const Token = Cookies.get('accessToken')
 
   // const dispatch = useDispatch();
   // const teamDetails = useSelector((state) => state.teamDetails);
@@ -1028,7 +1032,7 @@ const AddApps = () => {
   //         method: "POST",
   //         headers: {
   //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+  //           Authorization: `Bearer ${bearerToken}`,
   //         },
   //         body: JSON.stringify({
   //           name: appName,
@@ -1075,7 +1079,7 @@ const AddApps = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+            Authorization: `Bearer ${Token}`,
           },
           body: JSON.stringify({
             name: appName,
@@ -1107,7 +1111,7 @@ const AddApps = () => {
   const url = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}`;
 
   const headers = {
-    Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+    Authorization: `Bearer ${Token}`,
   };
 
   async function fetchData() {
@@ -1135,7 +1139,7 @@ const AddApps = () => {
     }
 
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
-    const bearerToken = process.env.BEARER_TOKEN;
+    const bearerToken = Token;
 
     const requestBody = {
       apiProducts: selected_apiProduct,

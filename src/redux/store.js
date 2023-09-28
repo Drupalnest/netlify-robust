@@ -5,6 +5,10 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import axios from "axios";
 
+import Cookies from 'js-cookie';
+const bearerToken = Cookies.get('accessToken'); // Assuming 'accessToken' is the cookie name
+
+
 // Actions
 const FETCH_TEAMS_SUCCESS = "FETCH_TEAMS_SUCCESS";
 const DELETE_TEAM_SUCCESS = "DELETE_TEAM_SUCCESS";
@@ -85,7 +89,7 @@ const axiosInstance = axios.create({
   baseURL:
     "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
   headers: {
-    Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+    Authorization: `Bearer ${bearerToken}`,
     "Content-Type": "application/json",
   },
 });
@@ -217,10 +221,10 @@ const teamDetailsReducer = (state = null, action) => {
 
 export const fetchAppDetails = (teamName, appName) => async (dispatch) => {
   try {
-    const token = process.env.BEARER_TOKEN;
+    const token = bearerToken;
     const response = await axios.get(
       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}`,
-      { headers: { Authorization: `Bearer ${process.env.BEARER_TOKEN}` } }
+      { headers: { Authorization: `Bearer ${bearerToken}` } }
     );
 
     dispatch({
@@ -256,10 +260,10 @@ const appDetailsData = (state = initialStateappdetals, action) => {
 
 // export const fetchApps = (appgroupname) => async (dispatch) => {
 //   try {
-//     const token = process.env.BEARER_TOKEN;
+//     const token = bearerToken;
 //     const response = await axios.get(
 //       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupname}/apps`,
-//       { headers: { Authorization: `Bearer ${process.env.BEARER_TOKEN}` } }
+//       { headers: { Authorization: `Bearer ${bearerToken}` } }
 //     );
 
 //     dispatch({
@@ -291,10 +295,10 @@ export const fetchApps = (appgroupname) => async (dispatch) => {
   try {
     dispatch({ type: FETCH_APPS_LOADING });
 
-    const token = process.env.BEARER_TOKEN;
+    const token = bearerToken;
     const response = await axios.get(
       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupname}/apps`,
-      { headers: { Authorization: `Bearer ${process.env.BEARER_TOKEN}` } }
+      { headers: { Authorization: `Bearer ${bearerToken}` } }
     );
 
     dispatch({
@@ -346,7 +350,7 @@ export const updateTeamDisplayName = (teamName, displayName,attributes) => (disp
     attributes: attributes,
   };
 
-  const token = process.env.BEARER_TOKEN; // Make sure you have your token properly configured.
+  const token = bearerToken; // Make sure you have your token properly configured.
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -386,7 +390,7 @@ export const addApp = (teamName, appData) => {
   return async (dispatch) => {
     try {
       const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps`;
-      const bearerToken = process.env.BEARER_TOKEN;
+      const bearerToken = bearerToken;
       const axiosConfig = {
         headers: {
           Authorization: `Bearer ${bearerToken}`,
@@ -414,11 +418,11 @@ export const deleteTeam = (appGroupName) => {
   return (dispatch) => {
     const apiBaseUrl =
       "https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups";
-    const bearerToken = process.env.BEARER_TOKEN;
+    const Token = bearerToken;
 
     const axiosConfig = {
       headers: {
-        Authorization: `Bearer ${bearerToken}`,
+        Authorization: `Bearer ${Token}`,
         "Content-Type": "application/json",
       },
     };
@@ -489,11 +493,11 @@ export const deleteTeamAppSuccess = (teamName, appName) => ({
 export const deleteTeamApp = (teamName, appName) => {
   return (dispatch) => {
     const apiBaseUrl = "https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups";
-    const bearerToken = process.env.BEARER_TOKEN;
+    const Token = bearerToken;
 
     const axiosConfig = {
       headers: {
-        Authorization: `Bearer ${bearerToken}`,
+        Authorization: `Bearer ${Token}`,
         "Content-Type": "application/json",
       },
     };

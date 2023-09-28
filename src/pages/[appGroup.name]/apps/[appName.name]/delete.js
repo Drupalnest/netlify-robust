@@ -19,7 +19,7 @@
 //         {
 //           headers: {
 //             "Content-Type": "application/json",
-//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`, // Use the correct environment variable for the bearer token
+//             Authorization: `Bearer ${bearerToken}`, // Use the correct environment variable for the bearer token
 //           },
 //         }
 //       )
@@ -42,7 +42,7 @@
 //           {
 //             headers: {
 //               "Content-Type": "application/json",
-//               Authorization: `Bearer ${process.env.BEARER_TOKEN}`, // Use the correct environment variable for the bearer token
+//               Authorization: `Bearer ${bearerToken}`, // Use the correct environment variable for the bearer token
 //             },
 //           }
 //         )
@@ -191,7 +191,7 @@
 //           {
 //             headers: {
 //               "Content-Type": "application/json",
-//               Authorization: `Bearer ${process.env.BEARER_TOKEN}`, // Use the correct environment variable for the bearer token
+//               Authorization: `Bearer ${bearerToken}`, // Use the correct environment variable for the bearer token
 //             },
 //           }
 //         )
@@ -282,7 +282,7 @@
 //         {
 //           headers: {
 //             "Content-Type": "application/json",
-//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`, // Use the correct environment variable for the bearer token
+//             Authorization: `Bearer ${bearerToken}`, // Use the correct environment variable for the bearer token
 //           },
 //         }
 //       )
@@ -305,7 +305,7 @@
 //           {
 //             headers: {
 //               "Content-Type": "application/json",
-//               Authorization: `Bearer ${process.env.BEARER_TOKEN}`, // Use the correct environment variable for the bearer token
+//               Authorization: `Bearer ${bearerToken}`, // Use the correct environment variable for the bearer token
 //             },
 //           }
 //         )
@@ -387,12 +387,13 @@ import {
 import { Link, navigate } from "gatsby";
 import Layout from "../../../../components/Layout";
 import AppsButton from "../AppsButton";
-
+import Cookies from 'js-cookie';
 const DeleteApps = () => {
   // const [companyName, setCompanyName] = useState("");
   const [appName, setAppName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch(); // Hook to dispatch actions
+  const Token = Cookies.get('accessToken')
 
   // Replace 'teamDetails' with your actual selector for the team details from Redux
   //  const teamDetails = useSelector((state) => state.teamDetails);

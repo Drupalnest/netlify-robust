@@ -21,7 +21,7 @@
 //     apiProductName
 //   ) => {
 //     const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
-//     const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+//     const bearerToken = bearerToken; // Replace with your bearer token
 
 //     try {
 //       await axios.delete(apiUrl, {
@@ -50,7 +50,7 @@
 //     }
 
 //     const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${selectedApiProduct}`;
-//     const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+//     const bearerToken = bearerToken; // Replace with your bearer token
 
 //     try {
 //       await axios.post(apiUrl, null, {
@@ -352,7 +352,7 @@
 //     apiProductName
 //   ) => {
 //     const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
-//     const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+//     const bearerToken = bearerToken; // Replace with your bearer token
 
 //     try {
 //       await axios.delete(apiUrl, {
@@ -381,7 +381,7 @@
 //     }
 
 //     const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps/${appName}/keys/${consumerKey}`;
-//     const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+//     const bearerToken = bearerToken; // Replace with your bearer token
 //     //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/asd/apps/aaaaaa/keys/h4yzMy90Rh3QI05yg1RvueSXfqf6dUGy?action=approve
 
 //     const requestBody = {
@@ -703,6 +703,7 @@ import { fetchAppDetails } from "../../../../redux/store";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
 import "./edit.css";
+import Cookies from 'js-cookie';
 
 const EditApps = () => {
   const dispatch = useDispatch();
@@ -710,6 +711,7 @@ const EditApps = () => {
   const [selectedAttributes, setSelectedAttributes] = useState("");
   const [selectedApiProducts, setSelectedApiProducts] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
+  const Token = Cookies.get('accessToken')
 
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("editApps", teamDetails);
@@ -759,7 +761,7 @@ const EditApps = () => {
   //   apiProductName
   // ) => {
   //   const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
-  //   const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+  //   const bearerToken = bearerToken; // Replace with your bearer token
 
   //   try {
   //     await axios.delete(apiUrl, {
@@ -795,7 +797,7 @@ const EditApps = () => {
     try {
       const { apiproduct, consumerKey, teamName, appName } = productToRemove;
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiproduct}`;
-      const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+      const bearerToken = Token; // Replace with your bearer token
 
       await axios.delete(apiUrl, {
         headers: {
@@ -835,7 +837,7 @@ const EditApps = () => {
   //   apiProductName
   // ) => {
   //   const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
-  //   const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+  //   const bearerToken = bearerToken; // Replace with your bearer token
 
   //   try {
   //     await axios.delete(apiUrl, {
@@ -865,7 +867,7 @@ const EditApps = () => {
     }
 
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
-    const bearerToken = process.env.BEARER_TOKEN; // Replace with your bearer token
+    const bearerToken = Token; // Replace with your bearer token
     //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/asd/apps/aaaaaa/keys/h4yzMy90Rh3QI05yg1RvueSXfqf6dUGy?action=approve
 
     const requestBody = {

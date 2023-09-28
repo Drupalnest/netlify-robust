@@ -46,7 +46,7 @@
 //           method: "PUT",
 //           headers: {
 //             "Content-Type": "application/json",
-//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//             Authorization: `Bearer ${bearerToken}`,
 //           },
 //           body: JSON.stringify({
 //             displayName: companyName,
@@ -110,7 +110,7 @@
 
 //   const fetchApiProducts = () => {
 //     const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/apiproducts`;
-//     const bearerToken = process.env.BEARER_TOKEN;
+//     const bearerToken = bearerToken;
 //     const headers = {
 //       Authorization: `Bearer ${bearerToken}`,
 //     };
@@ -426,6 +426,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
 import { fetchTeamDetails, apiProducts, fetchTeams } from "../../redux/store";
+import Cookies from 'js-cookie';
+const bearerToken = Cookies.get('accessToken')
 
 const UpdateCompanyName = () => {
   const [companyName, setCompanyName] = useState("");
@@ -497,7 +499,7 @@ const UpdateCompanyName = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+            Authorization: `Bearer ${bearerToken}`,
           },
           body: JSON.stringify({
             displayName: companyName,

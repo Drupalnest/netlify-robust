@@ -13,6 +13,7 @@ import {
 import "../../../style/popup.css";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import Cookies from 'js-cookie';
 
 //import "../../../styles/popup.css";
 import { Link, navigate } from "gatsby";
@@ -28,6 +29,7 @@ const ViewApp = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const [showDropdown, setShowDropdown] = useState({});
+  const Token = Cookies.get('accessToken')
 
   const toggleDropdown = (credentialKey) => {
     setDropdownOpen(!dropdownOpen);
@@ -253,7 +255,7 @@ const ViewApp = () => {
       const randomSecret = generateRandomSecret();
 
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys`;
-      const bearerToken = process.env.BEARER_TOKEN;
+      const bearerToken = Token;
 
       const response = await axios.post(
         apiUrl,
@@ -326,7 +328,7 @@ const ViewApp = () => {
 
   const handleAddAPIProduct = async () => {
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${latestConsumerKey}`;
-    const bearerToken = process.env.BEARER_TOKEN;
+    const bearerToken = Token;
 
     const requestBody = {
       apiProducts: apiProducts,
@@ -375,7 +377,7 @@ const ViewApp = () => {
 
   const handleRemovekey = async (teamName, appName, consumerKey) => {
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
-    const bearerToken = process.env.BEARER_TOKEN;
+    const bearerToken = Token;
 
     try {
       await axios.delete(apiUrl, {
@@ -392,7 +394,7 @@ const ViewApp = () => {
 
   const handleRevokeKey = async (teamName, appName, consumerKey) => {
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;
-    const bearerToken = process.env.BEARER_TOKEN;
+    const bearerToken = Token;
 
     try {
       const response = await fetch(apiUrl, {

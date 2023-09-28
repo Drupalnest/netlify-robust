@@ -16,9 +16,9 @@
 //   const handleSubmit = async (event) => {
 //     event.preventDefault();
 
-//     if (!process.env.BEARER_TOKEN) {
+//     if (!bearerToken) {
 //       console.error(
-//         "Bearer token not found. Make sure to set process.env.BEARER_TOKEN."
+//         "Bearer token not found. Make sure to set bearerToken."
 //       );
 //       return;
 //     }
@@ -36,7 +36,7 @@
 //       const response = await axios.post(apiUrl, requestBody, {
 //         headers: {
 //           "Content-Type": "application/json",
-//           Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//           Authorization: `Bearer ${bearerToken}`,
 //         },
 //       });
 
@@ -200,9 +200,9 @@
 //   const handleSubmit = async (event) => {
 //     event.preventDefault();
 
-//     if (!process.env.BEARER_TOKEN) {
+//     if (!bearerToken) {
 //       console.error(
-//         "Bearer token not found. Make sure to set process.env.BEARER_TOKEN."
+//         "Bearer token not found. Make sure to set bearerToken."
 //       );
 //       return;
 //     }
@@ -218,7 +218,7 @@
 //       const response = await axios.post(apiUrl, requestBody, {
 //         headers: {
 //           "Content-Type": "application/json",
-//           Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//           Authorization: `Bearer ${bearerToken}`,
 //         },
 //       });
 
@@ -421,9 +421,9 @@
 //   const handleSubmit = async (event) => {
 //     event.preventDefault();
 
-//     if (!process.env.BEARER_TOKEN) {
+//     if (!bearerToken) {
 //       console.error(
-//         "Bearer token not found. Make sure to set process.env.BEARER_TOKEN."
+//         "Bearer token not found. Make sure to set bearerToken."
 //       );
 //       return;
 //     }
@@ -451,7 +451,7 @@
 //       const response = await axios.post(apiUrl, requestBody, {
 //         headers: {
 //           "Content-Type": "application/json",
-//           Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//           Authorization: `Bearer ${bearerToken}`,
 //         },
 //       });
 
@@ -704,9 +704,9 @@
 //   const handleSubmit = async (event) => {
 //     event.preventDefault();
 
-//     if (!process.env.BEARER_TOKEN) {
+//     if (!bearerToken) {
 //       console.error(
-//         "Bearer token not found. Make sure to set process.env.BEARER_TOKEN."
+//         "Bearer token not found. Make sure to set bearerToken."
 //       );
 //       return;
 //     }
@@ -736,7 +736,7 @@
 //       const response = await axios.post(apiUrl, requestBody, {
 //         headers: {
 //           "Content-Type": "application/json",
-//           Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//           Authorization: `Bearer ${bearerToken}`,
 //         },
 //       });
 
@@ -1067,7 +1067,7 @@
 //       const response = await axios.post( requestBody, {
 //         headers: {
 //           "Content-Type": "application/json",
-//           Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//           Authorization: `Bearer ${bearerToken}`,
 //         },
 //       });
 
@@ -1201,7 +1201,7 @@
 //           method: "POST",
 //           headers: {
 //             "Content-Type": "application/json",
-//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//             Authorization: `Bearer ${bearerToken}`,
 //           },
 //           body: JSON.stringify({
 //             name: companyName,
@@ -1491,7 +1491,7 @@
 //           method: "POST",
 //           headers: {
 //             "Content-Type": "application/json",
-//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//             Authorization: `Bearer ${bearerToken}`,
 //           },
 //           body: JSON.stringify({
 //             name: companyName,
@@ -1797,7 +1797,7 @@
 //           method: "POST",
 //           headers: {
 //             "Content-Type": "application/json",
-//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//             Authorization: `Bearer ${bearerToken}`,
 //           },
 //           body: JSON.stringify({
 //             name: companyName,
@@ -2056,7 +2056,7 @@ import { apiProducts } from "../redux/store";
 import Cookies from "js-cookie";
 import SuccessToast from "../components/Toast/Success";
 import ErrorToast from "../components/Toast/Error";
-
+const bearerToken = Cookies.get('accessToken')
 
 const AddTeam = () => {
   const dispatch = useDispatch();
@@ -2125,7 +2125,7 @@ const AddTeam = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+            Authorization: `Bearer ${bearerToken}`,
           },
           body: JSON.stringify({
             name: companyName,

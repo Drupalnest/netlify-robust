@@ -44,7 +44,7 @@
 //           method: "PUT",
 //           headers: {
 //             "Content-Type": "application/json",
-//             Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+//             Authorization: `Bearer ${bearerToken}`,
 //           },
 //           body: JSON.stringify({
 //             attributes: [
@@ -165,6 +165,7 @@ import {
   updateAppDetails,
   appDetails,
 } from '../../../../redux/store';
+import Cookies from 'js-cookie';
 
 function RemovePage() {
   const dispatch = useDispatch();
@@ -173,14 +174,14 @@ function RemovePage() {
   const teamName = searchParams.get('team');
   const appName = searchParams.get('appName');
   const consumerKey = searchParams.get('consumerKey');
-
+  const Token = Cookies.get('accessToken')
   // Now you have access to the passed data (teamName, appName, consumerKey)
 
   // You can also call handleRemovekey with the data
   const handleRemovekey = async (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
-    const bearerToken = process.env.BEARER_TOKEN;
+    const bearerToken = Token;
 
     try {
       await axios.delete(apiUrl, {

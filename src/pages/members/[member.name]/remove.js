@@ -3,6 +3,8 @@ import Layout from "../../../components/Layout";
 import { Link, navigate } from "gatsby";
 import { fetchTeamDetails, fetchTeams } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import Cookies from 'js-cookie';
+const bearerToken = Cookies.get('accessToken')
 
 const DeleteMember = () => {
   const developer = useSelector((state) => state.memberName.developer);
@@ -51,7 +53,7 @@ console.log("adminsEmail", adminsEmail);
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+            Authorization: `Bearer ${bearerToken}`,
           },
           body: JSON.stringify({
             attributes: [

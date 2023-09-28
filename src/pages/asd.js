@@ -92,7 +92,42 @@
 
 
 
+// import React, { useState, useEffect } from 'react';
+
+// const YourComponent = () => {
+//   const [accessToken, setAccessToken] = useState('');
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const response = await fetch("http://localhost:5000/getAccessToken");
+//         const data = await response.json();
+//         setAccessToken(data.accessToken);
+//       } catch (error) {
+//         console.error('Error:', error);
+//       }
+//     };
+
+//     fetchData(); // Fetch data immediately when component mounts
+
+//     const interval = setInterval(fetchData, 60000); // Fetch data every minute
+
+//     return () => clearInterval(interval); // Cleanup interval on component unmount
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1>Your Gatsby App App</h1>
+//       <p>Access Token: {accessToken}</p>
+//     </div>
+//   );
+// };
+
+// export default YourComponent;
+
+
 import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 const YourComponent = () => {
   const [accessToken, setAccessToken] = useState('');
@@ -103,6 +138,10 @@ const YourComponent = () => {
         const response = await fetch("http://localhost:5000/getAccessToken");
         const data = await response.json();
         setAccessToken(data.accessToken);
+
+        // Set the access token in a cookie to expire in 30 minutes
+        const expirationTime = new Date(new Date().getTime() + 30 * 60 * 1000); // 30 minutes
+        Cookies.set('accessToken', data.accessToken, { expires: expirationTime });
       } catch (error) {
         console.error('Error:', error);
       }
@@ -112,7 +151,10 @@ const YourComponent = () => {
 
     const interval = setInterval(fetchData, 60000); // Fetch data every minute
 
-    return () => clearInterval(interval); // Cleanup interval on component unmount
+    return () => {
+      clearInterval(interval); // Cleanup interval on component unmount
+      Cookies.remove('accessToken'); // Remove the cookie on unmount
+    };
   }, []);
 
   return (
@@ -124,65 +166,3 @@ const YourComponent = () => {
 };
 
 export default YourComponent;
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { exec } from 'child_process';
-
-// const YourComponent = () => {
-//   const [accessToken, setAccessToken] = useState('');
-
-//   const getAccessToken = () => {
-//     const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json';
-
-//     exec(command, (error, stdout, stderr) => {
-//       if (error) {
-//         console.error(`Error: ${error.message}`);
-//         return;
-//       }
-//       if (stderr) {
-//         console.error(`Script stderr: ${stderr}`);
-//         return;
-//       }
-
-//       const lines = stdout.split('\n');
-//       const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
-      
-//       if (!accessTokenLine) {
-//         console.error('No valid access_token found in the response.');
-//         return;
-//       }
-
-//       const accessToken = accessTokenLine.split('"')[3];
-
-//       if (!accessToken) {
-//         console.error('No valid access_token found in the response.');
-//         return;
-//       }
-
-//       setAccessToken(accessToken); // Update state with the token
-//     });
-//   };
-
-//   useEffect(() => {
-//     getAccessToken(); // Call the function initially
-
-//     const interval = setInterval(() => {
-//       getAccessToken(); // Call the function every minute
-//     }, 60000);
-
-//     return () => clearInterval(interval); // Clear the interval on component unmount
-//   }, []);
-
-//   return (
-//     <div>
-//       <h1>Your Gatsby App</h1>
-//       <p>Access Token: {accessToken}</p>
-//     </div>
-//   );
-// };
-
-// export default YourComponent;
