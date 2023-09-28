@@ -10,10 +10,10 @@ const Index = () => {
   return (
     <div>
       {authenticated ? (
-        <>
+        
           <Teams />
-         {/* <Token/> */}
-        </>
+  
+        
       ) : (
         <Login onLogin={() => setAuthenticated(true)} />
       )}
