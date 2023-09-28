@@ -117,7 +117,7 @@ const YourComponent = () => {
 
   return (
     <div>
-      <h1>Your Gatsby App</h1>
+      <h1>Your Gatsby App App</h1>
       <p>Access Token: {accessToken}</p>
     </div>
   );
