@@ -419,16 +419,16 @@ const ViewApp = () => {
   if (!appDetailsData || (appDetailsData && isFetching)) {
     return (
       <Layout>
-        <div>
+        <div style={{ marginTop: "110px" }}>
           <AppsButton />
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
                 <div className="contextual-region block block--pagetitle bg-lighter py-4">
                   <div className="container">
-                    <h1 className="js-quickedit-page-title page__title mb-0">
+                    <h3 className="js-quickedit-page-title page__title mb-0">
                       Loading appgroups appdetails...
-                    </h1>
+                    </h3>
                   </div>
                 </div>
               </div>

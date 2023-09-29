@@ -38,31 +38,37 @@ const SELECT_TEAM = "SELECT_TEAM";
 
 // //const bearerToken = Cookies.get('accessToken'); 
 // // actions/authActions.js
-//  const FETCH_ACCESS_TOKEN_SUCCESS = 'FETCH_ACCESS_TOKEN_SUCCESS';
-//  const FETCH_ACCESS_TOKEN_FAILURE = 'FETCH_ACCESS_TOKEN_FAILURE';
 
-// const fetchAccessTokenSuccess = (accessToken) => ({
-//   type: FETCH_ACCESS_TOKEN_SUCCESS,
-//   payload: accessToken,
-// });
+const FETCH_ACCESS_TOKEN_SUCCESS = 'FETCH_ACCESS_TOKEN_SUCCESS';
+const FETCH_ACCESS_TOKEN_FAILURE = 'FETCH_ACCESS_TOKEN_FAILURE';
 
-// const fetchAccessTokenFailure = (error) => ({
-//   type: FETCH_ACCESS_TOKEN_FAILURE,
-//   payload: error,
-// });
+const fetchAccessTokenSuccess = (accessToken) => ({
+  type: FETCH_ACCESS_TOKEN_SUCCESS,
+  payload: accessToken,
+});
 
-// export const fetchAccessToken = () => async (dispatch) => {
-//   try {
-//     const response = await fetch('http://localhost:5000/getAccessToken');
-//     const data = await response.json();
-//     dispatch(fetchAccessTokenSuccess(data.accessToken));
+const fetchAccessTokenFailure = (error) => ({
+  type: FETCH_ACCESS_TOKEN_FAILURE,
+  payload: error,
+});
 
-//     // Set the access token in js-cookie
-//     Cookies.set('accessToken', data.accessToken, { sameSite: 'None', secure: true });
-//   } catch (error) {
-//     dispatch(fetchAccessTokenFailure(error));
-//   }
-// };
+export const fetchAccessToken = () => async (dispatch) => {
+  try {
+    const response = await fetch('http://localhost:5000/getAccessToken');
+    const data = await response.json();
+    console.log("abcd",data) // Log data here
+    dispatch(fetchAccessTokenSuccess(data.accessToken));
+
+    // Set the access token in js-cookie
+    Cookies.set('accessToken', data.accessToken, { sameSite: 'None', secure: true });
+  } catch (error) {
+    dispatch(fetchAccessTokenFailure(error));
+  }
+};
+
+
+
+
 
 
 
@@ -124,6 +130,7 @@ const addAppReducer = (state = null, action) => {
 
 
 const axiosInstance = axios.create({
+   
   baseURL: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
   headers: {
     Authorization: `Bearer ${bearerToken}`,

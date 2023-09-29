@@ -6,12 +6,6 @@
 //   return <Provider store={store}>{children}</Provider>;
 // };
 
-
-
-
-
-
-
 // // gatsby-browser.js or gatsby-ssr.js
 // import React from "react";
 // import { Provider } from "react-redux";
@@ -89,12 +83,6 @@
 
 // export default onClientEntry;
 
-
-
-
-
-
-
 // const fetchNewAccessToken = async () => {
 //   try {
 //     const response = await fetch("http://localhost:5000/getAccessToken");
@@ -124,11 +112,6 @@
 //   }
 // };
 
-
-
-
-
-
 import React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -139,8 +122,6 @@ import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
-
-
 
 const fetchNewAccessToken = async () => {
   try {
@@ -166,13 +147,68 @@ export const onClientEntry = () => {
   }
 };
 
-
 export const wrapRootElement = ({ element }) => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       {element}
-   
     </PersistGate>
   </Provider>
 );
 
+
+
+
+// import React from "react";
+// import { Provider } from "react-redux";
+// import { PersistGate } from "redux-persist/integration/react";
+// import { store, persistor } from "./src/redux/store";
+// import "@fortawesome/fontawesome-free/css/all.css";
+// import "bootstrap-css-only/css/bootstrap.min.css";
+// import "mdbreact/dist/css/mdb.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "react-toastify/dist/ReactToastify.css";
+// import Cookies from "js-cookie";
+// import axios from "axios";
+
+// async function fetchAndSetAccessToken() {
+//   try {
+//     const response = await fetch("http://localhost:5000/getAccessToken");
+//     const data = await response.json();
+
+//     Cookies.set("accessToken", data.accessToken, {
+//       sameSite: "None",
+//       secure: true,
+//     });
+
+//     // Set the access token as a default header for Axios
+//     axios.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`;
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// }
+
+// // Initial call
+// fetchAndSetAccessToken();
+
+// // Set interval to call fetchAndSetAccessToken every 1 minute
+// setInterval(fetchAndSetAccessToken, 1 * 60 * 1000);
+
+// // Add an Axios interceptor to handle 401 Unauthorized responses
+// axios.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     if (error.response && error.response.status === 401) {
+//       // Refresh the page on a 401 response
+//       window.location.reload();
+//     }
+//     return Promise.reject(error);
+//   }
+// );
+
+// export const wrapRootElement = ({ element }) => (
+//   <Provider store={store}>
+//     <PersistGate loading={null} persistor={persistor}>
+//       {element}
+//     </PersistGate>
+//   </Provider>
+// );
