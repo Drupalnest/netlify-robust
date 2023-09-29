@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "scheduler": "node ./token/node/getTokenWithServiceAccount/scheduler.js",
-    "develop": "npm-run-all -p start scheduler server",
+    "develop": "npm-run-all -p start  server",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",

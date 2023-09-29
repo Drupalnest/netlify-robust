@@ -36,7 +36,40 @@ const FETCH_API_PRODUCTS_FAILURE ="FETCH_API_PRODUCTS_FAILURE"
 const SELECT_TEAM = "SELECT_TEAM";
 
 
-const bearerToken = Cookies.get('accessToken'); 
+// //const bearerToken = Cookies.get('accessToken'); 
+// // actions/authActions.js
+//  const FETCH_ACCESS_TOKEN_SUCCESS = 'FETCH_ACCESS_TOKEN_SUCCESS';
+//  const FETCH_ACCESS_TOKEN_FAILURE = 'FETCH_ACCESS_TOKEN_FAILURE';
+
+// const fetchAccessTokenSuccess = (accessToken) => ({
+//   type: FETCH_ACCESS_TOKEN_SUCCESS,
+//   payload: accessToken,
+// });
+
+// const fetchAccessTokenFailure = (error) => ({
+//   type: FETCH_ACCESS_TOKEN_FAILURE,
+//   payload: error,
+// });
+
+// export const fetchAccessToken = () => async (dispatch) => {
+//   try {
+//     const response = await fetch('http://localhost:5000/getAccessToken');
+//     const data = await response.json();
+//     dispatch(fetchAccessTokenSuccess(data.accessToken));
+
+//     // Set the access token in js-cookie
+//     Cookies.set('accessToken', data.accessToken, { sameSite: 'None', secure: true });
+//   } catch (error) {
+//     dispatch(fetchAccessTokenFailure(error));
+//   }
+// };
+
+
+
+const bearerToken = Cookies.get('accessToken');
+console.log('bearerToken:', bearerToken);
+
+
 
 // export const selectTeam = (team) => {
 //   return {
@@ -85,9 +118,13 @@ const addAppReducer = (state = null, action) => {
 
 
 // Axios instance with base URL and bearer token
+
+
+
+
+
 const axiosInstance = axios.create({
-  baseURL:
-    "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
+  baseURL: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
   headers: {
     Authorization: `Bearer ${bearerToken}`,
     "Content-Type": "application/json",
@@ -135,6 +172,7 @@ const initialStateTeams = {
   data: [],
   error: null,
 };
+
 
 const teamsReducer = (state = initialStateTeams, action) => {
   switch (action.type) {

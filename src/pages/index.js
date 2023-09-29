@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./login";
 import Teams from "../pages/teams"; // Assuming this is the correct import path for Teams
 import App from "./App";
 // import Token from "../components/Auth/Token";
 import withAuth from "../components/HOC/withAuth";
 const Index = () => {
+  // useEffect(() => {
+  //   window.location.reload(); // Refresh the page immediately
+  // }, []);
   return (
     <div>
       <Teams />

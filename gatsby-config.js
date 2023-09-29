@@ -1,11 +1,11 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 
-require('dotenv').config({
-  path: `.env`,
-});
+// require('dotenv').config({
+//   path: `.env`,
+// });
 
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
   //   DEV_SSR: false
   // },
 
-  
+
  // plugins: [`gatsby-plugin-material-ui`],
 
   siteMetadata: {
@@ -121,12 +121,18 @@ module.exports = {
     //     },
     //   },
     // },
-    {
-      resolve: "gatsby-plugin-env-variables",
-      options: {
-        allowList: ["APIGEE_GRAPHQL_ENDPOINT", "BEARER_TOKEN"],
-      },
-    },
+
+
+
+
+
+    
+    // {
+    //   resolve: "gatsby-plugin-env-variables",
+    //   options: {
+    //     allowList: ["APIGEE_GRAPHQL_ENDPOINT", "BEARER_TOKEN"],
+    //   },
+    // },
 
 
     
