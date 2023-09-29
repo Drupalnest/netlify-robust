@@ -7,6 +7,8 @@ import axios from "axios";
 
 import Cookies from 'js-cookie';
 
+const bearerToken = Cookies.get('accessToken');
+console.log('bearerToken:', bearerToken);
 
 
 // Actions
@@ -72,8 +74,6 @@ export const fetchAccessToken = () => async (dispatch) => {
 
 
 
-const bearerToken = Cookies.get('accessToken');
-console.log('bearerToken:', bearerToken);
 
 
 

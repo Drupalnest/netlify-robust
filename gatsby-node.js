@@ -825,9 +825,9 @@ exports.createPages = async ({ actions }) => {
 // };
 
 
-exports.onPreBootstrap = ({ actions }) => {
-  process.env.BEARER_TOKEN = `${process.env.BEARER_TOKEN }`;
-};
+// exports.onPreBootstrap = ({ actions }) => {
+//   process.env.BEARER_TOKEN = `${process.env.BEARER_TOKEN }`;
+// };
 exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
   if (stage === "build-javascript" || stage === "develop") {
     const config = getConfig();

@@ -23,16 +23,17 @@ const ErrorToast = ({ message }) => {
   }, []);
 
   return (
-    <div style={{ position: 'fixed', bottom: '4rem', left: '50%', transform: 'translateX(-50%)', zIndex: 9999 }}>
-      <Toast isOpen={close} fade={false} onClose={toggle}>
-        <ToastHeader toggle={toggle} className="bg-danger text-white">
-          Error
-        </ToastHeader>
-        <ToastBody>
-          {message}
-        </ToastBody>
-      </Toast>
-    </div>
+    <div style={{ position: 'fixed', top: '4rem', left: '50%', transform: 'translateX(-50%)', zIndex: 9999 }}>
+    <Toast isOpen={close} fade={false} onClose={toggle}>
+      <ToastHeader toggle={toggle} className="bg-danger text-white">
+        Error
+      </ToastHeader>
+      <ToastBody>
+        {message}
+      </ToastBody>
+    </Toast>
+  </div>
+  
   );
 };
 

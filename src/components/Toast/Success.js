@@ -24,7 +24,7 @@ const SuccessToast = ({ message }) => {
   }, []);
 
   return (
-    <div style={{ position: 'fixed', bottom: '4rem', left: '50%', transform: 'translateX(-50%)', zIndex: 9999 }}>
+    <div style={{ position: 'fixed', top: '4rem', left: '50%', transform: 'translateX(-50%)', zIndex: 9999 }}>
       <Toast isOpen={close} fade={false} onClose={toggle}>
         <ToastHeader toggle={toggle} className="bg-success text-white">
           Success

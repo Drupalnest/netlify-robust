@@ -2056,14 +2056,12 @@ import { apiProducts } from "../redux/store";
 import Cookies from "js-cookie";
 import SuccessToast from "../components/Toast/Success";
 import ErrorToast from "../components/Toast/Error";
-const bearerToken = Cookies.get('accessToken')
+const bearerToken = Cookies.get("accessToken");
 
 const AddTeam = () => {
   const dispatch = useDispatch();
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
-
-
 
   const myToken = Cookies.get("BEARER_TOKEN");
   console.log("myToken", myToken);
@@ -2157,7 +2155,7 @@ const AddTeam = () => {
         console.log("Setting showToast to true");
         //alert("Failed to create appgroup");
         setShowSuccessToast(true);
-     
+
         navigate("/teams");
       } else {
         setShowErrorToast(true);
@@ -2250,8 +2248,6 @@ const AddTeam = () => {
             <h3>Add Appgroup</h3>
           </div>
         </div>
-
-        
 
         <div>
           <div className="container py-2">
@@ -2360,14 +2356,19 @@ const AddTeam = () => {
         </div>
       </div>
 
+      {/* Show success toast */}
+      {showSuccessToast && (
+        <SuccessToast message="Appgroup created successfully!" />
+      )}
 
-       {/* Show success toast */}
-       {showSuccessToast && <SuccessToast message="Appgroup created successfully!" />}
-      
       {/* Show error toast */}
       {showErrorToast && <ErrorToast message="Failed to create appgroup" />}
 
-      {showErrorToast && <ErrorToast message="An error occurred while creating appgroup" />}
+      {/* {showErrorToast && <ErrorToast message="An error occurred while creating appgroup" />}*/}
+
+      {showErrorToast && (
+        <ErrorToast message="Appgroup already exists. Please try with a different name." />
+      )}
     </Layout>
   );
 };
