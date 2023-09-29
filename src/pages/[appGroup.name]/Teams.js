@@ -1435,7 +1435,7 @@ const TeamList = () => {
   }, []);
 
   useEffect(() => {
-    const admin = JSON.parse(sessionStorage.getItem("userData"));
+    const admin = JSON.parse(localStorage.getItem("userData"));
     const adminName = admin?.current_user?.name;
 
     //const adminName = "ajay.gadhavana+1@gmail.com";

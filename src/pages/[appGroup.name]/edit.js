@@ -427,7 +427,10 @@ import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
 import { fetchTeamDetails, apiProducts, fetchTeams } from "../../redux/store";
 import Cookies from 'js-cookie';
-const bearerToken = Cookies.get('accessToken')
+import withAuth from "../../components/HOC/withAuth";
+
+
+
 
 const UpdateCompanyName = () => {
   const [companyName, setCompanyName] = useState("");
@@ -440,7 +443,7 @@ const UpdateCompanyName = () => {
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("edit", teamDetails);
-
+  const bearerToken = Cookies.get('accessToken')
   const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
 
   const team = teamDetails ? teamDetails.name : "";
@@ -949,4 +952,4 @@ console.log("adminsEmail", adminsEmail);
   );
 };
 
-export default UpdateCompanyName;
+export default withAuth(UpdateCompanyName);

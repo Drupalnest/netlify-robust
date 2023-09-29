@@ -3,20 +3,11 @@ import Login from "./login";
 import Teams from "../pages/teams"; // Assuming this is the correct import path for Teams
 import App from "./App";
 // import Token from "../components/Auth/Token";
-
+import withAuth from "../components/HOC/withAuth";
 const Index = () => {
-  const [authenticated, setAuthenticated] = useState(false);
-
   return (
     <div>
-      {authenticated ? (
-        
-          <Teams />
-  
-        
-      ) : (
-        <Login onLogin={() => setAuthenticated(true)} />
-      )}
+      <Teams />
 
       {/* <Teams /> */}
       {/* <App /> */}
@@ -24,8 +15,7 @@ const Index = () => {
   );
 };
 
-export default Index;
-
+export default withAuth(Index);
 
 // import React, { useState, useEffect } from "react";
 // import { getMyGoogleCalendarsList } from "../utils/calendarApi";

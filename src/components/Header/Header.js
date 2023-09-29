@@ -291,9 +291,6 @@
 
 // export default Header;
 
-
-
-
 import React, { useState } from "react";
 import Logout from "../Auth/Logout";
 import "../../style/globle.css";
@@ -313,7 +310,6 @@ const Header = () => {
     setNavbarCollapsed(!navbarCollapsed);
   };
 
-
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (dropdownOpen && !event.target.closest(".dropdown")) {
@@ -327,6 +323,13 @@ const Header = () => {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, [dropdownOpen]);
+
+  // When user logs in
+  const userData = JSON.parse(localStorage.getItem("userData"));
+const isLoggedIn = userData && userData.current_user && userData.current_user.uid;
+
+
+ 
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top">
@@ -387,7 +390,6 @@ const Header = () => {
               </Link>
             </li>
 
-
             {/* <li className="nav-item">
               <Link
                 className="nav-link text-dark"
@@ -446,11 +448,22 @@ const Header = () => {
                     Settings
                   </Link>
                 </li>
-                <li>
-                  <Link className="dropdown-item">
-                    <Logout />
-                  </Link>
-                </li>
+
+                {isLoggedIn && (
+                  <li>
+                    <Link className="dropdown-item">
+                      <Logout />
+                    </Link>
+                  </li>
+                )}
+
+                {/* {!isLoggedIn && (
+                  <li>
+                    <Link className="dropdown-item" to="#">
+                      Login
+                    </Link>
+                  </li>
+                )} */}
               </ul>
             </div>
           </div>
@@ -461,11 +474,6 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-
-
 
 // import React from "react";
 

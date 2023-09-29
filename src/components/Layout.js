@@ -3,8 +3,11 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 // import { ToastContainer } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
+import withAuth from "./HOC/withAuth";
 
 const Layout = ({ children }) => {
+
+  
   return (
     <div
       style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
@@ -16,4 +19,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default withAuth(Layout);
