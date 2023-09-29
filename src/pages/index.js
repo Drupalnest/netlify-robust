@@ -5,9 +5,12 @@ import App from "./App";
 // import Token from "../components/Auth/Token";
 import withAuth from "../components/HOC/withAuth";
 const Index = () => {
-  // useEffect(() => {
-  //   window.location.reload(); // Refresh the page immediately
-  // }, []);
+  useEffect(() => {
+   
+    setTimeout(() => {
+      window.location.reload(); // Refresh the page
+    }, 100); // Delay for 1 second before refreshing
+  }, []);
   return (
     <div>
       <Teams />

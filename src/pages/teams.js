@@ -31,19 +31,22 @@
 import React, { useEffect, useState } from "react";
 import Teams from "./[appGroup.name]/Teams";
 // import { getBearerToken } from "../../token/node/getTokenWithServiceAccount/scheduler.js"
-import Cookies from "js-cookie";
 
 const TeamsPage = () => {
-  const [refreshed, setRefreshed] = useState(false);
+  // const [token, setToken] = useState('');
 
-  useEffect(() => {
-    const bearerToken = Cookies.get('accessToken');
+  // useEffect(() => {
+  //   // Get the initial token
+  //   setToken(getBearerToken());
 
-    if (bearerToken === undefined && !refreshed) {
-      setRefreshed(true);
-      window.location.reload();
-    }
-  }, [refreshed]);
+  //   // Set up an interval to periodically update the token in your component
+  //   const interval = setInterval(() => {
+  //     setToken(getBearerToken());
+  //   }, 60000); // 60 seconds = 1 minute
+
+  //   // Clear the interval when the component is unmounted
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div>
