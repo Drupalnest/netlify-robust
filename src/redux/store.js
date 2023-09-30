@@ -81,22 +81,22 @@ export const setAccessToken = (accessToken) => ({
 // };
 
 
-const fetchNewToken = async () => {
+// const fetchNewToken = async () => {
  
-    const response = await fetch("http://localhost:5000/getAccessToken");
-    const data = await response.json();
+//     const response = await fetch("http://localhost:5000/getAccessToken");
+//     const data = await response.json();
 
-    // Assuming the token is inside data.accessToken
-    const accessToken = data.accessToken;
+//     // Assuming the token is inside data.accessToken
+//     const accessToken = data.accessToken;
 
-    if (accessToken) {
-      // Set the access token in cookies
-      Cookies.set("tokenn", accessToken, { expires: 7 }); // Expires in 7 days
+//     if (accessToken) {
+//       // Set the access token in cookies
+//       Cookies.set("tokenn", accessToken, { expires: 7 }); // Expires in 7 days
 
-      // Dispatch the action to set the access token in Redux store
-    }}
+//       // Dispatch the action to set the access token in Redux store
+//     }}
 
-    fetchNewToken()
+//     fetchNewToken()
 
 //  const response = await fetch("http://localhost:5000/getAccessToken");
 //  const data = await response.json();
