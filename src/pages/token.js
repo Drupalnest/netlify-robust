@@ -22,19 +22,19 @@
 
 
 
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAccessToken } from '../redux/store'; // Assuming you have actions set up
+// import React, { useEffect } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchAccessToken } from '../redux/store'; // Assuming you have actions set up
 
-const YourFunctionalComponent = () => {
-  const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.auth.accessToken);
+// const YourFunctionalComponent = () => {
+//   const dispatch = useDispatch();
+//   const accessToken = useSelector((state) => state.auth.accessToken);
 
-  useEffect(() => {
-    dispatch(fetchAccessToken('username', 'password'));
-  }, [dispatch]);
+//   useEffect(() => {
+//     dispatch(fetchAccessToken('username', 'password'));
+//   }, [dispatch]);
 
-  return <div>{accessToken}</div>;
-};
+//   return <div>{accessToken}</div>;
+// };
 
-export default YourFunctionalComponent;
+// export default YourFunctionalComponent;
