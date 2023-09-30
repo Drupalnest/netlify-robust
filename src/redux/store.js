@@ -91,7 +91,7 @@ const fetchNewToken = async () => {
 
     if (accessToken) {
       // Set the access token in cookies
-      Cookies.set("token", accessToken, { expires: 7 }); // Expires in 7 days
+      Cookies.set("tokenn", accessToken, { expires: 7 }); // Expires in 7 days
 
       // Dispatch the action to set the access token in Redux store
     }}
