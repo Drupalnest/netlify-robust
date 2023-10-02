@@ -4,14 +4,21 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import axios from "axios";
 
+import { composeWithDevTools } from "redux-devtools-extension";
 import Cookies from "js-cookie";
+import getBearerToken from "../components/Auth/Bearer";
+
+
+
+
+
 
 // Use the functions in your Gatsby components or pages
 
-// const bearerToken = Cookies.get('accessToken');
-// console.log('bearerToken:', bearerToken);
+ 
 
 console.log("hrfhf:");
+
 
 // Actions
 const FETCH_TEAMS_SUCCESS = "FETCH_TEAMS_SUCCESS";
@@ -38,82 +45,23 @@ const FETCH_API_PRODUCTS_SUCCESS = "FETCH_API_PRODUCTS_SUCCESS ";
 const FETCH_API_PRODUCTS_FAILURE = "FETCH_API_PRODUCTS_FAILURE";
 const SELECT_TEAM = "SELECT_TEAM";
 
-const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
+
+const token=Cookies.get('tokenn');
+console.log('token',token);
 
 
 
-export const setAccessToken = (accessToken) => ({
-  type: SET_ACCESS_TOKEN,
-  payload: accessToken,
-});
-
-// export const fetchAccessToken = () => async (dispatch) => {
-//   const fetchNewToken = async () => {
-//     try {
-//       const response = await fetch("http://localhost:5000/getAccessToken");
-//       const data = await response.json();
-
-//       // Assuming the token is inside data.accessToken
-//       const accessToken = data.accessToken;
-
-//       if (accessToken) {
-//         // Set the access token in cookies
-//         Cookies.set("testCookie", "testValue");
-
-//         Cookies.set("token", accessToken, { expires: 7 }); // Expires in 7 days
-//         console.log("Fetching access token...");
-//         dispatch(fetchAccessToken());
-        
-//         dispatch(setAccessToken(accessToken));
-//       } else {
-//         console.error("Access token not found in response:", data);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching access token:", error);
-//     }
-//   };
-
-//   // Initial fetch
-//   await fetchNewToken();
-
-//   // Fetch a new token every minute
-//   setInterval(fetchNewToken, 60 * 1000); // 60 seconds * 1000 milliseconds
-// };
-
-
-const fetchNewToken = async () => {
- 
-    const response = await fetch("http://localhost:5000/getAccessToken");
-    const data = await response.json();
-
-    // Assuming the token is inside data.accessToken
-    const accessToken = data.accessToken;
-
-    if (accessToken) {
-      // Set the access token in cookies
-      Cookies.set("tokenn", accessToken, { expires: 7 }); // Expires in 7 days
-
-      // Dispatch the action to set the access token in Redux store
-    }}
-
-    fetchNewToken()
-
-//  const response = await fetch("http://localhost:5000/getAccessToken");
-//  const data = await response.json();
-
-// // // Assuming the token is inside data.accessToken
-// // const accessToken = data.accessToken;
-// // Cookies.set("token", accessToken, { expires: 7 }); // Expires in 7 days
-  const bearerToken = Cookies.get('token');
- console.log('token:', bearerToken);
 
 const axiosInstance = axios.create({
   baseURL: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
   headers: {
-    Authorization: `Bearer ${bearerToken}`,
+    Authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
   },
 });
+
+
+
 
 
 
@@ -145,7 +93,7 @@ const addAppReducer = (state = null, action) => {
 
 //   baseURL: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
 //   headers: {
-//     Authorization: `Bearer ${bearerToken}`,
+//     Authorization: `Bearer ${token}`,
 //     "Content-Type": "application/json",
 //   },
 // });
@@ -264,10 +212,10 @@ const teamDetailsReducer = (state = null, action) => {
 
 export const fetchAppDetails = (teamName, appName) => async (dispatch) => {
   try {
-    const token = bearerToken;
+    const token = token;
     const response = await axios.get(
       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}`,
-      { headers: { Authorization: `Bearer ${bearerToken}` } }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
 
     dispatch({
@@ -297,10 +245,10 @@ const appDetailsData = (state = initialStateappdetals, action) => {
 
 // export const fetchApps = (appgroupname) => async (dispatch) => {
 //   try {
-//     const token = bearerToken;
+//     const token = token;
 //     const response = await axios.get(
 //       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupname}/apps`,
-//       { headers: { Authorization: `Bearer ${bearerToken}` } }
+//       { headers: { Authorization: `Bearer ${token}` } }
 //     );
 
 //     dispatch({
@@ -329,10 +277,10 @@ export const fetchApps = (appgroupname) => async (dispatch) => {
   try {
     dispatch({ type: FETCH_APPS_LOADING });
 
-    const token = bearerToken;
+    const token = token;
     const response = await axios.get(
       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupname}/apps`,
-      { headers: { Authorization: `Bearer ${bearerToken}` } }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
 
     dispatch({
@@ -382,7 +330,7 @@ export const updateTeamDisplayName =
       attributes: attributes,
     };
 
-    const token = bearerToken; // Make sure you have your token properly configured.
+    const token = token; // Make sure you have your token properly configured.
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -414,10 +362,10 @@ export const addApp = (teamName, appData) => {
   return async (dispatch) => {
     try {
       const apiUrl = `https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/${teamName}/apps`;
-      const bearerToken = bearerToken;
+      const token = token;
       const axiosConfig = {
         headers: {
-          Authorization: `Bearer ${bearerToken}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -440,7 +388,7 @@ export const deleteTeam = (appGroupName) => {
   return (dispatch) => {
     const apiBaseUrl =
       "https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups";
-    const Token = bearerToken;
+    const Token = token;
 
     const axiosConfig = {
       headers: {
@@ -505,7 +453,7 @@ export const deleteTeamApp = (teamName, appName) => {
   return (dispatch) => {
     const apiBaseUrl =
       "https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups";
-    const Token = bearerToken;
+    const Token = token;
 
     const axiosConfig = {
       headers: {
@@ -593,11 +541,17 @@ const rootReducer = combineReducers({
   //selectedTeam: selectedTeamReducer,
   appsData: appsData,
   memberName: memberreducer,
-  //authReducer: authReducer,
+  //tokenReducer: tokenReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-export const store = createStore(persistedReducer, applyMiddleware(thunk));
+export const store = createStore(
+  persistedReducer,
+  composeWithDevTools(
+    applyMiddleware(thunk)
+    // other store enhancers if any
+  )
+);
 export const persistor = persistStore(store);
 
 // export const store = createStore(rootReducer, applyMiddleware(thunk));

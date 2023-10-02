@@ -4,6 +4,8 @@ import Teams from "../pages/teams"; // Assuming this is the correct import path 
 import App from "./App";
 // import Token from "../components/Auth/Token";
 import withAuth from "../components/HOC/withAuth";
+import TokenFetcher from "../components/Auth/Token";
+import { Provider } from "react-redux";
 const Index = () => {
   // useEffect(() => {
   //   setTimeout(() => {
@@ -12,6 +14,8 @@ const Index = () => {
   // }, []);
   return (
     <div>
+    {/* <TokenFetcher/> */}
+      
       <Teams />
 
       {/* <Teams /> */}

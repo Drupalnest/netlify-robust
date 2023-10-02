@@ -112,51 +112,48 @@
 //   }
 // };
 
-import React from "react";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./src/redux/store";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "bootstrap-css-only/css/bootstrap.min.css";
-import "mdbreact/dist/css/mdb.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
-import Cookies from "js-cookie";
+// import React from "react";
+// import { Provider } from "react-redux";
+// import { PersistGate } from "redux-persist/integration/react";
+// import { store, persistor } from "./src/redux/store";
+// import "@fortawesome/fontawesome-free/css/all.css";
+// import "bootstrap-css-only/css/bootstrap.min.css";
+// import "mdbreact/dist/css/mdb.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "react-toastify/dist/ReactToastify.css";
+// import Cookies from "js-cookie";
 
-// const fetchNewAccessToken = async () => {
-//   try {
-//     const response = await fetch("http://localhost:5000/getAccessToken");
-//     const data = await response.json();
+// // const fetchNewAccessToken = async () => {
+// //   try {
+// //     const response = await fetch("http://localhost:5000/getAccessToken");
+// //     const data = await response.json();
 
-//     Cookies.set("accessToken", data.accessToken, {
-//       sameSite: "None",
-//       secure: true,
-//     });
+// //     Cookies.set("accessToken", data.accessToken, {
+// //       sameSite: "None",
+// //       secure: true,
+// //     });
 
-//     setTimeout(fetchNewAccessToken, 1 * 60 * 1000);
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// };
+// //     setTimeout(fetchNewAccessToken, 1 * 60 * 1000);
+// //   } catch (error) {
+// //     console.error("Error:", error);
+// //   }
+// // };
 
-// export const onClientEntry = () => {
-//   try {
-//     fetchNewAccessToken();
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// };
+// // export const onClientEntry = () => {
+// //   try {
+// //     fetchNewAccessToken();
+// //   } catch (error) {
+// //     console.error("Error:", error);
+// //   }
+// // };
 
-export const wrapRootElement = ({ element }) => (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      {element}
-    </PersistGate>
-  </Provider>
-);
-
-
-
+// export const wrapRootElement = ({ element }) => (
+//   <Provider store={store}>
+//     <PersistGate loading={null} persistor={persistor}>
+//       {element}
+//     </PersistGate>
+//   </Provider>
+// );
 
 // import React from "react";
 // import { Provider } from "react-redux";
@@ -212,3 +209,93 @@ export const wrapRootElement = ({ element }) => (
 //     </PersistGate>
 //   </Provider>
 // );
+
+// import React from "react";
+// import { Provider } from "react-redux";
+// import { PersistGate } from "redux-persist/integration/react";
+// import { store, persistor } from "./src/redux/store";
+// import "@fortawesome/fontawesome-free/css/all.css";
+// import "bootstrap-css-only/css/bootstrap.min.css";
+// import "mdbreact/dist/css/mdb.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "react-toastify/dist/ReactToastify.css";
+// import Cookies from "js-cookie";
+// import { fetchNewToken } from "./src/components/Auth/Token";
+// import { TrackerProvider } from 'react-tracking';
+// import TrackedButton from './src/components/TrackedButton';
+
+// export const wrapRootElement = ({ element }) => {
+//   // Call the function to fetch and set the token
+//   fetchNewToken();
+
+//   return (
+//     <Provider store={store}>
+//       <PersistGate loading={null} persistor={persistor}>
+//         {element}
+//       </PersistGate>
+//     </Provider>
+//   );
+// };
+
+// import React, { useEffect } from "react";
+// import { Provider } from "react-redux";
+// import { PersistGate } from "redux-persist/integration/react";
+// import { store, persistor } from "./src/redux/store";
+// import "@fortawesome/fontawesome-free/css/all.css";
+// import "bootstrap-css-only/css/bootstrap.min.css";
+// import "mdbreact/dist/css/mdb.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "react-toastify/dist/ReactToastify.css";
+// import Cookies from "js-cookie";
+// import { fetchNewToken } from "./src/components/Auth/Token";
+// import { TrackerProvider } from 'react-tracking';
+// import TrackedButton from './src/components/Buttons/TrackedButton';
+
+// export const wrapRootElement = ({ element }) => {
+//   // Call the function to fetch and set the token
+//   fetchNewToken();
+
+//   return (
+//     <Provider store={store}>
+//       <PersistGate loading={null} persistor={persistor}>
+//         {/* <TrackerProvider
+//           // Initialize your tracking provider here (e.g., Google Analytics)
+//           // This example uses an empty function, you would replace it with your actual initialization
+//           onInit={() => {}}
+//           // Additional options and settings for your tracking provider
+//           // For example, you might pass your tracking ID or other configurations here
+//         >
+
+//           <TrackedButton /> */}
+//           {element}
+//         {/* </TrackerProvider> */}
+//       </PersistGate>
+//     </Provider>
+//   );
+// };
+import React from "react";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./src/redux/store";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import TokenFetcher from "./src/components/Auth/Token";
+import { CookiesProvider } from "react-cookie";
+
+export const onInitialClientRender = () => {
+  // Call the function to fetch and set the token
+  <TokenFetcher />;
+};
+
+export const wrapRootElement = ({ element }) => {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <TokenFetcher />;<CookiesProvider> {element}</CookiesProvider>
+      </PersistGate>
+    </Provider>
+  );
+};

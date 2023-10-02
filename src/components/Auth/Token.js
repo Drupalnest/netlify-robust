@@ -1,139 +1,90 @@
+// import React, { useEffect } from "react";
+// import Cookies from "js-cookie";
 
-// import React, { useState, useEffect } from 'react';
-// import Cookies from 'js-cookie';
-
-// const Token = () => {
-//   const [accessToken, setAccessToken] = useState('');
-
+// const TokenFetcher = () => {
 //   useEffect(() => {
-//     const fetchData = async () => {
+//     const fetchToken = async () => {
 //       try {
 //         const response = await fetch("http://localhost:5000/getAccessToken");
 //         const data = await response.json();
-//         setAccessToken(data.accessToken);
 
-//         // Set the access token in a cookie to expire in 30 minutes
-//         const expirationTime = new Date(new Date().getTime() + 30 * 60 * 1000); // 30 minutes
-//         Cookies.set('accessToken', data.accessToken, { expires: expirationTime });
+//         const accessToken = data.accessToken;
+
+//         if (accessToken) {
+//           Cookies.set("tokenn", accessToken, {
+//             expires: 7,
+//             SameSite: "None",
+//             Secure: true,
+//           });
+//         }
 //       } catch (error) {
-//         console.error('Error:', error);
+//         console.error("Error fetching access token:", error);
 //       }
 //     };
 
-//     fetchData(); 
+//     // Set up a timer to fetch the token every minute
+//     const timer = setInterval(fetchToken, 60000); // Fetch token every 1 minute
 
-//     const interval = setInterval(fetchData, 60000); 
+//     // Call fetchToken immediately
+//     fetchToken();
 
-//     return () => {
-//       clearInterval(interval); 
-//       Cookies.remove('accessToken'); 
-//     };
-//   }, []);
+//     // Clear the timer when the component is unmounted
+//     return () => clearInterval(timer);
+//   }, []); // Empty dependency array means this effect runs once on mount
 
-//   return (
-//     <div>
-//       <h1>Your Gatsby App App</h1>
-//       <p>Access Token: {accessToken}</p>
-//     </div>
-//   );
+//   return null; // This component doesn't render anything
 // };
 
-// export default Token;
+// export default TokenFetcher;
 
 
 
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
+const TokenFetcher = () => {
+  const [refreshed, setRefreshed] = useState(false);
 
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/getAccessToken");
+        const data = await response.json();
 
+        const accessToken = data.accessToken;
 
+        if (accessToken) {
+          Cookies.set("tokenn", accessToken, {
+            expires: 7,
+            SameSite: "None",
+            Secure: true,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching access token:", error);
+      }
+    };
 
+    const isFirstVisit = localStorage.getItem("visited");
 
+    if (!isFirstVisit) {
+      localStorage.setItem("visited", "true");
+      setRefreshed(true);
+    }
 
+    if (refreshed) {
+      // Fetch the token if refreshed
+      fetchToken();
+    }
 
+    // Set up a timer to fetch the token every minute
+    const timer = setInterval(fetchToken, 60000); // Fetch token every 1 minute
 
+    // Clear the timer when the component is unmounted
+    return () => clearInterval(timer);
+  }, [refreshed]); // Include refreshed as a dependency
 
+  return null; // This component doesn't render anything
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import Cookies from 'js-cookie';
-
-// const tokenExpirationTime = 3600; // Define the expiration time in seconds
-
-
-
-// // 1. Get Access Token from Authentication API
-// async function getAccessToken(username, password) {
-//     const response = await fetch('http://localhost:5000/getAccessToken', {
-//       method: 'POST',
-//     //   headers: {
-//     //     'Content-Type': 'application/json',
-//     //   },
-//     //   body: JSON.stringify({
-//     //     username: username,
-//     //     password: password,
-//     //   }),
-//     });
-  
-//     const data = await response.json();
-//     return data.access_token;
-//   }
-  
-//   // 2. Store Access Token (using cookies in this example)
-//   function setAccessTokenInCookie(token) {
-//     Cookies.set('newtoken', token, { expires: tokenExpirationTime });
-//   }
-  
-//   // 3. Attach Access Token to API Requests
-//   function makeApiRequest(endpoint, method, data) {
-//     const accessToken = Cookies.get('accessToken');
-  
-//     return fetch(`https://example.com/api/${endpoint}`, {
-//       method: method,
-//       headers: {
-//         'Authorization': `Bearer ${accessToken}`,
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(data),
-//     });
-//   }
-  
-//   // 4. Handle Token Expiry and Refresh (assuming a refresh token is provided)
-//   async function checkAccessTokenValidity() {
-//     const accessToken = Cookies.get('accessToken');
-//     if (!accessToken) {
-//       // Handle case where access token is not available
-//       return;
-//     }
-  
-//     // Check if access token is expired (you need to implement this function)
-//     const isTokenExpired = isAccessTokenExpired(accessToken);
-  
-//     if (isTokenExpired) {
-//       // Use a refresh token (if provided) to get a new access token
-//       const refreshToken = Cookies.get('refreshToken');
-//       const newAccessToken = await getNewAccessToken(refreshToken);
-  
-//       // Store the new access token
-//       setAccessTokenInCookie(newAccessToken);
-//     }
-//   }
-  
+export default TokenFetcher;

@@ -725,6 +725,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import { navigate } from "gatsby";
+import Cookies from "js-cookie";
+import Bearer from "./Bearer";
+
 
 
 const Login = () => {
@@ -770,8 +773,11 @@ const Login = () => {
     }
   };
 
+
+
+
   return (
-    <div>
+    <div style={{marginTop:"110px"}}>
       <Header />
       <div className="dialog-off-canvas-main-canvas">
         <div className="page">
@@ -779,14 +785,16 @@ const Login = () => {
             <div className="container-fluid px-0">
               <div className="block block--pagetitle bg-lighter py-4">
                 <div className="container">
-                  <h1 className="page__title mb-0">Log in</h1>
+                  <h3 className="page__title mb-0">Log in</h3>
+                  {/* <Bearer/> */}
+              
                 </div>
               </div>
             </div>
           </div>
           <main className="main" role="main">
             <div className="page-layout-sidebar-default">
-              <div className="container py-5">
+              <div className="container py-2">
                 <div className="row">
                   <div className="page__content col-md">
                     <div className="hidden" />

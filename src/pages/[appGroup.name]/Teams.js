@@ -1426,6 +1426,9 @@ const TeamList = () => {
     dispatch(fetchTeams());
   }, [dispatch]);
 
+
+
+
   const handleFetchApps = (appGroup) => {
     dispatch(fetchApps(appGroup)); // Use the parameter appGroup
   };
@@ -1445,6 +1448,8 @@ const TeamList = () => {
     } else {
       navigate("/login");
     }
+
+    
 
     const updatedFilteredTeams = appgroups
       ? appgroups
@@ -1503,6 +1508,9 @@ const TeamList = () => {
       </p>
     );
   }
+
+
+  
 
   return (
     <Layout>

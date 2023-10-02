@@ -6,14 +6,6 @@
 //   return <Provider store={store}>{children}</Provider>;
 // };
 
-
-
-
-
-
-
-
-
 // // gatsby-browser.js or gatsby-ssr.js
 // import React from 'react';
 // import { Provider } from 'react-redux';
@@ -23,11 +15,6 @@
 // //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 // //import 'mdbreact/dist/css/mdb.css';
-
-
-
-
-
 
 // // import { ToastContainer } from 'react-toastify';
 // // import 'react-toastify/dist/ReactToastify.css'
@@ -41,12 +28,7 @@
 //   </Provider>
 // );
 
-
 // // gatsby-browser.js
-
-
-
-
 
 // import React from "react";
 // import { Provider } from "react-redux";
@@ -58,8 +40,6 @@
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "react-toastify/dist/ReactToastify.css";
 // import Cookies from "js-cookie";
-
-
 
 // const fetchNewAccessToken = async () => {
 //   try {
@@ -85,7 +65,6 @@
 //   }
 // };
 
-
 // export const wrapRootElement = ({ element }) => (
 //   <Provider store={store}>
 //     <PersistGate loading={null} persistor={persistor}>
@@ -94,16 +73,29 @@
 //   </Provider>
 // );
 
-
 import React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./src/redux/store";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import TokenFetcher from "./src/components/Auth/Token";
+import { CookiesProvider } from "react-cookie";
 
-export const wrapRootElement = ({ element }) => (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      {element}
-    </PersistGate>
-  </Provider>
-);
+export const onInitialClientRender = () => {
+  // Call the function to fetch and set the token
+  <TokenFetcher />;
+};
+
+export const wrapRootElement = ({ element }) => {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <TokenFetcher />;<CookiesProvider> {element}</CookiesProvider>
+      </PersistGate>
+    </Provider>
+  );
+};

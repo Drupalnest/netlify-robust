@@ -48,6 +48,7 @@ const TeamsPage = () => {
   //   return () => clearInterval(interval);
   // }, []);
 
+  
   return (
     <div>
       <Teams />
