@@ -108,7 +108,6 @@ const NewComponent = () => {
     Cookies.set('accessToken', currentToken);
   }, [currentToken]);
 
-  // Assuming there's a way to update the token (e.g., a function setToken)
   const setNewToken = () => {
     const newToken = 'new_token_value'; // Update this with the new token value
     setCurrentToken(newToken);
