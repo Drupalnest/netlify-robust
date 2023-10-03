@@ -273,6 +273,9 @@
 //     </Provider>
 //   );
 // };
+
+
+
 import React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -285,12 +288,15 @@ import "react-toastify/dist/ReactToastify.css";
 // import TokenFetcher from "./src/components/Auth/Token";
 import { CookiesProvider } from "react-cookie";
 
+import setInitialTokenInCookie from "./tokenHandler"
+
 // export const onInitialClientRender = () => {
 //   // Call the function to fetch and set the token
 //   <TokenFetcher />;
 // };
 
 export const wrapRootElement = ({ element }) => {
+  setInitialTokenInCookie();
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
