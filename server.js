@@ -287,8 +287,6 @@
 // retrieveToken();
 
 
-
-
 const axios = require('axios');
 const { exec } = require('child_process');
 const fs = require('fs');
@@ -357,3 +355,19 @@ const retrieveToken = async () => {
 };
 
 retrieveToken();
+
+exports.handler = async function(event, context) {
+  try {
+    const accessToken = await getTokenFromCommand();
+    
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ accessToken })
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Internal Server Error' })
+    };
+  }
+}
