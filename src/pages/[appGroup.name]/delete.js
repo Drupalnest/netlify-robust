@@ -119,7 +119,7 @@ import { Link, navigate } from "gatsby";
 import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
 import Cookies from 'js-cookie';
-const bearerToken = Cookies.get('accessToken')
+
 
 const DeleteTeam = () => {
   const [appGroupName, setAppGroupName] = useState("");
@@ -129,6 +129,7 @@ const DeleteTeam = () => {
 
   const teamDetails = useSelector((state) => state.teamDetails);
   const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
+  //const bearerToken = Cookies.get('accessToken')
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

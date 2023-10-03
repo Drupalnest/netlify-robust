@@ -10,6 +10,7 @@ const DropdownComponent = ({ appGroup }) => {
   const [isIconUp, setIsIconUp] = useState(false);
   const dispatch = useDispatch();
   console.log("teams", teams);
+  
   const isFetching = teams ? teams.isFetching : false;
   const dropdownRef = useRef(null);
 
@@ -18,7 +19,7 @@ const DropdownComponent = ({ appGroup }) => {
   // const appgroups = teams ? teams.appGroups : [];
   // console.log("appgroups", appgroups);
 
-  const handleClickTeam = (appGroup) => {
+  const handleClickTeam = () => {
     dispatch(fetchTeamDetails(appGroup));
   };
 
@@ -38,8 +39,9 @@ const DropdownComponent = ({ appGroup }) => {
   };
 
   const handleButtonClick = () => {
-    handleClickTeam(appGroup);
     handleFetchApps(appGroup);
+    handleClickTeam(appGroup);
+   
    
   };
 
