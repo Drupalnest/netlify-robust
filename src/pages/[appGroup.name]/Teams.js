@@ -1457,17 +1457,36 @@ const TeamList = ({ responseData }) => {
   //     }
     
 
+  // useEffect(() => {
+  //   const admin = JSON.parse(localStorage.getItem("userData"));
+  //   const adminName = admin?.current_user?.name;
+
+  //   logout_token:"aUgrSnKGXYIb2VYMJhratXaLSUAJ2x3QyZeUG1v5z6U"
+
+  //   //const adminName = "ajay.gadhavana+1@gmail.com";
+
+  //   if (logout_token) {
+  //     navigate("/teams");
+  //   } else {
+  //     navigate("/login");
+  //   }
+
+
   useEffect(() => {
     const admin = JSON.parse(localStorage.getItem("userData"));
     const adminName = admin?.current_user?.name;
 
-    //const adminName = "ajay.gadhavana+1@gmail.com";
+    const logout_token = localStorage.getItem("logout_token");
 
-    if (adminName) {
+    // const adminName = "ajay.gadhavana+1@gmail.com";
+
+    if (logout_token) {
       navigate("/teams");
     } else {
       navigate("/login");
     }
+
+
 
     
 
