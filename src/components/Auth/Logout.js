@@ -799,7 +799,7 @@ const Logout = () => {
 
       // Assuming response.ok for success and response.json() for error data
       // if (response.ok) {
-        localStorage.removeItem("userData");
+        localStorage.removeItem("logout_token");
       alert("Logout successful");
       navigate("/login")
       // } else {

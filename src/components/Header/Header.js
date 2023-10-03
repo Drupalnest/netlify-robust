@@ -325,8 +325,10 @@ const Header = () => {
   }, [dropdownOpen]);
 
   // When user logs in
-  const userData = JSON.parse(localStorage.getItem("userData"));
-const isLoggedIn = userData && userData.current_user && userData.current_user.uid;
+  const userData = localStorage.getItem("logout_token");
+const isLoggedIn =  userData
+
+
 
 
  

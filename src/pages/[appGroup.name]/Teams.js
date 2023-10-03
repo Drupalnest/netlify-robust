@@ -1382,10 +1382,6 @@
 
 // export default TeamList;
 
-
-
-
-
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from "../../redux/store";
@@ -1397,15 +1393,16 @@ import DropdownComponent from "../../components/DropDown/DropdownComponent";
 import SearchIcon from "@mui/icons-material/Search";
 import { MDBBtn } from "mdbreact";
 import { Container } from "mdbreact";
+import Cookies from "js-cookie";
 
-const TeamList = () => {
+const TeamList = ({ responseData }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTeams, setFilteredTeams] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const tableRef = useRef(); // Create a ref for the table element
   const dispatch = useDispatch();
-  const location = useLocation();
+  //const location = useLocation();
 
   const teams = useSelector((state) => state.teams.data);
   console.log("teams", teams);
@@ -1413,6 +1410,9 @@ const TeamList = () => {
 
   const appgroups = teams ? teams.appGroups : [];
   console.log("appgroups", appgroups);
+
+  const token = Cookies.get("tokenn");
+  console.log("token", token);
 
   const handleClickTeam = (appGroup) => {
     dispatch(fetchTeamDetails(appGroup));
@@ -1426,16 +1426,36 @@ const TeamList = () => {
     dispatch(fetchTeams());
   }, [dispatch]);
 
-
-
-
   const handleFetchApps = (appGroup) => {
     dispatch(fetchApps(appGroup)); // Use the parameter appGroup
   };
 
+
+
   useEffect(() => {
     tableRef.current && window.$(tableRef.current).DataTable();
   }, []);
+
+  
+
+
+
+  // useEffect(() => {
+  //   // Assuming responseData is an object received from an API call or some data source.
+   
+  //   if (responseData) {
+  //     const userData = JSON.stringify(responseData);
+  //     console.log("userData", userData);
+  
+  //     const adminName = responseData.current_user.name;
+  //     console.log("adminName",adminName)
+  
+  //     if (adminName) {
+  //       navigate("/teams");
+  //     } else {
+  //       navigate("/login");
+  //     }
+    
 
   useEffect(() => {
     const admin = JSON.parse(localStorage.getItem("userData"));
@@ -1483,6 +1503,9 @@ const TeamList = () => {
     console.log("filteredTeams", filteredTeams);
   }, [navigate, appgroups, searchTerm, currentPage]);
 
+ 
+ 
+ 
   const indexOfLastItem = currentPage * rowsPerPage;
   const indexOfFirstItem = indexOfLastItem - rowsPerPage;
   const currentItems = filteredTeams.slice(indexOfFirstItem, indexOfLastItem);
@@ -1508,9 +1531,6 @@ const TeamList = () => {
       </p>
     );
   }
-
-
-  
 
   return (
     <Layout>
@@ -1662,13 +1682,10 @@ const TeamList = () => {
                     className={`page-item ${
                       currentPage === index + 1 ? "active " : ""
                     }`}
-                    
                   >
                     <button
                       className="page-link "
                       onClick={() => paginate(index + 1)}
-                      
-                      
                     >
                       {index + 1}
                     </button>

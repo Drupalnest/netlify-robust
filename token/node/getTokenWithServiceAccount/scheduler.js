@@ -249,10 +249,166 @@
 
 
 
+// const axios = require('axios');
+// const { exec } = require('child_process');
+// const fs = require('fs');
+// const cron = require('node-cron');
+
+// const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json';
+
+// let scheduled = false;
+
+// const retrieveToken = async () => {
+//   try {
+//     const response = await axios.get('https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups', {
+//       headers: {
+//         'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
+//       }
+//     });
+
+//     console.log('Response:', response.data);
+
+//     if (scheduled) {
+//       scheduled = false;
+//       cron.cancelJob(retrieveTokenJob);
+//     }
+
+//   } catch (error) {
+//     if (error.response && error.response.status === 401) {
+//       console.log('Received 401 Unauthorized error. Retrieving quick token...');
+
+//       exec(command, (error, stdout, stderr) => {
+//         if (error) {
+//           console.error(`Error: ${error.message}`);
+//           return;
+//         }
+//         if (stderr) {
+//           console.error(`Script stderr: ${stderr}`);
+//           return;
+//         }
+
+//         const lines = stdout.split('\n');
+//         const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
+        
+//         if (!accessTokenLine) {
+//           console.error('No valid access_token found in the response.');
+//           return;
+//         }
+
+//         const accessToken = accessTokenLine.split('"')[3];
+
+//         if (!accessToken) {
+//           console.error('No valid access_token found in the response.');
+//           return;
+//         }
+
+//         fs.writeFileSync('.env', `BEARER_TOKEN=${accessToken}\n`, { flag: 'w' });
+//         // localStorage.setItem('BEARER_TOKEN', accessToken);
+        
+
+
+
+//         console.log(`Token obtained and stored successfully.`);
+
+//         if (!scheduled) {
+//           scheduled = true;
+//           const retrieveTokenJob = cron.schedule('*/1 * * * *', retrieveToken); // Run every 30 minutes
+//         }
+
+//       });
+//     } else {
+//       console.error('Error:', error);
+//     }
+//   }
+// };
+
+// // Call the function to start the process
+// retrieveToken();
+
+
+
+
+
+
+// const axios = require('axios');
+// const { exec } = require('child_process');
+// const cron = require('node-cron');
+
+// const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json';
+
+// let scheduled = false;
+
+// const retrieveToken = async () => {
+//   try {
+//     const response = await axios.get('https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups', {
+//       headers: {
+//         'Authorization': `Bearer ${localStorage.getItem('BEARER_TOKEN')}`
+//       }
+//     });
+
+//     console.log('Response:', response.data);
+
+//     if (scheduled) {
+//       scheduled = false;
+//       cron.cancelJob(retrieveTokenJob);
+//     }
+
+//   } catch (error) {
+//     if (error.response && error.response.status === 401) {
+//       console.log('Received 401 Unauthorized error. Retrieving quick token...');
+
+//       exec(command, (error, stdout, stderr) => {
+//         if (error) {
+//           console.error(`Error: ${error.message}`);
+//           return;
+//         }
+//         if (stderr) {
+//           console.error(`Script stderr: ${stderr}`);
+//           return;
+//         }
+
+//         const lines = stdout.split('\n');
+//         const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
+        
+//         if (!accessTokenLine) {
+//           console.error('No valid access_token found in the response.');
+//           return;
+//         }
+
+//         const accessToken = accessTokenLine.split('"')[3];
+
+//         if (!accessToken) {
+//           console.error('No valid access_token found in the response.');
+//           return;
+//         }
+
+//         // Store the token in localStorage
+//         localStorage.setItem('BEARER_TOKEN', accessToken);
+
+//         console.log(`Token obtained and stored successfully.`);
+
+//         if (!scheduled) {
+//           scheduled = true;
+//           const retrieveTokenJob = cron.schedule('*/1 * * * *', retrieveToken); // Run every minute
+//         }
+//       });
+//     } else {
+//       console.error('Error:', error);
+//     }
+//   }
+// };
+
+// // Call the function to start the process
+// retrieveToken();
+
+
+
 const axios = require('axios');
 const { exec } = require('child_process');
 const fs = require('fs');
 const cron = require('node-cron');
+
+const TOKEN_FILE_PATH = './token.txt';
 
 const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json';
 
@@ -262,7 +418,7 @@ const retrieveToken = async () => {
   try {
     const response = await axios.get('https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups', {
       headers: {
-        'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
+        'Authorization': `Bearer ${getTokenFromFile()}`
       }
     });
 
@@ -302,19 +458,15 @@ const retrieveToken = async () => {
           return;
         }
 
-        fs.writeFileSync('.env', `BEARER_TOKEN=${accessToken}\n`, { flag: 'w' });
-        // localStorage.setItem('BEARER_TOKEN', accessToken);
-        
-
-
+        // Store the token in the file
+        fs.writeFileSync(TOKEN_FILE_PATH, accessToken);
 
         console.log(`Token obtained and stored successfully.`);
 
         if (!scheduled) {
           scheduled = true;
-          const retrieveTokenJob = cron.schedule('*/1 * * * *', retrieveToken); // Run every 30 minutes
+          const retrieveTokenJob = cron.schedule('*/1 * * * *', retrieveToken); // Run every minute
         }
-
       });
     } else {
       console.error('Error:', error);
@@ -322,9 +474,14 @@ const retrieveToken = async () => {
   }
 };
 
+const getTokenFromFile = () => {
+  try {
+    return fs.readFileSync(TOKEN_FILE_PATH, 'utf8').trim();
+  } catch (error) {
+    console.error(`Error reading token file: ${error.message}`);
+    return '';
+  }
+}
+
 // Call the function to start the process
 retrieveToken();
-
-
-
-

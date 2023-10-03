@@ -31,8 +31,17 @@ module.exports = {
       options: {
         icon: "src/images/icon.png",
       },
+
+      
     },
-  
+
+    {
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        functionsSrc: `${__dirname}/src/functions`,
+        functionsOutput: `${__dirname}/functions`,
+      },
+    },
     
 
     

@@ -82,19 +82,12 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
-import TokenFetcher from "./src/components/Auth/Token";
-import { CookiesProvider } from "react-cookie";
-
-export const onInitialClientRender = () => {
-  // Call the function to fetch and set the token
-  <TokenFetcher />;
-};
 
 export const wrapRootElement = ({ element }) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <TokenFetcher />;<CookiesProvider> {element}</CookiesProvider>
+        {element}
       </PersistGate>
     </Provider>
   );

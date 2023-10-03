@@ -32,7 +32,7 @@ import React, { useEffect, useState } from "react";
 import Teams from "./[appGroup.name]/Teams";
 // import { getBearerToken } from "../../token/node/getTokenWithServiceAccount/scheduler.js"
 
-const TeamsPage = () => {
+const TeamsPage = (props) => {
   // const [token, setToken] = useState('');
 
   // useEffect(() => {
@@ -51,7 +51,7 @@ const TeamsPage = () => {
   
   return (
     <div>
-      <Teams />
+      <Teams/>
       {/* <p>Bearer Token: {token}</p> */}
     </div>
   );

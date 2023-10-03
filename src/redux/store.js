@@ -46,7 +46,7 @@ const FETCH_API_PRODUCTS_FAILURE = "FETCH_API_PRODUCTS_FAILURE";
 const SELECT_TEAM = "SELECT_TEAM";
 
 
-const token=Cookies.get('tokenn');
+const token=Cookies.get('token');
 console.log('token',token);
 
 

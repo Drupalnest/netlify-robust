@@ -29,7 +29,7 @@ import { navigate } from "gatsby";
 const withAuth = (Component) => {
   const WrappedComponent = (props) => {
     useEffect(() => {
-      const userData = localStorage.getItem("userData");
+      const userData = localStorage.getItem("logout_token");
       if (!userData) {
         navigate("/login");
       } 

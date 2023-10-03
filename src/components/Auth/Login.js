@@ -707,32 +707,18 @@
 
 // export default Login;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import { navigate } from "gatsby";
 import Cookies from "js-cookie";
 import Bearer from "./Bearer";
-
-
+import LoginResponse from "./LoginResponse";
+import TeamList from "../../pages/[appGroup.name]/Teams";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [responseData, setResponseData] = useState(null); // Add state for responseData
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -757,11 +743,14 @@ const Login = () => {
 
         console.log("Request Headers:", response.headers);
 
-       
-
+        
         localStorage.setItem("userData", JSON.stringify(responseData));
-       // sessionStorage.setItem("userDataData", JSON.stringify(responseData));
+
+        localStorage.setItem("logout_token", responseData.logout_token);
+
         alert("Login successful");
+        setResponseData(responseData); // Set the responseData state
+
         navigate("/teams");
       } else {
         const errorData = await response.json();
@@ -774,11 +763,10 @@ const Login = () => {
   };
 
 
-
-
   return (
-    <div style={{marginTop:"110px"}}>
+    <div style={{ marginTop: "110px" }}>
       <Header />
+      {responseData && <TeamList responseData={responseData} />}
       <div className="dialog-off-canvas-main-canvas">
         <div className="page">
           <div className="page__content-above">
@@ -787,7 +775,6 @@ const Login = () => {
                 <div className="container">
                   <h3 className="page__title mb-0">Log in</h3>
                   {/* <Bearer/> */}
-              
                 </div>
               </div>
             </div>
@@ -811,11 +798,11 @@ const Login = () => {
                         >
                           Username
                           <sup>
-                      <i
-                        className="fas fa-asterisk text-danger form-required__indicator"
-                        style={{ fontSize: "0.7em" }}
-                      />
-                    </sup>
+                            <i
+                              className="fas fa-asterisk text-danger form-required__indicator"
+                              style={{ fontSize: "0.7em" }}
+                            />
+                          </sup>
                         </label>
                         <input
                           autoCorrect="none"
@@ -850,11 +837,11 @@ const Login = () => {
                         >
                           Password
                           <sup>
-                      <i
-                        className="fas fa-asterisk text-danger form-required__indicator"
-                        style={{ fontSize: "0.7em" }}
-                      />
-                    </sup>
+                            <i
+                              className="fas fa-asterisk text-danger form-required__indicator"
+                              style={{ fontSize: "0.7em" }}
+                            />
+                          </sup>
                         </label>
                         <input
                           aria-describedby="edit-pass--description"
@@ -917,13 +904,9 @@ const Login = () => {
 
 export default Login;
 
-
-
-
 // import React, { useState } from "react";
 // import Header from "../Header/Header";
 // import { navigate } from "gatsby";
-
 
 // const Login = () => {
 //   const [loading, setLoading] = useState(false);
@@ -935,7 +918,6 @@ export default Login;
 //     setError(null);
 //     setLoading(true);
 
-  
 //   const API="https://robustapihub.io/user/login?_format=json"
 
 //   fetch(API, {
@@ -963,7 +945,7 @@ export default Login;
 //     sessionStorage.setItem('user', JSON.stringify(current_user));
 //     sessionStorage.setItem('csrf_token', csrf_token);
 //     sessionStorage.setItem('logout_token', logout_token);
-  
+
 //     navigate('/');
 //   })
 //   .catch(error => {
@@ -972,7 +954,6 @@ export default Login;
 //     console.error('Error:', error);
 //   });
 // }
-  
 
 //   return (
 //     <div>
@@ -1109,7 +1090,6 @@ export default Login;
 //   );
 // };
 
-
 // function useFormInput(initialValue) {
 //   const [value, setValue] = useState(initialValue);
 
@@ -1123,28 +1103,4 @@ export default Login;
 //   };
 // }
 
-
 // export default Login;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
