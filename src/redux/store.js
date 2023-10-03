@@ -210,6 +210,9 @@ const teamDetailsReducer = (state = null, action) => {
   }
 };
 
+
+
+
 export const fetchAppDetails = (teamName, appName) => async (dispatch) => {
   try {
     const accessToken = accessToken;
@@ -243,40 +246,8 @@ const appDetailsData = (state = initialStateappdetals, action) => {
   }
 };
 
-// export const fetchApps = (appgroupname) => async (dispatch) => {
-//   try {
-//     const accessToken = accessToken;
-//     const response = await axios.get(
-//       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupname}/apps`,
-//       { headers: { Authorization: `Bearer ${accessToken}` } }
-//     );
-
-//     dispatch({
-//       type: FETCH_APPS_SUCCESS,
-//       payload: response.data,
-//     });
-//   } catch (error) {
-//     dispatch({ type: FETCH_APPS_FAILURE, error: "Error fetching app details" });
-//   }
-// };
-
-// const initialStateApps = { appsData: null, error: null };
-
-// const appsData = (state = initialStateApps, action) => {
-//   switch (action.type) {
-//     case FETCH_APPS_SUCCESS:
-//       return { ...state, appsData: action.payload, error: null };
-//     case FETCH_APPS_FAILURE:
-//       return { ...state, appsData: null, error: action.error };
-//     default:
-//       return state;
-//   }
-// };
-
 export const fetchApps = (appgroupname) => async (dispatch) => {
   try {
-    dispatch({ type: FETCH_APPS_LOADING });
-
     const accessToken = accessToken;
     const response = await axios.get(
       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupname}/apps`,
@@ -292,25 +263,135 @@ export const fetchApps = (appgroupname) => async (dispatch) => {
   }
 };
 
-const initialStateApps = { appsData: null, error: null, loading: false };
+const initialStateApps = { appsData: null, error: null };
 
-export const appsData = (state = initialStateApps, action) => {
+const appsData = (state = initialStateApps, action) => {
   switch (action.type) {
     case FETCH_APPS_SUCCESS:
-      return {
-        ...state,
-        appsData: action.payload,
-        error: null,
-        loading: false,
-      };
+      return { ...state, appsData: action.payload, error: null };
     case FETCH_APPS_FAILURE:
-      return { ...state, appsData: null, error: action.error, loading: false };
-    case FETCH_APPS_LOADING:
-      return { ...state, loading: true };
+      return { ...state, appsData: null, error: action.error };
     default:
       return state;
   }
 };
+
+
+
+
+// export const fetchAppDetails = (teamName, appName) => async (dispatch) => {
+//   try {
+//     const token = token;
+//     const response = await axios.get(
+//       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}`,
+//       { headers: { Authorization: `Bearer ${token}` } }
+//     );
+
+//     dispatch({
+//       type: FETCH_APP_DETAILS_SUCCESS,
+//       payload: response.data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: FETCH_APP_DETAILS_FAILURE,
+//       error: "Error fetching app details",
+//     });
+//   }
+// };
+
+// const initialStateappdetals = { appDetailsData: null, error: null };
+
+// const appDetailsData = (state = initialStateappdetals, action) => {
+//   switch (action.type) {
+//     case FETCH_APP_DETAILS_SUCCESS:
+//       return { ...state, appDetailsData: action.payload, error: null };
+//     case FETCH_APP_DETAILS_FAILURE:
+//       return { ...state, appDetailsData: null, error: action.error };
+//     default:
+//       return state;
+//   }
+// };
+
+
+
+// export const fetchAppDetails = (teamName, appName) => async (dispatch) => {
+//   try {
+//     const token = token;
+//     const response = await axios.get(
+//       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}`,
+//       { headers: { Authorization: `Bearer ${token}` } }
+//     );
+
+//     dispatch({
+//       type: FETCH_APP_DETAILS_SUCCESS,
+//       payload: response.data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: FETCH_APP_DETAILS_FAILURE,
+//       error: "Error fetching app details",
+//     });
+//   }
+// };
+
+// const initialStateappdetals = { appDetailsData: null, error: null };
+
+// const appDetailsData = (state = initialStateappdetals, action) => {
+//   switch (action.type) {
+//     case FETCH_APP_DETAILS_SUCCESS:
+//       return { ...state, appDetailsData: action.payload, error: null };
+//     case FETCH_APP_DETAILS_FAILURE:
+//       return { ...state, appDetailsData: null, error: action.error };
+//     default:
+//       return state;
+//   }
+// };
+
+
+
+
+
+// export const fetchApps = (appgroupname) => async (dispatch) => {
+//   try {
+//     dispatch({ type: FETCH_APPS_LOADING });
+
+//     const accessToken = accessToken;
+//     const response = await axios.get(
+//       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupname}/apps`,
+//       { headers: { Authorization: `Bearer ${accessToken}` } }
+//     );
+
+//     dispatch({
+//       type: FETCH_APPS_SUCCESS,
+//       payload: response.data,
+//     });
+//   } catch (error) {
+//     dispatch({ type: FETCH_APPS_FAILURE, error: "Error fetching app details" });
+//   }
+// };
+
+// const initialStateApps = { appsData: null, error: null, loading: false };
+
+// export const appsData = (state = initialStateApps, action) => {
+//   switch (action.type) {
+//     case FETCH_APPS_SUCCESS:
+//       return {
+//         ...state,
+//         appsData: action.payload,
+//         error: null,
+//         loading: false,
+//       };
+//     case FETCH_APPS_FAILURE:
+//       return { ...state, appsData: null, error: action.error, loading: false };
+//     case FETCH_APPS_LOADING:
+//       return { ...state, loading: true };
+//     default:
+//       return state;
+//   }
+// };
+
+
+
 
 // Action Creators
 const updateTeamDisplayNameSuccess = () => ({

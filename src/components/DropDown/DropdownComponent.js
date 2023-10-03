@@ -38,8 +38,9 @@ const DropdownComponent = ({ appGroup }) => {
   };
 
   const handleButtonClick = () => {
-    handleFetchApps(appGroup);
     handleClickTeam(appGroup);
+    handleFetchApps(appGroup);
+   
   };
 
   useEffect(() => {
