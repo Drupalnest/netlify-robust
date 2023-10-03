@@ -6,7 +6,12 @@ import App from "./App";
 import withAuth from "../components/HOC/withAuth";
 import TokenFetcher from "../components/Auth/Token";
 import { Provider } from "react-redux";
+import setInitialTokenInCookie from "../../tokenHandler"
 const Index = () => {
+
+  useEffect(() => {
+    setInitialTokenInCookie(); // Call the function here
+  }, []); 
   // useEffect(() => {
   //   setTimeout(() => {
   //     window.location.reload(); // Refresh the page

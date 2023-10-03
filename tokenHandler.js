@@ -1,18 +1,9 @@
 import Cookies from 'js-cookie';
-import token from "../../token";
+import token from "./token";
 
-const setCookie = (name, value, options = {}) => {
-  Cookies.set(name, value, options);
+const setInitialTokenInCookie = () => {
+  const initialToken = token;
+  Cookies.set('token22', initialToken);
 }
 
-const updateTokenInCookie = () => {
-  const updateCookie = () => {
-    setCookie('tokenn', token);
-    setTimeout(updateCookie, 60000); // Call updateCookie again after 1 minute
-  }
-
-  // Initially set the cookie
-  updateCookie();
-}
-
-export default updateTokenInCookie;
+export default setInitialTokenInCookie;
