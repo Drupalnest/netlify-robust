@@ -105,7 +105,7 @@ const NewComponent = () => {
 
   useEffect(() => {
     // Set the token in cookies whenever it changes
-    Cookies.set('token', currentToken);
+    Cookies.set('accessToken', currentToken);
   }, [currentToken]);
 
   // Assuming there's a way to update the token (e.g., a function setToken)

@@ -3,7 +3,7 @@ import token from "./token";
 
 const setInitialTokenInCookie = () => {
   const initialToken = token;
-  Cookies.set('token22', initialToken);
+  Cookies.set('accessToken', initialToken);
 }
 
 export default setInitialTokenInCookie;
