@@ -178,16 +178,13 @@
 
 
 
-
-
-
-
 const { exec } = require('child_process');
 
 const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json';
 
 exports.handler = async function(event, context) {
   try {
+    console.log('Attempting to retrieve token...'); // Add this line for logging
     const accessToken = await new Promise((resolve, reject) => {
       exec(command, (error, stdout, stderr) => {
         if (error) {
@@ -218,11 +215,15 @@ exports.handler = async function(event, context) {
       });
     });
 
+    console.log('Token retrieved successfully:', accessToken); // Add this line for logging
+
     return {
       statusCode: 200,
       body: JSON.stringify({ accessToken }),
     };
   } catch (error) {
+    console.error('Error:', error); // Add this line for logging
+
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Internal Server Error' }),
