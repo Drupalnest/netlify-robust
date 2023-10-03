@@ -12,6 +12,8 @@ let scheduled = false;
 
 const getTokenFromCommand = () => {
   return new Promise((resolve, reject) => {
+    console.log('Before exec command');
+
     exec(command, (error, stdout, stderr) => {
       if (error) {
         reject(error);
