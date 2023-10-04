@@ -288,88 +288,92 @@
 
 
 
-//token
-const axios = require('axios');
-const { exec } = require('child_process');
-const fs = require('fs');
-const cron = require('node-cron');
 
-const TOKEN_FILE_PATH = './token.js';
 
-const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json';
 
-let scheduled = false;
 
-const getTokenFromCommand = () => {
-  return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      if (stderr) {
-        reject(new Error(`Script stderr: ${stderr}`));
-        return;
-      }
+// //token
+// const axios = require('axios');
+// const { exec } = require('child_process');
+// const fs = require('fs');
+// const cron = require('node-cron');
 
-      const lines = stdout.split('\n');
-      const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
+// const TOKEN_FILE_PATH = './token.js';
 
-      if (!accessTokenLine) {
-        reject(new Error('No valid access_token found in the response.'));
-        return;
-      }
+// const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json';
 
-      const accessToken = accessTokenLine.split('"')[3];
+// let scheduled = false;
 
-      if (!accessToken) {
-        reject(new Error('No valid access_token found in the response.'));
-        return;
-      }
+// const getTokenFromCommand = () => {
+//   return new Promise((resolve, reject) => {
+//     exec(command, (error, stdout, stderr) => {
+//       if (error) {
+//         reject(error);
+//         return;
+//       }
+//       if (stderr) {
+//         reject(new Error(`Script stderr: ${stderr}`));
+//         return;
+//       }
 
-      const tokenContent = `const token = "${accessToken}";\n\nmodule.exports = token;`;
-      fs.writeFile(TOKEN_FILE_PATH, tokenContent, { flag: 'w' }, (err) => {
-        if (err) {
-          reject(err);
-        } else {
-          console.log(`Token obtained and stored successfully.`);
-          resolve(accessToken);
-        }
-      });
-    });
-  });
-}
+//       const lines = stdout.split('\n');
+//       const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
 
-const retrieveToken = async () => {
-  try {
-    const token = await getTokenFromCommand();
+//       if (!accessTokenLine) {
+//         reject(new Error('No valid access_token found in the response.'));
+//         return;
+//       }
 
-    if (scheduled) {
-      scheduled = false;
-      cron.cancelJob('retrieveTokenJob');
-    }
+//       const accessToken = accessTokenLine.split('"')[3];
 
-    const retrieveTokenJob = cron.schedule('*/1 * * * *', retrieveToken, { scheduled: 'retrieveTokenJob' });
+//       if (!accessToken) {
+//         reject(new Error('No valid access_token found in the response.'));
+//         return;
+//       }
 
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+//       const tokenContent = `const token = "${accessToken}";\n\nmodule.exports = token;`;
+//       fs.writeFile(TOKEN_FILE_PATH, tokenContent, { flag: 'w' }, (err) => {
+//         if (err) {
+//           reject(err);
+//         } else {
+//           console.log(`Token obtained and stored successfully.`);
+//           resolve(accessToken);
+//         }
+//       });
+//     });
+//   });
+// }
 
-retrieveToken();
+// const retrieveToken = async () => {
+//   try {
+//     const token = await getTokenFromCommand();
 
-exports.handler = async function(event, context) {
-  try {
-    const accessToken = await getTokenFromCommand();
+//     if (scheduled) {
+//       scheduled = false;
+//       cron.cancelJob('retrieveTokenJob');
+//     }
+
+//     const retrieveTokenJob = cron.schedule('*/1 * * * *', retrieveToken, { scheduled: 'retrieveTokenJob' });
+
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// };
+
+// retrieveToken();
+
+// exports.handler = async function(event, context) {
+//   try {
+//     const accessToken = await getTokenFromCommand();
     
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ accessToken })
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Internal Server Error' })
-    };
-  }
-}
+//     return {
+//       statusCode: 200,
+//       body: JSON.stringify({ accessToken })
+//     };
+//   } catch (error) {
+//     return {
+//       statusCode: 500,
+//       body: JSON.stringify({ error: 'Internal Server Error' })
+//     };
+//   }
+// }

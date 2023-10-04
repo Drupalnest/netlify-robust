@@ -1397,8 +1397,8 @@ import Cookies from "js-cookie";
 
 const TeamList = ({ responseData }) => {
 
-  const accessToken = Cookies.get("accessToken");
-console.log("accessToken:", accessToken)
+//   const accessToken = Cookies.get("accessToken");
+// console.log("accessToken:", accessToken)
 
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -1416,8 +1416,8 @@ console.log("accessToken:", accessToken)
   const appgroups = teams ? teams.appGroups : [];
   console.log("appgroups", appgroups);
 
-  const token = Cookies.get("tokenn");
-  console.log("token", token);
+  // const token = Cookies.get("tokenn");
+  // console.log("token", token);
 
   const handleClickTeam = (appGroup) => {
     dispatch(fetchTeamDetails(appGroup));

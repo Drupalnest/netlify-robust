@@ -287,16 +287,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 // import TokenFetcher from "./src/components/Auth/Token";
 import { CookiesProvider } from "react-cookie";
+import fetchAccessToken  from "./fetchAccessToken";
 
-import setInitialTokenInCookie from "./tokenHandler"
 
-// export const onInitialClientRender = () => {
-//   // Call the function to fetch and set the token
-//   <TokenFetcher />;
-// };
+
+export const onInitialClientRender = () => {
+  // Call the function to fetch and set the token
+  fetchAccessToken();
+};
 
 export const wrapRootElement = ({ element }) => {
-  setInitialTokenInCookie();
+ 
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

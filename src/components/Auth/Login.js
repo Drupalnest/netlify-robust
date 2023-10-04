@@ -714,7 +714,7 @@ import Cookies from "js-cookie";
 import Bearer from "./Bearer";
 import LoginResponse from "./LoginResponse";
 import TeamList from "../../pages/[appGroup.name]/Teams";
-import setInitialTokenInCookie from "../../../tokenHandler";
+//import setInitialTokenInCookie from "../../../tokenHandler";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -722,9 +722,9 @@ const Login = () => {
   const [responseData, setResponseData] = useState(null); // Add state for responseData
 
 
-  useEffect(() => {
-    setInitialTokenInCookie(); // Call the function here
-  }, []); 
+  // useEffect(() => {
+  //   setInitialTokenInCookie(); // Call the function here
+  // }, []); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();

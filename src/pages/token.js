@@ -96,22 +96,72 @@
 
 // export default NewComponent;
 
+// src/components/MyComponent.js
+
+// import React, { useEffect, useState } from 'react';
+// import Cookies from 'js-cookie';
+// import fetchAccessToken from '../../fetchAccessToken'; // Adjust the path accordingly
+
+// const MyComponent = () => {
+//   const [currentToken, setCurrentToken] = useState('');
+
+//   useEffect(() => {
+//     const setToken = async () => {
+//       const token = await fetchAccessToken(); // Call fetchAccessToken to get the token
+//       setCurrentToken(token);
+//     }
+
+//     setToken();
+//   }, []);
+
+//   useEffect(() => {
+//     // Set the token in cookies whenever it changes
+//     Cookies.set('accessToken', currentToken);
+//   }, [currentToken]);
+
+//   return (
+//     <div>
+//       <h1>Token</h1>
+//       <p>{currentToken}</p>
+//     </div>
+//   );
+// }
+
+// export default MyComponent;
+
+
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import token from "../../token";
 
-const NewComponent = () => {
-  const [currentToken, setCurrentToken] = useState(token);
+const MyComponent = () => {
+  const [currentToken, setCurrentToken] = useState('');
+
+  useEffect(() => {
+    const fetchAccessToken = async () => {
+      try {
+        const response = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+        const data = await response.json();
+        return data.accessToken;
+      } catch (error) {
+        console.error('Error fetching access token:', error);
+        return null;
+      }
+    };
+
+    const setToken = async () => {
+      const token = await fetchAccessToken(); // Call fetchAccessToken to get the token
+      setCurrentToken(token);
+    }
+
+    setToken();
+  }, []);
 
   useEffect(() => {
     // Set the token in cookies whenever it changes
-    Cookies.set('accessToken1', currentToken);
+    if (currentToken) {
+      Cookies.set('accessToken', currentToken);
+    }
   }, [currentToken]);
-
-  const setNewToken = () => {
-    const newToken = 'new_token_value'; // Update this with the new token value
-    setCurrentToken(newToken);
-  }
 
   return (
     <div>
@@ -121,7 +171,4 @@ const NewComponent = () => {
   );
 }
 
-export default NewComponent;
-
-
-
+export default MyComponent;

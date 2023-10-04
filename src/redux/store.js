@@ -659,13 +659,14 @@
 
 
 
+
+
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import axios from "axios";
-
-import { composeWithDevTools } from "redux-devtools-extension";
+import { composeWithDevTools } from 'redux-devtools-extension';
 import Cookies from "js-cookie";
 
 
@@ -699,6 +700,36 @@ const SELECT_TEAM = "SELECT_TEAM";
 
  const accessToken = Cookies.get("accessToken");
  console.log("accessToken:", accessToken);
+
+
+
+
+ 
+
+const FETCH_TOKEN_SUCCESS = "FETCH_TOKEN_SUCCESS";
+ const FETCH_TOKEN_FAILURE = "FETCH_TOKEN_FAILURE";
+
+export const fetchToken = () => async (dispatch) => {
+  try {
+    const response = await axiosInstance.get(
+      "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+    );
+    const token = response.data.accessToken;
+
+    // Set token in cookie
+    Cookies.set('token', token);
+
+    dispatch({
+      type: FETCH_TOKEN_SUCCESS,
+      payload: token,
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_TOKEN_FAILURE,
+      payload: error.message,
+    });
+  }
+};
 
 
 const axiosInstance = axios.create({
@@ -1128,13 +1159,12 @@ const rootReducer = combineReducers({
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = createStore(
   persistedReducer,
-  composeWithDevTools(
-    applyMiddleware(thunk)
-    // other store enhancers if any
-  )
+  composeWithDevTools(applyMiddleware(thunk))
 );
+
 export const persistor = persistStore(store);
 
 // export const store = createStore(rootReducer, applyMiddleware(thunk));
