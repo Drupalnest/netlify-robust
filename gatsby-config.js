@@ -4,7 +4,7 @@
 // const fetch = require("node-fetch");
 
 require('dotenv').config({
-  path: `.env`,
+  path: `.env.${process.env.NODE_ENV}`,
 });
 
 
