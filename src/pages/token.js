@@ -130,45 +130,56 @@
 // export default MyComponent;
 
 
-import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+// import React, { useEffect, useState } from 'react';
+// import Cookies from 'js-cookie';
 
-const MyComponent = () => {
-  const [currentToken, setCurrentToken] = useState('');
+// const MyComponent = () => {
+//   const [currentToken, setCurrentToken] = useState('');
 
-  useEffect(() => {
-    const fetchAccessToken = async () => {
-      try {
-        const response = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
-        const data = await response.json();
-        return data.accessToken;
-      } catch (error) {
-        console.error('Error fetching access token:', error);
-        return null;
-      }
-    };
+//   useEffect(() => {
+//     const fetchAccessToken = async () => {
+//       try {
+//         const response = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+//         const data = await response.json();
+//         return data.accessToken;
+//       } catch (error) {
+//         console.error('Error fetching access token:', error);
+//         return null;
+//       }
+//     };
 
-    const setToken = async () => {
-      const token = await fetchAccessToken(); // Call fetchAccessToken to get the token
-      setCurrentToken(token);
-    }
+//     const setToken = async () => {
+//       const token = await fetchAccessToken(); // Call fetchAccessToken to get the token
+//       setCurrentToken(token);
+//     }
 
-    setToken();
-  }, []);
+//     setToken();
+//   }, []);
 
-  useEffect(() => {
-    // Set the token in cookies whenever it changes
-    if (currentToken) {
-      Cookies.set('accessToken', currentToken);
-    }
-  }, [currentToken]);
+//   useEffect(() => {
+//     // Set the token in cookies whenever it changes
+//     if (currentToken) {
+//       Cookies.set('accessToken', currentToken);
+//     }
+//   }, [currentToken]);
 
+//   return (
+//     <div>
+//       <h1>Token</h1>
+//       <p>{currentToken}</p>
+//     </div>
+//   );
+// }
+
+// export default MyComponent;
+
+
+import React from 'react'
+
+const token = () => {
   return (
-    <div>
-      <h1>Token</h1>
-      <p>{currentToken}</p>
-    </div>
-  );
+    <div>token</div>
+  )
 }
 
-export default MyComponent;
+export default token
