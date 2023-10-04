@@ -3,9 +3,9 @@
  */
 // const fetch = require("node-fetch");
 
-// require('dotenv').config({
-//   path: `.env`,
-// });
+require('dotenv').config({
+  path: `.env`,
+});
 
 
 module.exports = {
