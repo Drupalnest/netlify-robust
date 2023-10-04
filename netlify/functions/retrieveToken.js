@@ -233,6 +233,7 @@
 
 
 const { exec } = require('child_process');
+const path = require('path'); // Add this line
 
 exports.handler = function(event, context, callback) {
   const command = `node ${path.resolve(__dirname, './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js')} -v --keyfile ${path.resolve(__dirname, './token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json')}`;
