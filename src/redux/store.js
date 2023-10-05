@@ -1285,6 +1285,35 @@ const FETCH_API_PRODUCTS_FAILURE ="FETCH_API_PRODUCTS_FAILURE"
 // actionTypes.js
  const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
 
+ const SET_LOGIN_RESPONSE = 'SET_LOGIN_RESPONSE';
+
+
+export const setLoginResponse = (responseData) => {
+  return {
+    type: 'SET_LOGIN_RESPONSE',
+    payload: responseData,
+  };
+};
+
+
+const initialStateToken = {
+  loginResponse: null,
+};
+
+const loginReducer = (state = initialStateToken, action) => {
+  switch (action.type) {
+    case 'SET_LOGIN_RESPONSE':
+      return {
+        ...state,
+        loginResponse: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+
+
 //  export const setAccessToken = (accessToken) => {
 //   return {
 //     type: SET_ACCESS_TOKEN,
@@ -1816,6 +1845,7 @@ const rootReducer = combineReducers({
   //selectedTeam: selectedTeamReducer,
   appsData: appsData,
   memberName: memberreducer,
+  loginReducer:loginReducer
   //accessTokenReducer:accessTokenReducer
 });
 

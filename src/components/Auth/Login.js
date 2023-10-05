@@ -715,16 +715,17 @@ import Bearer from "./Bearer";
 import LoginResponse from "./LoginResponse";
 import TeamList from "../../pages/[appGroup.name]/Teams";
 //import setInitialTokenInCookie from "../../../tokenHandler";
+import { setLoginResponse } from "../../redux/store";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [responseData, setResponseData] = useState(null); 
-
+  const dispatch = useDispatch();
 
   // useEffect(() => {
-  //   setInitialTokenInCookie(); 
-  // }, []); 
+  //   setInitialTokenInCookie();
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -749,20 +750,14 @@ const Login = () => {
 
         console.log("Request Headers:", response.headers);
 
-        
-        localStorage.setItem("userData", JSON.stringify(responseData));
+        dispatch(setLoginResponse(responseData));
+        //localStorage.setItem("userData", JSON.stringify(responseData));
 
         localStorage.setItem("logout_token", responseData.logout_token);
-       
 
         alert("Login successful");
-        navigate("/teams", { state: { responseData } });
 
-        
-        setResponseData(responseData); // Set the responseData state
-
-        // navigate("/teams");
-        
+         navigate("/teams");
       } else {
         const errorData = await response.json();
         alert(`Login failed. Error: ${errorData.message}`);
@@ -773,11 +768,10 @@ const Login = () => {
     }
   };
 
-
   return (
     <div style={{ marginTop: "110px" }}>
       <Header />
-      {responseData && <TeamList responseData={responseData} />}
+
       <div className="dialog-off-canvas-main-canvas">
         <div className="page">
           <div className="page__content-above">

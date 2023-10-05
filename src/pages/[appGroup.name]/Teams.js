@@ -1394,6 +1394,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { MDBBtn } from "mdbreact";
 import { Container } from "mdbreact";
 import Cookies from "js-cookie";
+import { setLoginResponse } from "../../redux/store";
+
 
 const TeamList = ({ responseData }) => {
 
@@ -1408,6 +1410,8 @@ const TeamList = ({ responseData }) => {
   const tableRef = useRef(); // Create a ref for the table element
   const dispatch = useDispatch();
   //const location = useLocation();
+
+  
 
   const teams = useSelector((state) => state.teams.data);
   console.log("teams", teams);
@@ -1477,9 +1481,14 @@ const TeamList = ({ responseData }) => {
   //   }
 
 
+  const loginResponse = useSelector(state => state.loginReducer.loginResponse);
+  console.log("loginResponse",loginResponse)
+
   useEffect(() => {
-    const admin = JSON.parse(localStorage.getItem("userData"));
-    const adminName = admin?.current_user?.name;
+    
+    const adminName = loginResponse?.current_user?.name;
+console.log("Admin Name:", adminName);
+
 
     const logout_token = localStorage.getItem("logout_token");
 
