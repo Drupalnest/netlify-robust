@@ -3,9 +3,7 @@
  */
 // const fetch = require("node-fetch");
 
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
+require("dotenv").config();
 
 
 module.exports = {
@@ -136,12 +134,12 @@ module.exports = {
 
 
     
-    // {
-    //   resolve: "gatsby-plugin-env-variables",
-    //   options: {
-    //     allowList: ["APIGEE_GRAPHQL_ENDPOINT", "BEARER_TOKEN"],
-    //   },
-    // },
+    {
+      resolve: "gatsby-plugin-env-variables",
+      options: {
+        allowList: ["APIGEE_GRAPHQL_ENDPOINT", "BEARER_TOKEN","REACT_APP_TOKEN_API"],
+      },
+    },
 
 
     

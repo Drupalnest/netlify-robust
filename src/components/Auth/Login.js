@@ -719,11 +719,11 @@ import TeamList from "../../pages/[appGroup.name]/Teams";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [responseData, setResponseData] = useState(null); // Add state for responseData
+  const [responseData, setResponseData] = useState(null); 
 
 
   // useEffect(() => {
-  //   setInitialTokenInCookie(); // Call the function here
+  //   setInitialTokenInCookie(); 
   // }, []); 
 
   const handleSubmit = async (e) => {
@@ -753,11 +753,16 @@ const Login = () => {
         localStorage.setItem("userData", JSON.stringify(responseData));
 
         localStorage.setItem("logout_token", responseData.logout_token);
+       
 
         alert("Login successful");
+        navigate("/teams", { state: { responseData } });
+
+        
         setResponseData(responseData); // Set the responseData state
 
-        navigate("/teams");
+        // navigate("/teams");
+        
       } else {
         const errorData = await response.json();
         alert(`Login failed. Error: ${errorData.message}`);

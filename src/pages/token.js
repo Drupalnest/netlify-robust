@@ -1,4 +1,3 @@
-
 // import React, { useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
 // import { fetchAccessToken } from '../redux/store';
@@ -20,8 +19,6 @@
 
 // export default YourComponent;
 
-
-
 // import React, { useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchAccessToken } from '../redux/store'; // Assuming you have actions set up
@@ -39,17 +36,7 @@
 
 // export default YourFunctionalComponent;
 
-
-
-
-
-
-
-
-
-
 // import React, { useState } from 'react';
-
 
 // const AccessTokenComponent = () => {
 //   const [token, setToken] = useState('');
@@ -129,7 +116,6 @@
 
 // export default MyComponent;
 
-
 // import React, { useEffect, useState } from 'react';
 // import Cookies from 'js-cookie';
 
@@ -173,13 +159,73 @@
 
 // export default MyComponent;
 
+// import React, { useEffect, useState } from "react";
+// import fetchAccessToken from "../../fetchAccessToken";
+// import { accessToken } from "../../fetchAccessToken";
 
-import React from 'react'
+// const YourComponent = () => {
+//   // const [accessToken, setAccessToken] = useState(null);
 
-const token = () => {
+//   // useEffect(() => {
+//   //   const getAccessToken = async () => {
+//   //     const token = await fetchAccessToken();
+
+//   //     if (token) {
+//   //       // Access token retrieved successfully
+//   //       console.log("Access Token:", token);
+
+//   //       // Set the access token to the state
+//   //       setAccessToken(token);
+
+//   //       // You can use the accessToken for API calls or other purposes here
+//   //       // ...
+//   //     } else {
+//   //       // Handle error case if access token couldn't be retrieved
+//   //       console.error("Error fetching access token");
+//   //     }
+//   //   };
+
+//   //   getAccessToken();
+//   // }, []); // Empty dependency array ensures this effect runs once on component mount
+
+//   return (
+//     <div>
+//       {/* Your component JSX goes here */}
+//       <div>Access Token: {accessToken}</div>
+//     </div>
+//   );
+// };
+
+// export default YourComponent;
+
+
+
+
+
+
+import React, { useEffect, useState } from 'react';
+import { fetchAccessToken, accessToken } from '../../fetchAccessToken';
+
+const YourComponent = () => {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const token = await fetchAccessToken();
+      setToken(token);
+    }, 10000); // Adjust the interval as needed
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div>token</div>
-  )
-}
+    <div>
+      {/* Your component JSX goes here */}
+      Bearer Token: {token} {/* Display the accessToken if needed */}
+    </div>
+  );
+};
 
-export default token
+export default YourComponent;
+
+

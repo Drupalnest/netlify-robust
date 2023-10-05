@@ -292,9 +292,13 @@ import fetchAccessToken  from "./fetchAccessToken";
 
 
 export const onInitialClientRender = () => {
-  // Call the function to fetch and set the token
+  // Call the function to fetch and set the token initially
   fetchAccessToken();
+
+  // Set an interval to fetch a new token every minute (60,000 milliseconds)
+  setInterval(fetchAccessToken, 60000);
 };
+
 
 export const wrapRootElement = ({ element }) => {
  
