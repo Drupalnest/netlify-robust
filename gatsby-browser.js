@@ -286,18 +286,11 @@ import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 // import TokenFetcher from "./src/components/Auth/Token";
-import { CookiesProvider } from "react-cookie";
-import fetchAccessToken  from "./fetchAccessToken";
 
 
 
-export const onInitialClientRender = () => {
-  // Call the function to fetch and set the token initially
-  fetchAccessToken();
 
-  // Set an interval to fetch a new token every minute (60,000 milliseconds)
-  setInterval(fetchAccessToken, 60000);
-};
+
 
 
 export const wrapRootElement = ({ element }) => {
@@ -305,7 +298,7 @@ export const wrapRootElement = ({ element }) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <CookiesProvider> {element}</CookiesProvider>
+        {element}
       </PersistGate>
     </Provider>
   );

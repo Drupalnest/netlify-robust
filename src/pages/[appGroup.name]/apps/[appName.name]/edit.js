@@ -703,7 +703,7 @@ import { fetchAppDetails } from "../../../../redux/store";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
 import "./edit.css";
-import Cookies from 'js-cookie';
+
 
 const EditApps = () => {
   const dispatch = useDispatch();
@@ -711,7 +711,7 @@ const EditApps = () => {
   const [selectedAttributes, setSelectedAttributes] = useState("");
   const [selectedApiProducts, setSelectedApiProducts] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-  const Token = Cookies.get('accessToken')
+
 
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("editApps", teamDetails);
@@ -796,12 +796,14 @@ const EditApps = () => {
 
     try {
       const { apiproduct, consumerKey, teamName, appName } = productToRemove;
+      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+      const { accessToken } = await tokenResponse.json();
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiproduct}`;
-      const bearerToken = Token; // Replace with your bearer token
+      // Replace with your bearer token
 
       await axios.delete(apiUrl, {
         headers: {
-          Authorization: `Bearer ${bearerToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
 
@@ -865,9 +867,10 @@ const EditApps = () => {
       alert("Please select API product.");
       return;
     }
-
+    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
-    const bearerToken = Token; // Replace with your bearer token
+    const bearerToken = accessToken; // Replace with your bearer token
     //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/asd/apps/aaaaaa/keys/h4yzMy90Rh3QI05yg1RvueSXfqf6dUGy?action=approve
 
     const requestBody = {

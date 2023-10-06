@@ -850,25 +850,25 @@ exports.createPages = async ({ actions }) => {
 
 
 
-const fs = require('fs');
+// const fs = require('fs');
 
-const Cookies = require('js-cookie');
+// const Cookies = require('js-cookie');
 
-exports.onPreInit = async () => {
-  try {
-    const response = await axios.get('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+// exports.onPreInit = async () => {
+//   try {
+//     const response = await axios.get('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
 
-    if (response.data && response.data.accessToken) {
-      const accessToken = response.data.accessToken;
-      console.log('Access Token:', accessToken);
-      Cookies.set('accessToken', accessToken);
-    } else {
-      console.error('Access token not found in API response:', response.data);
-    }
-  } catch (error) {
-    console.error('Error fetching access token:', error);
-  }
-};
+//     if (response.data && response.data.accessToken) {
+//       const accessToken = response.data.accessToken;
+//       console.log('Access Token:', accessToken);
+//       Cookies.set('accessToken', accessToken);
+//     } else {
+//       console.error('Access token not found in API response:', response.data);
+//     }
+//   } catch (error) {
+//     console.error('Error fetching access token:', error);
+//   }
+// };
 
 
 

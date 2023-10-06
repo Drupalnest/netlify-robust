@@ -426,7 +426,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
 import { fetchTeamDetails, apiProducts, fetchTeams } from "../../redux/store";
-import Cookies from 'js-cookie';
+
 import withAuth from "../../components/HOC/withAuth";
 
 
@@ -443,7 +443,7 @@ const UpdateCompanyName = () => {
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("edit", teamDetails);
-  const bearerToken = Cookies.get('accessToken')
+ 
   const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
 
   const team = teamDetails ? teamDetails.name : "";
@@ -496,13 +496,15 @@ const UpdateCompanyName = () => {
 
     try {
       const serializedApiProduct = serializeData.join(",");
+      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const { accessToken } = await tokenResponse.json();
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamDetails.name}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${bearerToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
             displayName: companyName,

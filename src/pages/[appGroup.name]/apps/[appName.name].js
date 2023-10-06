@@ -13,7 +13,7 @@ import {
 import "../../../style/popup.css";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import Cookies from 'js-cookie';
+
 
 //import "../../../styles/popup.css";
 import { Link, navigate } from "gatsby";
@@ -29,7 +29,7 @@ const ViewApp = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const [showDropdown, setShowDropdown] = useState({});
-  const Token = Cookies.get('accessToken')
+
 
   const toggleDropdown = (credentialKey) => {
     setDropdownOpen(!dropdownOpen);
@@ -253,9 +253,11 @@ const ViewApp = () => {
       const oneYearInMilliseconds = 365 * 24 * 60 * 60;
       const randomKey = generateRandomKey();
       const randomSecret = generateRandomSecret();
-
+      
+      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+      const { accessToken } = await tokenResponse.json();
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys`;
-      const bearerToken = Token;
+      const bearerToken = accessToken;
 
       const response = await axios.post(
         apiUrl,
@@ -327,8 +329,10 @@ const ViewApp = () => {
   );
 
   const handleAddAPIProduct = async () => {
+    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${latestConsumerKey}`;
-    const bearerToken = Token;
+    const bearerToken = accessToken;
 
     const requestBody = {
       apiProducts: apiProducts,
@@ -376,8 +380,10 @@ const ViewApp = () => {
   };
 
   const handleRemovekey = async (teamName, appName, consumerKey) => {
+    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
-    const bearerToken = Token;
+    const bearerToken = accessToken;
 
     try {
       await axios.delete(apiUrl, {
@@ -393,8 +399,10 @@ const ViewApp = () => {
   };
 
   const handleRevokeKey = async (teamName, appName, consumerKey) => {
+    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;
-    const bearerToken = Token;
+    const bearerToken = accessToken;
 
     try {
       const response = await fetch(apiUrl, {

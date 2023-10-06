@@ -2056,15 +2056,17 @@ import { apiProducts } from "../redux/store";
 import Cookies from "js-cookie";
 import SuccessToast from "../components/Toast/Success";
 import ErrorToast from "../components/Toast/Error";
-const bearerToken = Cookies.get("accessToken");
+import { axiosInstance } from '../redux/store'; 
+import { setLoginResponse } from "../redux/store";
 
 const AddTeam = () => {
+  const loginResponse = useSelector(state => state.loginReducer.loginResponse);
   const dispatch = useDispatch();
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
+  
+  
 
-  const myToken = Cookies.get("BEARER_TOKEN");
-  console.log("myToken", myToken);
 
   const apiproducts = useSelector((state) => state.apiProducts);
   const apiproduct = apiproducts.apiProduct;
@@ -2080,8 +2082,9 @@ const AddTeam = () => {
   const [selectedAttributes, setSelectedAttributes] = useState([]);
   const [checkedAttributes, setCheckedAttributes] = useState([]);
 
-  const admin = JSON.parse(localStorage.getItem("userData"));
-  const adminName = admin.current_user.name;
+  const adminName = loginResponse?.current_user?.name;
+  console.log("Admin Name:", adminName);
+  
 
   console.log("adminName", adminName);
 
@@ -2102,20 +2105,80 @@ const AddTeam = () => {
     setDescription(e.target.value);
   };
 
+
+  
+  
+  
+  
+  // const handleAddTeam = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!companyName.trim()) {
+  //     alert("Please provide a valid appgroup name.");
+  //     return;
+  //   }
+
+  //   if (!description.trim()) {
+  //     alert("Please provide a description.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const serializedApiProduct = serializeData.join(",");
+  //     const response = await axiosInstance.post('/appgroups', {
+  //       name: companyName,
+  //       displayName: companyName,
+  //       attributes: [
+  //         {
+  //           name: "api_product",
+  //           value: serializedApiProduct,
+  //         },
+  //         {
+  //           name: "description",
+  //           value: description,
+  //         },
+  //         {
+  //           name: "ADMIN_EMAIL",
+  //           value: `${adminName}`,
+  //         },
+  //         {
+  //           name: "__apigee_reserved__developer_details",
+  //           value: `[{"developer":"${adminName}","roles":["admin"]}]`,
+  //         },
+  //       ],
+  //     });
+
+  //     if (response.status === 200) {
+  //       console.log("Setting showToast to true");
+  //       setShowSuccessToast(true);
+  //       navigate("/teams");
+  //     } else {
+  //       setShowErrorToast(true);
+  //     }
+  //   } catch (error) {
+  //     setShowErrorToast(true);
+  //   }
+  // };
+
+
   const handleAddTeam = async (e) => {
     e.preventDefault();
-
+  
     if (!companyName.trim()) {
       alert("Please provide a valid appgroup name.");
       return;
     }
-
+  
     if (!description.trim()) {
       alert("Please provide a description.");
       return;
     }
-
+  
     try {
+      // Fetch the bearer token
+      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+      const { accessToken } = await tokenResponse.json();
+  
       const serializedApiProduct = serializeData.join(",");
       const response = await fetch(
         "https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups",
@@ -2123,7 +2186,7 @@ const AddTeam = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${bearerToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
             name: companyName,
@@ -2141,7 +2204,6 @@ const AddTeam = () => {
                 name: "ADMIN_EMAIL",
                 value: `${adminName}`,
               },
-
               {
                 name: "__apigee_reserved__developer_details",
                 value: `[{\"developer\":\"${adminName}\",\"roles\":[\"admin\"]}]`,
@@ -2150,21 +2212,19 @@ const AddTeam = () => {
           }),
         }
       );
-
+  
       if (response.ok) {
         console.log("Setting showToast to true");
-        //alert("Failed to create appgroup");
         setShowSuccessToast(true);
-
         navigate("/teams");
       } else {
         setShowErrorToast(true);
-        //alert("Failed to create appgroup");
       }
     } catch (error) {
       setShowErrorToast(true);
     }
   };
+  
 
   const handleAttributeChange = (attributeValue) => {
     setSelectedAttributes((prevAttributes) => {

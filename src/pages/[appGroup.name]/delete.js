@@ -118,7 +118,7 @@ import { deleteTeam } from "../../redux/store";
 import { Link, navigate } from "gatsby";
 import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
-import Cookies from 'js-cookie';
+
 
 
 const DeleteTeam = () => {
@@ -129,7 +129,7 @@ const DeleteTeam = () => {
 
   const teamDetails = useSelector((state) => state.teamDetails);
   const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
-  //const bearerToken = Cookies.get('accessToken')
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -157,16 +157,16 @@ const DeleteTeam = () => {
   if (!teamDetails || (teamDetails && isFetching)) {
     return (
       <Layout>
-        <div>
+        <div style={{ marginTop: "120px" }}>
           <Buttons />
           <div className="page">
             <div className="page__content-above">
               <div className="container-fluid px-0">
                 <div className="contextual-region block block--pagetitle bg-lighter py-4">
                   <div className="container">
-                    <h1 className="js-quickedit-page-title page__title mb-0">
+                    <h3 className="js-quickedit-page-title page__title mb-0">
                       Loading appgroups...
-                    </h1>
+                    </h3>
                   </div>
                 </div>
               </div>

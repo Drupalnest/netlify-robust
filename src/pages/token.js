@@ -203,29 +203,39 @@
 
 
 
-import React, { useEffect, useState } from 'react';
-import { fetchAccessToken, accessToken } from '../../fetchAccessToken';
+// import React, { useEffect, useState } from 'react';
+// import { fetchAccessToken, accessToken } from '../../fetchAccessToken';
 
-const YourComponent = () => {
-  const [token, setToken] = useState(null);
+// const YourComponent = () => {
+//   const [token, setToken] = useState(null);
 
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      const token = await fetchAccessToken();
-      setToken(token);
-    }, 10000); // Adjust the interval as needed
+//   useEffect(() => {
+//     const interval = setInterval(async () => {
+//       const token = await fetchAccessToken();
+//       setToken(token);
+//     }, 10000); // Adjust the interval as needed
 
-    return () => clearInterval(interval);
-  }, []);
+//     return () => clearInterval(interval);
+//   }, []);
 
+//   return (
+//     <div>
+//       {/* Your component JSX goes here */}
+//       Bearer Token: {token} {/* Display the accessToken if needed */}
+//     </div>
+//   );
+// };
+
+// export default YourComponent;
+
+import React from 'react'
+
+const token = () => {
   return (
-    <div>
-      {/* Your component JSX goes here */}
-      Bearer Token: {token} {/* Display the accessToken if needed */}
-    </div>
-  );
-};
+    <div>token</div>
+  )
+}
 
-export default YourComponent;
+export default token
 
 

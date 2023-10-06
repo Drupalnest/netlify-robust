@@ -4,8 +4,7 @@ import Teams from "../pages/teams"; // Assuming this is the correct import path 
 import App from "./App";
 // import Token from "../components/Auth/Token";
 import withAuth from "../components/HOC/withAuth";
-import TokenFetcher from "../components/Auth/Token";
-import { Provider } from "react-redux";
+
 //import setInitialTokenInCookie from "../../tokenHandler"
 const Index = () => {
 

@@ -165,7 +165,7 @@ import {
   updateAppDetails,
   appDetails,
 } from '../../../../redux/store';
-import Cookies from 'js-cookie';
+
 
 function RemovePage() {
   const dispatch = useDispatch();
@@ -174,14 +174,16 @@ function RemovePage() {
   const teamName = searchParams.get('team');
   const appName = searchParams.get('appName');
   const consumerKey = searchParams.get('consumerKey');
-  const Token = Cookies.get('accessToken')
+  
   // Now you have access to the passed data (teamName, appName, consumerKey)
 
   // You can also call handleRemovekey with the data
   const handleRemovekey = async (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
+    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
-    const bearerToken = Token;
+    const bearerToken = accessToken;
 
     try {
       await axios.delete(apiUrl, {

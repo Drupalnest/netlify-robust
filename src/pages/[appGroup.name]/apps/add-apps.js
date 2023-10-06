@@ -930,7 +930,7 @@ const AddApps = () => {
   const [selected_apiProduct, setSelectedApiProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const Token = Cookies.get('accessToken')
+  
 
   // const dispatch = useDispatch();
   // const teamDetails = useSelector((state) => state.teamDetails);
@@ -965,29 +965,15 @@ const AddApps = () => {
   const [error, setError] = useState("");
   const [isErrorVisible, setIsErrorVisible] = useState("");
 
-  // const handleCompanyNameChange = (e) => {
-  //   const inputAppName = e.target.value;
-
-  //   // Define a regular expression pattern for validation
-  //   //const pattern = /^[a-z0-9]+-[a-z0-9]+-app$/;
-
-  //   const pattern = new RegExp(`^${teamName}-[a-z0-9]+-[a-z0-9]+-app$`);
-
-  //   if (!pattern.test(inputAppName)) {
-  //     setError(
-  //       'Use the "<companyname or groupname>-<appname>-app" format. Examples: ' +
-  //         'For Starbucks use group name: "ucpc-digitalorder-app". ' +
-  //         'For Non Starbucks use company name: "yourcompanyname-helpdesk-app". ' +
-  //         "Only lowercase alphanumeric and dashes are allowed."
-  //     );
-  //   } else {
-  //     setError("");
-  //   }
-
-  //   setAppName(inputAppName);
-  // };
-
-  const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
+  
+  // const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  }
+  
+  const escapedAppName = escapeRegExp(appgroupName);
+  const pattern = new RegExp(`^${escapedAppName}-[a-z0-9]+-app$`);
+  
   const handleCompanyNameChange = (e) => {
     const inputAppName = e.target.value;
     console.log("handleCompanyNameChange", inputAppName);
@@ -996,7 +982,13 @@ const AddApps = () => {
 
     const appgroupName = teamDetails ? teamDetails.name : "";
     console.log("teamName", appgroupName);
-    const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
+    //const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    }
+    
+    const escapedAppName = escapeRegExp(appgroupName);
+    const pattern = new RegExp(`^${escapedAppName}-[a-z0-9]+-app$`);
 
     if (!pattern.test(inputAppName)) {
       setError(
@@ -1018,147 +1010,164 @@ const AddApps = () => {
   };
 
   let fetchedConsumerKey = null;
-  // const handleAddApp = async () => {
-  //   if (!appName.trim()) {
-  //     alert("Please provide a valid company name.");
-  //     return;
-  //   }
-
-  //   try {
-  //     // const serializedApiProduct = serializeData.join(",");
-  //     const response = await fetch(
-  //       `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${bearerToken}`,
-  //         },
-  //         body: JSON.stringify({
-  //           name: appName,
-
-  //           attributes: [
-  //             {
-  //               name: "description",
-  //               value: description,
-  //             },
-  //           ],
-  //         }),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       //  alert(appName);
-
-  //       // alert(description);
-  //       // alert(serializedApiProduct);
-  //       dispatch(fetchApps(appgroupName));
-
-  //       alert("Appgroup app Created successfully!");
-  //       //navigate("/apps");
-  //     } else {
-  //       alert("Failed to create app");
-  //     }
-  //   } catch (error) {
-  //     alert("An error occurred while creating app ");
-  //   }
-  // };
+  
 
   const handleAddApp = async () => {
-    if (!appName.trim() || error) {
+    if (!appName.trim()) { // Removed 'error' check since it's not defined in the provided code
       alert("Please provide a valid company name.");
       return;
     }
-
+  
     try {
-      // Convert the given timestamp (1693575820130) to Date objects
       const oneYearInMilliseconds = 365 * 24 * 60 * 60 * 1000;
+      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+      const { accessToken } = await tokenResponse.json();
+  
+      // Assuming appName and appgroupName are defined
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${Token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
             name: appName,
             attributes: [
               {
                 name: "description",
-                value: description,
+                value: description, // Assuming description is defined
               },
             ],
             keyExpiresIn: oneYearInMilliseconds,
           }),
         }
       );
-
+  
       if (response.ok) {
-        dispatch(fetchApps(appgroupName));
+        dispatch(fetchApps(appgroupName)); // Assuming dispatch and fetchApps are defined
         alert("Appgroup app created successfully!");
       } else {
         alert("Failed to create app");
       }
     } catch (error) {
       alert("An error occurred while creating app");
+      console.error(error); // Add an error log for debugging
     }
   };
-
+  
+  // The following lines seem to be used later in your code
   const newAppName = appName;
   console.log("newAppName", newAppName);
+  
 
-  const url = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}`;
+  
 
-  const headers = {
-    Authorization: `Bearer ${Token}`,
-  };
 
-  async function fetchData() {
-    try {
-      const response = await fetch(url, { headers });
 
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("NewAppData:", responseData);
-        fetchedConsumerKey = responseData.credentials[0].consumerKey; // Assign value here
-        setConsumerKey(fetchedConsumerKey);
-        console.log(fetchedConsumerKey);
-      } else {
-        console.error("Error:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
 
-  const handleAddAPIProduct = async (newAppName, selected_apiProduct) => {
-    if (!selected_apiProduct) {
-      alert("Please select an API product.");
-      return;
-    }
 
-    const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
-    const bearerToken = Token;
 
-    const requestBody = {
-      apiProducts: selected_apiProduct,
+
+
+const fetchData = async () => {
+  try {
+    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const { accessToken } = await tokenResponse.json();
+    const url = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}`;
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
     };
 
-    try {
-      await axios.post(apiUrl, requestBody, {
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-        },
-      });
+    const response = await fetch(url, { headers });
 
-      console.log(selected_apiProduct);
-      console.log("API product added successfully");
-      navigate(`/${appgroupName}/apps`);
-    } catch (error) {
-      alert("Error adding API product: " + error);
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log("NewAppData:", responseData);
+      fetchedConsumerKey = responseData.credentials[0].consumerKey;
+      setConsumerKey(fetchedConsumerKey);
+      console.log("fetchedConsumerKey",fetchedConsumerKey);
+    } else {
+      console.error("Error:", response.statusText);
     }
-  };
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+  
+  // const handleAddAPIProduct = async (newAppName, selected_apiProduct, appgroupName) => {
+  //   if (!selected_apiProduct) {
+  //     alert("Please select an API product.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+  //     const { accessToken } = await tokenResponse.json();
+  //     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
+
+  //     const requestBody = {
+  //       apiProducts: selected_apiProduct,
+  //     };
+
+  //     const response = await axios.post(apiUrl, requestBody, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     });
+
+  //     if (response.status === 200) {
+  //       console.log(selected_apiProduct);
+  //       console.log("API product added successfully");
+  //       navigate(`/${appgroupName}/apps`);
+  //     } else {
+  //       alert("Error adding API product");
+  //     }
+  //   } catch (error) {
+  //     alert("Error adding API product: " + error);
+  //   }
+  // };
+  const appgroupNamee = teamDetails ? teamDetails.name : "";
+  console.log("teamName", appgroupNamee);
+
+  const handleAddAPIProduct = async (newAppName, selected_apiProduct, appgroupNamee) => {
+    if (!selected_apiProduct) {
+        alert("Please select an API product.");
+        return;
+    }
+
+    try {
+        const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+        const { accessToken } = await tokenResponse.json();
+
+        const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
+
+        const requestBody = {
+            apiProducts: [selected_apiProduct], // Assuming selected_apiProduct is a string or an array of API products
+        };
+
+        const response = await axios.post(apiUrl, requestBody, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.status >= 200 && response.status < 300) {
+            console.log(selected_apiProduct);
+            console.log("API product added successfully");
+            navigate(`/${appgroupName}/apps`);
+        } else {
+            alert("Error adding API product");
+        }
+    } catch (error) {
+        alert("Error adding API product: " + error);
+    }
+};
+
+
 
   const handleCombinedSubmit = async (event) => {
     event.preventDefault();
@@ -1169,15 +1178,15 @@ const AddApps = () => {
       setTimeout(async () => {
         setIsLoading(true);
         await fetchData();
-      }, 2000);
+      }, 3000);
 
       setTimeout(async () => {
         if (fetchedConsumerKey !== null) {
           await handleAddAPIProduct(newAppName, selected_apiProduct);
         } else {
-          console.log("Consumer key is not available");
+          alert("Consumer key is not available");
         }
-      }, 3000);
+      }, 6000);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -1187,10 +1196,20 @@ const AddApps = () => {
 
   console.log("selected_apiProduct", selected_apiProduct);
 
-  const selectedProducts = teamDetails.attributes.find(
+  // const selectedProducts = teamDetails.attributes.find(
+  //   (attr) => attr.name === "api_product"
+  // )?.value;
+  // console.log("selected", selectedProducts);
+  const selectedProducts = teamDetails?.attributes?.find(
     (attr) => attr.name === "api_product"
   )?.value;
-  console.log("selected", selectedProducts);
+  
+  if (selectedProducts) {
+    console.log("selected", selectedProducts);
+  } else {
+    console.error("Error: selectedProducts is null or undefined");
+  }
+  
   // // const selectedAttributes_All = JSON.parse(selectedProducts) || [];
   // // console.log("selectedProducts", selectedAttributes_All);
 
@@ -1381,6 +1400,7 @@ const AddApps = () => {
                                 placeholder=""
                                 required="required"
                                 aria-required="true"
+                                
                               />
                               {error && (
                                 <div className="invalid-feedback">{error}</div>

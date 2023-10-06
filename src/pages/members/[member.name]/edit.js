@@ -3,8 +3,8 @@ import Layout from "../../../components/Layout";
 import { Link, navigate } from "gatsby";
 import { fetchTeamDetails, fetchTeams } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import Cookies from 'js-cookie';
-const bearerToken = Cookies.get('accessToken')
+
+
 
 const EditMember = () => {
   const developer = useSelector((state) => state.memberName.developer);
@@ -63,13 +63,15 @@ console.log("adminsEmail", adminsEmail);
 
     try {
       // const serializedApiProduct = serializeData.join(",");
+      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const { accessToken } = await tokenResponse.json();
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamDetails.name}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${bearerToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
             attributes: [
