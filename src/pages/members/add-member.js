@@ -319,7 +319,7 @@ return (
                     </button>
 
                     <Link
-                      to="/members"
+                        to={`/${team}/members`}
                       className="button js-form-submit btn btn-md"
                     >
                       Cancel

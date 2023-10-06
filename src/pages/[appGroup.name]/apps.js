@@ -764,7 +764,7 @@ const TeamApps = () => {
               <table className="table--app-list responsive-enabled table">
                 <thead className=" border-bottom">
                   <tr className="text-center align-middle  border-bottom">
-                    <th className=" border-bottom">Sr. No. </th>
+                    <th className=" border-bottom">App. No. </th>
                     <th className=" border-bottom">Appgroups app name</th>
                     <th className=" border-bottom">Action</th>
                   </tr>
@@ -895,7 +895,7 @@ const TeamApps = () => {
                       <table className="table--app-list responsive-enabled table">
                         <thead className=" border-bottom">
                           <tr className="text-center align-middle  border-bottom">
-                            <th className=" border-bottom">Sr. No. </th>
+                            <th className=" border-bottom">App.No. </th>
                             <th className=" border-bottom">
                               Appgroups app name
                             </th>

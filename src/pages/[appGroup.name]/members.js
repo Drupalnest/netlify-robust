@@ -196,7 +196,7 @@ const Members = ({}) => {
                               <thead className=" border-bottom">
                                 <tr className="text-center align-middle  border-bottom">
                                   <th className=" border-bottom">
-                                    Sr No.
+                                  Member No.
                                   </th>
                                   <th className=" border-bottom">Member</th>
                                   <th className=" border-bottom">Roles</th>

@@ -2056,17 +2056,16 @@ import { apiProducts } from "../redux/store";
 import Cookies from "js-cookie";
 import SuccessToast from "../components/Toast/Success";
 import ErrorToast from "../components/Toast/Error";
-import { axiosInstance } from '../redux/store'; 
+import { axiosInstance } from "../redux/store";
 import { setLoginResponse } from "../redux/store";
 
 const AddTeam = () => {
-  const loginResponse = useSelector(state => state.loginReducer.loginResponse);
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
   const dispatch = useDispatch();
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
-  
-  
-
 
   const apiproducts = useSelector((state) => state.apiProducts);
   const apiproduct = apiproducts.apiProduct;
@@ -2084,7 +2083,6 @@ const AddTeam = () => {
 
   const adminName = loginResponse?.current_user?.name;
   console.log("Admin Name:", adminName);
-  
 
   console.log("adminName", adminName);
 
@@ -2105,11 +2103,6 @@ const AddTeam = () => {
     setDescription(e.target.value);
   };
 
-
-  
-  
-  
-  
   // const handleAddTeam = async (e) => {
   //   e.preventDefault();
 
@@ -2160,25 +2153,26 @@ const AddTeam = () => {
   //   }
   // };
 
-
   const handleAddTeam = async (e) => {
     e.preventDefault();
-  
+
     if (!companyName.trim()) {
       alert("Please provide a valid appgroup name.");
       return;
     }
-  
+
     if (!description.trim()) {
       alert("Please provide a description.");
       return;
     }
-  
+
     try {
       // Fetch the bearer token
-      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+      const tokenResponse = await fetch(
+        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      );
       const { accessToken } = await tokenResponse.json();
-  
+
       const serializedApiProduct = serializeData.join(",");
       const response = await fetch(
         "https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups",
@@ -2212,9 +2206,10 @@ const AddTeam = () => {
           }),
         }
       );
-  
+
       if (response.ok) {
         console.log("Setting showToast to true");
+        alert("Appgroup created successfully!")
         setShowSuccessToast(true);
         navigate("/teams");
       } else {
@@ -2224,7 +2219,6 @@ const AddTeam = () => {
       setShowErrorToast(true);
     }
   };
-  
 
   const handleAttributeChange = (attributeValue) => {
     setSelectedAttributes((prevAttributes) => {

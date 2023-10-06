@@ -718,9 +718,14 @@ import TeamList from "../../pages/[appGroup.name]/Teams";
 import { setLoginResponse } from "../../redux/store";
 import { useDispatch } from "react-redux";
 
+import SuccessToast from "../Toast/Success";
+import ErrorToast from "../Toast/Error";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -756,15 +761,18 @@ const Login = () => {
         localStorage.setItem("logout_token", responseData.logout_token);
 
         alert("Login successful");
+        //setShowSuccessToast(true);
 
          navigate("/teams");
       } else {
         const errorData = await response.json();
         alert(`Login failed. Error: ${errorData.message}`);
+        //setShowErrorToast(true);
       }
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while logging in.");
+      //setShowErrorToast(true);
     }
   };
 
@@ -903,6 +911,20 @@ const Login = () => {
           </main>
         </div>
       </div>
+
+      
+      {/* {showSuccessToast && (
+        <SuccessToast message="Login successful!" />
+      )}
+
+      
+      {showErrorToast && <ErrorToast message="Login failed." />}
+
+     
+
+      {showErrorToast && (
+        <ErrorToast message="An error occurred while logging in" />
+      )} */}
     </div>
   );
 };

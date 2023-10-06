@@ -29,7 +29,7 @@ const profile = () => {
                 />
                 <div className="container">
                   <h1 className="js-quickedit-page-title page__title mb-0">
-                    kpatel@starbucks.com
+                    
                   </h1>
                 </div>
               </div>

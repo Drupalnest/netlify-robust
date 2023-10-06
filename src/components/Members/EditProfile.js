@@ -19,9 +19,7 @@ const EditProfile = () => {
                   id="block-adminimal-theme-page-title--2"
                   className="block block-core block-page-title-block"
                 >
-                  <h1 className="js-quickedit-page-title page-title">
-                    kpatel@starbucks.com
-                  </h1>
+                  
                 </div>
                 <span data-big-pipe-placeholder-id="callback=Drupal%5Cblock%5CBlockViewBuilder%3A%3AlazyBuilder&args%5B0%5D=adminimal_theme_primary_local_tasks&args%5B1%5D=full&args%5B2%5D&token=3w6tD5gBLvpMvrRJQu4RJQdcYxhi3Ol7JBsSTj7VCMQ" />
               </div>
@@ -454,7 +452,7 @@ const EditProfile = () => {
                                 htmlFor="edit-roles-starbucks-viewer"
                                 className="option"
                               >
-                                Starbucks Viewer
+                               
                               </label>
                             </div>
                             <div className="js-form-item form-item js-form-type-checkbox form-type-checkbox js-form-item-roles-company-manager form-item-roles-company-manager">

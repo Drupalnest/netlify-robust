@@ -993,8 +993,8 @@ const AddApps = () => {
     if (!pattern.test(inputAppName)) {
       setError(
         'Use the "<companyname or groupname>-<appname>-app" format. Examples: ' +
-          'For Starbucks use group name: "ucpc-digitalorder-app". ' +
-          'For Non Starbucks use company name: "yourcompanyname-helpdesk-app". ' +
+          'For  use group name: "ucpc-digitalorder-app". ' +
+          'For Non  use company name: "yourcompanyname-helpdesk-app". ' +
           "Only lowercase alphanumeric and dashes are allowed."
       );
       setIsErrorVisible(true); // Show the error message
@@ -1316,7 +1316,7 @@ const fetchData = async () => {
         >
           <div className="page">
             <header className="page__header">
-              <span data-big-pipe-placeholder-id="callback=Drupal%5Cblock%5CBlockViewBuilder%3A%3AlazyBuilder&args%5B0%5D=starbucks_tabs&args%5B1%5D=full&args%5B2%5D&token=MEkI12DtyJlNIxuOGvgD3VFvH_cZWONfyjuDDe873eY" />
+            
             </header>
 
             <div className="page__content-above">
