@@ -245,7 +245,7 @@ const ViewApp = () => {
     setShowConfirmButton(false); // Hide the button when toggling the popup
     setTimeout(() => {
       setShowConfirmButton(true); // Show the button after 1 second
-    }, 1000);
+    }, 1500);
   };
 
   const handleConfirmClick = async () => {
