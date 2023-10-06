@@ -1536,7 +1536,7 @@ const fetchData = async () => {
                             </button>
 
                             <Link
-                              to="/apps"
+                              to={`/${teamName}/apps/`}
                               className="btn btn-outline-primary btn-md"
                             >
                               Cancel
