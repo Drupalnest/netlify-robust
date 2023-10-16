@@ -1163,12 +1163,12 @@
 //   useEffect(() => {
 //     const logoutTimer = setTimeout(() => {
 //       handleLogout();
-//     }, 600000); 
+//     }, 600000);
 
 //     return () => {
-//       clearTimeout(logoutTimer); 
+//       clearTimeout(logoutTimer);
 //     };
-//   }, []); 
+//   }, []);
 
 //   return (
 //     <div>
@@ -1178,7 +1178,6 @@
 // };
 
 // export default Logout;
-
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -1193,76 +1192,74 @@ import {
 const Logout = () => {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.eventLoginReducer.events);
-  const loginResponse = useSelector((state) => state.loginReducer.loginResponse);
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
   const csrfToken = loginResponse.csrf_token;
-
-  
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
 
   const handleLogout = () => {
     fetch("https://robustapihub.io/entity/apigee_log?_format=json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": csrfToken,
-            withCredentials: true,
-        },
-        body: JSON.stringify({
-            description: [JSON.stringify(events)],
-        }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken,
+        withCredentials: true,
+      },
+      body: JSON.stringify({
+        description: [JSON.stringify(events)],
+      }),
     })
-    .then(response => {
+      .then((response) => {
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-       
         dispatch(
-            trackEvent({
-                timestamp: new Date(),
-                operation: "Logout Successfully",
-            })
+          trackEvent({
+            username: userName,
+            timestamp: new Date(),
+            operations: `User ${userName} has logged out`,
+          })
         );
 
-        
         dispatch(resetEvents());
 
-       
         localStorage.removeItem("logout_token");
 
         alert("Logout successful");
         navigate("/login");
-    })
-    .catch(error => {
+      })
+      .catch((error) => {
         console.error("Error:", error);
         alert("An error occurred while logging out.");
-    });
-};
-
-
-useEffect(() => {
-  const handleBeforeUnload = () => {
-    handleLogout();
+      });
   };
 
-  window.addEventListener("beforeunload", handleBeforeUnload);
+  // useEffect(() => {
+  //   const handleBeforeUnload = () => {
+  //     handleLogout();
+  //   };
 
-  return () => {
-    window.removeEventListener("beforeunload", handleBeforeUnload);
-  };
-}, []); // Empty dependency array means this effect runs only once when component mounts
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, []); // Empty dependency array means this effect runs only once when component mounts
 
   // useEffect(() => {
   //   let logoutTimer;
 
   //   const handleBeforeUnload = () => {
-     
+
   //     clearTimeout(logoutTimer);
   //     handleLogout();
   //   };
 
   //   window.addEventListener("beforeunload", handleBeforeUnload);
 
-    
   //   logoutTimer = setTimeout(() => {
   //     handleLogout();
   //   }, 600000);
@@ -1273,11 +1270,9 @@ useEffect(() => {
   //   };
   // }, []);
 
-
-
   return (
     <div>
-     <div onClick={handleLogout}>Logout</div>
+      <div onClick={handleLogout}>Logout</div>
     </div>
   );
 };
