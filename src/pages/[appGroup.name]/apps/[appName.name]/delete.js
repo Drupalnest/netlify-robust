@@ -383,6 +383,7 @@ import {
   deleteTeamApp,
   fetchAppDetails,
   fetchApps,
+  trackEvent,
 } from "../../../../redux/store"; // Import your deleteTeamApp action from Redux
 import { Link, navigate } from "gatsby";
 import Layout from "../../../../components/Layout";
@@ -393,7 +394,6 @@ const DeleteApps = () => {
   const [appName, setAppName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch(); // Hook to dispatch actions
-  
 
   // Replace 'teamDetails' with your actual selector for the team details from Redux
   //  const teamDetails = useSelector((state) => state.teamDetails);
@@ -442,6 +442,14 @@ const DeleteApps = () => {
       setErrorMessage("");
       alert("Appgroups apps deleted successfully");
       dispatch(fetchApps(teamName));
+      dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Appgroup App Deleted",
+          appgroupName: teamName,
+          appName: appName,
+        })
+      );
       navigate(`/${teamName}/apps`);
     } catch (error) {
       setErrorMessage(`Error deleting appgroup app: ${error.message}`);

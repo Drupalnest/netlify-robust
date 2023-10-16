@@ -426,6 +426,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
 import { fetchTeamDetails, apiProducts, fetchTeams } from "../../redux/store";
+import { trackEvent } from "../../redux/store";
 
 import withAuth from "../../components/HOC/withAuth";
 
@@ -540,6 +541,21 @@ const UpdateCompanyName = () => {
         // alert(serializedApiProduct);
         alert("Appgroups  updated successfully!");
         dispatch(fetchTeamDetails(team));
+        dispatch(
+          trackEvent({
+            timestamp: new Date(),
+            operation: "Appgroup Edited",
+            //button: "Edit Team Button",
+            appgroupName:team,
+            EditedAppgroupName: companyName,
+            selectedApiProduct: uniqueAttributes,
+            updatedApiProduct:selected_attribute
+
+            //description:description,
+            //user:admins,
+            
+          })
+        );
         navigate("/teams");
       } else {
         alert("Appgroups updating failed .");

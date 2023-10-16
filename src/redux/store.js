@@ -1287,6 +1287,113 @@ const FETCH_API_PRODUCTS_FAILURE ="FETCH_API_PRODUCTS_FAILURE"
  const SET_LOGIN_RESPONSE = 'SET_LOGIN_RESPONSE';
 const INITIALIZE_AXIOS = 'INITIALIZE_AXIOS';
  const SET_AXIOS_INSTANCE = 'SET_AXIOS_INSTANCE';
+const TRACK_LOGIN_EVENT = 'TRACK_LOGIN_EVENT';
+const TRACK_ERROR_EVENT = 'TRACK_ERROR_EVENT';
+const RESET_EVENTS = 'RESET_EVENTS';
+
+
+
+// // action creators
+// export const trackLoginEvent = (username, password, method, api, responseData, timestamp, pageName, buttonClicked) => {
+//   return {
+//     type: TRACK_LOGIN_EVENT,
+//     payload: {
+//       username,
+//       password,
+//       method,
+//       api,
+//       responseData,
+//       timestamp,
+//       pageName,
+//       buttonClicked
+//     }
+//   };
+// };
+
+// export const trackErrorEvent = (errorDetails, timestamp, pageName) => {
+//   return {
+//     type: TRACK_ERROR_EVENT,
+//     payload: {
+//       errorDetails,
+//       timestamp,
+//       pageName
+//     }
+//   };
+// };
+
+
+
+// action creators
+export const trackEvent = (eventData) => {
+  return {
+    type: 'TRACK_LOGIN_EVENT',
+    payload: {
+      ...eventData,
+    },
+  };
+};
+
+
+
+export const trackErrorEvent = (eventData) => {
+  return {
+    type: 'TRACK_LOGIN_EVENT',
+    payload: {
+      ...eventData,
+    },
+  };
+};
+
+export const resetEvents = () => {
+  return {
+    type: RESET_EVENTS,
+  };
+};
+
+
+
+const initialStateLoginEvent = {
+  events: []
+};
+
+const eventLoginReducer = (state = initialStateLoginEvent, action) => {
+  switch (action.type) {
+    case 'TRACK_LOGIN_EVENT':
+    case 'TRACK_ERROR_EVENT':
+      return {
+        ...state,
+        events: [...state.events, action.payload]
+      };
+
+      case RESET_EVENTS:
+        return {
+          ...state,
+          events: []
+        };
+    default:
+      return state;
+  }
+};
+
+// const initialStateLoginEvent = {
+//   events: []
+// };
+
+// const eventLoginReducer = (state = initialStateLoginEvent, action) => {
+//   switch (action.type) {
+//     case TRACK_LOGIN_EVENT:
+//     case TRACK_ERROR_EVENT:
+//       return {
+//         ...state,
+//         events: [...state.events, action.payload]
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+
+
  
 
 export const setLoginResponse = (responseData) => {
@@ -1515,6 +1622,7 @@ export const fetchTeams = () => async (dispatch) => {
     console.error("Error fetching teams:", error);
   }
 };
+
 
 
 
@@ -1990,7 +2098,8 @@ const rootReducer = combineReducers({
   appsData: appsData,
   memberName: memberreducer,
   loginReducer:loginReducer,
-  reducerToken:reducerToken
+  reducerToken:reducerToken,
+  eventLoginReducer:eventLoginReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

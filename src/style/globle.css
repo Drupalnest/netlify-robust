@@ -28,13 +28,28 @@ body {
 
 .hover-effect :hover {
   background-color: #002a5c;
-  color:"white"
+  color: "white";
 }
 
 .navbar-nav .nav-item:hover {
-  border-bottom: 3px solid #002a5c; 
-  
-  
+  border-bottom: 3px solid #002a5c;
 }
 
+.text-custom {
+  border-color: #f46223 !important;
+}
+
+.table-hover tr:hover {
+  background-color: #ffa500; /* Orange color */
+}
+
+.table-head-color {
+  background-color: #002a5c;
+}
+
+
+.start-end-buttons:hover {
+  background-color: #002a5c;
+  cursor: pointer; 
+}
 

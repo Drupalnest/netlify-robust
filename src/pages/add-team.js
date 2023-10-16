@@ -2052,7 +2052,7 @@ import { Link, navigate } from "gatsby";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
-import { apiProducts } from "../redux/store";
+import { apiProducts, trackEvent } from "../redux/store";
 import Cookies from "js-cookie";
 import SuccessToast from "../components/Toast/Success";
 import ErrorToast from "../components/Toast/Error";
@@ -2103,56 +2103,6 @@ const AddTeam = () => {
     setDescription(e.target.value);
   };
 
-  // const handleAddTeam = async (e) => {
-  //   e.preventDefault();
-
-  //   if (!companyName.trim()) {
-  //     alert("Please provide a valid appgroup name.");
-  //     return;
-  //   }
-
-  //   if (!description.trim()) {
-  //     alert("Please provide a description.");
-  //     return;
-  //   }
-
-  //   try {
-  //     const serializedApiProduct = serializeData.join(",");
-  //     const response = await axiosInstance.post('/appgroups', {
-  //       name: companyName,
-  //       displayName: companyName,
-  //       attributes: [
-  //         {
-  //           name: "api_product",
-  //           value: serializedApiProduct,
-  //         },
-  //         {
-  //           name: "description",
-  //           value: description,
-  //         },
-  //         {
-  //           name: "ADMIN_EMAIL",
-  //           value: `${adminName}`,
-  //         },
-  //         {
-  //           name: "__apigee_reserved__developer_details",
-  //           value: `[{"developer":"${adminName}","roles":["admin"]}]`,
-  //         },
-  //       ],
-  //     });
-
-  //     if (response.status === 200) {
-  //       console.log("Setting showToast to true");
-  //       setShowSuccessToast(true);
-  //       navigate("/teams");
-  //     } else {
-  //       setShowErrorToast(true);
-  //     }
-  //   } catch (error) {
-  //     setShowErrorToast(true);
-  //   }
-  // };
-
   const handleAddTeam = async (e) => {
     e.preventDefault();
 
@@ -2174,6 +2124,7 @@ const AddTeam = () => {
       const { accessToken } = await tokenResponse.json();
 
       const serializedApiProduct = serializeData.join(",");
+      console.log("serializedApiProduct", serializedApiProduct);
       const response = await fetch(
         "https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups",
         {
@@ -2209,7 +2160,18 @@ const AddTeam = () => {
 
       if (response.ok) {
         console.log("Setting showToast to true");
-        alert("Appgroup created successfully!")
+        dispatch(
+          trackEvent({
+            timestamp: new Date(),
+            operation: "New Appgroup Added",
+            //button: "Add Team Button",
+            appgroupName: companyName,
+            // description:description,
+            user: adminName,
+            selectedApiProduct: selected_attribute,
+          })
+        );
+        //alert("Appgroup created successfully!");
         setShowSuccessToast(true);
         navigate("/teams");
       } else {
@@ -2258,6 +2220,8 @@ const AddTeam = () => {
   const mergedArray = [...selectedAttributes, ...checkedAttributes];
 
   const selected_attribute = Array.from(new Set(mergedArray));
+
+  console.log("selected_attribute", selected_attribute);
 
   const unselected_attributes = apiproduct
     ? apiproduct.filter((attr) => !selected_attribute.includes(attr.name))

@@ -707,6 +707,700 @@
 
 // export default Login;
 
+// import React, { useState, useEffect } from "react";
+// import Header from "../Header/Header";
+// import { navigate } from "gatsby";
+// import Cookies from "js-cookie";
+// import Bearer from "./Bearer";
+// import LoginResponse from "./LoginResponse";
+// import TeamList from "../../pages/[appGroup.name]/Teams";
+// //import setInitialTokenInCookie from "../../../tokenHandler";
+// import { setLoginResponse } from "../../redux/store";
+// import { useDispatch } from "react-redux";
+
+// import SuccessToast from "../Toast/Success";
+// import ErrorToast from "../Toast/Error";
+
+// const Login = () => {
+//   const [username, setUsername] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [showSuccessToast, setShowSuccessToast] = useState(false);
+//   const [showErrorToast, setShowErrorToast] = useState(false);
+//   const dispatch = useDispatch();
+
+//   // useEffect(() => {
+//   //   setInitialTokenInCookie();
+//   // }, []);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await fetch(
+//         "https://robustapihub.io/user/login?_format=json",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify({
+//             name: username,
+//             pass: password,
+//           }),
+//         }
+//       );
+
+//       if (response.ok) {
+//         const responseData = await response.json();
+//         console.log("responseData", responseData);
+
+//         console.log("Request Headers:", response.headers);
+
+//         dispatch(setLoginResponse(responseData));
+//         //localStorage.setItem("userData", JSON.stringify(responseData));
+
+//         localStorage.setItem("logout_token", responseData.logout_token);
+
+//         alert("Login successful");
+//         //setShowSuccessToast(true);
+
+//          navigate("/teams");
+//       } else {
+//         const errorData = await response.json();
+//         alert(`Login failed. Error: ${errorData.message}`);
+//         //setShowErrorToast(true);
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert("An error occurred while logging in.");
+//       //setShowErrorToast(true);
+//     }
+//   };
+
+//   return (
+//     <div style={{ marginTop: "110px" }}>
+//       <Header />
+
+//       <div className="dialog-off-canvas-main-canvas">
+//         <div className="page">
+//           <div className="page__content-above">
+//             <div className="container-fluid px-0">
+//               <div className="block block--pagetitle bg-lighter py-4">
+//                 <div className="container">
+//                   <h3 className="page__title mb-0">Log in</h3>
+//                   {/* <Bearer/> */}
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//           <main className="main" role="main">
+//             <div className="page-layout-sidebar-default">
+//               <div className="container py-2">
+//                 <div className="row">
+//                   <div className="page__content col-md">
+//                     <div className="hidden" />
+//                     <form
+//                       className="user-login-form"
+//                       method="post"
+//                       onSubmit={handleSubmit}
+//                       acceptCharset="UTF-8"
+//                     >
+//                       <div className="js-form-item form-item js-form-type-textfield form-type-textfield form-item-name js-form-item-name form-group">
+//                         <label
+//                           htmlFor="edit-name"
+//                           className="js-form-required form-required"
+//                         >
+//                           Username
+//                           <sup>
+//                             <i
+//                               className="fas fa-asterisk text-danger form-required__indicator"
+//                               style={{ fontSize: "0.7em" }}
+//                             />
+//                           </sup>
+//                         </label>
+//                         <input
+//                           autoCorrect="none"
+//                           autoCapitalize="none"
+//                           spellCheck="false"
+//                           autoFocus="autofocus"
+//                           data-drupal-selector="edit-name"
+//                           aria-describedby="edit-name--description"
+//                           type="text"
+//                           id="edit-name"
+//                           name="name"
+//                           value={username}
+//                           onChange={(e) => setUsername(e.target.value)}
+//                           size={60}
+//                           maxLength={60}
+//                           className="required form-control"
+//                           required="required"
+//                           aria-required="true"
+//                           autoComplete="true"
+//                         />
+//                         <small
+//                           id="edit-name--description"
+//                           className="description form-text text-muted"
+//                         >
+//                           Enter your username.
+//                         </small>
+//                       </div>
+//                       <div className="js-form-item form-item js-form-type-password form-type-password form-item-pass js-form-item-pass form-group">
+//                         <label
+//                           htmlFor="edit-pass"
+//                           className="js-form-required form-required"
+//                         >
+//                           Password
+//                           <sup>
+//                             <i
+//                               className="fas fa-asterisk text-danger form-required__indicator"
+//                               style={{ fontSize: "0.7em" }}
+//                             />
+//                           </sup>
+//                         </label>
+//                         <input
+//                           aria-describedby="edit-pass--description"
+//                           type="password"
+//                           id="edit-pass"
+//                           name="pass"
+//                           value={password}
+//                           onChange={(e) => setPassword(e.target.value)}
+//                           size={60}
+//                           maxLength={128}
+//                           className="required form-control"
+//                           required="required"
+//                           aria-required="true"
+//                         />
+//                         <small
+//                           id="edit-pass--description"
+//                           className="description form-text text-muted"
+//                         >
+//                           Enter the password that accompanies your username.
+//                         </small>
+//                       </div>
+//                       <input
+//                         autoComplete="off"
+//                         type="hidden"
+//                         name="form_build_id"
+//                         defaultValue="form-4kfs62KarGpfB4Y1Bv_AzISYQ5DfFiKECMJBaMuX5jI"
+//                         className="form-control"
+//                       />
+//                       <input
+//                         type="hidden"
+//                         name="form_id"
+//                         defaultValue="user_login_form"
+//                         className="form-control"
+//                       />
+//                       <div
+//                         className="form-actions js-form-wrapper form-wrapper"
+//                         id="edit-actions"
+//                       >
+//                         <button
+//                           type="submit"
+//                           id="edit-submit"
+//                           name="op"
+//                           defaultValue="Log in"
+//                           className="all-buttons-color text-white js-form-submit form-submit btn btn-md"
+//                         >
+//                           LOG IN
+//                         </button>
+//                       </div>
+//                     </form>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </main>
+//         </div>
+//       </div>
+
+//       {/* {showSuccessToast && (
+//         <SuccessToast message="Login successful!" />
+//       )}
+
+//       {showErrorToast && <ErrorToast message="Login failed." />}
+
+//       {showErrorToast && (
+//         <ErrorToast message="An error occurred while logging in" />
+//       )} */}
+//     </div>
+//   );
+// };
+
+// export default Login;
+
+// import React, { useState, useEffect } from "react";
+// import Header from "../Header/Header";
+// import { navigate } from "gatsby";
+// import Cookies from "js-cookie";
+// import Bearer from "./Bearer";
+// import LoginResponse from "./LoginResponse";
+// import TeamList from "../../pages/[appGroup.name]/Teams";
+// import { setLoginResponse } from "../../redux/store";
+// import { useDispatch } from "react-redux";
+// import { trackLoginEvent, trackErrorEvent } from "../../redux/store"; // Replace with the actual path to your actions
+
+// import SuccessToast from "../Toast/Success";
+// import ErrorToast from "../Toast/Error";
+
+// const Login = () => {
+//   const [username, setUsername] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [showSuccessToast, setShowSuccessToast] = useState(false);
+//   const [showErrorToast, setShowErrorToast] = useState(false);
+//   const dispatch = useDispatch();
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await fetch(
+//         "https://robustapihub.io/user/login?_format=json",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify({
+//             name: username,
+//             pass: password,
+//           }),
+//         }
+//       );
+
+//       if (response.ok) {
+//         const responseData = await response.json();
+
+//         dispatch(setLoginResponse(responseData));
+
+//         localStorage.setItem("logout_token", responseData.logout_token);
+
+//         alert("Login successful");
+
+//         // Track successful login event
+//         dispatch(
+//           trackLoginEvent(
+//             username,
+//             password,
+//             "POST",
+//             "https://robustapihub.io/user/login?_format=json",
+//             responseData,
+//             new Date(),
+//             "Login Page",
+//             "Login Button"
+//           )
+//         );
+
+//         navigate("/teams");
+//       } else {
+//         const errorData = await response.json();
+//         alert(`Login failed. Error: ${errorData.message}`);
+
+//         // Track login error event
+//         dispatch(
+//           trackErrorEvent(
+//             errorData.message,
+//             new Date(),
+//             "Login Page"
+//           )
+//         );
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert("An error occurred while logging in.");
+
+//       // Track login error event
+//       dispatch(
+//         trackErrorEvent(
+//           error.message,
+//           new Date(),
+//           "Login Page"
+//         )
+//       );
+//     }
+//   };
+
+//   return (
+//     <div style={{ marginTop: "110px" }}>
+//       <Header />
+//       <div className="dialog-off-canvas-main-canvas">
+//         <div className="page">
+//           <div className="page__content-above">
+//             <div className="container-fluid px-0">
+//               <div className="block block--pagetitle bg-lighter py-4">
+//                 <div className="container">
+//                   <h3 className="page__title mb-0">Log in</h3>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//           <main className="main" role="main">
+//             <div className="page-layout-sidebar-default">
+//               <div className="container py-2">
+//                 <div className="row">
+//                   <div className="page__content col-md">
+//                     <div className="hidden" />
+//                     <form
+//                       className="user-login-form"
+//                       method="post"
+//                       onSubmit={handleSubmit}
+//                       acceptCharset="UTF-8"
+//                     >
+//                       <div className="js-form-item form-item js-form-type-textfield form-type-textfield form-item-name js-form-item-name form-group">
+//                         <label
+//                           htmlFor="edit-name"
+//                           className="js-form-required form-required"
+//                         >
+//                           Username
+//                           <sup>
+//                             <i
+//                               className="fas fa-asterisk text-danger form-required__indicator"
+//                               style={{ fontSize: "0.7em" }}
+//                             />
+//                           </sup>
+//                         </label>
+//                         <input
+//                           autoCorrect="none"
+//                           autoCapitalize="none"
+//                           spellCheck="false"
+//                           autoFocus="autofocus"
+//                           data-drupal-selector="edit-name"
+//                           aria-describedby="edit-name--description"
+//                           type="text"
+//                           id="edit-name"
+//                           name="name"
+//                           value={username}
+//                           onChange={(e) => setUsername(e.target.value)}
+//                           size={60}
+//                           maxLength={60}
+//                           className="required form-control"
+//                           required="required"
+//                           aria-required="true"
+//                           autoComplete="true"
+//                         />
+//                         <small
+//                           id="edit-name--description"
+//                           className="description form-text text-muted"
+//                         >
+//                           Enter your username.
+//                         </small>
+//                       </div>
+//                       <div className="js-form-item form-item js-form-type-password form-type-password form-item-pass js-form-item-pass form-group">
+//                         <label
+//                           htmlFor="edit-pass"
+//                           className="js-form-required form-required"
+//                         >
+//                           Password
+//                           <sup>
+//                             <i
+//                               className="fas fa-asterisk text-danger form-required__indicator"
+//                               style={{ fontSize: "0.7em" }}
+//                             />
+//                           </sup>
+//                         </label>
+//                         <input
+//                           aria-describedby="edit-pass--description"
+//                           type="password"
+//                           id="edit-pass"
+//                           name="pass"
+//                           value={password}
+//                           onChange={(e) => setPassword(e.target.value)}
+//                           size={60}
+//                           maxLength={128}
+//                           className="required form-control"
+//                           required="required"
+//                           aria-required="true"
+//                         />
+//                         <small
+//                           id="edit-pass--description"
+//                           className="description form-text text-muted"
+//                         >
+//                           Enter the password that accompanies your username.
+//                         </small>
+//                       </div>
+//                       <input
+//                         autoComplete="off"
+//                         type="hidden"
+//                         name="form_build_id"
+//                         defaultValue="form-4kfs62KarGpfB4Y1Bv_AzISYQ5DfFiKECMJBaMuX5jI"
+//                         className="form-control"
+//                       />
+//                       <input
+//                         type="hidden"
+//                         name="form_id"
+//                         defaultValue="user_login_form"
+//                         className="form-control"
+//                       />
+//                       <div
+//                         className="form-actions js-form-wrapper form-wrapper"
+//                         id="edit-actions"
+//                       >
+//                         <button
+//                           type="submit"
+//                           id="edit-submit"
+//                           name="op"
+//                           defaultValue="Log in"
+//                           className="all-buttons-color text-white js-form-submit form-submit btn btn-md"
+//                         >
+//                           LOG IN
+//                         </button>
+//                       </div>
+//                     </form>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </main>
+//         </div>
+//       </div>
+//       {showSuccessToast && (
+//         <SuccessToast message="Login successful!" />
+//       )}
+//       {showErrorToast && <ErrorToast message="Login failed." />}
+//       {showErrorToast && (
+//         <ErrorToast message="An error occurred while logging in" />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Login;
+
+// import React, { useState } from "react";
+// import Header from "../Header/Header";
+// import { navigate } from "gatsby";
+// import { useDispatch } from "react-redux";
+// import { setLoginResponse } from "../../redux/store";
+// import SuccessToast from "../Toast/Success";
+// import ErrorToast from "../Toast/Error";
+
+// const Login = () => {
+//   const [username, setUsername] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [showSuccessToast, setShowSuccessToast] = useState(false);
+//   const [showErrorToast, setShowErrorToast] = useState(false);
+//   const dispatch = useDispatch();
+
+//   const trackLoginEvent = async (username, password, method, api, responseData, timestamp, page, button) => {
+//     try {
+//       const response = await fetch('https://imaginative-sprite-320f1b.rbut.api.com/event', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//           username,
+//           password,
+//           method,
+//           api,
+//           responseData,
+//           timestamp,
+//           page,
+//           button
+//         }),
+//       });
+
+//       if (response.ok) {
+//         console.log('Login event sent to API successfully');
+//       } else {
+//         console.error('Error sending login event to API:', response.status);
+//       }
+//     } catch (error) {
+//       console.error('Error sending login event to API:', error);
+//     }
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await fetch(
+//         "https://robustapihub.io/user/login?_format=json",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify({
+//             name: username,
+//             pass: password,
+//           }),
+//         }
+//       );
+
+//       if (response.ok) {
+//         const responseData = await response.json();
+
+//         dispatch(setLoginResponse(responseData));
+
+//         localStorage.setItem("logout_token", responseData.logout_token);
+
+//         alert("Login successful");
+
+//         trackLoginEvent(
+//           username,
+//           password,
+//           "POST",
+//           "https://robustapihub.io/user/login?_format=json",
+//           responseData,
+//           new Date(),
+//           "Login Page",
+//           "Login Button"
+//         );
+
+//         navigate("/teams");
+//       } else {
+//         const errorData = await response.json();
+//         alert(`Login failed. Error: ${errorData.message}`);
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert("An error occurred while logging in.");
+//     }
+//   };
+//     return (
+//     <div style={{ marginTop: "110px" }}>
+//       <Header />
+//       <div className="dialog-off-canvas-main-canvas">
+//         <div className="page">
+//           <div className="page__content-above">
+//             <div className="container-fluid px-0">
+//               <div className="block block--pagetitle bg-lighter py-4">
+//                 <div className="container">
+//                   <h3 className="page__title mb-0">Log in</h3>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//           <main className="main" role="main">
+//             <div className="page-layout-sidebar-default">
+//               <div className="container py-2">
+//                 <div className="row">
+//                   <div className="page__content col-md">
+//                     <div className="hidden" />
+//                     <form
+//                       className="user-login-form"
+//                       method="post"
+//                       onSubmit={handleSubmit}
+//                       acceptCharset="UTF-8"
+//                     >
+//                       <div className="js-form-item form-item js-form-type-textfield form-type-textfield form-item-name js-form-item-name form-group">
+//                         <label
+//                           htmlFor="edit-name"
+//                           className="js-form-required form-required"
+//                         >
+//                           Username
+//                           <sup>
+//                             <i
+//                               className="fas fa-asterisk text-danger form-required__indicator"
+//                               style={{ fontSize: "0.7em" }}
+//                             />
+//                           </sup>
+//                         </label>
+//                         <input
+//                           autoCorrect="none"
+//                           autoCapitalize="none"
+//                           spellCheck="false"
+//                           autoFocus="autofocus"
+//                           data-drupal-selector="edit-name"
+//                           aria-describedby="edit-name--description"
+//                           type="text"
+//                           id="edit-name"
+//                           name="name"
+//                           value={username}
+//                           onChange={(e) => setUsername(e.target.value)}
+//                           size={60}
+//                           maxLength={60}
+//                           className="required form-control"
+//                           required="required"
+//                           aria-required="true"
+//                           autoComplete="true"
+//                         />
+//                         <small
+//                           id="edit-name--description"
+//                           className="description form-text text-muted"
+//                         >
+//                           Enter your username.
+//                         </small>
+//                       </div>
+//                       <div className="js-form-item form-item js-form-type-password form-type-password form-item-pass js-form-item-pass form-group">
+//                         <label
+//                           htmlFor="edit-pass"
+//                           className="js-form-required form-required"
+//                         >
+//                           Password
+//                           <sup>
+//                             <i
+//                               className="fas fa-asterisk text-danger form-required__indicator"
+//                               style={{ fontSize: "0.7em" }}
+//                             />
+//                           </sup>
+//                         </label>
+//                         <input
+//                           aria-describedby="edit-pass--description"
+//                           type="password"
+//                           id="edit-pass"
+//                           name="pass"
+//                           value={password}
+//                           onChange={(e) => setPassword(e.target.value)}
+//                           size={60}
+//                           maxLength={128}
+//                           className="required form-control"
+//                           required="required"
+//                           aria-required="true"
+//                         />
+//                         <small
+//                           id="edit-pass--description"
+//                           className="description form-text text-muted"
+//                         >
+//                           Enter the password that accompanies your username.
+//                         </small>
+//                       </div>
+//                       <input
+//                         autoComplete="off"
+//                         type="hidden"
+//                         name="form_build_id"
+//                         defaultValue="form-4kfs62KarGpfB4Y1Bv_AzISYQ5DfFiKECMJBaMuX5jI"
+//                         className="form-control"
+//                       />
+//                       <input
+//                         type="hidden"
+//                         name="form_id"
+//                         defaultValue="user_login_form"
+//                         className="form-control"
+//                       />
+//                       <div
+//                         className="form-actions js-form-wrapper form-wrapper"
+//                         id="edit-actions"
+//                       >
+//                         <button
+//                           type="submit"
+//                           id="edit-submit"
+//                           name="op"
+//                           defaultValue="Log in"
+//                           className="all-buttons-color text-white js-form-submit form-submit btn btn-md"
+//                         >
+//                           LOG IN
+//                         </button>
+//                       </div>
+//                     </form>
+//                   </div>
+//                 </div>
+//               </div>
+
+//             </div>
+//           </main>
+//         </div>
+//       </div>
+//       {showSuccessToast && (
+//         <SuccessToast message="Login successful!" />
+//       )}
+//       {showErrorToast && <ErrorToast message="Login failed." />}
+//       {showErrorToast && (
+//         <ErrorToast message="An error occurred while logging in" />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Login;
+
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import { navigate } from "gatsby";
@@ -714,10 +1408,9 @@ import Cookies from "js-cookie";
 import Bearer from "./Bearer";
 import LoginResponse from "./LoginResponse";
 import TeamList from "../../pages/[appGroup.name]/Teams";
-//import setInitialTokenInCookie from "../../../tokenHandler";
 import { setLoginResponse } from "../../redux/store";
 import { useDispatch } from "react-redux";
-
+import { trackEvent, trackErrorEvent } from "../../redux/store";
 import SuccessToast from "../Toast/Success";
 import ErrorToast from "../Toast/Error";
 
@@ -727,10 +1420,6 @@ const Login = () => {
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   setInitialTokenInCookie();
-  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -751,35 +1440,55 @@ const Login = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log("responseData", responseData);
-
-        console.log("Request Headers:", response.headers);
 
         dispatch(setLoginResponse(responseData));
-        //localStorage.setItem("userData", JSON.stringify(responseData));
 
         localStorage.setItem("logout_token", responseData.logout_token);
 
         alert("Login successful");
-        //setShowSuccessToast(true);
 
-         navigate("/teams");
+        dispatch(
+          trackEvent({
+            username: username,
+            //password: password,
+            //method: "POST",
+            //api: "https://robustapihub.io/user/login?_format=json",
+            //responseData: responseData,
+            timestamp: new Date(),
+            operation: "User logged in",
+            //button: "Login Button",
+          })
+        );
+
+        navigate("/teams");
       } else {
         const errorData = await response.json();
         alert(`Login failed. Error: ${errorData.message}`);
-        //setShowErrorToast(true);
+
+        // Track login error event
+        dispatch(
+          trackErrorEvent({
+            error: errorData.message,
+            timestamp: new Date(),
+            page: "Login Page",
+            button: "Login Button",
+          })
+        );
       }
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while logging in.");
-      //setShowErrorToast(true);
+
+      // Track login error event
+      dispatch(
+        trackErrorEvent(error.message, new Date(), "Login Page", "Login Button")
+      );
     }
   };
 
   return (
     <div style={{ marginTop: "110px" }}>
       <Header />
-
       <div className="dialog-off-canvas-main-canvas">
         <div className="page">
           <div className="page__content-above">
@@ -787,7 +1496,6 @@ const Login = () => {
               <div className="block block--pagetitle bg-lighter py-4">
                 <div className="container">
                   <h3 className="page__title mb-0">Log in</h3>
-                  {/* <Bearer/> */}
                 </div>
               </div>
             </div>
@@ -911,223 +1619,13 @@ const Login = () => {
           </main>
         </div>
       </div>
-
-      
-      {/* {showSuccessToast && (
-        <SuccessToast message="Login successful!" />
-      )}
-
-      
+      {showSuccessToast && <SuccessToast message="Login successful!" />}
       {showErrorToast && <ErrorToast message="Login failed." />}
-
-     
-
       {showErrorToast && (
         <ErrorToast message="An error occurred while logging in" />
-      )} */}
+      )}
     </div>
   );
 };
 
 export default Login;
-
-// import React, { useState } from "react";
-// import Header from "../Header/Header";
-// import { navigate } from "gatsby";
-
-// const Login = () => {
-//   const [loading, setLoading] = useState(false);
-//   const username = useFormInput('');
-//   const password = useFormInput('');
-//   const [error, setError] = useState(null);
-
-//   const handleLogin = () => {
-//     setError(null);
-//     setLoading(true);
-
-//   const API="https://robustapihub.io/user/login?_format=json"
-
-//   fetch(API, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       name: username.value,
-//       pass: password.value,
-//     }),
-//   })
-//   .then(response => {
-//     setLoading(false);
-//     if (response.ok) {
-//       return response.json();
-//       alert(response.json())
-//     } else {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-//   })
-//   .then(data => {
-//     // Assuming response contains token and user data
-//     const { current_user, csrf_token, logout_token } = data;
-//     sessionStorage.setItem('user', JSON.stringify(current_user));
-//     sessionStorage.setItem('csrf_token', csrf_token);
-//     sessionStorage.setItem('logout_token', logout_token);
-
-//     navigate('/');
-//   })
-//   .catch(error => {
-//     setLoading(false);
-//     setError("Something went wrong. Please try again later.");
-//     console.error('Error:', error);
-//   });
-// }
-
-//   return (
-//     <div>
-//       <Header />
-//       <div className="dialog-off-canvas-main-canvas">
-//         <div className="page">
-//           <div className="page__content-above">
-//             <div className="container-fluid px-0">
-//               <div className="block block--pagetitle bg-lighter py-4">
-//                 <div className="container">
-//                   <h1 className="page__title mb-0">Log in</h1>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//           <main className="main" role="main">
-//             <div className="page-layout-sidebar-default">
-//               <div className="container py-5">
-//                 <div className="row">
-//                   <div className="page__content col-md">
-//                     <div className="hidden" />
-//                     <form
-//                       className="user-login-form"
-//                       method="post"
-//                       onSubmit={handleLogin}
-//                       acceptCharset="UTF-8"
-//                     >
-//                       <div className="js-form-item form-item js-form-type-textfield form-type-textfield form-item-name js-form-item-name form-group">
-//                         <label
-//                           htmlFor="edit-name"
-//                           className="js-form-required form-required"
-//                         >
-//                           Username
-//                           <sup>
-//                             <i
-//                               className="fas fa-asterisk text-danger form-required__indicator"
-//                               style={{ fontSize: "0.7em" }}
-//                             />
-//                           </sup>
-//                         </label>
-//                         <input
-//                           autoCorrect="none"
-//                           autoCapitalize="none"
-//                           spellCheck="false"
-//                           autoFocus="autofocus"
-//                           data-drupal-selector="edit-name"
-//                           aria-describedby="edit-name--description"
-//                           type="text"
-//                           id="edit-name"
-//                           name="name"
-//                           {...username}
-//                           size={60}
-//                           maxLength={60}
-//                           className="required form-control"
-//                           required="required"
-//                           aria-required="true"
-//                           autoComplete="true"
-//                         />
-//                         <small
-//                           id="edit-name--description"
-//                           className="description form-text text-muted"
-//                         >
-//                           Enter your username.
-//                         </small>
-//                       </div>
-//                       <div className="js-form-item form-item js-form-type-password form-type-password form-item-pass js-form-item-pass form-group">
-//                         <label
-//                           htmlFor="edit-pass"
-//                           className="js-form-required form-required"
-//                         >
-//                           Password
-//                           <sup>
-//                             <i
-//                               className="fas fa-asterisk text-danger form-required__indicator"
-//                               style={{ fontSize: "0.7em" }}
-//                             />
-//                           </sup>
-//                         </label>
-//                         <input
-//                           aria-describedby="edit-pass--description"
-//                           type="password"
-//                           id="edit-pass"
-//                           name="pass"
-//                           {...password}
-//                           size={60}
-//                           maxLength={128}
-//                           className="required form-control"
-//                           required="required"
-//                           aria-required="true"
-//                         />
-//                         <small
-//                           id="edit-pass--description"
-//                           className="description form-text text-muted"
-//                         >
-//                           Enter the password that accompanies your username.
-//                         </small>
-//                       </div>
-//                       <input
-//                         autoComplete="off"
-//                         type="hidden"
-//                         name="form_build_id"
-//                         defaultValue="form-4kfs62KarGpfB4Y1Bv_AzISYQ5DfFiKECMJBaMuX5jI"
-//                         className="form-control"
-//                       />
-//                       <input
-//                         type="hidden"
-//                         name="form_id"
-//                         defaultValue="user_login_form"
-//                         className="form-control"
-//                       />
-//                       <div
-//                         className="form-actions js-form-wrapper form-wrapper"
-//                         id="edit-actions"
-//                       >
-//                         <button
-//                           type="submit"
-//                           id="edit-submit"
-//                           name="op"
-//                           defaultValue="Log in"
-//                           className="all-buttons-color text-white js-form-submit form-submit btn btn-md"
-//                         >
-//                           LOG IN
-//                         </button>
-//                       </div>
-//                     </form>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </main>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// function useFormInput(initialValue) {
-//   const [value, setValue] = useState(initialValue);
-
-//   function handleChange(e) {
-//     setValue(e.target.value);
-//   }
-
-//   return {
-//     value,
-//     onChange: handleChange,
-//   };
-// }
-
-// export default Login;

@@ -275,7 +275,6 @@
 // };
 
 
-
 import React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -285,16 +284,21 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
-// import TokenFetcher from "./src/components/Auth/Token";
 
+const handleBeforeUnload = () => {
+  alert("Logging out...");
+  // Add your logout logic here
+};
 
+export const onRouteUpdate = ({ location }) => {
+  window.addEventListener("beforeunload", handleBeforeUnload);
 
-
-
-
+  return () => {
+    window.removeEventListener("beforeunload", handleBeforeUnload);
+  };
+};
 
 export const wrapRootElement = ({ element }) => {
- 
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

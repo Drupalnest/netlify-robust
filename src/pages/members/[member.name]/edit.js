@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../../components/Layout";
 import { Link, navigate } from "gatsby";
-import { fetchTeamDetails, fetchTeams } from "../../../redux/store";
+import { fetchTeamDetails, fetchTeams, trackEvent } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -104,6 +104,18 @@ console.log("adminsEmail", adminsEmail);
         // alert(serializedApiProduct);
         alert("Member updated Successfully!");
         dispatch(fetchTeamDetails(team));
+        dispatch(
+          trackEvent({
+            timestamp: new Date(),
+            operation: "Members Edited",
+            //button: "Add Member Button",
+            appgroupName:team,
+            adminEmail:adminsEmail,
+            members:admins,
+            roles:selectedRoles,
+            previousRole:rolesOfSelectedDeveloper
+          })
+        );
         navigate(`/${team}/members`);
       } else {
         alert("Failed to update members.");

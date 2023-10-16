@@ -164,6 +164,7 @@ import {
   fetchAppDetails,
   updateAppDetails,
   appDetails,
+  trackEvent,
 } from '../../../../redux/store';
 
 
@@ -172,7 +173,9 @@ function RemovePage() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const teamName = searchParams.get('team');
+  console.log("teamName",teamName)
   const appName = searchParams.get('appName');
+  console.log("appName",appName)
   const consumerKey = searchParams.get('consumerKey');
   
   // Now you have access to the passed data (teamName, appName, consumerKey)
@@ -192,6 +195,19 @@ function RemovePage() {
         },
       });
       dispatch(fetchAppDetails(teamName, appName));
+      
+
+
+      dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Appgroup App Consumer Key Deleted",
+          appgroupName: teamName,
+          appName: appName,
+          consumerKey: consumerKey,
+        })
+      );
+
       alert('Key removed successfully');
       navigate(`/${teamName}/apps/${appName}`);
     } catch (error) {

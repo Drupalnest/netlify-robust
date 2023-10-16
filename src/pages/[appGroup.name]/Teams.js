@@ -1382,6 +1382,16 @@
 
 // export default TeamList;
 
+
+
+
+
+
+
+
+
+
+
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeams } from "../../redux/store";
@@ -1396,12 +1406,9 @@ import { Container } from "mdbreact";
 import Cookies from "js-cookie";
 import { setLoginResponse } from "../../redux/store";
 
-
 const TeamList = ({ responseData }) => {
-
-//   const accessToken = Cookies.get("accessToken");
-// console.log("accessToken:", accessToken)
-
+  //   const accessToken = Cookies.get("accessToken");
+  // console.log("accessToken:", accessToken)
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTeams, setFilteredTeams] = useState([]);
@@ -1410,8 +1417,6 @@ const TeamList = ({ responseData }) => {
   const tableRef = useRef(); // Create a ref for the table element
   const dispatch = useDispatch();
   //const location = useLocation();
-
-  
 
   const teams = useSelector((state) => state.teams.data);
   console.log("teams", teams);
@@ -1427,6 +1432,7 @@ const TeamList = ({ responseData }) => {
     dispatch(fetchTeamDetails(appGroup));
   };
 
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -1435,8 +1441,10 @@ const TeamList = ({ responseData }) => {
     dispatch(fetchTeams());
   }, [dispatch]);
 
+  
+
   const handleFetchApps = (appGroup) => {
-    dispatch(fetchApps(appGroup)); // Use the parameter appGroup
+    dispatch(fetchApps(appGroup));  // Use the parameter appGroup
   };
 
 
@@ -1445,50 +1453,14 @@ const TeamList = ({ responseData }) => {
     tableRef.current && window.$(tableRef.current).DataTable();
   }, []);
 
-  
-
-
-
-  // useEffect(() => {
-  //   // Assuming responseData is an object received from an API call or some data source.
-   
-  //   if (responseData) {
-  //     const userData = JSON.stringify(responseData);
-  //     console.log("userData", userData);
-  
-  //     const adminName = responseData.current_user.name;
-  //     console.log("adminName",adminName)
-  
-  //     if (adminName) {
-  //       navigate("/teams");
-  //     } else {
-  //       navigate("/login");
-  //     }
-    
-
-  // useEffect(() => {
-  //   const admin = JSON.parse(localStorage.getItem("userData"));
-  //   const adminName = admin?.current_user?.name;
-
-  //   logout_token:"aUgrSnKGXYIb2VYMJhratXaLSUAJ2x3QyZeUG1v5z6U"
-
-  //   //const adminName = "ajay.gadhavana+1@gmail.com";
-
-  //   if (logout_token) {
-  //     navigate("/teams");
-  //   } else {
-  //     navigate("/login");
-  //   }
-
-
-  const loginResponse = useSelector(state => state.loginReducer.loginResponse);
-  console.log("loginResponse",loginResponse)
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+  console.log("loginResponse", loginResponse);
 
   useEffect(() => {
-    
     const adminName = loginResponse?.current_user?.name;
-console.log("Admin Name:", adminName);
-
+    console.log("Admin Name:", adminName);
 
     const logout_token = localStorage.getItem("logout_token");
 
@@ -1501,8 +1473,6 @@ console.log("Admin Name:", adminName);
     }
 
 
-
-    
 
     const updatedFilteredTeams = appgroups
       ? appgroups
@@ -1536,9 +1506,6 @@ console.log("Admin Name:", adminName);
     console.log("filteredTeams", filteredTeams);
   }, [navigate, appgroups, searchTerm, currentPage]);
 
- 
- 
- 
   const indexOfLastItem = currentPage * rowsPerPage;
   const indexOfFirstItem = indexOfLastItem - rowsPerPage;
   const currentItems = filteredTeams.slice(indexOfFirstItem, indexOfLastItem);
@@ -1607,6 +1574,8 @@ console.log("Admin Name:", adminName);
               value={searchTerm}
               onChange={handleSearch}
             />
+
+
 
             {/* <MDBBtn
             className="btn btn-sm"

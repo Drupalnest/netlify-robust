@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import { useStaticQuery, graphql, Link, navigate } from "gatsby";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTeamDetails, fetchTeams } from "../../redux/store";
+import { fetchTeamDetails, fetchTeams, trackEvent } from "../../redux/store";
 
 
 const AddMembers = () => {
@@ -58,6 +58,12 @@ const products = teamDetails
   : "";
 console.log("products", products);
 
+const adminsEmail = teamDetails
+? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")
+    ?.value
+: "";
+console.log("adminsEmail", adminsEmail);
+
 const members = teamDetails
   ? teamDetails.attributes.find(
       (attr) => attr.name === "__apigee_reserved__developer_details"
@@ -111,7 +117,7 @@ const handleAddMember = async (e) => {
             },
             {
               name: "ADMIN_EMAIL",
-              value: "kpatolia@starbucks.com",
+              value: adminsEmail,
             },
             {
               name: "DP_AdminEmails",
@@ -125,6 +131,17 @@ const handleAddMember = async (e) => {
     if (response.ok) {
       // alert(serializedApiProduct);
       alert("Member added Successfully!");
+      dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Members Added",
+          //button: "Add Member Button",
+          appgroupName:team,
+          adminEmail:adminsEmail,
+          members:admins,
+          roles:selectedRoles
+        })
+      );
       dispatch(fetchTeamDetails(team));
       navigate(`/${team}/members`);
     } else {

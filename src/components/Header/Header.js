@@ -357,7 +357,7 @@ const isLoggedIn =  userData
           }`}
           id="navbarSupportedContent"
         >
-          <Link className="navbar-brand d-flex align-items-center" to="#">
+          <Link className="navbar-brand d-flex align-items-center" to="/teams">
             <img
               src={Logo}
               alt="Robust API Hub"
@@ -367,8 +367,13 @@ const isLoggedIn =  userData
           </Link>
 
           <ul className="navbar-nav ml-auto mr-5 ">
+          <li className="nav-item">
+              <Link className="hover-effect nav-link text-dark" to="/usertrack">
+              Activity Log
+              </Link>
+            </li>
             <li className="nav-item">
-              <Link className="hover-effect nav-link text-dark" to="#">
+              <Link className="hover-effect nav-link text-dark" to="/myapps">
                 My Apps
               </Link>
             </li>

@@ -8,12 +8,12 @@ import {
   fetchAppDetails,
   updateAppDetails,
   appDetails,
+  trackEvent,
 } from "../../../redux/store";
 
 import "../../../style/popup.css";
 
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-
 
 //import "../../../styles/popup.css";
 import { Link, navigate } from "gatsby";
@@ -29,7 +29,6 @@ const ViewApp = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const [showDropdown, setShowDropdown] = useState({});
-
 
   const toggleDropdown = (credentialKey) => {
     setDropdownOpen(!dropdownOpen);
@@ -253,8 +252,10 @@ const ViewApp = () => {
       const oneYearInMilliseconds = 365 * 24 * 60 * 60;
       const randomKey = generateRandomKey();
       const randomSecret = generateRandomSecret();
-      
-      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+
+      const tokenResponse = await fetch(
+        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      );
       const { accessToken } = await tokenResponse.json();
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys`;
       const bearerToken = accessToken;
@@ -274,6 +275,18 @@ const ViewApp = () => {
         }
       );
       dispatch(fetchAppDetails(teamName, appName));
+
+      dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Appgroup App Key Added",
+          //button: "Add Member Button",
+          consumerKey: randomKey,
+          consumerSecret: randomSecret,
+          teamName: teamName,
+          appName: appName,
+        })
+      );
       //alert("API key created successfully");
     } catch (error) {
       alert("Error creating API key: " + error.message);
@@ -329,7 +342,9 @@ const ViewApp = () => {
   );
 
   const handleAddAPIProduct = async () => {
-    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const tokenResponse = await fetch(
+      "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+    );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${latestConsumerKey}`;
     const bearerToken = accessToken;
@@ -345,6 +360,15 @@ const ViewApp = () => {
         },
       });
       dispatch(fetchAppDetails(teamName, appName));
+      dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Appgroup App Api Product Added",
+          appgroupName: teamName,
+          appName: appName,
+          selectedApiProduct: apiProducts,
+        })
+      );
       alert("API key and product added successfully");
       setShowPopup(false);
     } catch (error) {
@@ -379,8 +403,13 @@ const ViewApp = () => {
     return "•".repeat(15);
   };
 
+
+
+
   const handleRemovekey = async (teamName, appName, consumerKey) => {
-    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const tokenResponse = await fetch(
+      "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+    );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
     const bearerToken = accessToken;
@@ -391,6 +420,16 @@ const ViewApp = () => {
           Authorization: `Bearer ${bearerToken}`,
         },
       });
+      dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Appgroup App Consumer Key Deleted",
+          teamName: teamName,
+          appName: appName,
+          selectedApiProduct: apiProducts,
+          consumerKey: consumerKey,
+        })
+      );
       dispatch(fetchAppDetails(teamName, appName));
       alert("Key removed successfully");
     } catch (error) {
@@ -398,8 +437,12 @@ const ViewApp = () => {
     }
   };
 
+
+
   const handleRevokeKey = async (teamName, appName, consumerKey) => {
-    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const tokenResponse = await fetch(
+      "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+    );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;
     const bearerToken = accessToken;
@@ -414,7 +457,20 @@ const ViewApp = () => {
 
       if (response.status === 204) {
         // Key revoked successfully
+
         dispatch(fetchAppDetails(teamName, appName));
+
+        dispatch(
+          trackEvent({
+            timestamp: new Date(),
+            operation: "Appgroup App Consumer Key Revoked",
+            teamName: teamName,
+            appName: appName,
+            selectedApiProduct: apiProducts,
+            consumerKey: consumerKey,
+          })
+        );
+
         alert("Key revoked successfully");
       } else {
         alert("Key revocation was not successful");

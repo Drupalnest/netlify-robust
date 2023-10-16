@@ -699,11 +699,10 @@ import axios from "axios";
 import { navigate } from "gatsby";
 import Layout from "../../../../components/Layout";
 import AppsButton from "../AppsButton";
-import { fetchAppDetails } from "../../../../redux/store";
+import { fetchAppDetails, trackEvent } from "../../../../redux/store";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
 import "./edit.css";
-
 
 const EditApps = () => {
   const dispatch = useDispatch();
@@ -711,7 +710,6 @@ const EditApps = () => {
   const [selectedAttributes, setSelectedAttributes] = useState("");
   const [selectedApiProducts, setSelectedApiProducts] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-
 
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("editApps", teamDetails);
@@ -796,7 +794,9 @@ const EditApps = () => {
 
     try {
       const { apiproduct, consumerKey, teamName, appName } = productToRemove;
-      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+      const tokenResponse = await fetch(
+        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      );
       const { accessToken } = await tokenResponse.json();
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiproduct}`;
       // Replace with your bearer token
@@ -809,6 +809,28 @@ const EditApps = () => {
 
       // Perform any additional actions after successful removal
       dispatch(fetchAppDetails(teamName, appName));
+      // dispatch(
+      //   trackEvent({
+      //     timestamp: new Date(),
+      //     apiproduct: apiproduct,
+      //     consumerKey: consumerKey,
+      //     teamName: teamName,
+      //     appName: appName,
+      //   })
+      // );
+
+      dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Appgroup App Edited Deleted Api Product",
+          appgroupName: teamName,
+          appName: appName,
+          selectedApiProduct: selectedApiProducts,
+          consumerKey: consumerKey,
+          
+        })
+      );
+
       alert("API product removed successfully");
     } catch (error) {
       alert("Error removing API product:", error);
@@ -867,7 +889,9 @@ const EditApps = () => {
       alert("Please select API product.");
       return;
     }
-    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const tokenResponse = await fetch(
+      "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+    );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
     const bearerToken = accessToken; // Replace with your bearer token
@@ -886,6 +910,32 @@ const EditApps = () => {
 
       // Perform any additional actions after successful addition
       dispatch(fetchAppDetails(teamName, appName));
+      // dispatch(
+      //   trackEvent({
+      //     timestamp: new Date(),
+      //     page: "App Edit Page",
+      //     button: "Add Api Product",
+      //     selectedApiProduct: selectedApiProduct,
+      //     consumerKey: consumerKey,
+      //     teamName: teamName,
+      //     appName: appName,
+      //   })
+      // );
+
+     
+      dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Appgroup App Edited Add Api Product",
+          appgroupName: teamName,
+          appName: appName,
+          selectedApiProduct: selectedApiProduct,
+          consumerKey: consumerKey,
+          
+        })
+      );
+
+
       alert("API product added successfully");
       setSelectedApiProducts([]);
     } catch (error) {

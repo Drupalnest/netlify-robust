@@ -916,9 +916,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link, navigate } from "gatsby";
 import Header from "../../../components/Header/Header";
-import { fetchApps, fetchAppDetails } from "../../../redux/store";
-import Cookies from 'js-cookie';
-
+import { fetchApps, fetchAppDetails, trackEvent } from "../../../redux/store";
+import Cookies from "js-cookie";
 
 const AddApps = () => {
   const dispatch = useDispatch();
@@ -929,8 +928,6 @@ const AddApps = () => {
   const [consumerKey, setConsumerKey] = useState(null);
   const [selected_apiProduct, setSelectedApiProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  
 
   // const dispatch = useDispatch();
   // const teamDetails = useSelector((state) => state.teamDetails);
@@ -965,15 +962,14 @@ const AddApps = () => {
   const [error, setError] = useState("");
   const [isErrorVisible, setIsErrorVisible] = useState("");
 
-  
   // const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
   function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
   }
-  
+
   const escapedAppName = escapeRegExp(appgroupName);
   const pattern = new RegExp(`^${escapedAppName}-[a-z0-9]+-app$`);
-  
+
   const handleCompanyNameChange = (e) => {
     const inputAppName = e.target.value;
     console.log("handleCompanyNameChange", inputAppName);
@@ -984,9 +980,9 @@ const AddApps = () => {
     console.log("teamName", appgroupName);
     //const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
     function escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
     }
-    
+
     const escapedAppName = escapeRegExp(appgroupName);
     const pattern = new RegExp(`^${escapedAppName}-[a-z0-9]+-app$`);
 
@@ -1010,19 +1006,21 @@ const AddApps = () => {
   };
 
   let fetchedConsumerKey = null;
-  
 
   const handleAddApp = async () => {
-    if (!appName.trim()) { // Removed 'error' check since it's not defined in the provided code
+    if (!appName.trim()) {
+      // Removed 'error' check since it's not defined in the provided code
       alert("Please provide a valid company name.");
       return;
     }
-  
+
     try {
       const oneYearInMilliseconds = 365 * 24 * 60 * 60 * 1000;
-      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+      const tokenResponse = await fetch(
+        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      );
       const { accessToken } = await tokenResponse.json();
-  
+
       // Assuming appName and appgroupName are defined
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps`,
@@ -1044,9 +1042,10 @@ const AddApps = () => {
           }),
         }
       );
-  
+
       if (response.ok) {
         dispatch(fetchApps(appgroupName)); // Assuming dispatch and fetchApps are defined
+        
         alert("Appgroup app created successfully!");
       } else {
         alert("Failed to create app");
@@ -1056,47 +1055,39 @@ const AddApps = () => {
       console.error(error); // Add an error log for debugging
     }
   };
-  
+
   // The following lines seem to be used later in your code
   const newAppName = appName;
   console.log("newAppName", newAppName);
-  
 
-  
+  const fetchData = async () => {
+    try {
+      const tokenResponse = await fetch(
+        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      );
+      const { accessToken } = await tokenResponse.json();
+      const url = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}`;
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
 
+      const response = await fetch(url, { headers });
 
-
-
-
-
-
-
-const fetchData = async () => {
-  try {
-    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
-    const { accessToken } = await tokenResponse.json();
-    const url = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}`;
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
-    };
-
-    const response = await fetch(url, { headers });
-
-    if (response.ok) {
-      const responseData = await response.json();
-      console.log("NewAppData:", responseData);
-      fetchedConsumerKey = responseData.credentials[0].consumerKey;
-      setConsumerKey(fetchedConsumerKey);
-      console.log("fetchedConsumerKey",fetchedConsumerKey);
-    } else {
-      console.error("Error:", response.statusText);
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log("NewAppData:", responseData);
+        fetchedConsumerKey = responseData.credentials[0].consumerKey;
+        setConsumerKey(fetchedConsumerKey);
+        console.log("fetchedConsumerKey", fetchedConsumerKey);
+        
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+  };
 
-  
   // const handleAddAPIProduct = async (newAppName, selected_apiProduct, appgroupName) => {
   //   if (!selected_apiProduct) {
   //     alert("Please select an API product.");
@@ -1132,42 +1123,59 @@ const fetchData = async () => {
   const appgroupNamee = teamDetails ? teamDetails.name : "";
   console.log("teamName", appgroupNamee);
 
-  const handleAddAPIProduct = async (newAppName, selected_apiProduct, appgroupNamee) => {
+  const handleAddAPIProduct = async (
+    newAppName,
+    selected_apiProduct,
+    appgroupNamee
+  ) => {
     if (!selected_apiProduct) {
-        alert("Please select an API product.");
-        return;
+      alert("Please select an API product.");
+      return;
     }
 
     try {
-        const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
-        const { accessToken } = await tokenResponse.json();
+      const tokenResponse = await fetch(
+        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      );
+      const { accessToken } = await tokenResponse.json();
 
-        const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
+      const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
 
-        const requestBody = {
-            apiProducts: [selected_apiProduct], // Assuming selected_apiProduct is a string or an array of API products
-        };
+      const requestBody = {
+        apiProducts: [selected_apiProduct], // Assuming selected_apiProduct is a string or an array of API products
+      };
 
-        const response = await axios.post(apiUrl, requestBody, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-            },
-        });
+      const response = await axios.post(apiUrl, requestBody, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-        if (response.status >= 200 && response.status < 300) {
-            console.log(selected_apiProduct);
-            console.log("API product added successfully");
-            navigate(`/${appgroupName}/apps`);
-        } else {
-            alert("Error adding API product");
-        }
+      if (response.status >= 200 && response.status < 300) {
+        console.log(selected_apiProduct);
+        console.log("API product added successfully");
+
+        dispatch(
+          trackEvent({
+            timestamp: new Date(),
+            operation: "Appgroup App Added",
+            //button: "Add Member Button",
+            appgroupName: appgroupName,
+            appName: appName,
+            description: description,
+            consumerKey: fetchedConsumerKey,
+            selectedApiProduct: selected_apiProduct,
+          })
+        );
+        navigate(`/${appgroupName}/apps`);
+      } else {
+        alert("Error adding API product");
+      }
     } catch (error) {
-        alert("Error adding API product: " + error);
+      alert("Error adding API product: " + error);
     }
-};
-
-
+  };
 
   const handleCombinedSubmit = async (event) => {
     event.preventDefault();
@@ -1203,13 +1211,13 @@ const fetchData = async () => {
   const selectedProducts = teamDetails?.attributes?.find(
     (attr) => attr.name === "api_product"
   )?.value;
-  
+
   if (selectedProducts) {
     console.log("selected", selectedProducts);
   } else {
     console.error("Error: selectedProducts is null or undefined");
   }
-  
+
   // // const selectedAttributes_All = JSON.parse(selectedProducts) || [];
   // // console.log("selectedProducts", selectedAttributes_All);
 
@@ -1315,9 +1323,7 @@ const fetchData = async () => {
           data-off-canvas-main-canvas=""
         >
           <div className="page">
-            <header className="page__header">
-            
-            </header>
+            <header className="page__header"></header>
 
             <div className="page__content-above">
               <div className="container-fluid px-0">
@@ -1332,23 +1338,23 @@ const fetchData = async () => {
             </div>
 
             <div className="page__content-above">
-  <div className="container-fluid px-0">
-    <div className="container">
-      {isErrorVisible && (
-        <div className="error-message alert alert-danger d-flex justify-content-between align-items-center">
-          <span>{error}</span>
-          <button
-            className="close-button btn btn-link"
-            onClick={() => setIsErrorVisible(false)}
-            style={{ position: 'absolute', top: '0', right: '0' }}
-          >
-            &#x2716;
-          </button>
-        </div>
-      )}
-    </div>
-  </div>
-</div>
+              <div className="container-fluid px-0">
+                <div className="container">
+                  {isErrorVisible && (
+                    <div className="error-message alert alert-danger d-flex justify-content-between align-items-center">
+                      <span>{error}</span>
+                      <button
+                        className="close-button btn btn-link"
+                        onClick={() => setIsErrorVisible(false)}
+                        style={{ position: "absolute", top: "0", right: "0" }}
+                      >
+                        &#x2716;
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
 
             <main className="main" role="main">
               <div className="page-layout-sidebar-default">
@@ -1360,7 +1366,11 @@ const fetchData = async () => {
                         className="hidden"
                       />
                       {isLoading ? (
-                        <p>Loading...</p>
+                        <div className="text-center">
+                          <div className="spinner-border " role="status">
+                            <span className="visually-hidden"></span>
+                          </div>
+                        </div>
                       ) : (
                         <form
                           className="team-app-add-for-team-form team-app-form apigee-edge--form"
@@ -1400,7 +1410,6 @@ const fetchData = async () => {
                                 placeholder=""
                                 required="required"
                                 aria-required="true"
-                                
                               />
                               {error && (
                                 <div className="invalid-feedback">{error}</div>

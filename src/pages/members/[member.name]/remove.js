@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../../../components/Layout";
 import { Link, navigate } from "gatsby";
-import { fetchTeamDetails, fetchTeams } from "../../../redux/store";
+import { fetchTeamDetails, fetchTeams, trackEvent } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-
 
 const DeleteMember = () => {
   const developer = useSelector((state) => state.memberName.developer);
@@ -34,20 +33,20 @@ const DeleteMember = () => {
     : "";
   console.log("members", members);
 
-
   const adminsEmail = teamDetails
-  ? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")
-      ?.value
-  : "";
-console.log("adminsEmail", adminsEmail);
+    ? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")?.value
+    : "";
+  console.log("adminsEmail", adminsEmail);
 
   const handleDeleteMember = async (e) => {
     e.preventDefault();
 
     try {
       // const serializedApiProduct = serializeData.join(",");
-      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
-    const { accessToken } = await tokenResponse.json();
+      const tokenResponse = await fetch(
+        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      );
+      const { accessToken } = await tokenResponse.json();
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamDetails.name}`,
         {
@@ -72,8 +71,8 @@ console.log("adminsEmail", adminsEmail);
               },
               {
                 name: "ADMIN_EMAIL",
-                value: adminsEmail
-            },
+                value: adminsEmail,
+              },
             ],
           }),
         }
@@ -83,6 +82,16 @@ console.log("adminsEmail", adminsEmail);
         // alert(serializedApiProduct);
         alert("Member remove Successfully!");
         dispatch(fetchTeamDetails(team));
+        dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Member Deleted",
+          //button: "Add Member Button",
+          appgroupName: team,
+          members:developer
+
+        })
+        );
         navigate(`/${team}/members`);
       } else {
         alert("Failed to remove members.");
@@ -113,7 +122,10 @@ console.log("adminsEmail", adminsEmail);
 
   return (
     <Layout>
-      <div className="dialog-off-canvas-main-canvas" style={{marginTop:"120px"}}>
+      <div
+        className="dialog-off-canvas-main-canvas"
+        style={{ marginTop: "120px" }}
+      >
         <div className="page">
           <header className="page__header"></header>
           <div className="page__content-above">
@@ -121,8 +133,8 @@ console.log("adminsEmail", adminsEmail);
               <div className="contextual-region block block--pagetitle bg-lighter py-4">
                 <div className="container">
                   <h3 className="js-quickedit-page-title page__title mb-0">
-                    Are you sure that you would like to remove
-                    &nbsp;{developer}&nbsp;from the team member?
+                    Are you sure that you would like to remove &nbsp;{developer}
+                    &nbsp;from the team member?
                   </h3>
                 </div>
               </div>

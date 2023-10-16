@@ -114,7 +114,7 @@
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTeam } from "../../redux/store";
+import { deleteTeam, trackEvent } from "../../redux/store";
 import { Link, navigate } from "gatsby";
 import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
@@ -146,6 +146,17 @@ const DeleteTeam = () => {
 
       setAppGroupName("");
       setErrorMessage("");
+      dispatch(
+        trackEvent({
+          timestamp: new Date(),
+          operation: "Appgroup Deleted",
+          //button: "Delete Team Button",
+          appgroupName:appGroupName,
+          //description:description,
+          //admins:admins,
+          
+        })
+      );
       alert("Appgroup deleted successfully");
       navigate("/teams");
     } catch (error) {
