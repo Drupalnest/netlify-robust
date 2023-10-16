@@ -707,7 +707,7 @@ const DataTable = () => {
                 <tr key={index}>
                   <td>{item.username}</td>
                   <td>{formatTimestamp(item.timestamp)}</td>
-                  <td>{item.operation}</td>
+                  <td>{item.operations}</td>
                   <td>
                     {item.appgroupName && (
                       <p>Appgroup Name: {item.appgroupName}</p>

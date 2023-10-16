@@ -1448,15 +1448,21 @@ const Login = () => {
         alert("Login successful");
 
         dispatch(
+          // trackEvent({
+          //   username: username,
+          //   //password: password,
+          //   //method: "POST",
+          //   //api: "https://robustapihub.io/user/login?_format=json",
+          //   //responseData: responseData,
+          //   timestamp: new Date(),
+          //   operation: "User logged in",
+          //   //button: "Login Button",
+          // })
+
           trackEvent({
             username: username,
-            //password: password,
-            //method: "POST",
-            //api: "https://robustapihub.io/user/login?_format=json",
-            //responseData: responseData,
             timestamp: new Date(),
-            operation: "User logged in",
-            //button: "Login Button",
+            operations: `User ${username} has logged in`,
           })
         );
 
