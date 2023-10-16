@@ -33,13 +33,13 @@ module.exports = {
       
     },
 
-    {
-      resolve: 'gatsby-plugin-netlify',
-      options: {
-        functionsSrc: `${__dirname}/src/functions`,
-        functionsOutput: `${__dirname}/functions`,
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-netlify',
+    //   options: {
+    //     functionsSrc: `${__dirname}/src/functions`,
+    //     functionsOutput: `${__dirname}/functions`,
+    //   },
+    // },
     
 
     
@@ -134,12 +134,12 @@ module.exports = {
 
 
     
-    {
-      resolve: "gatsby-plugin-env-variables",
-      options: {
-        allowList: ["APIGEE_GRAPHQL_ENDPOINT", "BEARER_TOKEN","REACT_APP_TOKEN_API"],
-      },
-    },
+    // {
+    //   resolve: "gatsby-plugin-env-variables",
+    //   options: {
+    //     allowList: ["APIGEE_GRAPHQL_ENDPOINT", "BEARER_TOKEN","REACT_APP_TOKEN_API"],
+    //   },
+    // },
 
 
     
