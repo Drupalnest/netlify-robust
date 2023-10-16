@@ -1195,7 +1195,8 @@ const Logout = () => {
   const loginResponse = useSelector(
     (state) => state.loginReducer.loginResponse
   );
-  const csrfToken = loginResponse.csrf_token;
+  const csrfToken = loginResponse ? loginResponse.csrf_token : null;
+
   const userName = loginResponse?.current_user?.name;
   console.log("userName", userName);
 

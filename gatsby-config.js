@@ -33,13 +33,13 @@ module.exports = {
       
     },
 
-    {
-      resolve: 'gatsby-plugin-netlify',
-      options: {
-        functionsSrc: `${__dirname}/src/functions`,
-        functionsOutput: `${__dirname}/functions`,
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-netlify',
+    //   options: {
+    //     functionsSrc: `${__dirname}/src/functions`,
+    //     functionsOutput: `${__dirname}/functions`,
+    //   },
+    // },
     
 
     
