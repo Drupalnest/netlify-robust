@@ -1551,14 +1551,14 @@ const addAppReducer = (state = null, action) => {
 // };
 
 
-// https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken
+
 
 
 let axiosInstance;
 
 export const initializeAxios = async () => {
   try {
-    const response = await axios.get('');
+    const response = await axios.get('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
     const accessToken = response.data.accessToken;
     axiosInstance = axios.create({
       baseURL: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
