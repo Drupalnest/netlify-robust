@@ -14,7 +14,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "server": "node server.js",
-    "token": "node ./netlify/functions/asd.js"
+    "token": "node ./netlify/functions/retrieveToken.js"
   },
   "dependencies": {
     "@apollo/client": "^3.7.17",
