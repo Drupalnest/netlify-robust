@@ -285,18 +285,18 @@ import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 
-// const handleBeforeUnload = () => {
-//   alert("Logging out...");
-//   // Add your logout logic here
-// };
+const handleBeforeUnload = () => {
+  alert("Logging out...");
+  // Add your logout logic here
+};
 
-// export const onRouteUpdate = ({ location }) => {
-//   window.addEventListener("beforeunload", handleBeforeUnload);
+export const onRouteUpdate = ({ location }) => {
+  window.addEventListener("beforeunload", handleBeforeUnload);
 
-//   return () => {
-//     window.removeEventListener("beforeunload", handleBeforeUnload);
-//   };
-// };
+  return () => {
+    window.removeEventListener("beforeunload", handleBeforeUnload);
+  };
+};
 
 export const wrapRootElement = ({ element }) => {
   return (
