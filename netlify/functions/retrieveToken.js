@@ -241,8 +241,8 @@ const { exec } = require('child_process');
 const path = require('path'); 
 
 exports.handler = function(event, context, callback) {
-  const scriptPath = path.resolve(__dirname, '/token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-  const keyFilePath = path.resolve(__dirname, '/token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json');
+  const scriptPath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+  const keyFilePath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json');
 
   console.log('Script Path:', scriptPath);
   console.log('Key File Path:', keyFilePath);
