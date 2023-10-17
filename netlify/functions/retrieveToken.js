@@ -363,21 +363,23 @@
 // };
 
 
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-const path = require('path');
+// handler.mjs
+import { exec } from 'child_process';
+import path from 'path';
+import esm from 'esm';
 
-exports.handler = async function(event, context) {
+const esmRequire = esm(module);
+
+const handler = async (event, context) => {
   try {
-    const scriptPath = path.resolve(process.cwd(), 'token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-    const keyFilePath = path.resolve(process.cwd(), 'token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json');
+    const scriptPath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+    const keyFilePath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json');
 
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
-
-    const { stdout, stderr } = await exec(command);
+    const { stdout, stderr } = await esmRequire('util').promisify(exec)(command);
 
     if (stderr) {
       console.error(`Script stderr: ${stderr}`);
@@ -424,3 +426,5 @@ exports.handler = async function(event, context) {
     };
   }
 };
+
+export { handler };
