@@ -312,7 +312,7 @@ const keyFilePath = path.resolve(__dirname, './token/node/getTokenWithServiceAcc
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    const command = `node ${scriptPath}.js -v --keyfile ${keyFilePath}`;
+    const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
 
     const { stdout, stderr } = await exec(command);
 
