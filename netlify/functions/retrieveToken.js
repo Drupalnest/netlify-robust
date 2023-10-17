@@ -306,8 +306,8 @@ const path = require('path');
 
 exports.handler = async function(event, context) {
   try {
-    const scriptPath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-const keyFilePath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json');
+    const scriptPath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount');
+const keyFilePath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a');
 
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
