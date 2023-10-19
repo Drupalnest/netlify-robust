@@ -275,6 +275,48 @@
 // };
 
 
+// import React from "react";
+// import { Provider } from "react-redux";
+// import { PersistGate } from "redux-persist/integration/react";
+// import { store, persistor } from "./src/redux/store";
+// import "@fortawesome/fontawesome-free/css/all.css";
+// import "bootstrap-css-only/css/bootstrap.min.css";
+// import "mdbreact/dist/css/mdb.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "react-toastify/dist/ReactToastify.css";
+// import Logout from "./src/components/Auth/Logout";
+// import handleLogout from './src/components/Auth/Logout';
+
+// // const handleBeforeUnload = () => {
+// //   handleLogout(); 
+// // };
+
+// // export const onRouteUpdate = ({ location }) => {
+// //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+// //   return () => {
+// //     window.removeEventListener("beforeunload", handleBeforeUnload);
+// //   };
+// // };
+// // export const onClientEntry = () => {
+// //   window.handleLogout = handleLogout;
+// // };
+
+
+
+// export const wrapRootElement = ({ element }) => {
+//   return (
+//     <Provider store={store}>
+//       <PersistGate loading={null} persistor={persistor}>
+//         {element}
+//       </PersistGate>
+//     </Provider>
+//   );
+// };
+
+
+
+
 import React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -284,19 +326,25 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
+import Logout from "./src/components/Auth/Logout";
+import handleLogout from './src/components/Auth/Logout';
 
-const handleBeforeUnload = () => {
-  alert("Logging out...");
-  // Add your logout logic here
-};
+// const handleBeforeUnload = () => {
+//   handleLogout(); 
+// };
 
-export const onRouteUpdate = ({ location }) => {
-  window.addEventListener("beforeunload", handleBeforeUnload);
+// export const onRouteUpdate = ({ location }) => {
+//   window.addEventListener("beforeunload", handleBeforeUnload);
 
-  return () => {
-    window.removeEventListener("beforeunload", handleBeforeUnload);
-  };
-};
+//   return () => {
+//     window.removeEventListener("beforeunload", handleBeforeUnload);
+//   };
+// };
+// export const onClientEntry = () => {
+//   window.handleLogout = handleLogout;
+// };
+
+
 
 export const wrapRootElement = ({ element }) => {
   return (

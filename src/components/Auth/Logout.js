@@ -1190,8 +1190,10 @@ import {
 } from "../../redux/store";
 
 const Logout = () => {
-  const dispatch = useDispatch();
   const events = useSelector((state) => state.eventLoginReducer.events);
+  console.log("eventsLogout", events);
+  const dispatch = useDispatch();
+
   const loginResponse = useSelector(
     (state) => state.loginReducer.loginResponse
   );
@@ -1199,6 +1201,14 @@ const Logout = () => {
 
   const userName = loginResponse?.current_user?.name;
   console.log("userName", userName);
+
+  const logoutEvent = {
+    username: userName,
+    timestamp: new Date(),
+    operations: `User ${userName} is logging out`,
+  };
+
+  const combinedEvents = events.concat(logoutEvent);
 
   const handleLogout = () => {
     fetch("https://robustapihub.io/entity/apigee_log?_format=json", {
@@ -1209,21 +1219,13 @@ const Logout = () => {
         withCredentials: true,
       },
       body: JSON.stringify({
-        description: [JSON.stringify(events)],
+        description: [JSON.stringify(combinedEvents)],
       }),
     })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-        dispatch(
-          trackEvent({
-            username: userName,
-            timestamp: new Date(),
-            operations: `User ${userName} has logged out`,
-          })
-        );
 
         dispatch(resetEvents());
 
@@ -1248,7 +1250,8 @@ const Logout = () => {
   //   return () => {
   //     window.removeEventListener("beforeunload", handleBeforeUnload);
   //   };
-  // }, []); // Empty dependency array means this effect runs only once when component mounts
+  // }, [combinedEvents]); // Added events as dependency
+
 
   // useEffect(() => {
   //   let logoutTimer;

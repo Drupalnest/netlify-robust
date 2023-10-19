@@ -557,6 +557,7 @@ import { useSelector } from "react-redux";
 import { Alert } from "react-bootstrap";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Layout from "../components/Layout";
 
 const DataTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -624,6 +625,7 @@ const DataTable = () => {
   }, [showAlert]);
 
   return (
+    <Layout>
     <div style={{ marginTop: "130px" }} className="">
       <Header />
 
@@ -698,8 +700,8 @@ const DataTable = () => {
               <tr className="border-top table-head-color text-white">
                 <th style={{ width: "20%" }}>Username</th>
                 <th style={{ width: "20%" }}>Timestamp</th>
-                <th style={{ width: "20%" }}>Location</th>
-                <th style={{ width: "40%" }}>Activity</th>
+                <th style={{ width: "20%" }}>operations</th>
+                {/* <th style={{ width: "40%" }}>Activity</th> */}
               </tr>
             </MDBTableHead>
             <MDBTableBody className="table-hover">
@@ -708,7 +710,7 @@ const DataTable = () => {
                   <td>{item.username}</td>
                   <td>{formatTimestamp(item.timestamp)}</td>
                   <td>{item.operations}</td>
-                  <td>
+                  {/* <td>
                     {item.appgroupName && (
                       <p>Appgroup Name: {item.appgroupName}</p>
                     )}
@@ -778,7 +780,7 @@ const DataTable = () => {
                         </ul>
                       </div>
                     )}
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </MDBTableBody>
@@ -790,6 +792,7 @@ const DataTable = () => {
         )}
       </MDBContainer>
     </div>
+    </Layout>
   );
 };
 

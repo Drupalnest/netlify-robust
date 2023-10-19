@@ -933,6 +933,13 @@ const AddApps = () => {
   // const teamDetails = useSelector((state) => state.teamDetails);
   // const teamName = teamDetails?.name || "";
 
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
+
   const appDetailsData = useSelector(
     (state) => state.appDetailsData.appDetailsData
   );
@@ -1045,7 +1052,7 @@ const AddApps = () => {
 
       if (response.ok) {
         dispatch(fetchApps(appgroupName)); // Assuming dispatch and fetchApps are defined
-        
+
         alert("Appgroup app created successfully!");
       } else {
         alert("Failed to create app");
@@ -1079,7 +1086,6 @@ const AddApps = () => {
         fetchedConsumerKey = responseData.credentials[0].consumerKey;
         setConsumerKey(fetchedConsumerKey);
         console.log("fetchedConsumerKey", fetchedConsumerKey);
-        
       } else {
         console.error("Error:", response.statusText);
       }
@@ -1158,14 +1164,22 @@ const AddApps = () => {
 
         dispatch(
           trackEvent({
+            // timestamp: new Date(),
+            // operation: "Appgroup App Added",
+            // //button: "Add Member Button",
+            // appgroupName: appgroupName,
+            // appName: appName,
+            // description: description,
+            // consumerKey: fetchedConsumerKey,
+            // selectedApiProduct: selected_apiProduct,
+
+            username: userName,
             timestamp: new Date(),
-            operation: "Appgroup App Added",
-            //button: "Add Member Button",
-            appgroupName: appgroupName,
-            appName: appName,
-            description: description,
-            consumerKey: fetchedConsumerKey,
-            selectedApiProduct: selected_apiProduct,
+            operations: `${appName} New Appgroup Apps Added ${
+              selected_apiProduct.length > 0
+                ? `with ${selected_apiProduct} products`
+                : "no api products added"
+            }`,
           })
         );
         navigate(`/${appgroupName}/apps`);

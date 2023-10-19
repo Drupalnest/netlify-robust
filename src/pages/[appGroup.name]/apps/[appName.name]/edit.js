@@ -711,6 +711,13 @@ const EditApps = () => {
   const [selectedApiProducts, setSelectedApiProducts] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
 
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+ 
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
+
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("editApps", teamDetails);
   const teamName = teamDetails ? teamDetails.name : "";
@@ -821,12 +828,16 @@ const EditApps = () => {
 
       dispatch(
         trackEvent({
-          timestamp: new Date(),
-          operation: "Appgroup App Edited Deleted Api Product",
-          appgroupName: teamName,
-          appName: appName,
-          selectedApiProduct: selectedApiProducts,
-          consumerKey: consumerKey,
+          // timestamp: new Date(),
+          // operation: "Appgroup App Edited Deleted Api Product",
+          // appgroupName: teamName,
+          // appName: appName,
+          // selectedApiProduct: selectedApiProducts,
+          // consumerKey: consumerKey,
+
+          username: userName,
+            timestamp: new Date(),
+            operations: `${appName} Team apps updated, ${apiproduct} product removed`,
           
         })
       );
@@ -925,12 +936,16 @@ const EditApps = () => {
      
       dispatch(
         trackEvent({
+          // timestamp: new Date(),
+          // operation: "Appgroup App Edited Add Api Product",
+          // appgroupName: teamName,
+          // appName: appName,
+          // selectedApiProduct: selectedApiProduct,
+          // consumerKey: consumerKey,
+
+          username: userName,
           timestamp: new Date(),
-          operation: "Appgroup App Edited Add Api Product",
-          appgroupName: teamName,
-          appName: appName,
-          selectedApiProduct: selectedApiProduct,
-          consumerKey: consumerKey,
+          operations: `${appName} Team apps updated, ${selectedApiProducts} product added`,
           
         })
       );

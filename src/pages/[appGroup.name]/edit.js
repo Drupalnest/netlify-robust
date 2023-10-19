@@ -430,9 +430,6 @@ import { trackEvent } from "../../redux/store";
 
 import withAuth from "../../components/HOC/withAuth";
 
-
-
-
 const UpdateCompanyName = () => {
   const [companyName, setCompanyName] = useState("");
   const [description, setDescription] = useState("");
@@ -444,7 +441,14 @@ const UpdateCompanyName = () => {
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("edit", teamDetails);
- 
+
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
+
   const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
 
   const team = teamDetails ? teamDetails.name : "";
@@ -497,8 +501,10 @@ const UpdateCompanyName = () => {
 
     try {
       const serializedApiProduct = serializeData.join(",");
-      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
-    const { accessToken } = await tokenResponse.json();
+      const tokenResponse = await fetch(
+        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      );
+      const { accessToken } = await tokenResponse.json();
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamDetails.name}`,
         {
@@ -541,19 +547,47 @@ const UpdateCompanyName = () => {
         // alert(serializedApiProduct);
         alert("Appgroups  updated successfully!");
         dispatch(fetchTeamDetails(team));
+
+        const isAdded = checkedAttributes.length > selectedAttributes.length;
+        const action = isAdded ? "added to" : "removed from";
+
+        const addedAttributes = checkedAttributes.filter(
+          (attr) => !selectedAttributes.includes(attr)
+        );
+       
+        // const removedAttributes = selectedAttributes.filter(
+        //   (attr) => !checkedAttributes.includes(attr)
+        // );
+        // console.log("removedAttributes:", removedAttributes);
+        
+
+        const addedAttributeNames = addedAttributes.join(", ");
+        const removedAttributeNames = unselected_attributes.join(", ");
+
+        const operationsMessage = `${team} Appgroup Edited. ${
+          addedAttributeNames ? `${addedAttributeNames} product added to` : ""
+        } ${
+          removedAttributeNames
+            ? `${removedAttributeNames} product removed from`
+            : ""
+        } Appgroup`;
+
         dispatch(
           trackEvent({
-            timestamp: new Date(),
-            operation: "Appgroup Edited",
-            //button: "Edit Team Button",
-            appgroupName:team,
-            EditedAppgroupName: companyName,
-            selectedApiProduct: uniqueAttributes,
-            updatedApiProduct:selected_attribute
+            // timestamp: new Date(),
+            // operation: "Appgroup Edited",
+            // //button: "Edit Team Button",
+            // appgroupName:team,
+            // EditedAppgroupName: companyName,
+            // selectedApiProduct: uniqueAttributes,
+            // updatedApiProduct: selected_attribute,
+            // selectedApiProduct: unselected_attributes,
 
             //description:description,
             //user:admins,
-            
+            username: userName,
+            timestamp: new Date(),
+            operations: operationsMessage,
           })
         );
         navigate("/teams");
@@ -593,6 +627,23 @@ const UpdateCompanyName = () => {
     });
   };
 
+
+  // const checkedAttributesRef = useRef([]);
+
+  // const handleCheckboxChange = (attribute) => {
+  //   setCheckedAttributes((prevChecked) => {
+  //     if (prevChecked.includes(attribute)) {
+  //       // Is line ko badle
+  //       checkedAttributesRef.current = prevChecked.filter((attr) => attr !== attribute);
+  //       return prevChecked.filter((attr) => attr !== attribute);
+  //     } else {
+  //       // Is line ko badle
+  //       checkedAttributesRef.current = [...prevChecked, attribute];
+  //       return [...prevChecked, attribute];
+  //     }
+  //   });
+  // };
+
   const descriptionValue = teamDetails
     ? teamDetails.attributes.find((attr) => attr.name === "description")?.value
     : "";
@@ -610,15 +661,10 @@ const UpdateCompanyName = () => {
     : "";
   console.log("admins", admins);
 
-
   const adminsEmail = teamDetails
-  ? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")
-      ?.value
-  : "";
-console.log("adminsEmail", adminsEmail);
-
-
-  
+    ? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")?.value
+    : "";
+  console.log("adminsEmail", adminsEmail);
 
   const filteredData = namesArray
     ? namesArray.filter((attr) => attr !== "0")
@@ -944,7 +990,6 @@ console.log("adminsEmail", adminsEmail);
                             <button
                               className="all-buttons-color text-white js-form-submit-modal-init   js-form-submit form-submit text-white btn btn-md"
                               onClick={handleUpdateCompany}
-                              
                             >
                               Save appgroup
                             </button>

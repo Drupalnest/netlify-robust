@@ -2081,9 +2081,10 @@ const AddTeam = () => {
   const [selectedAttributes, setSelectedAttributes] = useState([]);
   const [checkedAttributes, setCheckedAttributes] = useState([]);
 
-  const adminName = loginResponse?.current_user?.name;
-  console.log("Admin Name:", adminName);
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
 
+  const adminName = loginResponse?.current_user?.name;
   console.log("adminName", adminName);
 
   const handleCompanyNameChange = (e) => {
@@ -2162,14 +2163,28 @@ const AddTeam = () => {
         console.log("Setting showToast to true");
         dispatch(
           
+          // trackEvent({
+          //   timestamp: new Date(),
+          //   operation: "New Appgroup Added",
+          //   //button: "Add Team Button",
+          //   appgroupName: companyName,
+          //   // description:description,
+          //   user: adminName,
+          //   selectedApiProduct: selected_attribute,
+          // })
+
           trackEvent({
+            // timestamp: new Date(),
+            // operation: "New Appgroup Added",
+            // //button: "Add Team Button",
+            // appgroupName: companyName,
+            // // description:description,
+            // user: adminName,
+            // selectedApiProduct: selected_attribute,
+
+            username: userName,
             timestamp: new Date(),
-            operation: "New Appgroup Added",
-            //button: "Add Team Button",
-            appgroupName: companyName,
-            // description:description,
-            user: adminName,
-            selectedApiProduct: selected_attribute,
+            operations: `${companyName} New Appgroup Added with product ${selected_attribute}`
           })
         );
         //alert("Appgroup created successfully!");

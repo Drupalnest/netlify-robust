@@ -4,11 +4,16 @@ import { Link, navigate } from "gatsby";
 import { fetchTeamDetails, fetchTeams, trackEvent } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
-
-
 const EditMember = () => {
   const developer = useSelector((state) => state.memberName.developer);
   console.log("developer", developer);
+
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
 
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
@@ -29,10 +34,9 @@ const EditMember = () => {
   console.log("products", products);
 
   const adminsEmail = teamDetails
-  ? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")
-      ?.value
-  : "";
-console.log("adminsEmail", adminsEmail);
+    ? teamDetails.attributes.find((attr) => attr.name === "ADMIN_EMAIL")?.value
+    : "";
+  console.log("adminsEmail", adminsEmail);
 
   const members = teamDetails
     ? teamDetails.attributes.find(
@@ -40,8 +44,6 @@ console.log("adminsEmail", adminsEmail);
       )?.value
     : "";
   console.log("members", members);
-
-
 
   const allMembers = JSON.parse(members);
   console.log("All Members:", allMembers);
@@ -63,8 +65,10 @@ console.log("adminsEmail", adminsEmail);
 
     try {
       // const serializedApiProduct = serializeData.join(",");
-      const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
-    const { accessToken } = await tokenResponse.json();
+      const tokenResponse = await fetch(
+        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      );
+      const { accessToken } = await tokenResponse.json();
       const response = await fetch(
         `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamDetails.name}`,
         {
@@ -101,21 +105,56 @@ console.log("adminsEmail", adminsEmail);
       );
 
       if (response.ok) {
-        // alert(serializedApiProduct);
         alert("Member updated Successfully!");
         dispatch(fetchTeamDetails(team));
+      
+        const removedFromAdmin =
+          !rolesOfSelectedDeveloper.includes("admin") &&
+          selectedRoles.includes("admin");
+        const addedAsAdmin =
+          rolesOfSelectedDeveloper.includes("admin") &&
+          !selectedRoles.includes("admin");
+      
+        const removedFromMember =
+          !rolesOfSelectedDeveloper.includes("member") &&
+          selectedRoles.includes("member");
+        const addedAsMember =
+          rolesOfSelectedDeveloper.includes("member") &&
+          !selectedRoles.includes("member");
+      
+        let message = `${team} team updated. ${developer} `;
+      
+        if (removedFromAdmin) {
+          message += `added as admin. `;
+        }
+      
+        if (addedAsAdmin) {
+          message += `removed as admin. `;
+        }
+      
+        if (removedFromMember) {
+          message += `added as member. `;
+        }
+      
+        if (addedAsMember) {
+          message += `removed as member. `;
+        }
+      
         dispatch(
           trackEvent({
+            username: userName,
             timestamp: new Date(),
-            operation: "Members Edited",
-            //button: "Add Member Button",
-            appgroupName:team,
-            adminEmail:adminsEmail,
-            members:admins,
-            roles:selectedRoles,
-            previousRole:rolesOfSelectedDeveloper
+            operations: message,
           })
         );
+        dispatch(
+          trackEvent({
+            username: userName,
+            timestamp: new Date(),
+            operations: message,
+          })
+        );
+
         navigate(`/${team}/members`);
       } else {
         alert("Failed to update members.");
@@ -219,7 +258,10 @@ console.log("adminsEmail", adminsEmail);
                         </legend>
 
                         <div className="p-4 fieldset-wrapper ">
-                          <div id="edit-team-roles" className="form-checkboxes ">
+                          <div
+                            id="edit-team-roles"
+                            className="form-checkboxes "
+                          >
                             {/* Checkbox for Administrator */}
                             <div className="js-form-item form-item js-form-type-checkbox form-item-team-roles-admin js-form-item-team-roles-admin form-check p-0  ">
                               <input

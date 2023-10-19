@@ -8,6 +8,13 @@ const DeleteMember = () => {
   const developer = useSelector((state) => state.memberName.developer);
   console.log("developer", developer);
 
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+ 
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
+
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("edit", teamDetails);
@@ -84,11 +91,15 @@ const DeleteMember = () => {
         dispatch(fetchTeamDetails(team));
         dispatch(
         trackEvent({
+          // timestamp: new Date(),
+          // operation: "Member Deleted",
+          // //button: "Add Member Button",
+          // appgroupName: team,
+          // members:developer,
+
+          username: userName,
           timestamp: new Date(),
-          operation: "Member Deleted",
-          //button: "Add Member Button",
-          appgroupName: team,
-          members:developer
+          operations: `Member ${developer} deleted from ${team} appgroup`
 
         })
         );

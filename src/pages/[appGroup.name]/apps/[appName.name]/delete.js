@@ -410,6 +410,13 @@ const DeleteApps = () => {
   //   const appNames = appDetailsData.name;
   //   console.log("appNames", appNames);
 
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+ 
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
+
   const appDetailsData = useSelector(
     (state) => state.appDetailsData.appDetailsData
   );
@@ -444,10 +451,13 @@ const DeleteApps = () => {
       dispatch(fetchApps(teamName));
       dispatch(
         trackEvent({
-          timestamp: new Date(),
-          operation: "Appgroup App Deleted",
-          appgroupName: teamName,
-          appName: appName,
+          // timestamp: new Date(),
+          // operation: "Appgroup App Deleted",
+          // appgroupName: teamName,
+          // appName: appName,
+          username: userName,
+            timestamp: new Date(),
+            operations: `${appName} Team Apps Deleted`,
         })
       );
       navigate(`/${teamName}/apps`);

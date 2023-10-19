@@ -131,6 +131,13 @@ const DeleteTeam = () => {
   const isFetching = teamDetails ? teamDetails.loading : true; // Handle null value
 
 
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+ 
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -148,13 +155,15 @@ const DeleteTeam = () => {
       setErrorMessage("");
       dispatch(
         trackEvent({
-          timestamp: new Date(),
-          operation: "Appgroup Deleted",
-          //button: "Delete Team Button",
-          appgroupName:appGroupName,
+          // timestamp: new Date(),
+          // operation: "Appgroup Deleted",
+          // //button: "Delete Team Button",
+          // appgroupName:appGroupName,
           //description:description,
           //admins:admins,
-          
+          username: userName,
+            timestamp: new Date(),
+            operations: `${appGroupName} Appgroup Deleted.`
         })
       );
       alert("Appgroup deleted successfully");

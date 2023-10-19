@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../../components/Layout";
@@ -37,7 +37,12 @@ const ViewApp = () => {
       [credentialKey]: !prevState[credentialKey],
     }));
   };
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
 
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
   // const toggleDropdown = () => {
   //   setDropdownOpen(!dropdownOpen);
   // };
@@ -82,6 +87,7 @@ const ViewApp = () => {
   const [showKey1, setShowKey1] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [copyMessage, setCopyMessage] = useState("");
+  const textInputRef = useRef(null);
   const [copyMessages, setCopyMessages] = useState({});
   const [showConfirmButton, setShowConfirmButton] = useState(false);
   // const copyToClipboard = (text, index) => {
@@ -93,10 +99,58 @@ const ViewApp = () => {
   //   }, 2000);
   // };
 
-  const copyToClipboard = async (text, index) => {
+  // const copyToClipboard = async (text, index) => {
+  //   try {
+  //     await navigator.clipboard.writeText(text);
+  //     setCopyMessage("");
+
+  //     // dispatch(trackEvent({
+  //     //   username: userName,
+  //     //   timestamp: new Date(),
+  //     //   operations: `${appName} API key ${consumerKey} and secret copied`,
+  //     // }));
+
+  //     setTimeout(() => {
+  //       setCopyMessage("");
+  //     }, 2000);
+  //   } catch (error) {
+  //     console.error("Error copying to clipboard:", error);
+  //     // Handle the error here if needed
+  //   }
+  // };
+
+  const copyToClipboard = async (
+    text,
+    identifier,
+    consumerKey,
+    consumerSecret
+  ) => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopyMessage("");
+
+      if (identifier === "consumerKey") {
+        // setCopyMessage("Consumer Key Copied!");
+        setCopyMessage();
+
+        dispatch(
+          trackEvent({
+            username: userName,
+            timestamp: new Date(),
+            operations: `Consumer Key copied from ${appName} Appgroup Apps in ${teamName} Appgroup`,
+          })
+        );
+      } else if (identifier === "consumerSecret") {
+        //setCopyMessage("Consumer Secret Copied!");
+        setCopyMessage();
+
+        dispatch(
+          trackEvent({
+            username: userName,
+            timestamp: new Date(),
+            operations: `Consumer Secret copied from ${appName} Appgroup Apps in ${teamName} Appgroup`,
+          })
+        );
+      }
 
       setTimeout(() => {
         setCopyMessage("");
@@ -106,6 +160,23 @@ const ViewApp = () => {
       // Handle the error here if needed
     }
   };
+
+  // const copyToClipboard = async (consumerKey, consumerSecret) => {
+  //   try {
+  //     const textToCopy = `${consumerKey}\n${consumerSecret}`;
+  //     await navigator.clipboard.writeText(textToCopy);
+  //     setCopyMessage("Copied!");
+
+  //     // Dispatch your action here
+  //     dispatch(trackEvent({
+  //       username: userName,
+  //       timestamp: new Date(),
+  //       operations: `${appName} API key ${consumerKey} and secret copied`,
+  //     }));
+  //   } catch (error) {
+  //     console.error("Error copying to clipboard:", error);
+  //   }
+  // };
 
   function customFormatTimestamp(timestamp) {
     if (!timestamp) {
@@ -278,13 +349,17 @@ const ViewApp = () => {
 
       dispatch(
         trackEvent({
+          // timestamp: new Date(),
+          // operation: "Appgroup App Key Added",
+          // //button: "Add Member Button",
+          // consumerKey: randomKey,
+          // consumerSecret: randomSecret,
+          // teamName: teamName,
+          // appName: appName,
+
+          username: userName,
           timestamp: new Date(),
-          operation: "Appgroup App Key Added",
-          //button: "Add Member Button",
-          consumerKey: randomKey,
-          consumerSecret: randomSecret,
-          teamName: teamName,
-          appName: appName,
+          operations: `${appName}  API key added`,
         })
       );
       //alert("API key created successfully");
@@ -360,15 +435,15 @@ const ViewApp = () => {
         },
       });
       dispatch(fetchAppDetails(teamName, appName));
-      dispatch(
-        trackEvent({
-          timestamp: new Date(),
-          operation: "Appgroup App Api Product Added",
-          appgroupName: teamName,
-          appName: appName,
-          selectedApiProduct: apiProducts,
-        })
-      );
+      // dispatch(
+      //   trackEvent({
+      //     timestamp: new Date(),
+      //     operation: "Appgroup App Api Product Added",
+      //     appgroupName: teamName,
+      //     appName: appName,
+      //     selectedApiProduct: apiProducts,
+      //   })
+      // );
       alert("API key and product added successfully");
       setShowPopup(false);
     } catch (error) {
@@ -403,9 +478,6 @@ const ViewApp = () => {
     return "•".repeat(15);
   };
 
-
-
-
   const handleRemovekey = async (teamName, appName, consumerKey) => {
     const tokenResponse = await fetch(
       "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
@@ -422,12 +494,16 @@ const ViewApp = () => {
       });
       dispatch(
         trackEvent({
+          // timestamp: new Date(),
+          // operation: "Appgroup App Consumer Key Deleted",
+          // teamName: teamName,
+          // appName: appName,
+          // selectedApiProduct: apiProducts,
+          // consumerKey: consumerKey,
+
+          username: userName,
           timestamp: new Date(),
-          operation: "Appgroup App Consumer Key Deleted",
-          teamName: teamName,
-          appName: appName,
-          selectedApiProduct: apiProducts,
-          consumerKey: consumerKey,
+          operations: `${teamName} Appgroup updated, ${consumerKey} key is deleted from ${appName} Appgroup Apps`,
         })
       );
       dispatch(fetchAppDetails(teamName, appName));
@@ -436,8 +512,6 @@ const ViewApp = () => {
       alert("Error removing key: " + error);
     }
   };
-
-
 
   const handleRevokeKey = async (teamName, appName, consumerKey) => {
     const tokenResponse = await fetch(
@@ -462,12 +536,16 @@ const ViewApp = () => {
 
         dispatch(
           trackEvent({
+            // timestamp: new Date(),
+            // operation: "Appgroup App Consumer Key Revoked",
+            // teamName: teamName,
+            // appName: appName,
+            // selectedApiProduct: apiProducts,
+            // consumerKey: consumerKey,
+
+            username: userName,
             timestamp: new Date(),
-            operation: "Appgroup App Consumer Key Revoked",
-            teamName: teamName,
-            appName: appName,
-            selectedApiProduct: apiProducts,
-            consumerKey: consumerKey,
+            operations: `${teamName} Appgroup updated, ${consumerKey} key is revoked from ${appName} Appgroups Apps`,
           })
         );
 
@@ -761,7 +839,8 @@ const ViewApp = () => {
                                                 <span
                                                   onClick={() =>
                                                     copyToClipboard(
-                                                      credential.consumerKey
+                                                      credential.consumerKey,
+                                                      "consumerKey"
                                                     )
                                                   }
                                                   style={{
@@ -845,7 +924,8 @@ const ViewApp = () => {
                                                 <span
                                                   onClick={() =>
                                                     copyToClipboard(
-                                                      credential.consumerSecret
+                                                      credential.consumerSecret,
+                                                      "consumerSecret"
                                                     )
                                                   }
                                                   style={{
@@ -1219,7 +1299,8 @@ const ViewApp = () => {
                                                     <span
                                                       onClick={() =>
                                                         copyToClipboard(
-                                                          credential.consumerKey
+                                                          credential.consumerKey,
+                                                          "consumerKey"
                                                         )
                                                       }
                                                       style={{
@@ -1305,7 +1386,8 @@ const ViewApp = () => {
                                                     <span
                                                       onClick={() =>
                                                         copyToClipboard(
-                                                          credential.consumerSecret
+                                                          credential.consumerSecret,
+                                                          "consumerSecret"
                                                         )
                                                       }
                                                       style={{

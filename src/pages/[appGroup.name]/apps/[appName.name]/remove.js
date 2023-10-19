@@ -158,7 +158,7 @@ import { useLocation } from '@reach/router';
 import Layout from '../../../../components/Layout';
 import { Link, navigate } from 'gatsby';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchTeamDetails,
   fetchAppDetails,
@@ -177,6 +177,13 @@ function RemovePage() {
   const appName = searchParams.get('appName');
   console.log("appName",appName)
   const consumerKey = searchParams.get('consumerKey');
+
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+ 
+  const userName = loginResponse?.current_user?.name;
+  console.log("userName", userName);
   
   // Now you have access to the passed data (teamName, appName, consumerKey)
 
@@ -200,11 +207,17 @@ function RemovePage() {
 
       dispatch(
         trackEvent({
+          // timestamp: new Date(),
+          // operation: "Appgroup App Consumer Key Deleted",
+          // appgroupName: teamName,
+          // appName: appName,
+          // consumerKey: consumerKey,
+
+          username: userName,
           timestamp: new Date(),
-          operation: "Appgroup App Consumer Key Deleted",
-          appgroupName: teamName,
-          appName: appName,
-          consumerKey: consumerKey,
+          operations: `${teamName} Appgroup updated , ${consumerKey} key is deleted from ${appName} Appgroup Apps`
+
+
         })
       );
 
