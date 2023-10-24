@@ -4,13 +4,13 @@ import Teams from "../pages/teams"; // Assuming this is the correct import path 
 import App from "./App";
 // import Token from "../components/Auth/Token";
 import withAuth from "../components/HOC/withAuth";
+import Startpage from "./start-page";
 
 //import setInitialTokenInCookie from "../../tokenHandler"
 const Index = () => {
-
   // useEffect(() => {
   //   setInitialTokenInCookie(); // Call the function here
-  // }, []); 
+  // }, []);
   // useEffect(() => {
   //   setTimeout(() => {
   //     window.location.reload(); // Refresh the page
@@ -18,9 +18,10 @@ const Index = () => {
   // }, []);
   return (
     <div>
-    {/* <TokenFetcher/> */}
-      
-      <Teams />
+      {/* <TokenFetcher/> */}
+
+      {/* <Teams /> */}
+      <Startpage />
 
       {/* <Teams /> */}
       {/* <App /> */}
@@ -28,7 +29,8 @@ const Index = () => {
   );
 };
 
-export default withAuth(Index);
+// export default withAuth(Index);
+export default Index;
 
 // import React, { useState, useEffect } from "react";
 // import { getMyGoogleCalendarsList } from "../utils/calendarApi";
