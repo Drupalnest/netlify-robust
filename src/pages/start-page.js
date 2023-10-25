@@ -875,7 +875,7 @@ const Startpage = () => {
               {/* Section 1 */}
 
               <div
-                className="paragraph hero hero--default bg-light card position-relative d-flex flex-column min-width-0 word-wrap-break-word bg-white bg-clip-border-box border rounded-2 border-dark p-4 text-center"
+                className="paragraph hero hero--default bg-light card position-relative d-flex flex-column min-width-0 word-wrap-break-word bg-white bg-clip-border-box border rounded-2 p-4 text-center"
                 // style={{ border: "4px solid red" }}
               >
                 <div className="hero__wrapper">
@@ -918,7 +918,7 @@ const Startpage = () => {
                         <div className="col-md-6">
                           <div className="field field--hidden hero__field-media">
                             <div className="media media--type-image media--view-mode-hero-squared">
-                              <div className="field field--hidden image__field-media-image">
+                              <div className="p-2 field field--hidden image__field-media-image">
                                 <img
                                   loading="lazy"
                                   src={place1}
@@ -1096,8 +1096,9 @@ const Startpage = () => {
                   <h2 className="card-group__title text-center pb-1 p-sm-4 text-white">
                     Get started with the APIs in minutes
                   </h2>
-                  <div className="row justify-content-center">
-                    <div className="col-md-4 mb-4">
+
+                  <div className="row d-flex flex-wrap justify-content-center ">
+                    <div className="col-md-6 col-lg-5 col-xl-4 mb-4">
                       <div
                         className="card has-hover-shadow p-1 paragraph card--default 
                        rounded-4 d-flex"
@@ -1143,7 +1144,7 @@ const Startpage = () => {
                       </div>
                     </div>
 
-                    <div className="col-md-4  mb-4">
+                    <div className="col-md-6 col-lg-5 col-xl-4 mb-4">
                       <div className="card has-hover-shadow paragraph card--default p-1">
                         <Link to="#">
                           <div className="card-block d-flex border-dark text-dark">
@@ -1186,7 +1187,7 @@ const Startpage = () => {
                       </div>
                     </div>
 
-                    <div className="col-md-4 mb-4">
+                    <div className="col-md-8 col-lg-5 col-xl-4 mb-4">
                       <div className="card has-hover-shadow paragraph card--default p-1">
                         <Link to="#">
                           <div className="card-block d-flex border-dark text-dark">
@@ -1307,8 +1308,8 @@ const Startpage = () => {
 
               {/* section4  */}
               <div
-                className="paragraph views-block views-block--default  h-50 darkBlue-background-color"
-                 style={{ border: "4px solid red" }}
+                className="paragraph views-block views-block--default  "
+                //style={{ border: "4px solid red" }}
               >
                 <div
                   className="position-absolute top-0 start-0 w-100 h-50 darkBlue-background-color"
@@ -1323,433 +1324,494 @@ const Startpage = () => {
                     </div>
                   </h3>
 
-                  <div className="card-deck pt-5 d-flex flex-md-wrap justify-content-center align-items-center  border border-danger">
-                    <div className="field field--hidden views-block__field-views-block">
-                      <div className="views-element-container block block--views-block--api-categories-block-1">
-                        <div>
-                          {/* <div className="view view-api-categories view-api-categories--block-1 view-id-api_categories view-display-id-block_1 js-view-dom-id-fba349cdd881250540a883e806224441faff83c917a58f0b9aca6cdcf925677a">
-                            <div className="view-content d-flex flex-wrap justify-content-between border border-danger">
-                              <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-3">
-                                <div className="views-field views-field-field-category-image">
-                                  <div className="field-content mb-3  justify-content-center ">
-                                    <img
-                                      loading="lazy"
-                                      src={place2}
-                                      width="165"
-                                      height="123"
-                                      alt="authentication"
-                                      typeof="foaf:Image"
-                                      className="img-fluid mx-auto p-3 "
-                                    />
-                                  </div>
-                                </div>
-                                <div className="views-field views-field-name py-2">
-                                  <span className="field-content">
-                                    Authentication
-                                  </span>
-                                </div>
-                                <div className="views-field views-field-description__value py-2">
-                                  <span className="field-content">
-                                    Authentication APIs
-                                  </span>
-                                </div>
-                                <div className="views-field views-field-nothing ">
-                                  <span className="field-content">
-                                    <Link to="#" label="Authentication  APIs">
-                                      Authentication APIs
-                                    </Link>
-                                  </span>
-                                </div>
-                              </div>
-
-                              <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-3">
-                                <div className="views-field views-field-field-category-image">
-                                  <div className="field-content mb-3  justify-content-center ">
-                                    <img
-                                      loading="lazy"
-                                      src={place2}
-                                      width="165"
-                                      height="123"
-                                      alt="authentication"
-                                      typeof="foaf:Image"
-                                      className="img-fluid mx-auto p-3"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="views-field views-field-name py-2">
-                                  <span className="field-content">
-                                    Claims and EOBs
-                                  </span>
-                                </div>
-                                <div className="views-field views-field-description__value py-2">
-                                  <span className="field-content">
-                                    <p>API services that manage claims</p>
-                                  </span>
-                                </div>
-                                <div className="views-field views-field-nothing py-2">
-                                  <span className="field-content">
-                                    <Link to="#" label="Claims and EOBs  APIs">
-                                      Claims and EOBs APIs
-                                    </Link>
-                                  </span>
-                                </div>
-                              </div>
-
-                              <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-3">
-                                <div className="views-field views-field-field-category-image">
-                                  <div className="field-content mb-3  justify-content-center ">
-                                    <img
-                                      loading="lazy"
-                                      src={place2}
-                                      width="165"
-                                      height="123"
-                                      alt="authentication"
-                                      typeof="foaf:Image"
-                                      className="img-fluid mx-auto p-3"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="views-field views-field-name py-2">
-                                  <span className="field-content">Covid19</span>
-                                </div>
-                                <div className="views-field views-field-description__value py-2">
-                                  <span className="field-content">
-                                    All COVID19 related APIs
-                                  </span>
-                                </div>
-                                <div className="views-field views-field-nothing py-2">
-                                  <span className="field-content">
-                                    <Link to="#" label="Covid19  APIs">
-                                      Covid19 APIs
-                                    </Link>
-                                  </span>
-                                </div>
-                              </div>
-
-                              <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-3">
-                                <div className="views-field views-field-field-category-image">
-                                  <div className="field-content mb-3  justify-content-center ">
-                                    <img
-                                      loading="lazy"
-                                      src={place2}
-                                      width="165"
-                                      height="123"
-                                      alt="authentication"
-                                      typeof="foaf:Image"
-                                      className="img-fluid mx-auto p-3"
-                                    />
-                                  </div>
-                                </div>
-                                <div className="views-field views-field-name py-2">
-                                  <span className="field-content">
-                                    ExtraCare
-                                  </span>
-                                </div>
-                                <div className="views-field views-field-description__value py-2">
-                                  <span className="field-content">
-                                    Extracare APIs
-                                  </span>
-                                </div>
-                                <div className="views-field views-field-nothing py-2">
-                                  <span className="field-content">
-                                    <Link to="#" label="ExtraCare  APIs">
-                                      ExtraCare APIs
-                                    </Link>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="d-flex justify-content-center py-4">
-                              <div className="more-link btn btn-primary">
-                                Button Content
-                              </div>
-                            </div>
-                          </div> */}
-                          <div className="view-content d-flex flex-wrap justify-content-between border border-danger">
-                            <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-3">
-                              <div className="views-field views-field-field-category-image">
-                                <div className="field-content mb-3  justify-content-center ">
-                                  <img
-                                    loading="lazy"
-                                    src={place2}
-                                    width="165"
-                                    height="123"
-                                    alt="authentication"
-                                    typeof="foaf:Image"
-                                    className="img-fluid mx-auto p-3 "
-                                  />
-                                </div>
-                              </div>
-                              <div className="views-field views-field-name py-2">
-                                <span className="field-content">
-                                  Authentication
-                                </span>
-                              </div>
-                              <div className="views-field views-field-description__value py-2">
-                                <span className="field-content">
-                                  Authentication APIs
-                                </span>
-                              </div>
-                              <div className="views-field views-field-nothing ">
-                                <span className="field-content">
-                                  <Link
-                                    to="#"
-                                    label="Authentication  APIs"
-                                    className="text-orange-color"
-                                  >
-                                    Authentication APIs
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
-                            <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-3">
-                              <div className="views-field views-field-field-category-image">
-                                <div className="field-content mb-3  justify-content-center ">
-                                  <img
-                                    loading="lazy"
-                                    src={place2}
-                                    width="165"
-                                    height="123"
-                                    alt="authentication"
-                                    typeof="foaf:Image"
-                                    className="img-fluid mx-auto p-3 "
-                                  />
-                                </div>
-                              </div>
-                              <div className="views-field views-field-name py-2">
-                                <span className="field-content">
-                                  Authentication
-                                </span>
-                              </div>
-                              <div className="views-field views-field-description__value py-2">
-                                <span className="field-content">
-                                  Authentication APIs
-                                </span>
-                              </div>
-                              <div className="views-field views-field-nothing ">
-                                <span className="field-content">
-                                  <Link
-                                    to="#"
-                                    label="Authentication  APIs"
-                                    className="text-orange-color"
-                                  >
-                                    Authentication APIs
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
-                            <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-3">
-                              <div className="views-field views-field-field-category-image">
-                                <div className="field-content mb-3  justify-content-center ">
-                                  <img
-                                    loading="lazy"
-                                    src={place2}
-                                    width="165"
-                                    height="123"
-                                    alt="authentication"
-                                    typeof="foaf:Image"
-                                    className="img-fluid mx-auto p-3 "
-                                  />
-                                </div>
-                              </div>
-                              <div className="views-field views-field-name py-2">
-                                <span className="field-content">
-                                  Authentication
-                                </span>
-                              </div>
-                              <div className="views-field views-field-description__value py-2">
-                                <span className="field-content">
-                                  Authentication APIs
-                                </span>
-                              </div>
-                              <div className="views-field views-field-nothing ">
-                                <span className="field-content">
-                                  <Link
-                                    to="#"
-                                    label="Authentication  APIs"
-                                    className="text-orange-color"
-                                  >
-                                    Authentication APIs
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
-                            <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-3">
-                              <div className="views-field views-field-field-category-image">
-                                <div className="field-content mb-3  justify-content-center ">
-                                  <img
-                                    loading="lazy"
-                                    src={place2}
-                                    width="165"
-                                    height="123"
-                                    alt="authentication"
-                                    typeof="foaf:Image"
-                                    className="img-fluid mx-auto p-3 "
-                                  />
-                                </div>
-                              </div>
-                              <div className="views-field views-field-name py-2">
-                                <span className="field-content">
-                                  Authentication
-                                </span>
-                              </div>
-                              <div className="views-field views-field-description__value py-2">
-                                <span className="field-content">
-                                  Authentication APIs
-                                </span>
-                              </div>
-                              <div className="views-field views-field-nothing ">
-                                <span className="field-content">
-                                  <Link
-                                    to="#"
-                                    label="Authentication  APIs"
-                                    className="text-orange-color"
-                                  >
-                                    Authentication APIs
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
+                  {/* <div className=" pt-5 d-flex  justify-content-center align-items-center  border border-danger">
+                    <div className="container d-flex flex-wrap justify-content-center align-items-center">
+                      <div className="  col-md-4 col-lg-5 col-xl-4 mb-4">
+                        <div
+                          className="card text-center has-hover-shadow   
+                       rounded-4 d-flex"
+                        >
+                          <div className="field-content mb-3  justify-content-center ">
+                            <img
+                              loading="lazy"
+                              src={place2}
+                              width="165"
+                              height="123"
+                              alt="authentication"
+                              typeof="foaf:Image"
+                              className="img-fluid mx-auto p-3 "
+                            />
                           </div>
 
-                          {/* <div className="d-flex flex-wrap justify-content-between border border-danger">
-                            <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-4">
-                              <div className="views-field views-field-field-category-image">
-                                <div className="field-content mb-5 justify-content-center">
-                                  <img
-                                    loading="lazy"
-                                    src={place2}
-                                    width="165"
-                                    height="223"
-                                    alt="authentication"
-                                    typeof="foaf:Image"
-                                    className="img-fluid mx-auto p-3"
-                                  />
-                                </div>
-                              </div>
-                              <div className="views-field views-field-name py-2">
-                                <span className="field-content">
-                                  Authentication
-                                </span>
-                              </div>
-                              <div className="views-field views-field-description__value py-2">
-                                <span className="field-content">
-                                  Authentication APIs
-                                </span>
-                              </div>
-                              <div className="views-field views-field-nothing ">
-                                <span className="field-content">
-                                  <Link to="#" label="Authentication APIs">
-                                    Authentication APIs
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
+                          <div className="views-field views-field-name py-2">
+                            <span className="field-content">
+                              Authentication
+                            </span>
+                          </div>
+                          <div className="views-field views-field-description__value py-2">
+                            <span className="field-content">
+                              Authentication APIs
+                            </span>
+                          </div>
+                          <div className="views-field views-field-nothing ">
+                            <span className="field-content">
+                              <Link
+                                to="#"
+                                label="Authentication  APIs"
+                                className="text-orange-color"
+                              >
+                                Authentication APIs
+                              </Link>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
 
-                            <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-4">
-                              <div className="views-field views-field-field-category-image">
-                                <div className="field-content mb-5 justify-content-center">
-                                  <img
-                                    loading="lazy"
-                                    src={place2}
-                                    width="165"
-                                    height="223"
-                                    alt="authentication"
-                                    typeof="foaf:Image"
-                                    className="img-fluid mx-auto p-3"
-                                  />
-                                </div>
-                              </div>
-                              <div className="views-field views-field-name py-2">
-                                <span className="field-content">
-                                  Authentication
-                                </span>
-                              </div>
-                              <div className="views-field views-field-description__value py-2">
-                                <span className="field-content">
-                                  Authentication APIs
-                                </span>
-                              </div>
-                              <div className="views-field views-field-nothing ">
-                                <span className="field-content">
-                                  <Link to="#" label="Authentication APIs">
-                                    Authentication APIs
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
+                      <div className=" col-md-4 col-lg-5 col-xl-4 mb-4">
+                        <div
+                          className="card text-center has-hover-shadow p-1 paragraph card--default 
+                       rounded-4 d-flex"
+                        >
+                          <div className="field-content mb-3  justify-content-center ">
+                            <img
+                              loading="lazy"
+                              src={place2}
+                              width="165"
+                              height="123"
+                              alt="authentication"
+                              typeof="foaf:Image"
+                              className="img-fluid mx-auto p-3 "
+                            />
+                          </div>
 
-                            <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-4">
-                              <div className="views-field views-field-field-category-image">
-                                <div className="field-content mb-5 justify-content-center">
-                                  <img
-                                    loading="lazy"
-                                    src={place2}
-                                    width="165"
-                                    height="223"
-                                    alt="authentication"
-                                    typeof="foaf:Image"
-                                    className="img-fluid mx-auto p-3"
-                                  />
-                                </div>
-                              </div>
-                              <div className="views-field views-field-name py-2">
-                                <span className="field-content">
-                                  Authentication
-                                </span>
-                              </div>
-                              <div className="views-field views-field-description__value py-2">
-                                <span className="field-content">
-                                  Authentication APIs
-                                </span>
-                              </div>
-                              <div className="views-field views-field-nothing ">
-                                <span className="field-content">
-                                  <Link to="#" label="Authentication APIs">
-                                    Authentication APIs
-                                  </Link>
-                                </span>
-                              </div>
-                            </div>
+                          <div className="views-field views-field-name py-2">
+                            <span className="field-content">
+                              Authentication
+                            </span>
+                          </div>
+                          <div className="views-field views-field-description__value py-2">
+                            <span className="field-content">
+                              Authentication APIs
+                            </span>
+                          </div>
+                          <div className="views-field views-field-nothing ">
+                            <span className="field-content">
+                              <Link
+                                to="#"
+                                label="Authentication  APIs"
+                                className="text-orange-color"
+                              >
+                                Authentication APIs
+                              </Link>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
 
-                            <div className="card text-center col-lg-3 col-md-4 col-sm-6 mb-4">
-                              <div className="views-field views-field-field-category-image">
-                                <div className="field-content mb-5 justify-content-center">
-                                  <img
-                                    loading="lazy"
-                                    src={place2}
-                                    width="165"
-                                    height="223"
-                                    alt="authentication"
-                                    typeof="foaf:Image"
-                                    className="img-fluid mx-auto p-3"
-                                  />
-                                </div>
-                              </div>
-                              <div className="views-field views-field-name py-2">
-                                <span className="field-content">
-                                  Authentication
-                                </span>
-                              </div>
-                              <div className="views-field views-field-description__value py-2">
-                                <span className="field-content">
-                                  Authentication APIs
-                                </span>
-                              </div>
-                              <div className="views-field views-field-nothing ">
-                                <span className="field-content">
-                                  <Link to="#" label="Authentication APIs">
-                                    Authentication APIs
-                                  </Link>
-                                </span>
-                              </div>
+                      <div className="col-md-4 col-lg-5 col-xl-4 mb-4">
+                        <div
+                          className="card text-center has-hover-shadow p-1 paragraph card--default 
+                       rounded-4 d-flex"
+                        >
+                          <div className="field-content mb-3  justify-content-center ">
+                            <img
+                              loading="lazy"
+                              src={place2}
+                              width="165"
+                              height="123"
+                              alt="authentication"
+                              typeof="foaf:Image"
+                              className="img-fluid mx-auto p-3 "
+                            />
+                          </div>
+
+                          <div className="views-field views-field-name py-2">
+                            <span className="field-content">
+                              Authentication
+                            </span>
+                          </div>
+                          <div className="views-field views-field-description__value py-2">
+                            <span className="field-content">
+                              Authentication APIs
+                            </span>
+                          </div>
+                          <div className="views-field views-field-nothing ">
+                            <span className="field-content">
+                              <Link
+                                to="#"
+                                label="Authentication  APIs"
+                                className="text-orange-color"
+                              >
+                                Authentication APIs
+                              </Link>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className=" col-md-4 col-lg-5 col-xl-4 mb-4">
+                        <div
+                          className="card text-center has-hover-shadow p-1 paragraph card--default 
+                       rounded-4 d-flex"
+                        >
+                          <div className="field-content mb-3  justify-content-center ">
+                            <img
+                              loading="lazy"
+                              src={place2}
+                              width="165"
+                              height="123"
+                              alt="authentication"
+                              typeof="foaf:Image"
+                              className="img-fluid mx-auto p-3 "
+                            />
+                          </div>
+
+                          <div className="views-field views-field-name py-2">
+                            <span className="field-content">
+                              Authentication
+                            </span>
+                          </div>
+                          <div className="views-field views-field-description__value py-2">
+                            <span className="field-content">
+                              Authentication APIs
+                            </span>
+                          </div>
+                          <div className="views-field views-field-nothing ">
+                            <span className="field-content">
+                              <Link
+                                to="#"
+                                label="Authentication  APIs"
+                                className="text-orange-color"
+                              >
+                                Authentication APIs
+                              </Link>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> */}
+                  <div className="pt-5 d-flex justify-content-center align-items-center">
+                    <div className="container d-flex flex-wrap  align-items-center">
+                      <div className="col-md-6 col-lg-4 col-xl-3 mb-4">
+                        <div className="card text-center has-hover-shadow rounded-4 d-flex">
+                          <div className="field-content mb-3 justify-content-center">
+                            <img
+                              loading="lazy"
+                              src={place2}
+                              width="165"
+                              height="123"
+                              alt="authentication"
+                              typeof="foaf:Image"
+                              className="img-fluid mx-auto p-3"
+                            />
+                          </div>
+
+                          <div className="views-field views-field-name py-2">
+                            <div
+                              className="field-content bold-text"
+                              style={{ fontWeight: "bold", fontSize: "1.5em" }}
+                            >
+                              Authentication
                             </div>
-                          </div> */}
+                          </div>
+                          <div className="views-field views-field-description__value py-2">
+                            <span className="field-content">
+                              Authentication APIs
+                            </span>
+                          </div>
+                          <div className="views-field views-field-nothing py-3 ">
+                            <span className="field-content ">
+                              <Link
+                                to="#"
+                                label="Authentication APIs"
+                                className="text-orange-color  "
+                              >
+                                Authentication APIs
+                              </Link>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-6 col-lg-4 col-xl-3 mb-4">
+                        <div className="card text-center has-hover-shadow rounded-4 d-flex">
+                          <div className="field-content mb-3 justify-content-center">
+                            <img
+                              loading="lazy"
+                              src={place2}
+                              width="165"
+                              height="123"
+                              alt="authentication"
+                              typeof="foaf:Image"
+                              className="img-fluid mx-auto p-3"
+                            />
+                          </div>
+
+                          <div className="views-field views-field-name py-2">
+                            <div
+                              className="field-content bold-text"
+                              style={{ fontWeight: "bold", fontSize: "1.5em" }}
+                            >
+                              Authentication
+                            </div>
+                          </div>
+                          <div className="views-field views-field-description__value py-2">
+                            <span className="field-content">
+                              Authentication APIs
+                            </span>
+                          </div>
+                          <div className="views-field views-field-nothing py-3">
+                            <span className="field-content">
+                              <Link
+                                to="#"
+                                label="Authentication APIs"
+                                className="text-orange-color"
+                              >
+                                Authentication APIs
+                              </Link>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="col-md-6 col-lg-4 col-xl-3 mb-4">
+                        <div className="card text-center has-hover-shadow rounded-4 d-flex">
+                          <div className="field-content mb-3 justify-content-center">
+                            <img
+                              loading="lazy"
+                              src={place2}
+                              width="165"
+                              height="123"
+                              alt="authentication"
+                              typeof="foaf:Image"
+                              className="img-fluid mx-auto p-3"
+                            />
+                          </div>
+
+                          <div className="views-field views-field-name py-2">
+                            <div
+                              className="field-content bold-text"
+                              style={{ fontWeight: "bold", fontSize: "1.5em" }}
+                            >
+                              Authentication
+                            </div>
+                          </div>
+                          <div className="views-field views-field-description__value py-2">
+                            <span className="field-content">
+                              Authentication APIs
+                            </span>
+                          </div>
+                          <div className="views-field views-field-nothing py-3">
+                            <span className="field-content">
+                              <Link
+                                to="#"
+                                label="Authentication APIs"
+                                className="text-orange-color"
+                              >
+                                Authentication APIs
+                              </Link>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="col-md-6 col-lg-4 col-xl-3 mb-4">
+                        <div className="card text-center has-hover-shadow rounded-4 d-flex">
+                          <div className="field-content mb-3 justify-content-center">
+                            <img
+                              loading="lazy"
+                              src={place2}
+                              width="165"
+                              height="123"
+                              alt="authentication"
+                              typeof="foaf:Image"
+                              className="img-fluid mx-auto p-3"
+                            />
+                          </div>
+
+                          <div className="views-field views-field-name py-2">
+                            <div
+                              className="field-content bold-text"
+                              style={{ fontWeight: "bold", fontSize: "1.5em" }}
+                            >
+                              Authentication
+                            </div>
+                          </div>
+                          <div className="views-field views-field-description__value py-2">
+                            <span className="field-content">
+                              Authentication APIs
+                            </span>
+                          </div>
+                          <div className="views-field views-field-nothing py-3">
+                            <span className="field-content">
+                              <Link
+                                to="#"
+                                label="Authentication APIs"
+                                className="text-orange-color"
+                              >
+                                Authentication APIs
+                              </Link>
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+
+                  {/* <div className="p-3 d-flex justify-content-center align-items-center border border-danger">
+                    <div className="container">
+                      <div className="p-1 row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                        <div className="col ">
+                          <div className="card m-2 text-center has-hover-shadow rounded-4 d-flex">
+                            <div className="field-content mb-3 justify-content-center">
+                              <img
+                                loading="lazy"
+                                src={place2}
+                                width="165"
+                                height="123"
+                                alt="authentication"
+                                typeof="foaf:Image"
+                                className="img-fluid mx-auto p-3"
+                              />
+                            </div>
+
+                            <div className="views-field views-field-name py-2">
+                              <span className="field-content">
+                                Authentication
+                              </span>
+                            </div>
+                            <div className="views-field views-field-description__value py-2">
+                              <span className="field-content">
+                                Authentication APIs
+                              </span>
+                            </div>
+                            <div className="views-field views-field-nothing">
+                              <span className="field-content">
+                                <Link
+                                  to="#"
+                                  label="Authentication APIs"
+                                  className="text-orange-color"
+                                >
+                                  Authentication APIs
+                                </Link>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col">
+                          <div className="card m-2 text-center has-hover-shadow rounded-4 d-flex">
+                            <div className="field-content mb-3 justify-content-center">
+                              <img
+                                loading="lazy"
+                                src={place2}
+                                width="165"
+                                height="123"
+                                alt="authentication"
+                                typeof="foaf:Image"
+                                className="img-fluid mx-auto p-3"
+                              />
+                            </div>
+
+                            <div className="views-field views-field-name py-2">
+                              <span className="field-content">
+                                Authentication
+                              </span>
+                            </div>
+                            <div className="views-field views-field-description__value py-2">
+                              <span className="field-content">
+                                Authentication APIs
+                              </span>
+                            </div>
+                            <div className="views-field views-field-nothing">
+                              <span className="field-content">
+                                <Link
+                                  to="#"
+                                  label="Authentication APIs"
+                                  className="text-orange-color"
+                                >
+                                  Authentication APIs
+                                </Link>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col">
+                          <div className="card m-2 text-center has-hover-shadow rounded-4 d-flex">
+                            <div className="field-content mb-3 justify-content-center">
+                              <img
+                                loading="lazy"
+                                src={place2}
+                                width="165"
+                                height="123"
+                                alt="authentication"
+                                typeof="foaf:Image"
+                                className="img-fluid mx-auto p-3"
+                              />
+                            </div>
+
+                            <div className="views-field views-field-name py-2">
+                              <span className="field-content">
+                                Authentication
+                              </span>
+                            </div>
+                            <div className="views-field views-field-description__value py-2">
+                              <span className="field-content">
+                                Authentication APIs
+                              </span>
+                            </div>
+                            <div className="views-field views-field-nothing">
+                              <span className="field-content">
+                                <Link
+                                  to="#"
+                                  label="Authentication APIs"
+                                  className="text-orange-color"
+                                >
+                                  Authentication APIs
+                                </Link>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col">
+                          <div className="card m-2 text-center has-hover-shadow rounded-4 d-flex">
+                            <div className="field-content mb-3 justify-content-center">
+                              <img
+                                loading="lazy"
+                                src={place2}
+                                width="165"
+                                height="123"
+                                alt="authentication"
+                                typeof="foaf:Image"
+                                className="img-fluid mx-auto p-3"
+                              />
+                            </div>
+
+                            <div className="views-field views-field-name py-2">
+                              <span className="field-content">
+                                Authentication
+                              </span>
+                            </div>
+                            <div className="views-field views-field-description__value py-2">
+                              <span className="field-content">
+                                Authentication APIs
+                              </span>
+                            </div>
+                            <div className="views-field views-field-nothing">
+                              <span className="field-content">
+                                <Link
+                                  to="#"
+                                  label="Authentication APIs"
+                                  className="text-orange-color"
+                                >
+                                  Authentication APIs
+                                </Link>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> */}
                 </div>
                 <div className="d-flex justify-content-center py-4">
                   <div className="more-link btn btn-primary">
@@ -1760,9 +1822,9 @@ const Startpage = () => {
 
               {/* section 5  */}
               <div
-                className="paragraph views-block views-block--default "
+                className="p-5 paragraph views-block views-block--default "
                 //orange-background-color
-                 //style={{ border: "4px solid red" }}
+                //style={{ border: "4px solid red" }}
               >
                 <div className="container ">
                   <h2 className="card-group__title text-center ">
@@ -1783,12 +1845,13 @@ const Startpage = () => {
                             <div className="view-header"></div>
 
                             <div className="view-content d-flex flex-wrap row justify-content-center">
-                              <div className="col-lg-4 col-md-6 col-sm-12 api-item views-row justify-content-center mb-4">
+                              <div className="p-3  col-lg-4 col-md-6 col-sm-12 api-item views-row justify-content-center mb-4">
                                 <div
                                   className="item-body px-4  bg-white rounded"
                                   style={{
                                     //minHeight: "230px",
-                                    boxShadow: "4px 4px 4px 4px rgba(0.3, 0.3, 0.3, 0.3)",
+                                    boxShadow:
+                                      "4px 4px 4px 4px rgba(0.3, 0.3, 0.3, 0.3)",
                                   }}
                                 >
                                   <div className="item-image p-2">
@@ -1802,10 +1865,16 @@ const Startpage = () => {
                                       className="img-fluid mx-auto"
                                     />
                                   </div>
-                                  <div className="item-title">
+                                  <div
+                                    className="item-title py-3"
+                                    style={{
+                                      fontWeight: "bold",
+                                      fontSize: "1.1em",
+                                    }}
+                                  >
                                     Covid19 Vaccine Availability
                                   </div>
-                                  <div className="item-description">
+                                  <div className="item-description p-2">
                                     The purpose of this API is to provide a near
                                     real-time inventory status of COVID19
                                     Vaccine inventory at CVS stores based on
@@ -1828,12 +1897,13 @@ const Startpage = () => {
                                 </div>
                               </div>
 
-                              <div className="col-lg-4 col-md-6 col-sm-12 api-item views-row justify-content-center mb-4">
+                              <div className="p-3 col-lg-4 col-md-6 col-sm-12 api-item views-row justify-content-center mb-4">
                                 <div
                                   className="item-body px-4  bg-white rounded"
                                   style={{
                                     // minHeight: "230px",
-                                    boxShadow: "4px 4px 4px 4px rgba(0.3, 0.3, 0.3, 0.3)",
+                                    boxShadow:
+                                      "4px 4px 4px 4px rgba(0.3, 0.3, 0.3, 0.3)",
                                   }}
                                 >
                                   <div className="item-image p-2">
@@ -1847,10 +1917,16 @@ const Startpage = () => {
                                       className="img-fluid mx-auto"
                                     />
                                   </div>
-                                  <div className="item-title">
+                                  <div
+                                    className="item-title py-3"
+                                    style={{
+                                      fontWeight: "bold",
+                                      fontSize: "1.1em",
+                                    }}
+                                  >
                                     Covid19 Vaccine Availability
                                   </div>
-                                  <div className="item-description">
+                                  <div className="item-description p-2">
                                     The purpose of this API is to provide a near
                                     real-time inventory status of COVID19
                                     Vaccine inventory at CVS stores based on
@@ -1885,11 +1961,10 @@ const Startpage = () => {
                         </div>
                       </div>
                     </div>
-                    {/* <div
-                      className="position-absolute w-100 h-50  orange-background-color"
-                      // style={{ zIndex: -1, border: "4px solid yellow" }}
-                      style={{ zIndex: -4 }}
-                    ></div> */}
+                    <div
+                      className="position-absolute bottom-0 w-100 h-50 h-md-80 h-sm-80 orange-background-color"
+                      style={{ zIndex: -4, marginTop: "20%" }}
+                    ></div>
                   </div>
                 </div>
               </div>

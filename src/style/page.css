@@ -19,3 +19,9 @@
 .nav-link:hover {
   color: #f46223;
 }
+
+
+.custom-input {
+    height: 40px; /* Adjust the height as per your preference */
+  }
+  

@@ -1880,7 +1880,7 @@
 
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
-import { navigate } from "gatsby";
+import { Link, navigate } from "gatsby";
 import Cookies from "js-cookie";
 import Bearer from "./Bearer";
 import LoginResponse from "./LoginResponse";
@@ -2101,6 +2101,13 @@ const Login = () => {
                   </div>
 
                   <hr className="my-3" />
+
+                  <div className="mt-1 d-flex align-items-center justify-content-center">
+                    <p className="mb-0">Don't have an account yet?</p>
+                    <Link className="btn btn-link" to="/register">
+                      Sign Up
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

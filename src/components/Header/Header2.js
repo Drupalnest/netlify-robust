@@ -36,7 +36,7 @@ const Header2 = () => {
   const isLoggedIn = userData;
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top border-pixel ">
+    <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top  ">
       <div className="container-fluid  ">
         <button
           className={`navbar-toggler ${
