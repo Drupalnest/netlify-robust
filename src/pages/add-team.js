@@ -2058,14 +2058,13 @@ import SuccessToast from "../components/Toast/Success";
 import ErrorToast from "../components/Toast/Error";
 import { axiosInstance } from "../redux/store";
 import { setLoginResponse } from "../redux/store";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 const AddTeam = () => {
   const loginResponse = useSelector(
     (state) => state.loginReducer.loginResponse
   );
   const dispatch = useDispatch();
-  
 
   const apiproducts = useSelector((state) => state.apiProducts);
   const apiproduct = apiproducts.apiProduct;
@@ -2108,12 +2107,16 @@ const AddTeam = () => {
     e.preventDefault();
 
     if (!companyName.trim()) {
-      alert("Please provide a valid appgroup name.");
+      //alert("Please provide a valid appgroup name.");
+      toast.error("Please provide a valid app group name");
+     
       return;
     }
 
     if (!description.trim()) {
-      alert("Please provide a description.");
+      //alert("Please provide a description.");
+
+      toast.error("Please provide a description");
       return;
     }
 
@@ -2162,7 +2165,6 @@ const AddTeam = () => {
       if (response.ok) {
         console.log("Setting showToast to true");
         dispatch(
-          
           // trackEvent({
           //   timestamp: new Date(),
           //   operation: "New Appgroup Added",
@@ -2184,12 +2186,12 @@ const AddTeam = () => {
 
             username: userName,
             timestamp: new Date(),
-            operations: `${companyName} New Appgroup Added with product ${selected_attribute}`
+            operations: `${companyName} New Appgroup Added with product ${selected_attribute}`,
           })
         );
         //alert("Appgroup created successfully!");
         toast.success("Appgroup created successfully!", {
-          autoClose: 3000, 
+          autoClose: 3000,
         });
         navigate("/teams");
       } else {

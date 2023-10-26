@@ -47,6 +47,17 @@ const AddMembers = () => {
     setSuggestions([]); // Clear suggestions after selecting one
   };
 
+  // const handleSuggestionClick = (suggestion) => {
+  //   if (suggestion) {
+  //     setUsername(suggestion.display_name);
+  //   } else {
+  //     setUsername(""); // Clear the input field if no suggestion is selected
+  //     toast.error("Please select a member");
+  //   }
+  //   setSuggestions([]); // Clear suggestions after selecting one
+  // };
+  
+
   const dispatch = useDispatch();
   const teamDetails = useSelector((state) => state.teamDetails);
   console.log("edit", teamDetails);
@@ -79,6 +90,12 @@ const AddMembers = () => {
 
   const handleAddMember = async (e) => {
     e.preventDefault();
+
+    if (!username) {
+      toast.error("Please select a member"); 
+      return; 
+    }
+
     const membersSerialized = members ? JSON.parse(members) : [];
 
     // Check if the developer already exists in the membersSerialized array

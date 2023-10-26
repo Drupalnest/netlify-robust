@@ -495,7 +495,8 @@ const UpdateCompanyName = () => {
     e.preventDefault();
 
     if (!companyName.trim()) {
-      alert("Please provide a valid company name.");
+      //alert("Please provide a valid company name.");
+      toast.error("Please provide a valid company name");
       return;
     }
 

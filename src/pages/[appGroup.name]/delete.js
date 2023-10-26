@@ -143,7 +143,8 @@ const DeleteTeam = () => {
     event.preventDefault();
 
     if (!appGroupName) {
-      setErrorMessage("Appgroup name is required");
+      //setErrorMessage("Appgroup name is required");
+      toast.error("Appgroup name is required");
       return;
     }
 

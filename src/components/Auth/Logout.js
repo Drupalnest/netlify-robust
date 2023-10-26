@@ -1179,6 +1179,115 @@
 
 // export default Logout;
 
+
+
+// import React, { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { navigate } from "gatsby";
+// import {
+//   trackEvent,
+//   trackErrorEvent,
+//   resetEvents,
+//   setLoginResponse,
+// } from "../../redux/store";
+
+// const Logout = () => {
+//   const events = useSelector((state) => state.eventLoginReducer.events);
+//   console.log("eventsLogout", events);
+//   const dispatch = useDispatch();
+
+//   const loginResponse = useSelector(
+//     (state) => state.loginReducer.loginResponse
+//   );
+//   const csrfToken = loginResponse ? loginResponse.csrf_token : null;
+
+//   const userName = loginResponse?.current_user?.name;
+//   console.log("userName", userName);
+
+//   const logoutEvent = {
+//     username: userName,
+//     timestamp: new Date(),
+//     operations: `User ${userName} is logging out`,
+//   };
+
+//   const combinedEvents = events.concat(logoutEvent);
+
+//   const handleLogout = () => {
+//     fetch("https://robustapihub.io/entity/apigee_log?_format=json", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken,
+//         withCredentials: true,
+//       },
+//       body: JSON.stringify({
+//         description: [JSON.stringify(combinedEvents)],
+//       }),
+//     })
+//       .then((response) => {
+//         if (!response.ok) {
+//           throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+
+//         dispatch(resetEvents());
+
+//         localStorage.removeItem("logout_token");
+
+//         alert("Logout successful");
+//         navigate("/login");
+//       })
+//       .catch((error) => {
+//         console.error("Error:", error);
+//         alert("An error occurred while logging out.");
+//       });
+//   };
+
+//   // useEffect(() => {
+//   //   const handleBeforeUnload = () => {
+//   //     handleLogout();
+//   //   };
+
+//   //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+//   //   return () => {
+//   //     window.removeEventListener("beforeunload", handleBeforeUnload);
+//   //   };
+//   // }, [combinedEvents]); // Added events as dependency
+
+
+//   // useEffect(() => {
+//   //   let logoutTimer;
+
+//   //   const handleBeforeUnload = () => {
+
+//   //     clearTimeout(logoutTimer);
+//   //     handleLogout();
+//   //   };
+
+//   //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+//   //   logoutTimer = setTimeout(() => {
+//   //     handleLogout();
+//   //   }, 600000);
+
+//   //   return () => {
+//   //     clearTimeout(logoutTimer);
+//   //     window.removeEventListener("beforeunload", handleBeforeUnload);
+//   //   };
+//   // }, []);
+
+//   return (
+//     <div>
+//       <div onClick={handleLogout}>Logout</div>
+//     </div>
+//   );
+// };
+
+// export default Logout;
+
+
+
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { navigate } from "gatsby";
@@ -1191,7 +1300,6 @@ import {
 
 const Logout = () => {
   const events = useSelector((state) => state.eventLoginReducer.events);
-  console.log("eventsLogout", events);
   const dispatch = useDispatch();
 
   const loginResponse = useSelector(
@@ -1200,7 +1308,6 @@ const Logout = () => {
   const csrfToken = loginResponse ? loginResponse.csrf_token : null;
 
   const userName = loginResponse?.current_user?.name;
-  console.log("userName", userName);
 
   const logoutEvent = {
     username: userName,
@@ -1240,39 +1347,25 @@ const Logout = () => {
       });
   };
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = () => {
-  //     handleLogout();
-  //   };
+  useEffect(() => {
+    let logoutTimer;
 
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
+    const handleBeforeUnload = () => {
+      clearTimeout(logoutTimer);
+      handleLogout();
+    };
 
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, [combinedEvents]); // Added events as dependency
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
+    logoutTimer = setTimeout(() => {
+      handleLogout();
+    }, 600000);
 
-  // useEffect(() => {
-  //   let logoutTimer;
-
-  //   const handleBeforeUnload = () => {
-
-  //     clearTimeout(logoutTimer);
-  //     handleLogout();
-  //   };
-
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   logoutTimer = setTimeout(() => {
-  //     handleLogout();
-  //   }, 600000);
-
-  //   return () => {
-  //     clearTimeout(logoutTimer);
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, []);
+    return () => {
+      clearTimeout(logoutTimer);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <div>
