@@ -109,8 +109,7 @@ import InternetAlert from "./InternetAlert/internetAlert";
 import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import { navigate } from "gatsby";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 import {
   trackEvent,
@@ -157,12 +156,14 @@ const Layout = ({ children }) => {
           dispatch(resetEvents());
 
           localStorage.removeItem("logout_token");
-          alert("Logout successful");
+          //alert("Logout successful");
+          toast.success("Logout successful");
           navigate("/login");
         })
         .catch((error) => {
           console.error("Error:", error);
-          alert("An error occurred while logging out.");
+          //alert("An error occurred while logging out.");
+          toast.error("An error occurred while logging out");
         });
     }
   };

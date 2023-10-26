@@ -1297,6 +1297,7 @@ import {
   resetEvents,
   setLoginResponse,
 } from "../../redux/store";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Logout = () => {
   const events = useSelector((state) => state.eventLoginReducer.events);
@@ -1338,34 +1339,36 @@ const Logout = () => {
 
         localStorage.removeItem("logout_token");
 
-        alert("Logout successful");
+        //alert("Logout successful");
+        toast.success("Logout successful");
         navigate("/login");
       })
       .catch((error) => {
         console.error("Error:", error);
-        alert("An error occurred while logging out.");
+        //alert("An error occurred while logging out.");
+        toast.error("An error occurred while logging out");
       });
   };
 
-  useEffect(() => {
-    let logoutTimer;
+  // useEffect(() => {
+  //   let logoutTimer;
 
-    const handleBeforeUnload = () => {
-      clearTimeout(logoutTimer);
-      handleLogout();
-    };
+  //   const handleBeforeUnload = () => {
+  //     clearTimeout(logoutTimer);
+  //     handleLogout();
+  //   };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
 
-    logoutTimer = setTimeout(() => {
-      handleLogout();
-    }, 600000);
+  //   logoutTimer = setTimeout(() => {
+  //     handleLogout();
+  //   }, 600000);
 
-    return () => {
-      clearTimeout(logoutTimer);
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
+  //   return () => {
+  //     clearTimeout(logoutTimer);
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, []);
 
   return (
     <div>
