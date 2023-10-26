@@ -728,7 +728,7 @@
 // export const fetchToken = () => async (dispatch) => {
 //   try {
 //     const response = await axiosInstance.get(
-//       "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+//       "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
 //     );
 //     const token = response.data.accessToken;
 
@@ -1536,7 +1536,7 @@ const addAppReducer = (state = null, action) => {
 
 // const initializeAxios = async () => {
 //   try {
-//     const response = await axios.get('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+//     const response = await axios.get('https://robustapihub.netlify.app/.netlify/functions/retrieveToken');
 //     const accessToken = response.data.accessToken;
 //     axiosInstance = axios.create({
 //       baseURL: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
@@ -1558,7 +1558,7 @@ let axiosInstance;
 
 export const initializeAxios = async () => {
   try {
-    const response = await axios.get('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const response = await axios.get('https://robustapihub.netlify.app/.netlify/functions/retrieveToken');
     const accessToken = response.data.accessToken;
     axiosInstance = axios.create({
       baseURL: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",

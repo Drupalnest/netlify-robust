@@ -82,12 +82,15 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
+
 
 export const wrapRootElement = ({ element }) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         {element}
+        <ToastContainer />
       </PersistGate>
     </Provider>
   );

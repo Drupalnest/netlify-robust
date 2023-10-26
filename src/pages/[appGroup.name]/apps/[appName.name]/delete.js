@@ -388,6 +388,7 @@ import {
 import { Link, navigate } from "gatsby";
 import Layout from "../../../../components/Layout";
 import AppsButton from "../AppsButton";
+import { ToastContainer, toast } from 'react-toastify';
 
 const DeleteApps = () => {
   // const [companyName, setCompanyName] = useState("");
@@ -447,7 +448,8 @@ const DeleteApps = () => {
       setAppName("");
       // setCompanyName("");
       setErrorMessage("");
-      alert("Appgroups apps deleted successfully");
+      toast.success("Appgroups apps deleted successfully")
+      //alert("Appgroups apps deleted successfully");
       dispatch(fetchApps(teamName));
       dispatch(
         trackEvent({
@@ -462,7 +464,8 @@ const DeleteApps = () => {
       );
       navigate(`/${teamName}/apps`);
     } catch (error) {
-      setErrorMessage(`Error deleting appgroup app: ${error.message}`);
+      //setErrorMessage(`Error deleting appgroup app: ${error.message}`);
+      toast.error(`Error deleting appgroup app: ${error.message}`)
     }
   };
 

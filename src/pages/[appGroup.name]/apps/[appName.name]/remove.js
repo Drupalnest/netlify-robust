@@ -166,6 +166,7 @@ import {
   appDetails,
   trackEvent,
 } from '../../../../redux/store';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function RemovePage() {
@@ -190,7 +191,7 @@ function RemovePage() {
   // You can also call handleRemovekey with the data
   const handleRemovekey = async (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
-    const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+    const tokenResponse = await fetch('https://robustapihub.netlify.app/.netlify/functions/retrieveToken');
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
     const bearerToken = accessToken;
@@ -221,10 +222,13 @@ function RemovePage() {
         })
       );
 
-      alert('Key removed successfully');
+      //alert('Key removed successfully');
+      toast.success("Key removed successfully")
       navigate(`/${teamName}/apps/${appName}`);
     } catch (error) {
-      alert('Error removing key: ' + error);
+      //alert('Error removing key: ' + error);
+      toast.error('Error removing key: ' + error)
+      
     }
   };
 

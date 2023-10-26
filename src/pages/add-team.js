@@ -2058,14 +2058,14 @@ import SuccessToast from "../components/Toast/Success";
 import ErrorToast from "../components/Toast/Error";
 import { axiosInstance } from "../redux/store";
 import { setLoginResponse } from "../redux/store";
+import { ToastContainer, toast } from 'react-toastify';
 
 const AddTeam = () => {
   const loginResponse = useSelector(
     (state) => state.loginReducer.loginResponse
   );
   const dispatch = useDispatch();
-  const [showSuccessToast, setShowSuccessToast] = useState(false);
-  const [showErrorToast, setShowErrorToast] = useState(false);
+  
 
   const apiproducts = useSelector((state) => state.apiProducts);
   const apiproduct = apiproducts.apiProduct;
@@ -2120,7 +2120,7 @@ const AddTeam = () => {
     try {
       // Fetch the bearer token
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
 
@@ -2188,13 +2188,15 @@ const AddTeam = () => {
           })
         );
         //alert("Appgroup created successfully!");
-        setShowSuccessToast(true);
+        toast.success("Appgroup created successfully!", {
+          autoClose: 3000, 
+        });
         navigate("/teams");
       } else {
-        setShowErrorToast(true);
+        toast.error("Failed to create appgroup"); // Show error toast
       }
     } catch (error) {
-      setShowErrorToast(true);
+      toast.error("Appgroup already exists. Please try with a different name"); // Show error toast
     }
   };
 
@@ -2391,18 +2393,18 @@ const AddTeam = () => {
       </div>
 
       {/* Show success toast */}
-      {showSuccessToast && (
+      {/* {showSuccessToast && (
         <SuccessToast message="Appgroup created successfully!" />
-      )}
+      )} */}
 
       {/* Show error toast */}
-      {showErrorToast && <ErrorToast message="Failed to create appgroup" />}
+      {/* {showErrorToast && <ErrorToast message="Failed to create appgroup" />} */}
 
       {/* {showErrorToast && <ErrorToast message="An error occurred while creating appgroup" />}*/}
 
-      {showErrorToast && (
+      {/* {showErrorToast && (
         <ErrorToast message="Appgroup already exists. Please try with a different name." />
-      )}
+      )} */}
     </Layout>
   );
 };

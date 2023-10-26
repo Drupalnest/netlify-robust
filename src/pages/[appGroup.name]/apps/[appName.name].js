@@ -10,19 +10,16 @@ import {
   appDetails,
   trackEvent,
 } from "../../../redux/store";
-
 import "../../../style/popup.css";
-
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-
 //import "../../../styles/popup.css";
 import { Link, navigate } from "gatsby";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 //import "./viewstyle.css";
-
 import DropDownDark from "../../../images/DropDownDark.svg";
+import { ToastContainer, toast } from "react-toastify";
 
 const ViewApp = () => {
   const dispatch = useDispatch();
@@ -325,7 +322,7 @@ const ViewApp = () => {
       const randomSecret = generateRandomSecret();
 
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys`;
@@ -364,7 +361,8 @@ const ViewApp = () => {
       );
       //alert("API key created successfully");
     } catch (error) {
-      alert("Error creating API key: " + error.message);
+      //alert("Error creating API key: " + error.message);
+      toast.error("Error creating API key: " + error.message);
     }
   };
 
@@ -418,7 +416,7 @@ const ViewApp = () => {
 
   const handleAddAPIProduct = async () => {
     const tokenResponse = await fetch(
-      "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
     );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${latestConsumerKey}`;
@@ -444,10 +442,12 @@ const ViewApp = () => {
       //     selectedApiProduct: apiProducts,
       //   })
       // );
-      alert("API key and product added successfully");
+      //alert("API key and product added successfully");
+      toast.success("API key and product added successfully!")
       setShowPopup(false);
     } catch (error) {
-      alert("Error adding API product: " + error);
+      //alert("Error adding API product: " + error);
+      toast.error("Error adding API product: " + error);
     }
   };
 
@@ -480,7 +480,7 @@ const ViewApp = () => {
 
   const handleRemovekey = async (teamName, appName, consumerKey) => {
     const tokenResponse = await fetch(
-      "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
     );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
@@ -507,15 +507,17 @@ const ViewApp = () => {
         })
       );
       dispatch(fetchAppDetails(teamName, appName));
-      alert("Key removed successfully");
+      //alert("Key removed successfully");
+      toast.success("Key removed successfully!")
     } catch (error) {
-      alert("Error removing key: " + error);
+      //alert("Error removing key: " + error);
+      toast.error("Error removing key: " + error)
     }
   };
 
   const handleRevokeKey = async (teamName, appName, consumerKey) => {
     const tokenResponse = await fetch(
-      "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
     );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;
@@ -549,12 +551,16 @@ const ViewApp = () => {
           })
         );
 
-        alert("Key revoked successfully");
+        //alert("Key revoked successfully");
+        toast.success("Key revoked successfully!")
       } else {
-        alert("Key revocation was not successful");
+        //alert("Key revocation was not successful");
+        toast.error("Key revocation was not successful")
+        
       }
     } catch (error) {
-      alert("Error revoking key: " + error.message);
+      //alert("Error revoking key: " + error.message);
+      toast.error("Error revoking key: " + error.message)
     }
   };
 

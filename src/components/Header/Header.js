@@ -291,6 +291,9 @@
 
 // export default Header;
 
+
+
+
 import React, { useState } from "react";
 import Logout from "../Auth/Logout";
 import "../../style/globle.css";
@@ -326,11 +329,16 @@ const Header = () => {
 
   // When user logs in
   const userData = localStorage.getItem("logout_token");
-  const isLoggedIn = userData;
+const isLoggedIn =  userData
+
+
+
+
+ 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top  ">
-      <div className="container-fluid container-sm">
+    <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top  " >
+      <div className="container-fluid  ">
         <button
           className={`navbar-toggler ${
             navbarCollapsed ? "" : "collapsed"
@@ -362,9 +370,9 @@ const Header = () => {
           </Link>
 
           <ul className="navbar-nav ml-auto mr-5 ">
-            <li className="nav-item">
+          <li className="nav-item">
               <Link className="hover-effect nav-link text-dark" to="/usertrack">
-                Activity Log
+              Activity Log
               </Link>
             </li>
             <li className="nav-item">

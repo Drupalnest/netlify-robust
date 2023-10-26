@@ -118,6 +118,7 @@ import { deleteTeam, trackEvent } from "../../redux/store";
 import { Link, navigate } from "gatsby";
 import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -166,11 +167,13 @@ const DeleteTeam = () => {
             operations: `${appGroupName} Appgroup Deleted.`
         })
       );
-      alert("Appgroup deleted successfully");
+      //alert("Appgroup deleted successfully");
+      toast.success("Appgroups deleted successfully!")
       navigate("/teams");
     } catch (error) {
       setLoading(false);
-      setErrorMessage(`Error deleting appgroup: ${error.message}`);
+      //setErrorMessage(`Error deleting appgroup: ${error.message}`);
+      toast.error(`Error deleting appgroup: ${error.message}`);
     }
   };
 

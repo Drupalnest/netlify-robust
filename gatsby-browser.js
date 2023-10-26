@@ -325,9 +325,10 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
 import Logout from "./src/components/Auth/Logout";
 import handleLogout from './src/components/Auth/Logout';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // const handleBeforeUnload = () => {
 //   handleLogout(); 
@@ -351,6 +352,7 @@ export const wrapRootElement = ({ element }) => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         {element}
+        <ToastContainer />
       </PersistGate>
     </Provider>
   );

@@ -700,9 +700,9 @@ import { navigate } from "gatsby";
 import Layout from "../../../../components/Layout";
 import AppsButton from "../AppsButton";
 import { fetchAppDetails, trackEvent } from "../../../../redux/store";
-import { toast } from "react-toastify";
 import Modal from "react-modal";
 import "./edit.css";
+import { ToastContainer, toast } from 'react-toastify';
 
 const EditApps = () => {
   const dispatch = useDispatch();
@@ -802,7 +802,7 @@ const EditApps = () => {
     try {
       const { apiproduct, consumerKey, teamName, appName } = productToRemove;
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiproduct}`;
@@ -842,9 +842,11 @@ const EditApps = () => {
         })
       );
 
-      alert("API product removed successfully");
+      //alert("API product removed successfully");
+      toast.success("API product removed successfully")
     } catch (error) {
       alert("Error removing API product:", error);
+      toast.error("Error removing API product:", error)
       // Handle error, show a message to the user, etc.
     }
 
@@ -897,11 +899,12 @@ const EditApps = () => {
   ) => {
     console.log("selectedApiProduct:", selectedApiProduct);
     if (!selectedApiProduct || selectedApiProduct.length === 0) {
-      alert("Please select API product.");
+      //alert("Please select API product.");
+      toast.error("Please select API product")
       return;
     }
     const tokenResponse = await fetch(
-      "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+      "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
     );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
@@ -951,10 +954,12 @@ const EditApps = () => {
       );
 
 
-      alert("API product added successfully");
+      //alert("API product added successfully");
+      toast.success("API product added successfully")
       setSelectedApiProducts([]);
     } catch (error) {
-      alert("Error adding API product:", error);
+      //alert("Error adding API product:", error);
+      toast.error("Error adding API product:", error)
     }
   };
 

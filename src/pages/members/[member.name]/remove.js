@@ -3,6 +3,7 @@ import Layout from "../../../components/Layout";
 import { Link, navigate } from "gatsby";
 import { fetchTeamDetails, fetchTeams, trackEvent } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
 
 const DeleteMember = () => {
   const developer = useSelector((state) => state.memberName.developer);
@@ -51,7 +52,7 @@ const DeleteMember = () => {
     try {
       // const serializedApiProduct = serializeData.join(",");
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
       const response = await fetch(
@@ -87,7 +88,8 @@ const DeleteMember = () => {
 
       if (response.ok) {
         // alert(serializedApiProduct);
-        alert("Member remove Successfully!");
+        //alert("Member remove Successfully!");
+        toast.success("Member remove Successfully!")
         dispatch(fetchTeamDetails(team));
         dispatch(
         trackEvent({
@@ -105,10 +107,12 @@ const DeleteMember = () => {
         );
         navigate(`/${team}/members`);
       } else {
-        alert("Failed to remove members.");
+        //alert("Failed to remove members.");
+        toast.error("Failed to remove members");
       }
     } catch (error) {
-      alert("An error occurred while remove member.");
+      //alert("An error occurred while remove member.");
+      toast.error("An error occurred while remove member");
     }
   };
 

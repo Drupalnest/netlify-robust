@@ -3,6 +3,7 @@ import Layout from "../../../components/Layout";
 import { Link, navigate } from "gatsby";
 import { fetchTeamDetails, fetchTeams, trackEvent } from "../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
 
 const EditMember = () => {
   const developer = useSelector((state) => state.memberName.developer);
@@ -66,7 +67,7 @@ const EditMember = () => {
     try {
       // const serializedApiProduct = serializeData.join(",");
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
       const response = await fetch(
@@ -105,7 +106,8 @@ const EditMember = () => {
       );
 
       if (response.ok) {
-        alert("Member updated Successfully!");
+        toast.success("Member updated Successfully!")
+        //alert("Member updated Successfully!");
         dispatch(fetchTeamDetails(team));
       
         const removedFromAdmin =
@@ -157,10 +159,12 @@ const EditMember = () => {
 
         navigate(`/${team}/members`);
       } else {
-        alert("Failed to update members.");
+        //alert("Failed to update members.");
+        toast.error("Failed to update members.");
       }
     } catch (error) {
-      alert("An error occurred while updated members.");
+      //alert("An error occurred while updated members.");
+      toast.error("An error occurred while updated members");
     }
   };
 

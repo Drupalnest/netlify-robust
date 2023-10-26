@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import { useStaticQuery, graphql, Link, navigate } from "gatsby";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTeamDetails, fetchTeams, trackEvent } from "../../redux/store";
+import { ToastContainer, toast } from 'react-toastify';
 
 const AddMembers = () => {
   const data = useStaticQuery(graphql`
@@ -97,7 +98,7 @@ const AddMembers = () => {
     try {
       // const serializedApiProduct = serializeData.join(",");
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
       const response = await fetch(
@@ -137,7 +138,8 @@ const AddMembers = () => {
 
       if (response.ok) {
         // alert(serializedApiProduct);
-        alert("Member added Successfully!");
+        //alert("Member added Successfully!");
+        toast.success("Member added Successfully!")
         const adminRoles = selectedRoles.filter(role => role === "admin");
   
         let operationsMessage = `New member ${username} added into ${team} appgroup`;
@@ -164,10 +166,12 @@ const AddMembers = () => {
         dispatch(fetchTeamDetails(team));
         navigate(`/${team}/members`);
       } else {
-        alert("Failed to add member.");
+        //alert("Failed to add member.");
+        toast.error("Failed to add member.");
       }
     } catch (error) {
-      alert("An error occurred while adding the member");
+      //alert("An error occurred while adding the member");
+      toast.error("An error occurred while adding the member");
     }
   };
 

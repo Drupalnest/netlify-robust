@@ -427,7 +427,7 @@ import Layout from "../../components/Layout";
 import Buttons from "../../components/Buttons/Buttons";
 import { fetchTeamDetails, apiProducts, fetchTeams } from "../../redux/store";
 import { trackEvent } from "../../redux/store";
-
+import { ToastContainer, toast } from 'react-toastify';
 import withAuth from "../../components/HOC/withAuth";
 
 const UpdateCompanyName = () => {
@@ -502,7 +502,7 @@ const UpdateCompanyName = () => {
     try {
       const serializedApiProduct = serializeData.join(",");
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
       const response = await fetch(
@@ -545,7 +545,8 @@ const UpdateCompanyName = () => {
 
       if (response.ok) {
         // alert(serializedApiProduct);
-        alert("Appgroups  updated successfully!");
+        //alert("Appgroups  updated successfully!");
+        toast.success("Appgroups  updated successfully!")
         dispatch(fetchTeamDetails(team));
 
         const isAdded = checkedAttributes.length > selectedAttributes.length;
@@ -592,10 +593,12 @@ const UpdateCompanyName = () => {
         );
         navigate("/teams");
       } else {
-        alert("Appgroups updating failed .");
+        //alert("Appgroups updating failed.");
+        toast.error("Appgroups updating failed."); // Show error toast
       }
     } catch (error) {
-      alert("An error occurred while member role updating.");
+      //alert("An error occurred while member role updating.");
+      toast.error("Appgroups updating failed An error occurred while updating appgroups.")
     }
   };
 

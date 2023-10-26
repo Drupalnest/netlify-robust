@@ -109,6 +109,8 @@ import InternetAlert from "./InternetAlert/internetAlert";
 import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import { navigate } from "gatsby";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
   trackEvent,
@@ -191,6 +193,7 @@ const Layout = ({ children }) => {
         <Header />
         <div style={{ flex: 1 }}>{children}</div>
         <InternetAlert />
+        <ToastContainer />
         {/* <Footer /> */}
       </div>
     </>

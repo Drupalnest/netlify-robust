@@ -918,6 +918,7 @@ import { Link, navigate } from "gatsby";
 import Header from "../../../components/Header/Header";
 import { fetchApps, fetchAppDetails, trackEvent } from "../../../redux/store";
 import Cookies from "js-cookie";
+import { ToastContainer, toast } from 'react-toastify';
 
 const AddApps = () => {
   const dispatch = useDispatch();
@@ -1017,14 +1018,15 @@ const AddApps = () => {
   const handleAddApp = async () => {
     if (!appName.trim()) {
       // Removed 'error' check since it's not defined in the provided code
-      alert("Please provide a valid company name.");
+      //alert("Please provide a valid company name.");
+      toast.error("Please provide a valid company name")
       return;
     }
 
     try {
       const oneYearInMilliseconds = 365 * 24 * 60 * 60 * 1000;
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
 
@@ -1053,12 +1055,15 @@ const AddApps = () => {
       if (response.ok) {
         dispatch(fetchApps(appgroupName)); // Assuming dispatch and fetchApps are defined
 
-        alert("Appgroup app created successfully!");
+        //alert("Appgroup app created successfully!");
+        toast.success("Appgroup app created successfully!")
       } else {
-        alert("Failed to create app");
+        //alert("Failed to create app");
+        toast.error("Failed to create app");
       }
     } catch (error) {
-      alert("An error occurred while creating app");
+      //alert("An error occurred while creating app");
+      toast.error("An error occurred while creating app");
       console.error(error); // Add an error log for debugging
     }
   };
@@ -1070,7 +1075,7 @@ const AddApps = () => {
   const fetchData = async () => {
     try {
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
       const url = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}`;
@@ -1101,7 +1106,7 @@ const AddApps = () => {
   //   }
 
   //   try {
-  //     const tokenResponse = await fetch('https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken');
+  //     const tokenResponse = await fetch('https://robustapihub.netlify.app/.netlify/functions/retrieveToken');
   //     const { accessToken } = await tokenResponse.json();
   //     const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
 
@@ -1141,7 +1146,7 @@ const AddApps = () => {
 
     try {
       const tokenResponse = await fetch(
-        "https://imaginative-sprite-320f1b.netlify.app/.netlify/functions/retrieveToken"
+        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
       );
       const { accessToken } = await tokenResponse.json();
 
@@ -1184,10 +1189,13 @@ const AddApps = () => {
         );
         navigate(`/${appgroupName}/apps`);
       } else {
-        alert("Error adding API product");
+        //alert("Error adding API product");
+        toast.error("Error adding API product");
       }
     } catch (error) {
-      alert("Error adding API product: " + error);
+      //alert("Error adding API product: " + error);
+      toast.error("Error adding API product: " + error);
+      
     }
   };
 
@@ -1206,7 +1214,8 @@ const AddApps = () => {
         if (fetchedConsumerKey !== null) {
           await handleAddAPIProduct(newAppName, selected_apiProduct);
         } else {
-          alert("Consumer key is not available");
+          //alert("Consumer key is not available");
+          toast.error("Consumer key is not available");
         }
       }, 6000);
     } catch (error) {
