@@ -103,105 +103,7 @@
 
 // export default withAuth(Layout);
 
-import React, { useEffect } from "react";
-import Header from "./Header/Header";
-import InternetAlert from "./InternetAlert/internetAlert";
-import { useDispatch, useSelector } from "react-redux";
-import { Helmet } from "react-helmet";
-import { navigate } from "gatsby";
-import { ToastContainer, toast } from 'react-toastify';
 
-import {
-  trackEvent,
-  trackErrorEvent,
-  resetEvents,
-  setLoginResponse,
-} from "../redux/store";
-
-const Layout = ({ children }) => {
-  const events = useSelector((state) => state.eventLoginReducer.events);
-  const dispatch = useDispatch();
-  const loginResponse = useSelector(
-    (state) => state.loginReducer.loginResponse
-  );
-  const csrfToken = loginResponse ? loginResponse.csrf_token : null;
-  const userName = loginResponse?.current_user?.name;
-
-  const logoutEvent = {
-    username: userName,
-    timestamp: new Date(),
-    operations: `User ${userName} is logging out`,
-  };
-
-  const combinedEvents = events.concat(logoutEvent);
-
-  const handleBeforeUnload = () => {
-    if (csrfToken) {
-      fetch("https://robustapihub.io/entity/apigee_log?_format=json", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrfToken,
-          withCredentials: true,
-        },
-        body: JSON.stringify({
-          description: [JSON.stringify(combinedEvents)],
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          dispatch(resetEvents());
-
-          localStorage.removeItem("logout_token");
-          //alert("Logout successful");
-          toast.success("Logout successful");
-          navigate("/login");
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          //alert("An error occurred while logging out.");
-          toast.error("An error occurred while logging out");
-        });
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [combinedEvents, csrfToken, userName]);
-
-  return (
-    <>
-      <Helmet>
-        <script>
-          {`
-            window.addEventListener('beforeunload', function (e) {
-              e.preventDefault();
-              e.returnValue = '';
-            });
-          `}
-        </script>
-      </Helmet>
-      <div
-        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-      >
-        <Header />
-        <div style={{ flex: 1 }}>{children}</div>
-        <InternetAlert />
-        <ToastContainer />
-        {/* <Footer /> */}
-      </div>
-    </>
-  );
-};
-
-export default Layout;
 
 // import React, { useEffect } from "react";
 // import Header from "./Header/Header";
@@ -312,9 +214,6 @@ export default Layout;
 // };
 
 // export default Layout;
-
-
-
 
 // import React, { useEffect } from "react";
 // import Header from "./Header/Header";
@@ -448,8 +347,6 @@ export default Layout;
 
 // export default Layout;
 
-
-
 // import React, { useEffect } from "react";
 // import Header from "./Header/Header";
 // import InternetAlert from "./InternetAlert/internetAlert";
@@ -482,7 +379,7 @@ export default Layout;
 
 //   const handleBeforeUnload = (e) => {
 //     const confirmationMessage = "Are you sure you want to leave this page?";
-    
+
 //     e.returnValue = confirmationMessage; // Standard for most browsers
 
 //     const confirmationDialog = `
@@ -604,8 +501,6 @@ export default Layout;
 
 // export default Layout;
 
-
-
 // import React, { useEffect } from "react";
 // import Header from "./Header/Header";
 // import InternetAlert from "./InternetAlert/internetAlert";
@@ -666,12 +561,6 @@ export default Layout;
 //     }
 //   };
 
-
-
-
-
-
-
 //   const handleBeforeUnload = (e) => {
 //     const confirmationMessage = "Are you sure you want to leave this page?";
 //     e.returnValue = confirmationMessage; // Standard for most browsers
@@ -715,8 +604,6 @@ export default Layout;
 // };
 
 // export default Layout;
-
-
 
 // import React, { useEffect } from "react";
 // import Header from "./Header/Header";
@@ -826,3 +713,148 @@ export default Layout;
 // };
 
 // export default Layout;
+
+
+
+
+import React, { useEffect } from "react";
+import Header from "./Header/Header";
+import InternetAlert from "./InternetAlert/internetAlert";
+import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
+import { navigate } from "gatsby";
+import { ToastContainer, toast } from "react-toastify";
+
+import {
+  trackEvent,
+  trackErrorEvent,
+  resetEvents,
+  setLoginResponse,
+} from "../redux/store";
+
+const Layout = ({ children }) => {
+  const events = useSelector((state) => state.eventLoginReducer.events);
+  const dispatch = useDispatch();
+  const loginResponse = useSelector(
+    (state) => state.loginReducer.loginResponse
+  );
+  const csrfToken = loginResponse ? loginResponse.csrf_token : null;
+  const userName = loginResponse?.current_user?.name;
+
+  const logoutEvent = {
+    username: userName,
+    timestamp: new Date(),
+    operations: `User ${userName} is logging out`,
+  };
+
+  const combinedEvents = events.concat(logoutEvent);
+
+  const handleBeforeUnload = () => {
+    if (csrfToken) {
+      fetch("https://robustapihub.io/entity/apigee_log?_format=json", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken,
+          withCredentials: true,
+        },
+        body: JSON.stringify({
+          description: [JSON.stringify(combinedEvents)],
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          dispatch(resetEvents());
+
+          localStorage.removeItem("logout_token");
+          //alert("Logout successful");
+          toast.success("Logout successful");
+          navigate("/login");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          //alert("An error occurred while logging out.");
+          toast.error("An error occurred while logging out");
+        });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [combinedEvents, csrfToken, userName]);
+
+  return (
+    <>
+      <Helmet>
+        <style>
+          {`
+      .custom-confirmation {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 16px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+      }
+
+      .confirmation-message {
+        font-size: 16px;
+        margin-bottom: 16px;
+      }
+
+      .confirmation-buttons {
+        text-align: right;
+      }
+
+      .confirmation-buttons button {
+        margin-left: 8px;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .confirmation-buttons button.cancel {
+        background-color: #ccc;
+      }
+    `}
+        </style>
+
+        <script>
+          {`
+      window.addEventListener('beforeunload', function (e) {
+        const confirmationMessage = 'Are you sure you want to leave?';
+        e.returnValue = confirmationMessage; // Standard for most browsers
+        return confirmationMessage; // For some older browsers
+      });
+    `}
+        </script>
+      </Helmet>
+      <div
+        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      >
+        <Header />
+        <div style={{ flex: 1 }}>{children}</div>
+        <InternetAlert />
+        <ToastContainer />
+        {/* <Footer /> */}
+      </div>
+    </>
+  );
+};
+
+export default Layout;
