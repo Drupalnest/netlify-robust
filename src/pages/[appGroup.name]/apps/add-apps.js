@@ -971,12 +971,12 @@ const AddApps = () => {
   const [isErrorVisible, setIsErrorVisible] = useState("");
 
   // const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
-  function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
-  }
+  // function escapeRegExp(string) {
+  //   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+  // }
 
-  const escapedAppName = escapeRegExp(appgroupName);
-  const pattern = new RegExp(`^${escapedAppName}-[a-z0-9]+-app$`);
+  // const escapedAppName = escapeRegExp(appgroupName);
+  // const pattern = new RegExp(`^${escapedAppName}-[a-z0-9]+-app$`);
 
   const handleCompanyNameChange = (e) => {
     const inputAppName = e.target.value;
@@ -987,20 +987,21 @@ const AddApps = () => {
     const appgroupName = teamDetails ? teamDetails.name : "";
     console.log("teamName", appgroupName);
     //const pattern = new RegExp(`^${appgroupName}+-[a-z0-9]+-app$`);
-    function escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
-    }
+    // function escapeRegExp(string) {
+    //   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+    // }
 
-    const escapedAppName = escapeRegExp(appgroupName);
-    const pattern = new RegExp(`^${escapedAppName}-[a-z0-9]+-app$`);
+    // const escapedAppName = escapeRegExp(appgroupName);
+    // const pattern = new RegExp(`^${escapedAppName}-[a-z0-9]+-app$`);
 
-    if (!pattern.test(inputAppName)) {
-      setError(
-        'Use the "<companyname or groupname>-<appname>-app" format. Examples: ' +
-          'For  use group name: "ucpc-digitalorder-app". ' +
-          'For Non  use company name: "yourcompanyname-helpdesk-app". ' +
-          "Only lowercase alphanumeric and dashes are allowed."
-      );
+    //if (!pattern.test(inputAppName)) {
+      if (!inputAppName) {
+      // setError(
+      //   'Use the "<companyname or groupname>-<appname>-app" format. Examples: ' +
+      //     'For  use group name: "ucpc-digitalorder-app". ' +
+      //     'For Non  use company name: "yourcompanyname-helpdesk-app". ' +
+      //     "Only lowercase alphanumeric and dashes are allowed."
+      // );
       setIsErrorVisible(true); // Show the error message
     } else {
       setError("");
@@ -1363,7 +1364,7 @@ const AddApps = () => {
             <div className="page__content-above">
               <div className="container-fluid px-0">
                 <div className="container">
-                  {isErrorVisible && (
+                  {/* {isErrorVisible && (
                     <div className="error-message alert alert-danger d-flex justify-content-between align-items-center">
                       <span>{error}</span>
                       <button
@@ -1374,7 +1375,7 @@ const AddApps = () => {
                         &#x2716;
                       </button>
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>

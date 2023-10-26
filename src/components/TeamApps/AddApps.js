@@ -1238,7 +1238,7 @@ const AddApps = () => {
         >
           <div className="page">
             <header className="page__header">
-              <span data-big-pipe-placeholder-id="callback=Drupal%5Cblock%5CBlockViewBuilder%3A%3AlazyBuilder&args%5B0%5D=starbucks_tabs&args%5B1%5D=full&args%5B2%5D&token=MEkI12DtyJlNIxuOGvgD3VFvH_cZWONfyjuDDe873eY" />
+              <span data-big-pipe-placeholder-id="callback=Drupal%5Cblock%5CBlockViewBuilder%3A%3AlazyBuilder&args%5B0%5D=&args%5B1%5D=full&args%5B2%5D&token=MEkI12DtyJlNIxuOGvgD3VFvH_cZWONfyjuDDe873eY" />
             </header>
             <div className="page__content-above">
               <div className="container-fluid px-0">

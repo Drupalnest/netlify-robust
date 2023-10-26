@@ -34,7 +34,7 @@ const Members = ({}) => {
           <div className="page">
             <div className="page__tasks">
               <div className="container">
-                <div className="contextual-region block block--starbucks-actions">
+                <div className="contextual-region block block--actions">
                   <div className="my-4">
                     <Link
                       to="/add-member"

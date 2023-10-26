@@ -16,7 +16,7 @@ module.exports = {
  // plugins: [`gatsby-plugin-material-ui`],
 
   siteMetadata: {
-    title: `gatsby-starbucks`,
+    title: `gatsby-robustApi`,
     siteUrl: `https://www.yourdomain.tld`,
   },
   plugins: [

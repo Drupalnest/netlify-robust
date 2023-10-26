@@ -57,11 +57,11 @@ const profile = () => {
                         </div>
                         <div className="field field-username">
                           <div className="field__label">Username:</div>
-                          <div>kpatel@starbucks.com</div>
+                          {/* <div>kpatel@starbucks.com</div> */}
                         </div>
                         <div className="field field-email">
                           <div className="field__label">Email:</div>
-                          <div>kpatel@starbucks.com</div>
+                          {/* <div>kpatel@starbucks.com</div> */}
                         </div>
                       </div>
                     </article>

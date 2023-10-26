@@ -738,7 +738,7 @@ const TeamApps = () => {
             <div className="page">
               <div className="page__tasks" style={{ marginTop: "70px" }}>
                 <div className="container">
-                  <div className="contextual-region block block--starbucks-actions">
+                  <div className="contextual-region block block--actions">
                     <div className="d-flex justify-content-center mt-3 ">
                       <Link
                         to={`/${teamName}/apps/add-apps`}
@@ -863,7 +863,7 @@ const TeamApps = () => {
             <div className="page">
               <div className="page__tasks">
                 <div className="container">
-                  <div className="contextual-region block block--starbucks-actions">
+                  <div className="contextual-region block block--actions">
                     <div className="d-flex justify-content-center mt-3 ">
                       <Link
                         to={`/${teamName}/apps/add-apps`}
