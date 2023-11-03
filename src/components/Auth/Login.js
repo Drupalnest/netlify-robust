@@ -2120,10 +2120,177 @@
 
 // export default Login;
 
+// import React, { useState, useEffect } from "react";
+// import { ToastContainer, toast } from 'react-toastify';
+// import Header from "../Header/Header";
+// import { Link, navigate } from "gatsby";
+// import Cookies from "js-cookie";
+// import Bearer from "./Bearer";
+// import LoginResponse from "./LoginResponse";
+// import TeamList from "../../pages/[appGroup.name]/Teams";
+// import { setLoginResponse } from "../../redux/store";
+// import { useDispatch } from "react-redux";
+// import { trackEvent, trackErrorEvent } from "../../redux/store";
 
+// const Login = () => {
+//   const [username, setUsername] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [showPassword, setShowPassword] = useState(false);
+//   const dispatch = useDispatch();
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await fetch(
+//         "https://robustapihub.io/user/login?_format=json",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify({
+//             name: username,
+//             pass: password,
+//           }),
+//         }
+//       );
+
+//       if (response.ok) {
+//         const responseData = await response.json();
+
+//         dispatch(setLoginResponse(responseData));
+
+//         localStorage.setItem("logout_token", responseData.logout_token);
+
+//         toast.success("Login successful", {
+//           autoClose: 3000,
+//         });
+
+//         dispatch(
+//           trackEvent({
+//             username: username,
+//             timestamp: new Date(),
+//             operations: `User ${username} has logged in`,
+//           })
+//         );
+
+//           navigate("/teams");
+
+//         //navigate("/teams");
+//       } else {
+//         const errorData = await response.json();
+//         toast.error(`Login failed. Error: ${errorData.message}`); // Show error toast
+
+//         dispatch(
+//           trackErrorEvent({
+//             error: errorData.message,
+//             timestamp: new Date(),
+//             page: "Login Page",
+//             button: "Login Button",
+//           })
+//         );
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       toast.error('An error occurred while logging in.'); // Show error toast
+
+//       dispatch(
+//         trackErrorEvent(error.message, new Date(), "Login Page", "Login Button")
+//       );
+//     }
+//   };
+
+//   const handleTogglePassword = () => {
+//     setShowPassword(!showPassword);
+//   };
+
+//   return (
+//     <div className="login-page">
+//       <Header />
+//       <section className="vh-100">
+//         <div
+//           style={{
+//             backgroundColor: "rgba(255, 255, 255, 0.3)",
+//             position: "absolute",
+//             width: "100vw",
+//             height: "100vh",
+//             zIndex: "0",
+//             backdropFilter: "blur(1px)",
+//           }}
+//         ></div>
+//         <div className="container py-5 h-100" style={{ zIndex: "9999" }}>
+//           <div className="row d-flex justify-content-center align-items-center h-100 ">
+//             <div>
+//               <div className="card mx-auto  ">
+//                 <div className="card-body  p-5 text-center " style={{ margin: "0 auto", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", borderRadius: "10px" }}>
+//                   <h3 className="mb-5 ">Sign in</h3>
+//                   <div className="form-outline mb-4 text-left ">
+//                     <label htmlFor="edit-name" className="js-form-required text-left form-required ">
+//                       Username
+//                       <sup>
+//                         <i className="fas fa-asterisk text-danger form-required__indicator" style={{ fontSize: "0.7em" }} />
+//                       </sup>
+//                     </label>
+//                     <input
+//                       type="email"
+//                       id="typeEmailX-2"
+//                       className="form-control form-control-lg"
+//                       value={username}
+//                       onChange={(e) => setUsername(e.target.value)}
+//                       style={{ width: "100%", maxWidth: "500px", fontSize: "1em" }}
+//                     />
+//                     <small id="edit-name--description" className="description form-text text-left text-muted">
+//                       Enter your username.
+//                     </small>
+//                   </div>
+//                   <div className="form-outline mb-4  text-left ">
+//                     <label htmlFor="edit-name" className="js-form-required text-left  form-required ">
+//                       Password
+//                       <sup>
+//                         <i className="fas fa-asterisk text-danger form-required__indicator" style={{ fontSize: "0.7em" }} />
+//                       </sup>
+//                     </label>
+//                     <div className="input-group d-flex">
+//                       <input
+//                         type={showPassword ? "text" : "password"}
+//                         id="typePasswordX-2"
+//                         className="form-control form-control-lg"
+//                         value={password}
+//                         onChange={(e) => setPassword(e.target.value)}
+//                         style={{ width: "100%", maxWidth: "500px" }}
+//                       />
+//                     </div>
+//                     <small id="edit-pass--description" className="description form-text text-left text-muted">
+//                       Enter the password that accompanies your username.
+//                     </small>
+//                   </div>
+//                   <div className="mt-5">
+//                     <button className="orange_buttton  btn-lg btn-block text-white" type="submit" onClick={handleSubmit}>
+//                       Login
+//                     </button>
+//                   </div>
+//                   <hr className="my-3" />
+//                   <div className="mt-1 d-flex align-items-center justify-content-center">
+//                     <p className="mb-0">Don't have an account yet?</p>
+//                     <Link className="btn btn-link" to="/register">
+//                       Sign Up
+//                     </Link>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//     </div>
+//   );
+// };
+
+// export default Login;
 
 import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import Header from "../Header/Header";
 import { Link, navigate } from "gatsby";
 import Cookies from "js-cookie";
@@ -2165,7 +2332,7 @@ const Login = () => {
         localStorage.setItem("logout_token", responseData.logout_token);
 
         toast.success("Login successful", {
-          autoClose: 3000, 
+          autoClose: 3000,
         });
 
         dispatch(
@@ -2175,9 +2342,9 @@ const Login = () => {
             operations: `User ${username} has logged in`,
           })
         );
-       
-          navigate("/teams");
-       
+
+        navigate("/teams");
+
         //navigate("/teams");
       } else {
         const errorData = await response.json();
@@ -2194,7 +2361,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error('An error occurred while logging in.'); // Show error toast
+      toast.error("An error occurred while logging in."); // Show error toast
 
       dispatch(
         trackErrorEvent(error.message, new Date(), "Login Page", "Login Button")
@@ -2207,85 +2374,92 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page">
+    <>
       <Header />
-      <section className="vh-100">
-        <div
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.3)",
-            position: "absolute",
-            width: "100vw",
-            height: "100vh",
-            zIndex: "0",
-            backdropFilter: "blur(1px)",
-          }}
-        ></div>
-        <div className="container py-5 h-100" style={{ zIndex: "9999" }}>
-          <div className="row d-flex justify-content-center align-items-center h-100 ">
-            <div>
-              <div className="card mx-auto  ">
-                <div className="card-body  p-5 text-center " style={{ margin: "0 auto", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", borderRadius: "10px" }}>
-                  <h3 className="mb-5 ">Sign in</h3>
-                  <div className="form-outline mb-4 text-left ">
-                    <label htmlFor="edit-name" className="js-form-required text-left form-required ">
-                      Username
-                      <sup>
-                        <i className="fas fa-asterisk text-danger form-required__indicator" style={{ fontSize: "0.7em" }} />
-                      </sup>
-                    </label>
-                    <input
-                      type="email"
-                      id="typeEmailX-2"
-                      className="form-control form-control-lg"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      style={{ width: "100%", maxWidth: "500px", fontSize: "1em" }}
+      <div className="login-page">
+        <section className="vh-100 d-flex justify-content-center align-items-center">
+          <div className="card mx-auto">
+            <div className="card-body p-5 text-center">
+              <h3 className="mb-5">Sign in</h3>
+              <div className="form-outline mb-4 text-left">
+                <label
+                  htmlFor="typeEmailX-2"
+                  className="js-form-required text-left form-required"
+                >
+                  Username
+                  <sup>
+                    <i
+                      className="fas fa-asterisk text-danger form-required__indicator"
+                      style={{ fontSize: "0.7em" }}
                     />
-                    <small id="edit-name--description" className="description form-text text-left text-muted">
-                      Enter your username.
-                    </small>
-                  </div>
-                  <div className="form-outline mb-4  text-left ">
-                    <label htmlFor="edit-name" className="js-form-required text-left  form-required ">
-                      Password
-                      <sup>
-                        <i className="fas fa-asterisk text-danger form-required__indicator" style={{ fontSize: "0.7em" }} />
-                      </sup>
-                    </label>
-                    <div className="input-group d-flex">
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        id="typePasswordX-2"
-                        className="form-control form-control-lg"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        style={{ width: "100%", maxWidth: "500px" }}
-                      />
-                    </div>
-                    <small id="edit-pass--description" className="description form-text text-left text-muted">
-                      Enter the password that accompanies your username.
-                    </small>
-                  </div>
-                  <div className="mt-5">
-                    <button className="orange_buttton  btn-lg btn-block text-white" type="submit" onClick={handleSubmit}>
-                      Login
-                    </button>
-                  </div>
-                  <hr className="my-3" />
-                  <div className="mt-1 d-flex align-items-center justify-content-center">
-                    <p className="mb-0">Don't have an account yet?</p>
-                    <Link className="btn btn-link" to="/register">
-                      Sign Up
-                    </Link>
-                  </div>
+                  </sup>
+                </label>
+                <input
+                  type="email"
+                  id="typeEmailX-2"
+                  className="form-control form-control-lg"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  style={{ width: "100%", maxWidth: "500px", fontSize: "1em" }}
+                />
+                <small
+                  id="edit-name--description"
+                  className="description form-text text-left text-muted"
+                >
+                  Enter your username.
+                </small>
+              </div>
+              <div className="form-outline mb-4 text-left">
+                <label
+                  htmlFor="typePasswordX-2"
+                  className="js-form-required text-left form-required"
+                >
+                  Password
+                  <sup>
+                    <i
+                      className="fas fa-asterisk text-danger form-required__indicator"
+                      style={{ fontSize: "0.7em" }}
+                    />
+                  </sup>
+                </label>
+                <div className="input-group d-flex">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="typePasswordX-2"
+                    className="form-control form-control-lg"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    style={{ width: "100%", maxWidth: "500px" }}
+                  />
                 </div>
+                <small
+                  id="edit-pass--description"
+                  className="description form-text text-left text-muted"
+                >
+                  Enter the password that accompanies your username.
+                </small>
+              </div>
+              <div className="mt-5">
+                <button
+                  className="orange_buttton btn-lg btn-block text-white"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Login
+                </button>
+              </div>
+              <hr className="my-3" />
+              <div className="mt-1 d-flex align-items-center justify-content-center">
+                <p className="mb-0">Don't have an account yet?</p>
+                <Link className="btn btn-link" to="/register">
+                  Sign Up
+                </Link>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      
-    </div>
+        </section>
+      </div>
+    </>
   );
 };
 

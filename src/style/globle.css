@@ -60,19 +60,16 @@ body {
   cursor: pointer;
 }
 
-.blue-background-color{
+.blue-background-color {
   background-color: #0550ad;
-
 }
 
-.darkBlue-background-color{
+.darkBlue-background-color {
   background-color: #002a5c;
-
 }
 
-.orange-background-color{
+.orange-background-color {
   background-color: #f46223;
-
 }
 
 .card.has-hover-shadow {
@@ -94,7 +91,6 @@ body {
 
 } */
 
-
 /* .login-page::after {
   content: "";
   position: absolute;
@@ -108,11 +104,10 @@ body {
   backdrop-filter: blur(10px); 
 } */
 
-
 .login-page {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   object-fit: cover;
   background-image: url("../images/roboustBanner.jpg");
   background-size: cover;
@@ -120,10 +115,12 @@ body {
   background-attachment: fixed;
 }
 
-
-
-
-
 .border-pixel {
   border: 2px solid red;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    font-size: 0.9rem;
+  }
 }

@@ -1554,6 +1554,26 @@ const addAppReducer = (state = null, action) => {
 
 
 
+ let axiosInstance;
+
+export const initializeAxios = async () => {
+  try {
+    const response = await axios.get('https://robustapihub.netlify.app/.netlify/functions/retrieveToken');
+    const accessToken = response.data.accessToken;
+    axiosInstance = axios.create({
+      baseURL: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${accessToken}`
+      },
+    });
+  } catch (error) {
+    console.error('Error initializing axios:', error);
+  }
+};
+
+
+
 // let axiosInstance;
 
 // export const initializeAxios = async () => {
@@ -1572,31 +1592,11 @@ const addAppReducer = (state = null, action) => {
 //   }
 // };
 
+// // Call initializeAxios initially
+// initializeAxios();
 
-
-let axiosInstance;
-
-export const initializeAxios = async () => {
-  try {
-    const response = await axios.get('https://robustapihub.netlify.app/.netlify/functions/retrieveToken');
-    const accessToken = response.data.accessToken;
-    axiosInstance = axios.create({
-      baseURL: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${accessToken}`
-      },
-    });
-  } catch (error) {
-    console.error('Error initializing axios:', error);
-  }
-};
-
-// Call initializeAxios initially
-initializeAxios();
-
-// Set up interval to refresh every 30 minutes (30 * 60 * 1000 milliseconds)
-setInterval(initializeAxios, 30 * 60 * 1000);
+// // Set up interval to refresh every 30 minutes (30 * 60 * 1000 milliseconds)
+// setInterval(initializeAxios, 30 * 60 * 1000);
 
 
 export const setAxiosInstance = (instance) => {

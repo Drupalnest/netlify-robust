@@ -291,9 +291,6 @@
 
 // export default Header;
 
-
-
-
 import React, { useState } from "react";
 import Logout from "../Auth/Logout";
 import "../../style/globle.css";
@@ -330,11 +327,6 @@ const Header = () => {
   // When user logs in
   const userData = localStorage.getItem("logout_token");
 const isLoggedIn =  userData
-
-
-
-
- 
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top  " >
@@ -485,102 +477,151 @@ const isLoggedIn =  userData
 
 export default Header;
 
-// import React from "react";
+
+
+
+// import React, { useState } from "react";
+// import Logout from "../Auth/Logout";
+// import "../../style/globle.css";
+// import Logo from "../../images/logo-main.png";
+// import { Link } from "gatsby";
+// import { useEffect } from "react";
 
 // const Header = () => {
+//   const [dropdownOpen, setDropdownOpen] = useState(false);
+//   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
+
+//   const toggleDropdown = () => {
+//     setDropdownOpen(!dropdownOpen);
+//   };
+
+//   const toggleNavbar = () => {
+//     setNavbarCollapsed(!navbarCollapsed);
+//   };
+
+//   useEffect(() => {
+//     const handleOutsideClick = (event) => {
+//       if (dropdownOpen && !event.target.closest(".dropdown")) {
+//         setDropdownOpen(false);
+//       }
+//     };
+
+//     document.addEventListener("click", handleOutsideClick);
+
+//     return () => {
+//       document.removeEventListener("click", handleOutsideClick);
+//     };
+//   }, [dropdownOpen]);
+
+//   // When user logs in
+//   const userData = localStorage.getItem("logout_token");
+//   const isLoggedIn = userData;
+
 //   return (
-//     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-//       <div className="container">
-//         <a className="navbar-brand" href="/">
-//           Your Logo
-//         </a>
+//     <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top">
+//       <div className="container-fluid">
 //         <button
-//           className="navbar-toggler"
+//           className={`navbar-toggler ${
+//             navbarCollapsed ? "" : "collapsed"
+//           } text-dark`}
 //           type="button"
 //           data-toggle="collapse"
-//           data-target="#navbarNav"
-//           aria-controls="navbarNav"
-//           aria-expanded="false"
+//           data-target="#navbarSupportedContent"
+//           aria-controls="navbarSupportedContent"
+//           aria-expanded={!navbarCollapsed ? "true" : "false"}
 //           aria-label="Toggle navigation"
+//           onClick={toggleNavbar}
 //         >
-//           <span className="navbar-toggler-icon"></span>
+//           <span className="navbar-toggler-icon" />
 //         </button>
-//         <div className="collapse navbar-collapse" id="navbarNav">
-//           <ul className="navbar-nav ml-auto">
-//             <li className="nav-item active">
-//               <a className="nav-link" href="/">
-//                 Home <span className="sr-only">(current)</span>
-//               </a>
+
+//         <div
+//           className={`collapse navbar-collapse ${
+//             navbarCollapsed ? "" : "show"
+//           }`}
+//           id="navbarSupportedContent"
+//         >
+//           <Link className="navbar-brand d-flex align-items-center" to="/teams">
+//             <img
+//               src={Logo}
+//               alt="Robust API Hub"
+//               className="img-fluid"
+//               style={{ maxHeight: "40px" }}
+//             />
+//           </Link>
+
+//           <ul className="navbar-nav ml-auto mr-5">
+//             <li className="nav-item">
+//               <Link className="hover-effect nav-link text-dark" to="/usertrack">
+//                 Activity Log
+//               </Link>
 //             </li>
 //             <li className="nav-item">
-//               <a className="nav-link" href="/about">
-//                 About
-//               </a>
+//               <Link className="hover-effect nav-link text-dark" to="/usertrack">
+//                 Activity Log
+//               </Link>
 //             </li>
 //             <li className="nav-item">
-//               <a className="nav-link" href="/services">
-//                 Services
-//               </a>
+//               <Link className="hover-effect nav-link text-dark" to="/usertrack">
+//                 Activity Log
+//               </Link>
 //             </li>
 //             <li className="nav-item">
-//               <a className="nav-link" href="/contact">
-//                 Contact
-//               </a>
+//               <Link className="hover-effect nav-link text-dark" to="/usertrack">
+//                 Activity Log
+//               </Link>
 //             </li>
+//             <li className="nav-item">
+//               <Link className="hover-effect nav-link text-dark" to="/usertrack">
+//                 Activity Log
+//               </Link>
+//             </li>
+//             {/* Add more navigation links here */}
 //           </ul>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
 
-// export default Header;
-
-// import React from "react";
-// import Logo from "../../images/logo-main.png";
-
-// const Header = () => {
-//   return (
-//     <div className="border border-primary  container-fluid p-2">
-//       <div className="row border-primary min-vh-1">
-//         <div className="col-md border border-primary ">
-//           <img
-//             src={Logo}
-//             alt="Robust API Hub"
-//             loading="lazy"
-//             className="img-fluid mx-auto"
-
-//           />
-//         </div>
-//         <div className="col-md-7 border border-primary ">
-//           One of three columns
-//         </div>
-//         <div className="col-md border border-primary ">
-//           <div className="d-flex">
-//             <div className="w-25 h-25 border border-primary" style={{width:"25px"}}>
-//               <svg
-//                 aria-hidden="true"
-//                 focusable="false"
-//                 data-prefix="fas"
-//                 data-icon="circle-user"
-//                 className="svg-inline--fa fa-circle-user"
-//                 role="img"
-//                 xmlns="http://www.w3.org/2000/svg"
-//                 viewBox="0 0 512 512"
+//           <div className="ml-2 d-flex mr-5">
+//             <div className="dropdown">
+//               <Link
+//                 className="dropdown-toggle d-flex align-items-center hidden-arrow"
+//                 to="#"
+//                 id="navbarDropdownMenuAvatar"
+//                 role="button"
+//                 onClick={toggleDropdown}
+//                 aria-expanded={dropdownOpen ? "true" : "false"}
 //               >
-//                 <path
-//                   fill="currentColor"
-//                   d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"
-//                 ></path>
-//               </svg>
+//                 {/* Add user icon here */}
+//               </Link>
+
+//               <ul
+//                 className={`dropdown-menu  ${
+//                   dropdownOpen ? "show" : ""
+//                 } border border-1`}
+//                 aria-labelledby="navbarDropdownMenuAvatar"
+//               >
+//                 <li>
+//                   <Link className="dropdown-item" to="#">
+//                     My profile
+//                   </Link>
+//                 </li>
+//                 <li>
+//                   <Link className="dropdown-item" to="#">
+//                     Settings
+//                   </Link>
+//                 </li>
+
+//                 {isLoggedIn && (
+//                   <li>
+//                     <Link className="dropdown-item">
+//                       <Logout />
+//                     </Link>
+//                   </li>
+//                 )}
+//               </ul>
 //             </div>
-//             <span>User</span>
-//             <span>Name</span>
 //           </div>
 //         </div>
 //       </div>
-
-//     </div>
+//     </nav>
 //   );
 // };
 

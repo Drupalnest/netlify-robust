@@ -1103,7 +1103,7 @@ const Startpage = () => {
                         className="card has-hover-shadow p-1 paragraph card--default 
                        rounded-4 d-flex"
                       >
-                        <Link to="#">
+                        <Link to="/swaggerui">
                           <div className="card-block d-flex  border-dark text-dark">
                             <div className="card-body">
                               <h3 className="card-title">Products</h3>
@@ -1138,7 +1138,7 @@ const Startpage = () => {
                             </div>
                           </div>
                           <div className="card-footer text-dark bg-white">
-                            <span className="text-orange-color">All APIs</span>
+                            <span className="text-orange-color">Swagger</span>
                           </div>
                         </Link>
                       </div>

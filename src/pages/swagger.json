@@ -1,0 +1,1434 @@
+
+{
+
+  
+  "openapi": "3.0.0",
+
+  "info": {
+        "title": "Compute Service API",
+        "description": "This service is responsible for Compute Service API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+              "name": "Ken Team",
+              "url": "https://www.ken.in",
+              "email": "b"
+        },
+        "license": {
+              "name": "MIT Licence",
+              "url": "https://github.com/thombergs/code-examples/blob/master/LICENSE"
+        },
+        "version": "1.0.0"
+  },
+  "servers": [
+        {
+              "url": "https://app.sastoo.com/"
+        }
+  ],
+  "tags": [
+        {
+              "name": "drupal",
+              "description": "the Drupal Management API"
+        },
+        {
+              "name": "Actuator",
+              "description": "Monitor and interact",
+              "externalDocs": {
+                    "description": "Spring Boot Actuator Web API Documentation",
+                    "url": "https://docs.spring.io/spring-boot/docs/current/actuator-api/html/"
+              }
+        }
+  ],
+  "paths": {
+        "/compute/startTestEnvironment": {
+              "post": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "operationId": "cloneTestEnvironment",
+                    "requestBody": {
+                          "content": {
+                                "application/json": {
+                                      "schema": {
+                                            "$ref": "#/components/schemas/CreateTestPodCloneRequest"
+                                      }
+                                }
+                          },
+                          "required": true
+                    },
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/CreatePodResponse"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/pod": {
+              "post": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "Create Dev/Test Environments",
+                    "description": "Create Drupal and MariaDB Environment",
+                    "operationId": "createCMS",
+                    "requestBody": {
+                          "content": {
+                                "application/json": {
+                                      "schema": {
+                                            "$ref": "#/components/schemas/CreatePodRequest"
+                                      }
+                                }
+                          },
+                          "required": true
+                    },
+                    "responses": {
+                          "200": {
+                                "description": "successful operation",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/CreatePodResponse"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              },
+              "delete": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "Delete Dev/Test Environments",
+                    "description": "Delete Drupal and MariaDB Environment",
+                    "operationId": "deletePod",
+                    "requestBody": {
+                          "content": {
+                                "application/json": {
+                                      "schema": {
+                                            "$ref": "#/components/schemas/DeletePodRequest"
+                                      }
+                                }
+                          },
+                          "required": true
+                    },
+                    "responses": {
+                          "200": {
+                                "description": "OK"
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/mysql-restore": {
+              "post": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "Take MariaDB Restore",
+                    "operationId": "runMysqlRestore",
+                    "requestBody": {
+                          "content": {
+                                "application/json": {
+                                      "schema": {
+                                            "$ref": "#/components/schemas/MysqlRestoreRequest"
+                                      }
+                                }
+                          },
+                          "required": true
+                    },
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/MysqlRestoreResponse"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/mysql-backup": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "List MariaDB Backups",
+                    "operationId": "getMysqlBackup",
+                    "parameters": [
+                          {
+                                "name": "userName",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "domain",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "mode",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          }
+                    ],
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/MysqlListBackup"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              },
+              "post": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "Take MariaDB Backup",
+                    "operationId": "runMysqlBackup",
+                    "requestBody": {
+                          "content": {
+                                "application/json": {
+                                      "schema": {
+                                            "$ref": "#/components/schemas/MysqlBackupRequest"
+                                      }
+                                }
+                          },
+                          "required": true
+                    },
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/MysqlBackupResponse"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/drupal-restore": {
+              "post": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": " Drupal Restore",
+                    "operationId": "runDrupalRestore",
+                    "requestBody": {
+                          "content": {
+                                "application/json": {
+                                      "schema": {
+                                            "$ref": "#/components/schemas/DrupalRestoreRequest"
+                                      }
+                                }
+                          },
+                          "required": true
+                    },
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/DrupalRestoreResponse"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/drupal-backup": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "List Drupal Backups",
+                    "operationId": "getDrupalBackup",
+                    "parameters": [
+                          {
+                                "name": "userName",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "domain",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "mode",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          }
+                    ],
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/DrupalListBackup"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              },
+              "post": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "Take Drupal Backup",
+                    "operationId": "runDrupalBackup",
+                    "requestBody": {
+                          "content": {
+                                "application/json": {
+                                      "schema": {
+                                            "$ref": "#/components/schemas/DrupalBackupRequest"
+                                      }
+                                }
+                          },
+                          "required": true
+                    },
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/DrupalBackupResponse"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/clone": {
+              "post": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "Take Clone from Dev to Test or Test to Dev Environment",
+                    "operationId": "runClone",
+                    "requestBody": {
+                          "content": {
+                                "application/json": {
+                                      "schema": {
+                                            "$ref": "#/components/schemas/CloneRequest"
+                                      }
+                                }
+                          },
+                          "required": true
+                    },
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/CloneResponse"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/volume": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "Show NFS volume path based on Domain name",
+                    "operationId": "getPodVolume",
+                    "parameters": [
+                          {
+                                "name": "userName",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "domain",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "mode",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          }
+                    ],
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/SastooVolume"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/version": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "operationId": "version",
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "type": "string"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/ready": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "operationId": "getPodStatus",
+                    "parameters": [
+                          {
+                                "name": "userName",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "domain",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "mode",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          }
+                    ],
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/Status"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/presign": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "operationId": "getPresignedURL",
+                    "parameters": [
+                          {
+                                "name": "userName",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "domain",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "mode",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "type",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "fileName",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          }
+                    ],
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "type": "string"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/pods": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "List the Environments",
+                    "operationId": "getPodsList",
+                    "parameters": [
+                          {
+                                "name": "userName",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          },
+                          {
+                                "name": "platform",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          }
+                    ],
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/PodListResponse"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/logs": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "summary": "Show logs of pod",
+                    "operationId": "getLogsCustomPod",
+                    "parameters": [
+                          {
+                                "name": "id",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "type": "string"
+                                }
+                          }
+                    ],
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/LogResponse"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/clearDrupalCache": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "operationId": "clearDrupalCache",
+                    "parameters": [
+                          {
+                                "name": "clearCacheRequest",
+                                "in": "query",
+                                "required": true,
+                                "schema": {
+                                      "$ref": "#/components/schemas/ClearCacheRequest"
+                                }
+                          }
+                    ],
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "type": "string"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/compute/cleanAll": {
+              "get": {
+                    "tags": [
+                          "drupal"
+                    ],
+                    "operationId": "cleanAll",
+                    "responses": {
+                          "200": {
+                                "description": "OK"
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/actuator": {
+              "get": {
+                    "tags": [
+                          "Actuator"
+                    ],
+                    "summary": "Actuator root web endpoint",
+                    "operationId": "links",
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "application/vnd.spring-boot.actuator.v3+json": {
+                                            "schema": {
+                                                  "type": "object",
+                                                  "additionalProperties": {
+                                                        "type": "object",
+                                                        "additionalProperties": {
+                                                              "$ref": "#/components/schemas/Link"
+                                                        }
+                                                  }
+                                            }
+                                      },
+                                      "application/vnd.spring-boot.actuator.v2+json": {
+                                            "schema": {
+                                                  "type": "object",
+                                                  "additionalProperties": {
+                                                        "type": "object",
+                                                        "additionalProperties": {
+                                                              "$ref": "#/components/schemas/Link"
+                                                        }
+                                                  }
+                                            }
+                                      },
+                                      "application/json": {
+                                            "schema": {
+                                                  "type": "object",
+                                                  "additionalProperties": {
+                                                        "type": "object",
+                                                        "additionalProperties": {
+                                                              "$ref": "#/components/schemas/Link"
+                                                        }
+                                                  }
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/actuator/health": {
+              "get": {
+                    "tags": [
+                          "Actuator"
+                    ],
+                    "summary": "Actuator web endpoint 'health'",
+                    "operationId": "health",
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "application/vnd.spring-boot.actuator.v3+json": {
+                                            "schema": {
+                                                  "type": "object"
+                                            }
+                                      },
+                                      "application/vnd.spring-boot.actuator.v2+json": {
+                                            "schema": {
+                                                  "type": "object"
+                                            }
+                                      },
+                                      "application/json": {
+                                            "schema": {
+                                                  "type": "object"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        },
+        "/actuator/health/**": {
+              "get": {
+                    "tags": [
+                          "Actuator"
+                    ],
+                    "summary": "Actuator web endpoint 'health-path'",
+                    "operationId": "health-path",
+                    "responses": {
+                          "200": {
+                                "description": "OK",
+                                "content": {
+                                      "application/vnd.spring-boot.actuator.v3+json": {
+                                            "schema": {
+                                                  "type": "object"
+                                            }
+                                      },
+                                      "application/vnd.spring-boot.actuator.v2+json": {
+                                            "schema": {
+                                                  "type": "object"
+                                            }
+                                      },
+                                      "application/json": {
+                                            "schema": {
+                                                  "type": "object"
+                                            }
+                                      }
+                                }
+                          },
+                          "400": {
+                                "description": "Bad Request",
+                                "content": {
+                                      "*/*": {
+                                            "schema": {
+                                                  "$ref": "#/components/schemas/ProblemDetail"
+                                            }
+                                      }
+                                }
+                          }
+                    }
+              }
+        }
+  },
+  "components": {
+        "schemas": {
+              "ProblemDetail": {
+                    "type": "object",
+                    "properties": {
+                          "type": {
+                                "type": "string",
+                                "format": "uri"
+                          },
+                          "title": {
+                                "type": "string"
+                          },
+                          "status": {
+                                "type": "integer",
+                                "format": "int32"
+                          },
+                          "detail": {
+                                "type": "string"
+                          },
+                          "instance": {
+                                "type": "string",
+                                "format": "uri"
+                          },
+                          "properties": {
+                                "type": "object",
+                                "additionalProperties": {
+                                      "type": "object"
+                                }
+                          }
+                    }
+              },
+              "CreateTestPodCloneRequest": {
+                    "required": [
+                          "domainName",
+                          "userName"
+                    ],
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "CmsPod": {
+                    "type": "object",
+                    "properties": {
+                          "pvcName": {
+                                "type": "string"
+                          },
+                          "deploymentName": {
+                                "type": "string"
+                          },
+                          "serviceName": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "CreatePodResponse": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "devPodId": {
+                                "$ref": "#/components/schemas/Instance"
+                          },
+                          "testPodId": {
+                                "$ref": "#/components/schemas/Instance"
+                          }
+                    }
+              },
+              "Instance": {
+                    "type": "object",
+                    "properties": {
+                          "mariaDbPod": {
+                                "$ref": "#/components/schemas/MariaDbPod"
+                          },
+                          "drupalPod": {
+                                "$ref": "#/components/schemas/CmsPod"
+                          },
+                          "domain": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "MariaDbPod": {
+                    "type": "object",
+                    "properties": {
+                          "pvcName": {
+                                "type": "string"
+                          },
+                          "deploymentName": {
+                                "type": "string"
+                          },
+                          "serviceName": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "ApigeeDetails": {
+                    "type": "object",
+                    "properties": {
+                          "autoPortalInstall": {
+                                "type": "boolean"
+                          },
+                          "edgeInstanceType": {
+                                "type": "string"
+                          },
+                          "edgeAuthType": {
+                                "type": "string"
+                          },
+                          "edgeOrganization": {
+                                "type": "string"
+                          },
+                          "edgeUserName": {
+                                "type": "string"
+                          },
+                          "edgePassword": {
+                                "type": "string"
+                          },
+                          "edgeEndpoint": {
+                                "type": "string"
+                          },
+                          "adminEmail": {
+                                "type": "string"
+                          },
+                          "adminUser": {
+                                "type": "string"
+                          },
+                          "adminpassword": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "CreatePodRequest": {
+                    "required": [
+                          "domainName",
+                          "userName"
+                    ],
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          },
+                          "cpu": {
+                                "type": "string"
+                          },
+                          "memory": {
+                                "type": "string"
+                          },
+                          "mode": {
+                                "type": "string"
+                          },
+                          "prefix": {
+                                "type": "string"
+                          },
+                          "platform": {
+                                "type": "string"
+                          },
+                          "apigeeDetails": {
+                                "$ref": "#/components/schemas/ApigeeDetails"
+                          }
+                    }
+              },
+              "MysqlRestoreRequest": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          },
+                          "sqlFile": {
+                                "type": "string"
+                          },
+                          "mode": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "MysqlRestoreResponse": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "backupJobId": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "MysqlBackupRequest": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          },
+                          "mode": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "MysqlBackupResponse": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "backupJobId": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "DrupalRestoreRequest": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          },
+                          "mode": {
+                                "type": "string"
+                          },
+                          "zipFile": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "DrupalRestoreResponse": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "backupJobId": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "DrupalBackupRequest": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          },
+                          "mode": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "DrupalBackupResponse": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "backupJobId": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "CloneRequest": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          },
+                          "from": {
+                                "type": "string"
+                          },
+                          "to": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "CloneResponse": {
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "drupalBackupJobId": {
+                                "type": "string"
+                          },
+                          "mariadbBackupJobId": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "SastooVolume": {
+                    "type": "object",
+                    "properties": {
+                          "drupalVolumePath": {
+                                "type": "string"
+                          },
+                          "mariadbVolumePath": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "Status": {
+                    "type": "object",
+                    "properties": {
+                          "ready": {
+                                "type": "boolean"
+                          }
+                    }
+              },
+              "PodDetails": {
+                    "type": "object",
+                    "properties": {
+                          "jobName": {
+                                "type": "string"
+                          },
+                          "createdDate": {
+                                "type": "string"
+                          },
+                          "cpu": {
+                                "type": "string"
+                          },
+                          "memory": {
+                                "type": "string"
+                          },
+                          "state": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "PodListResponse": {
+                    "type": "object",
+                    "properties": {
+                          "instances": {
+                                "type": "array",
+                                "items": {
+                                      "$ref": "#/components/schemas/PodDetails"
+                                }
+                          }
+                    }
+              },
+              "MysqlListBackup": {
+                    "type": "object",
+                    "properties": {
+                          "files": {
+                                "uniqueItems": true,
+                                "type": "array",
+                                "items": {
+                                      "type": "string"
+                                }
+                          },
+                          "domain": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "LogResponse": {
+                    "type": "object",
+                    "properties": {
+                          "log": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "DrupalListBackup": {
+                    "type": "object",
+                    "properties": {
+                          "files": {
+                                "uniqueItems": true,
+                                "type": "array",
+                                "items": {
+                                      "type": "string"
+                                }
+                          },
+                          "domain": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "ClearCacheRequest": {
+                    "required": [
+                          "domainName",
+                          "userName"
+                    ],
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          },
+                          "mode": {
+                                "type": "string"
+                          },
+                          "platform": {
+                                "type": "string"
+                          }
+                    }
+              },
+              "Link": {
+                    "type": "object",
+                    "properties": {
+                          "href": {
+                                "type": "string"
+                          },
+                          "templated": {
+                                "type": "boolean"
+                          }
+                    }
+              },
+              "DeletePodRequest": {
+                    "required": [
+                          "domainName",
+                          "mode",
+                          "userName"
+                    ],
+                    "type": "object",
+                    "properties": {
+                          "userName": {
+                                "type": "string"
+                          },
+                          "domainName": {
+                                "type": "string"
+                          },
+                          "mode": {
+                                "type": "string"
+                          }
+                    }
+              }
+        }
+  }
+
+}
