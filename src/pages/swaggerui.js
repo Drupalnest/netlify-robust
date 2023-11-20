@@ -4348,14 +4348,24 @@ const apiSpec={
         "summary": "Get details of appgroups apps",
         "parameters": [
           {
-            "name": "appgroupName",
+            "name": "appgroup name",
             "in": "path",
             "description": "Name of the appgroup",
             "required": true,
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "appgroup app name",
+            "in": "path",
+            "description": "Name of the appgroup app",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
+          
         ],
         "responses": {
           "200": {
@@ -4401,14 +4411,24 @@ const apiSpec={
         "summary": "Update an existing appgroup apps",
         "parameters": [
           {
-            "name": "appgroupName",
+            "name": "appgroup name",
             "in": "path",
-            "description": "ID of the app group",
+            "description": "Name of the appgroup",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appgroup app name",
+            "in": "path",
+            "description": "Name of the appgroup app",
             "required": true,
             "schema": {
               "type": "string"
             }
           }
+          
         ],
         "requestBody": {
           "description": "Updated app group object",
@@ -4438,14 +4458,24 @@ const apiSpec={
         "summary": "Delete an appgroup apps",
         "parameters": [
           {
-            "name": "appgroupName",
+            "name": "appgroup name",
             "in": "path",
-            "description": "ID of the app group",
+            "description": "Name of the appgroup",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appgroup app name",
+            "in": "path",
+            "description": "Name of the appgroup app",
             "required": true,
             "schema": {
               "type": "string"
             }
           }
+          
         ],
         "responses": {
           "204": {
@@ -4564,7 +4594,7 @@ const apiSpec={
 
     req.headers[
       "Authorization"
-    ] = `Bearer ya29.c.c0AY_VpZhxz5gG1j9FItXfROvgHmjnHvyoP9KCVKXKs57e_ZBu-gCC5d0GU60_YRnlBxYvdvfvODVAudK0uZe-oMPi8lkMXeQYcGtruc-XeFkBluxQd0FuGJvi5F3W53WBcH3Wwt3tWqkFZqwCrWCZcJcvccm21MI6aCJaRLvZQvAY0YhOGoCMCIx79oRHtEf6wzyGYxMtx1AxXksQ14aAEGhnZ_GREL4E4SjmU3siI8IhSSYKP7Bx-BBQmwn4EGm1Ej419znnCxI0VBIgD0-L48eDqsIV_xqJ8psN1eAcRlYwzqvXFE0Vft6wlJ8lJHFW9QVSFlR7D94O1Jc19Tk5yRjYG6BLgJkaq1hampaMBYRqpBcFdfnV_w1FygG387CnhnY1025ao_4qj09m84d8a8-9yrI38f-MggY4XMFYRq5cRolbMizubZxyOlWu9zpwpFUnykJXgv9-QXwO3xwUv_VV_xssvrovdMnvIqzW9hZactfr58d-vM6Vq6jJrxFRfnosZsibparYUhu7UV88ald4uQzoc_geBZYVO1xti8ak9g9yXF3B20p12mXOyB8-cw-b3J8ZwfY_5gJuXafJXnFfBMxg5j-6tIYsVWhBtfaXeWShRey5QXxUrbyy_Shpf6uIapB89I3-FzZ75qFhpV0c-OxMuS4U09B8OgqljMvWYqpFa0_Wx3YjVFM3s_S2ep_io-dufwd0aIJ8W1p3slOsMcZov5vqX421JJFt_81zu9z056-Yi-qrWjbjgfQeF6BjQBds1elvlSbzl7e9eZOyR34OtR8QFReO1hvk6g4ftJzp1sIjtMJuu4qaUhRix1n6dc8tnVqtfbrZ0F-XRcuchScjuy8qRiqvgcars8QeJmOzQgaqVJ9wnMauuurshzO8Vw1lZ6g0_OBsVg5xthJjeb3fc6BUJr6_qaVUWk9MBsOdv6x67Y5rdWlQ_s6y-u1YYShIIt6-kYy1OVWp8M1umiRBUYRV5IvBSQUn-_ucu1j07a1srXW`;
+    ] = `Bearer ya29.c.c0AY_VpZh6JQdAySTQ0Kxm0A_5xaKYmqHIqZShewLkDZGd1kzSUqIrnTFZggs6qLZohvVRsBoOZtwlJaMM39t8pIqnrayqhXrM-ZVMDIusDq58ykDgzuOAUdyGJu3jmvVSFlvnjPIDB9YCJqaNOdmmQosUe__Cf2XBIJ2Y_br7uKVekH76AdGRvn7jzMFaTtPdpKMbNhzfpMF692t0IYu37UmSC9Sqcn078oBfaf0TbkFRmrWpGYlod9c1DkTd67lE4BKsq9eiz0hbvZlGmy3jqJ_o_biLed5NNL9YgX4nkV6NcQXMye6E30RImNNBe8rdqV8bqgg7Cd5BJbUtV43ZyMuzDDmsqLzsip2J7VhFJQs1WIYs4LuSFWQG384DQbBqO787Msv0czm_94wROryz6wBjbJaV1az457QuVy3uw9O6mgfQ2QSy3R1tk7yoQ6Y39xqrdb9atnQJyFdUuWpc6U841bxjv6f0lQ8IsIidQq7-x7yX6SSJrRwvaQfZ8VnZ_BM_-MfeXrk0iXfkO75eqU5n4fklYQor1xjseFmoS5sm3gOquR-RSqyyat0op_7m97f_9dFmOu7w496SSn9Xe2ZqU3fJFa8M8ig7aZBzUSuVF5W_jno8_z-olIiklFtXxohh8wyIUZ7Foogn043t778u2zj68B5j51FQUfxMS3zVMQ5QSavegWzSY4bxUjfuvypcV-Bwh-hwOvy63uzdgRUfiytMcI-n5Rx1aSOXO-qO1veu-UqdoQSIeyWk7X9I5m-cxgm0loJUI9cJay9BpSo7zsVmY6x8Son_pS_Uo6-aoXoFOwyWp8lbFazipdSzj1QbBfXOYlxZ7BpQdcgzipv8-0fBYat0YcypujxoZnJf2ivZb6bpIRdq6MS8BjmqOakOzXmVu2MXk0Xl3xUB2lg1JXrwUqFU2FbYeS77Qx4sa8f03BO-sxQMzS6vkYnXV33fk8MXcw3qyb_kMt1bZcoubrvZyjU6-Vv_igwRZ0eZ8d9fs4UrQo_`;
     return req;
   };
 
