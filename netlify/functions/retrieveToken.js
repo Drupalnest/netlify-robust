@@ -497,13 +497,11 @@
 // // // export { handler };
 
 
-
-
 const { exec } = require('child_process');
+const util = require('util');
 const path = require('path');
-const esm = require('esm');
 
-const esmRequire = esm(module);
+const execPromise = util.promisify(exec);
 
 exports.handler = async (event, context) => {
   try {
@@ -514,7 +512,7 @@ exports.handler = async (event, context) => {
     console.log('Key File Path:', keyFilePath);
 
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
-    const { stdout, stderr } = await esmRequire('util').promisify(exec)(command);
+    const { stdout, stderr } = await execPromise(command);
 
     if (stderr) {
       console.error(`Script stderr: ${stderr}`);
@@ -548,7 +546,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "*", 
         "Access-Control-Allow-Headers": "Content-Type",
       },
       body: JSON.stringify({ accessToken })
