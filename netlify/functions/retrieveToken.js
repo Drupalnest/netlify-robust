@@ -496,7 +496,7 @@
 // };
 // // export { handler };
 
-const { spawn } = require('child_process');
+const { exec } = require('child_process');
 const path = require('path');
 
 exports.handler = async (event, context) => {
@@ -507,60 +507,55 @@ exports.handler = async (event, context) => {
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    const child = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
+    const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
 
-    let stdout = '';
-    let stderr = '';
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error: ${error.message}`);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: 'Internal Server Error' }),
+        };
+      }
 
-    child.stdout.on('data', (data) => {
-      stdout += data.toString();
-    });
+      if (stderr) {
+        console.error(`Script stderr: ${stderr}`);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: 'Internal Server Error' }),
+        };
+      }
 
-    child.stderr.on('data', (data) => {
-      stderr += data.toString();
-    });
+      const lines = stdout.split('\n');
+      const accessTokenLine = lines.find((line) => line.startsWith('  "access_token":'));
 
-    await new Promise((resolve) => {
-      child.on('close', resolve);
-    });
+      if (!accessTokenLine) {
+        console.error('No valid access_token found in the response.');
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: 'Internal Server Error' }),
+        };
+      }
 
-    if (stderr) {
-      console.error(`Script stderr: ${stderr}`);
+      const accessToken = accessTokenLine.split('"')[3];
+
+      if (!accessToken) {
+        console.error('No valid access_token found in the response.');
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: 'Internal Server Error' }),
+        };
+      }
+
       return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+        body: JSON.stringify({ accessToken }),
       };
-    }
-
-    const lines = stdout.split('\n');
-    const accessTokenLine = lines.find((line) => line.startsWith('  "access_token":'));
-
-    if (!accessTokenLine) {
-      console.error('No valid access_token found in the response.');
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
-      };
-    }
-
-    const accessToken = accessTokenLine.split('"')[3];
-
-    if (!accessToken) {
-      console.error('No valid access_token found in the response.');
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
-      };
-    }
-
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-      body: JSON.stringify({ accessToken }),
-    };
+    });
   } catch (error) {
     console.error(`Error: ${error.message}`);
     return {
