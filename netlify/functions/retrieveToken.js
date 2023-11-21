@@ -497,8 +497,8 @@
 // // export { handler };
 
 
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+
+const { spawn } = require('child_process');
 const path = require('path');
 
 exports.handler = async (event, context) => {
@@ -509,8 +509,24 @@ exports.handler = async (event, context) => {
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
-    const { stdout, stderr } = await exec(command);
+    const process = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
+
+    let stdout = '';
+    let stderr = '';
+
+    process.stdout.on('data', (data) => {
+      stdout += data.toString();
+    });
+
+    process.stderr.on('data', (data) => {
+      stderr += data.toString();
+    });
+
+    await new Promise((resolve) => {
+      process.on('close', (code) => {
+        resolve(code);
+      });
+    });
 
     console.log('Script Output:', stdout);
 
@@ -549,5 +565,3 @@ exports.handler = async (event, context) => {
     };
   }
 };
-
-
