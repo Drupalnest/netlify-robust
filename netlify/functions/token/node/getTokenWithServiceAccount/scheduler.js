@@ -254,7 +254,7 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const cron = require('node-cron');
 
-const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-f1028d346375.json';
+const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json';
 
 let scheduled = false;
 
