@@ -440,6 +440,7 @@ const esmRequire = esm(module);
 exports.handler = async (event, context) => {
   try {
     const scriptPath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+
     const keyFilePath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/apt-subset-398000-f1028d346375.json');
 
     console.log('Script Path:', scriptPath);
