@@ -493,4 +493,4 @@ exports.handler = async (event, context) => {
     };
   }
 };
-// export { handler };
+ export { handler };
