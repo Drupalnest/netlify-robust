@@ -439,9 +439,9 @@ const esmRequire = esm(module);
 
 exports.handler = async (event, context) => {
   try {
-    const scriptPath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-
-    const keyFilePath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
+    const scriptPath = require.resolve('./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+    const keyFilePath = require.resolve('./token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
+    
 
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
