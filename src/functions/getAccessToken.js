@@ -1,7 +1,7 @@
 const { exec } = require('child_process');
 
 exports.handler = function (event, context, callback) {
-  const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-ff6b648af86a.json';
+  const command = 'node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ./token/node/getTokenWithServiceAccount/apt-subset-398000-f1028d346375.json';
 
   exec(command, (error, stdout, stderr) => {
     if (error || stderr) {

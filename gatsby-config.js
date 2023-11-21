@@ -173,6 +173,76 @@ module.exports = {
         },
       },
 
+
+      // {
+      //   resolve: `gatsby-source-drupal`,
+      //   options: {
+      //     baseUrl: `https://robustapihub.io/`,
+      //     apiBase: `jsonapi`,
+      //     query: `
+      //       {
+      //         allUserUser {
+      //           edges {
+      //             node {
+      //               display_name
+      //               drupal_id
+      //               id
+                   
+      //             }
+      //           }
+      //         }
+      //       }
+      //     `,
+      //   },
+      // },
+
+     
+
+
+// gatsby-config.js
+
+    // {
+    //   resolve: `gatsby-source-drupal`,
+    //   options: {
+    //     baseUrl: `https://robustapihub.io/`,
+    //     apiBase: `jsonapi`,
+    //     // Add your other plugin options here
+
+    //     // Custom error handling
+    //     errorHandling: {
+    //       // Handle 403 Forbidden errors
+    //       onFetchError: ({ request, error }) => {
+    //         if (error.response && error.response.status === 403) {
+    //           console.warn(
+    //             `Warning: Received a 403 Forbidden error while fetching ${request.url}.`
+    //           );
+    //           // You can log a warning, skip the error, or take any other appropriate action
+    //           return null; // Return null to prevent the build from failing
+    //         }
+    //         // For other errors, you can choose to handle them differently
+    //         console.error(`Error fetching ${request.url}: ${error.message}`);
+    //         throw error; // Throw the error to make the build fail
+    //       },
+    //     },
+    //   },
+    // },
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      
       // {
       //   resolve: `gatsby-source-drupal`,
