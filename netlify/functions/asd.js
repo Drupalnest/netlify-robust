@@ -1,26 +1,39 @@
 
-const { spawnSync } = require('child_process');
+const { spawn } = require('child_process');
 const path = require('path');
 
 exports.handler = async (event, context) => {
   try {
-    const scriptPath = path.resolve(process.cwd(), 'netlify/functions/token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-    const keyFilePath = path.resolve(process.cwd(), 'netlify/functions/token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
+    // Use __dirname to get the directory of the current module
+    const scriptPath = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount', 'getTokenWithServiceAccount.js');
+    const keyFilePath = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount', 'inspiring-bonus-405815-b81c6343d863.json');
 
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    const result = spawnSync('node', [scriptPath, '-v', '--keyfile', keyFilePath], {
-      encoding: 'utf-8',
+    // Use spawn with cwd option to set the current working directory
+    const child = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath], { cwd: __dirname });
+
+    let stdout = '';
+    let stderr = '';
+
+    child.stdout.on('data', (data) => {
+      stdout += data.toString();
     });
 
-    const { stdout, stderr } = result;
+    child.stderr.on('data', (data) => {
+      stderr += data.toString();
+    });
+
+    await new Promise((resolve) => {
+      child.on('close', resolve);
+    });
 
     if (stderr) {
       console.error(`Script stderr: ${stderr}`);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
+        body: JSON.stringify({ error: 'Internal Server Error' })
       };
     }
 
@@ -31,7 +44,7 @@ exports.handler = async (event, context) => {
       console.error('No valid access_token found in the response.');
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
+        body: JSON.stringify({ error: 'Internal Server Error' })
       };
     }
 
@@ -41,23 +54,23 @@ exports.handler = async (event, context) => {
       console.error('No valid access_token found in the response.');
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
+        body: JSON.stringify({ error: 'Internal Server Error' })
       };
     }
 
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
       },
-      body: JSON.stringify({ accessToken }),
+      body: JSON.stringify({ accessToken })
     };
   } catch (error) {
     console.error(`Error: ${error.message}`);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal Server Error' }),
+      body: JSON.stringify({ error: 'Internal Server Error' })
     };
   }
 };
