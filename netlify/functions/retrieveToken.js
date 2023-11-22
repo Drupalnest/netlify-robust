@@ -421,7 +421,7 @@ const path = require('path');
 
 exports.handler = async (event, context) => {
   try {
-    const scriptPath = './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js';
+    const scriptPath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
     const keyFilePath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
 
     console.log('Script Path:', scriptPath);
