@@ -566,7 +566,7 @@
 
 
 
-const { spawnSync } = require('child_process');
+const { spawn } = require('child_process');
 const path = require('path');
 
 exports.handler = async (event, context) => {
@@ -581,8 +581,23 @@ exports.handler = async (event, context) => {
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    // Execute the script as a separate process
-    const { stdout, stderr } = spawnSync('node', [scriptPath, '-v', '--keyfile', keyFilePath], { encoding: 'utf-8' });
+    // Execute the script as a separate process asynchronously
+    const child = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
+
+    let stdout = '';
+    let stderr = '';
+
+    child.stdout.on('data', (data) => {
+      stdout += data.toString();
+    });
+
+    child.stderr.on('data', (data) => {
+      stderr += data.toString();
+    });
+
+    await new Promise((resolve) => {
+      child.on('close', resolve);
+    });
 
     if (stderr) {
       console.error(`Script stderr: ${stderr}`);
@@ -593,7 +608,7 @@ exports.handler = async (event, context) => {
     }
 
     const lines = stdout.split('\n');
-    const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
+    const accessTokenLine = lines.find((line) => line.startsWith('  "access_token":'));
 
     if (!accessTokenLine) {
       console.error('No valid access_token found in the response.');
