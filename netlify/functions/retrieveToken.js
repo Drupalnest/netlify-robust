@@ -566,12 +566,8 @@
 
 
 
-
-const { exec } = require('child_process');
-const util = require('util');
+const { spawn } = require('child_process');
 const path = require('path');
-
-const execPromise = util.promisify(exec);
 
 exports.handler = async (event, context) => {
   try {
@@ -585,16 +581,29 @@ exports.handler = async (event, context) => {
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
-    const { stdout, stderr } = await execPromise(command);
+    // Use spawn to execute the Node.js script
+    const child = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
+    
+    let stdout = '';
+    let stderr = '';
 
-    if (stderr) {
-      console.error(`Script stderr: ${stderr}`);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' })
-      };
-    }
+    child.stdout.on('data', (data) => {
+      stdout += data.toString();
+    });
+
+    child.stderr.on('data', (data) => {
+      stderr += data.toString();
+    });
+
+    await new Promise((resolve, reject) => {
+      child.on('close', (code) => {
+        if (code === 0) {
+          resolve();
+        } else {
+          reject(new Error(`Script exited with code ${code}. Stderr: ${stderr}`));
+        }
+      });
+    });
 
     const lines = stdout.split('\n');
     const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
