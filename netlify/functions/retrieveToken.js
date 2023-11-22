@@ -416,6 +416,7 @@
 
 
 
+const util = require('util');
 const { exec } = require('child_process');
 const path = require('path');
 const esm = require('esm');
@@ -426,13 +427,15 @@ exports.handler = async (event, context) => {
   try {
     const scriptPath = require.resolve('./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
     const keyFilePath = require.resolve('./token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
-    
 
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
-    const { stdout, stderr } = await esmRequire('util').promisify(exec)(command);
+    const { stdout, stderr } = await util.promisify(exec)(command);
+
+    console.log('Script stdout:', stdout);
+    console.log('Script stderr:', stderr);
 
     if (stderr) {
       console.error(`Script stderr: ${stderr}`);
@@ -444,7 +447,7 @@ exports.handler = async (event, context) => {
 
     const lines = stdout.split('\n');
     const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
-    
+
     if (!accessTokenLine) {
       console.error('No valid access_token found in the response.');
       return {
@@ -473,10 +476,10 @@ exports.handler = async (event, context) => {
     };
   } catch (error) {
     console.error(`Error: ${error.message}`);
+    console.error(error.stack); // Log the full stack trace
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Internal Server Error' })
     };
   }
 };
-// // export { handler };
