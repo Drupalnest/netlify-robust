@@ -566,7 +566,7 @@
 
 
 
-const { spawn } = require('child_process');
+const { spawnSync } = require('child_process');
 const path = require('path');
 
 exports.handler = async (event, context) => {
@@ -581,29 +581,16 @@ exports.handler = async (event, context) => {
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    // Use spawn to execute the Node.js script
-    const child = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
-    
-    let stdout = '';
-    let stderr = '';
+    // Execute the script as a separate process
+    const { stdout, stderr } = spawnSync('node', [scriptPath, '-v', '--keyfile', keyFilePath], { encoding: 'utf-8' });
 
-    child.stdout.on('data', (data) => {
-      stdout += data.toString();
-    });
-
-    child.stderr.on('data', (data) => {
-      stderr += data.toString();
-    });
-
-    await new Promise((resolve, reject) => {
-      child.on('close', (code) => {
-        if (code === 0) {
-          resolve();
-        } else {
-          reject(new Error(`Script exited with code ${code}. Stderr: ${stderr}`));
-        }
-      });
-    });
+    if (stderr) {
+      console.error(`Script stderr: ${stderr}`);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Internal Server Error' }),
+      };
+    }
 
     const lines = stdout.split('\n');
     const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
@@ -612,7 +599,7 @@ exports.handler = async (event, context) => {
       console.error('No valid access_token found in the response.');
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' })
+        body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
 
@@ -622,23 +609,23 @@ exports.handler = async (event, context) => {
       console.error('No valid access_token found in the response.');
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' })
+        body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
 
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
       },
-      body: JSON.stringify({ accessToken })
+      body: JSON.stringify({ accessToken }),
     };
   } catch (error) {
     console.error(`Error: ${error.message}`);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal Server Error' })
+      body: JSON.stringify({ error: 'Internal Server Error' }),
     };
   }
 };
