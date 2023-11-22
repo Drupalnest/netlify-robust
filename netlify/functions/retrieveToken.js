@@ -421,17 +421,17 @@ const path = require('path');
 
 exports.handler = async (event, context) => {
   try {
-    const scriptPath = path.join(process.env.LAMBDA_TASK_ROOT, 'token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-    const keyFilePath = path.join(process.env.LAMBDA_TASK_ROOT, 'token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
-
+    const scriptPath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+    const keyFilePath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
+    
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
     const { stdout, stderr } = await util.promisify(exec)(command);
 
-    console.log('Script stdout:', stdout);
-    console.log('Script stderr:', stderr);
+    // console.log('Script stdout:', stdout);
+    // console.log('Script stderr:', stderr);
 
     if (stderr) {
       console.error(`Script stderr: ${stderr}`);
