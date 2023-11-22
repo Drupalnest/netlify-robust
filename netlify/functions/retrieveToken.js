@@ -575,10 +575,10 @@ exports.handler = async (event, context) => {
   try {
     // Determine the absolute path of the current script
     const currentScriptPath = __filename;
-    
+
     // Build paths relative to the current script
-    const scriptPath = path.resolve(path.dirname(currentScriptPath), './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-const keyFilePath = path.resolve(path.dirname(currentScriptPath), './token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
+    const scriptPath = path.resolve(path.dirname(currentScriptPath), 'token', 'node', 'getTokenWithServiceAccount', 'getTokenWithServiceAccount.js');
+    const keyFilePath = path.resolve(path.dirname(currentScriptPath), 'token', 'node', 'getTokenWithServiceAccount', 'inspiring-bonus-405815-b81c6343d863.json');
 
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
@@ -618,7 +618,7 @@ const keyFilePath = path.resolve(path.dirname(currentScriptPath), './token/node/
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*", 
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
       },
       body: JSON.stringify({ accessToken })
