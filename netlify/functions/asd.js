@@ -53,11 +53,8 @@ exports.handler = async (event, context) => {
     console.log('Access Token:', accessToken);
 
     return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
+      statusCode: 201,
+     
       body: JSON.stringify({ accessToken }),
     };
 
