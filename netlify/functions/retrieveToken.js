@@ -415,12 +415,12 @@
 
 
 
+
 const { spawnSync } = require('child_process');
 const path = require('path');
 
 exports.handler = async (event, context) => {
   try {
-    // Use process.cwd() to get the current working directory
     const scriptPath = path.resolve(process.cwd(), 'netlify/functions/token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
     const keyFilePath = path.resolve(process.cwd(), 'netlify/functions/token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
 
@@ -428,7 +428,6 @@ exports.handler = async (event, context) => {
     console.log('Key File Path:', keyFilePath);
 
     const result = spawnSync('node', [scriptPath, '-v', '--keyfile', keyFilePath], {
-      cwd: process.cwd(),
       encoding: 'utf-8',
     });
 
