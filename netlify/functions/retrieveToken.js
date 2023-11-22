@@ -564,7 +564,6 @@
 
 
 
-
 const { exec } = require('child_process');
 const util = require('util');
 const path = require('path');
@@ -573,12 +572,12 @@ const execPromise = util.promisify(exec);
 
 exports.handler = async (event, context) => {
   try {
-    // Determine the absolute path of the current script
-    const currentScriptPath = __filename;
+    // Use the environment variable to get the base path
+    const basePath = process.env.LAMBDA_TASK_ROOT || process.cwd();
 
-    // Build paths relative to the current script
-    const scriptPath = path.resolve(path.dirname(currentScriptPath), 'token', 'node', 'getTokenWithServiceAccount', 'getTokenWithServiceAccount.js');
-    const keyFilePath = path.resolve(path.dirname(currentScriptPath), 'token', 'node', 'getTokenWithServiceAccount', 'inspiring-bonus-405815-b81c6343d863.json');
+    // Build paths using the base path
+    const scriptPath = path.resolve(basePath, 'token', 'node', 'getTokenWithServiceAccount', 'getTokenWithServiceAccount.js');
+    const keyFilePath = path.resolve(basePath, 'token', 'node', 'getTokenWithServiceAccount', 'inspiring-bonus-405815-b81c6343d863.json');
 
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
