@@ -1,5 +1,5 @@
 
-const { spawn } = require('child_process');
+const { exec } = require('child_process');
 const path = require('path');
 
 exports.handler = async (event, context) => {
@@ -12,23 +12,9 @@ exports.handler = async (event, context) => {
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    // Use spawn with cwd option to set the current working directory
-    const child = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath], { cwd: rootDirectory });
-
-    let stdout = '';
-    let stderr = '';
-
-    child.stdout.on('data', (data) => {
-      stdout += data.toString();
-    });
-
-    child.stderr.on('data', (data) => {
-      stderr += data.toString();
-    });
-
-    await new Promise((resolve) => {
-      child.on('close', resolve);
-    });
+    // Execute the script directly
+    const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
+    const { stdout, stderr } = await exec(command, { cwd: rootDirectory });
 
     if (stderr) {
       console.error(`Script stderr: ${stderr}`);
