@@ -497,11 +497,20 @@
 
 
 
-
-
 const util = require('util');
 const { spawn } = require('child_process');
 const path = require('path');
+
+const executeCommand = async (command, options) => {
+  const { stdout, stderr } = await util.promisify(require('child_process').exec)(command, options);
+
+  if (stderr) {
+    console.error(`Script stderr: ${stderr}`);
+    throw new Error('Internal Server Error');
+  }
+
+  return stdout;
+};
 
 exports.handler = async (event, context) => {
   try {
@@ -511,32 +520,8 @@ exports.handler = async (event, context) => {
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    const childProcess = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
-    
-    let scriptStdout = ''; // Variable to capture stdout
-
-    childProcess.stdout.on('data', (data) => {
-      console.log(`Script stdout: ${data}`);
-      scriptStdout += data; // Append data to scriptStdout
-    });
-
-    childProcess.stderr.on('data', (data) => {
-      console.error(`Script stderr: ${data}`);
-    });
-
-    const exitCode = await new Promise((resolve) => {
-      childProcess.on('close', (code) => {
-        resolve(code);
-      });
-    });
-
-    if (exitCode !== 0) {
-      console.error(`Script exited with code ${exitCode}`);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
-      };
-    }
+    const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
+    const scriptStdout = await executeCommand(command);
 
     // Rest of the code remains unchanged
     const lines = scriptStdout.split('\n');
@@ -544,20 +529,14 @@ exports.handler = async (event, context) => {
 
     if (!accessTokenLine) {
       console.error('No valid access_token found in the response.');
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
-      };
+      throw new Error('Internal Server Error');
     }
 
     const accessToken = accessTokenLine.split('"')[3];
 
     if (!accessToken) {
       console.error('No valid access_token found in the response.');
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
-      };
+      throw new Error('Internal Server Error');
     }
 
     return {
