@@ -414,6 +414,8 @@
 // };
 
 
+
+
 const { spawn } = require('child_process');
 const path = require('path');
 
@@ -448,7 +450,7 @@ exports.handler = async (event, context) => {
       console.error(`Script stderr: ${stderr}`);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' })
+        body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
 
@@ -459,7 +461,7 @@ exports.handler = async (event, context) => {
       console.error('No valid access_token found in the response.');
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' })
+        body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
 
@@ -469,23 +471,23 @@ exports.handler = async (event, context) => {
       console.error('No valid access_token found in the response.');
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' })
+        body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
 
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*", 
-        "Access-Control-Allow-Headers": "Content-Type",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
       },
-      body: JSON.stringify({ accessToken })
+      body: JSON.stringify({ accessToken }),
     };
   } catch (error) {
     console.error(`Error: ${error.message}`);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal Server Error' })
+      body: JSON.stringify({ error: 'Internal Server Error' }),
     };
   }
 };
