@@ -1,5 +1,3 @@
-
 [build]
-  command = "npm run build"
   functions = "netlify/functions"
-  node_version = "14"
+  node_version = "14"  # Adjust the version as needed
