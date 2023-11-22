@@ -496,13 +496,12 @@
 
 
 
-
 const util = require('util');
-const { spawn } = require('child_process');
+const { exec } = require('child_process');
 const path = require('path');
 
 const executeCommand = async (command, options) => {
-  const { stdout, stderr } = await util.promisify(require('child_process').exec)(command, options);
+  const { stdout, stderr } = await util.promisify(exec)(command, options);
 
   if (stderr) {
     console.error(`Script stderr: ${stderr}`);
@@ -512,7 +511,7 @@ const executeCommand = async (command, options) => {
   return stdout;
 };
 
-exports.handler = async (event, context) => {
+exports.handler = async () => {
   try {
     const scriptPath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
     const keyFilePath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
@@ -523,7 +522,6 @@ exports.handler = async (event, context) => {
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
     const scriptStdout = await executeCommand(command);
 
-    // Rest of the code remains unchanged
     const lines = scriptStdout.split('\n');
     const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
 
