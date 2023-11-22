@@ -415,7 +415,7 @@
 
 
 
-const { spawn } = require('child_process');
+const { spawnSync } = require('child_process');
 const path = require('path');
 
 exports.handler = async (event, context) => {
@@ -427,23 +427,12 @@ exports.handler = async (event, context) => {
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    // Use spawn with cwd option to set the current working directory
-    const child = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath], { cwd: process.cwd() });
-
-    let stdout = '';
-    let stderr = '';
-
-    child.stdout.on('data', (data) => {
-      stdout += data.toString();
+    const result = spawnSync('node', [scriptPath, '-v', '--keyfile', keyFilePath], {
+      cwd: process.cwd(),
+      encoding: 'utf-8',
     });
 
-    child.stderr.on('data', (data) => {
-      stderr += data.toString();
-    });
-
-    await new Promise((resolve) => {
-      child.on('close', resolve);
-    });
+    const { stdout, stderr } = result;
 
     if (stderr) {
       console.error(`Script stderr: ${stderr}`);
