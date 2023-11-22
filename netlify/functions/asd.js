@@ -4,15 +4,16 @@ const path = require('path');
 
 exports.handler = async (event, context) => {
   try {
-    // Use __dirname to get the directory of the current module
-    const scriptPath = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount', 'getTokenWithServiceAccount.js');
-    const keyFilePath = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount', 'inspiring-bonus-405815-b81c6343d863.json');
+    // Use process.env.LAMBDA_TASK_ROOT to get the root directory in Netlify functions
+    const rootDirectory = process.env.LAMBDA_TASK_ROOT || process.cwd();
+    const scriptPath = path.resolve(rootDirectory, 'token', 'node', 'getTokenWithServiceAccount', 'getTokenWithServiceAccount.js');
+    const keyFilePath = path.resolve(rootDirectory, 'token', 'node', 'getTokenWithServiceAccount', 'inspiring-bonus-405815-b81c6343d863.json');
 
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
     // Use spawn with cwd option to set the current working directory
-    const child = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath], { cwd: __dirname });
+    const child = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath], { cwd: rootDirectory });
 
     let stdout = '';
     let stderr = '';
