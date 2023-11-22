@@ -414,8 +414,93 @@
 // };
 
 
+
+
+
+
+
+
+
+// const util = require('util');
+// const { exec } = require('child_process');
+// const path = require('path');
+
+// exports.handler = async (event, context) => {
+//   try {
+//     const scriptPath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+//     const keyFilePath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
+
+//     console.log('Script Path:', scriptPath);
+//     console.log('Key File Path:', keyFilePath);
+
+//     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
+//     const { stdout, stderr } = await util.promisify(exec)(command);
+
+//     // console.log('Script stdout:', stdout);
+//     // console.log('Script stderr:', stderr);
+
+//     if (stderr) {
+//       console.error(`Script stderr: ${stderr}`);
+//       return {
+//         statusCode: 500,
+//         body: JSON.stringify({ error: 'Internal Server Error' }),
+//       };
+//     }
+
+//     const lines = stdout.split('\n');
+//     const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
+
+//     if (!accessTokenLine) {
+//       console.error('No valid access_token found in the response.');
+//       return {
+//         statusCode: 500,
+//         body: JSON.stringify({ error: 'Internal Server Error' }),
+//       };
+//     }
+
+//     const accessToken = accessTokenLine.split('"')[3];
+
+//     if (!accessToken) {
+//       console.error('No valid access_token found in the response.');
+//       return {
+//         statusCode: 500,
+//         body: JSON.stringify({ error: 'Internal Server Error' }),
+//       };
+//     }
+
+//     return {
+//       statusCode: 200,
+//       headers: {
+//         'Access-Control-Allow-Origin': '*',
+//         'Access-Control-Allow-Headers': 'Content-Type',
+//       },
+//       body: JSON.stringify({ accessToken }),
+//     };
+//   } catch (error) {
+//     console.error(`Error: ${error.message}`);
+//     console.error(error.stack); // Log the full stack trace
+//     return {
+//       statusCode: 500,
+//       body: JSON.stringify({ error: 'Internal Server Error' }),
+//     };
+//   }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const util = require('util');
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const path = require('path');
 
 exports.handler = async (event, context) => {
@@ -426,21 +511,35 @@ exports.handler = async (event, context) => {
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
-    const { stdout, stderr } = await util.promisify(exec)(command);
+    const childProcess = spawn('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
+    
+    let scriptStdout = ''; // Variable to capture stdout
 
-    // console.log('Script stdout:', stdout);
-    // console.log('Script stderr:', stderr);
+    childProcess.stdout.on('data', (data) => {
+      console.log(`Script stdout: ${data}`);
+      scriptStdout += data; // Append data to scriptStdout
+    });
 
-    if (stderr) {
-      console.error(`Script stderr: ${stderr}`);
+    childProcess.stderr.on('data', (data) => {
+      console.error(`Script stderr: ${data}`);
+    });
+
+    const exitCode = await new Promise((resolve) => {
+      childProcess.on('close', (code) => {
+        resolve(code);
+      });
+    });
+
+    if (exitCode !== 0) {
+      console.error(`Script exited with code ${exitCode}`);
       return {
         statusCode: 500,
         body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
 
-    const lines = stdout.split('\n');
+    // Rest of the code remains unchanged
+    const lines = scriptStdout.split('\n');
     const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
 
     if (!accessTokenLine) {
