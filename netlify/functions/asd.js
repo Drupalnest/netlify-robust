@@ -6,15 +6,15 @@ const esmRequire = esm(module);
 
 exports.handler = async (event, context) => {
   try {
-    // Get the correct paths using process.cwd() which returns the current working directory
-    const scriptPath = path.resolve(process.cwd(), 'netlify/functions/token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-    const keyFilePath = path.resolve(process.cwd(), 'netlify/functions/token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
+    // Dynamically resolve the paths based on the current working directory
+    const scriptPath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+    const keyFilePath = path.resolve(__dirname, './token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
 
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
     // Use the NODE_PATH environment variable to set the paths for ESM
-    process.env.NODE_PATH = process.cwd();
+    process.env.NODE_PATH = __dirname;
     esmRequire('module').Module._initPaths();
 
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
