@@ -1,1 +1,0 @@
-require('./getTokenWithServiceAccount/getTokenWithServiceAccount.js');
