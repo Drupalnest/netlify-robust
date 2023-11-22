@@ -480,7 +480,6 @@
 // };
 
 
-
 const { exec } = require('child_process');
 const path = require('path');
 
@@ -489,11 +488,8 @@ exports.handler = async (event, context) => {
     const scriptPath = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount', 'getTokenWithServiceAccount.js');
     const keyFilePath = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount', 'inspiring-bonus-405815-b81c6343d863.json');
 
-    console.log('Script Path:', scriptPath);
-    console.log('Key File Path:', keyFilePath);
-
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
-    
+
     const { stdout, stderr } = await runCommand(command);
 
     if (stderr) {
@@ -504,26 +500,7 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const lines = stdout.split('\n');
-    const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
-
-    if (!accessTokenLine) {
-      console.error('No valid access_token found in the response.');
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
-      };
-    }
-
-    const accessToken = accessTokenLine.split('"')[3];
-
-    if (!accessToken) {
-      console.error('No valid access_token found in the response.');
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
-      };
-    }
+    // Handle the output as needed and return a response
 
     return {
       statusCode: 200,
@@ -531,7 +508,7 @@ exports.handler = async (event, context) => {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
       },
-      body: JSON.stringify({ accessToken }),
+      body: JSON.stringify({ result: 'success' }),
     };
   } catch (error) {
     console.error(`Error: ${error.message}`);
@@ -552,4 +529,4 @@ function runCommand(command) {
       resolve({ stdout, stderr });
     });
   });
-}
+};
