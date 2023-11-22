@@ -565,7 +565,6 @@
 
 
 
-
 const { spawn } = require('child_process');
 const path = require('path');
 
@@ -575,20 +574,8 @@ exports.handler = async (event, context) => {
     const currentScriptPath = __filename;
 
     // Build paths relative to the current script
-    const scriptPath = path.resolve(
-      path.dirname(currentScriptPath),
-      'token',
-      'node',
-      'getTokenWithServiceAccount',
-      'getTokenWithServiceAccount.js'
-    );
-    const keyFilePath = path.resolve(
-      path.dirname(currentScriptPath),
-      'token',
-      'node',
-      'getTokenWithServiceAccount',
-      'inspiring-bonus-405815-b81c6343d863.json'
-    );
+    const scriptPath = require.resolve('./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+    const keyFilePath = path.resolve(path.dirname(currentScriptPath), 'token', 'node', 'getTokenWithServiceAccount', 'inspiring-bonus-405815-b81c6343d863.json');
 
     console.log('Current working directory:', process.cwd());
     console.log('Script Path:', scriptPath);
