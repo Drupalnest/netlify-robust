@@ -414,7 +414,6 @@
 // };
 
 
-
 const util = require('util');
 const { exec } = require('child_process');
 const path = require('path');
@@ -423,7 +422,7 @@ exports.handler = async (event, context) => {
   try {
     const scriptPath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
     const keyFilePath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
-    
+
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
@@ -437,7 +436,7 @@ exports.handler = async (event, context) => {
       console.error(`Script stderr: ${stderr}`);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' })
+        body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
 
@@ -448,7 +447,7 @@ exports.handler = async (event, context) => {
       console.error('No valid access_token found in the response.');
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' })
+        body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
 
@@ -458,24 +457,24 @@ exports.handler = async (event, context) => {
       console.error('No valid access_token found in the response.');
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' })
+        body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
 
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*", 
-        "Access-Control-Allow-Headers": "Content-Type",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
       },
-      body: JSON.stringify({ accessToken })
+      body: JSON.stringify({ accessToken }),
     };
   } catch (error) {
     console.error(`Error: ${error.message}`);
     console.error(error.stack); // Log the full stack trace
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal Server Error' })
+      body: JSON.stringify({ error: 'Internal Server Error' }),
     };
   }
 };
