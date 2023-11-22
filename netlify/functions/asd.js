@@ -15,6 +15,7 @@ exports.handler = async (event, context) => {
     process.env.NODE_PATH = path.join(__dirname, 'token', 'node', 'getTokenWithServiceAccount');
     esmRequire('module').Module._initPaths();
 
+    console.log('Executing script...');
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
     const { stdout, stderr } = await esmRequire('util').promisify(exec)(command);
 
@@ -25,6 +26,8 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
+
+    console.log('Script output:', stdout);
 
     const lines = stdout.split('\n');
     const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
@@ -46,6 +49,8 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({ error: 'Internal Server Error' }),
       };
     }
+
+    console.log('Access Token:', accessToken);
 
     return {
       statusCode: 200,
