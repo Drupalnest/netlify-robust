@@ -1,3 +1,12 @@
+
+// https://github.com/DinoChiesa/get-gcp-access-token/tree/main
+
+// cd node/getTokenWithServiceAccount
+// npm install
+// node ./getTokenWithServiceAccount.js -v  --keyfile ~/Downloads/inspiring-bonus-405815-b81c6343d863.json
+
+
+
 // const { exec } = require('child_process');
 
 // exports.handler = function (event, context, callback) {
