@@ -584,7 +584,6 @@
 
 
 
-
 const util = require('util');
 const { execFile } = require('child_process');
 const path = require('path');
@@ -603,9 +602,8 @@ const executeCommand = async (file, args) => {
 exports.handler = async (event, context) => {
   try {
     const currentDirectory = process.cwd();
-    const scriptPath = path.resolve(currentDirectory, 'netlify/functions/token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-    const keyFilePath = path.resolve(currentDirectory, 'netlify/functions/token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
-
+        const scriptPath = require.resolve('./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+     const keyFilePath = require.resolve('./token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
