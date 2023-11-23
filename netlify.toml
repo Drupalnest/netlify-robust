@@ -1,6 +1,7 @@
-[build]
-  functions = "netlify/functions"
-    publish = "public"
-  
-  
 
+
+[build]
+  command = "npm install && npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+  node_version = "14"

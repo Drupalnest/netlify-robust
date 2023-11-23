@@ -513,9 +513,9 @@ const executeCommand = async (command, options) => {
 
 exports.handler = async () => {
   try {
-    const scriptPath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
-    const keyFilePath = path.join(__dirname, 'token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
-
+    const scriptPath = require.resolve('./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
+    const keyFilePath = require.resolve('./token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json');
+    
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
