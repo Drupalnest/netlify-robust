@@ -585,10 +585,6 @@
 
 
 
-
-
-
-
 const util = require('util');
 const { execFile } = require('child_process');
 const path = require('path');
@@ -604,7 +600,7 @@ const executeCommand = async (file, args) => {
   return stdout;
 };
 
-exports.handler = async () => {
+exports.handler = async (event, context) => {
   try {
     const currentDirectory = process.cwd();
     const scriptPath = path.resolve(currentDirectory, 'netlify/functions/token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js');
