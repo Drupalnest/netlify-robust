@@ -112,5 +112,14 @@
   "devDependencies": {
     "babel-plugin-lodash": "^3.3.4",
     "concurrently": "^8.2.1"
+  },
+  "engines": {
+    "node": ">=12.0.0"  
+  },
+  "vercel": {
+    "functions": "api"  
+  },
+  "netlify": {
+    "functions": "netlify/functions"  
   }
 }
