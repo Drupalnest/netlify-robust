@@ -1,11 +1,12 @@
-
 // https://github.com/DinoChiesa/get-gcp-access-token/tree/main
 
 // cd node/getTokenWithServiceAccount
 // npm install
 // node ./getTokenWithServiceAccount.js -v  --keyfile ~/Downloads/inspiring-bonus-405815-b81c6343d863.json
 
+// node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v  --keyfile ~/Downloads/inspiring-bonus-405815-b81c6343d863.json
 
+// node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v  --keyfile ./token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json
 
 // const { exec } = require('child_process');
 
@@ -56,16 +57,20 @@
 
 
 
+
+
 // netlify/functions/retrieveToken.js
-const util = require('util');
-const { exec } = require('child_process');
+const util = require("util");
+const { exec } = require("child_process");
 
 const executeCommand = async (file, args) => {
-  const { stdout, stderr } = await util.promisify(exec)(`${file} ${args.join(' ')}`);
+  const { stdout, stderr } = await util.promisify(exec)(
+    `${file} ${args.join(" ")}`
+  );
 
   if (stderr) {
     console.error(`Script stderr: ${stderr}`);
-    throw new Error('Internal Server Error');
+    throw new Error("Internal Server Error");
   }
 
   return stdout;
@@ -73,39 +78,48 @@ const executeCommand = async (file, args) => {
 
 exports.handler = async function (event, context) {
   try {
-    const scriptPath = './token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js';
-    const keyFilePath = './token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json';
+    const scriptPath =
+      "./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js";
+    const keyFilePath =
+      "./token/node/getTokenWithServiceAccount/inspiring-bonus-405815-b81c6343d863.json";
 
-    const scriptStdout = await executeCommand('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
+    const scriptStdout = await executeCommand("node", [
+      scriptPath,
+      "-v",
+      "--keyfile",
+      keyFilePath,
+    ]);
 
-    const lines = scriptStdout.split('\n');
-    const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
+    const lines = scriptStdout.split("\n");
+    const accessTokenLine = lines.find((line) =>
+      line.startsWith('  "access_token":')
+    );
 
     if (!accessTokenLine) {
-      console.error('No valid access_token found in the response.');
-      throw new Error('Internal Server Error');
+      console.error("No valid access_token found in the response.");
+      throw new Error("Internal Server Error");
     }
 
     const accessToken = accessTokenLine.split('"')[3];
 
     if (!accessToken) {
-      console.error('No valid access_token found in the response.');
-      throw new Error('Internal Server Error');
+      console.error("No valid access_token found in the response.");
+      throw new Error("Internal Server Error");
     }
 
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*',
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({ accessToken }),
     };
   } catch (error) {
     console.error(`Error: ${error.message}`);
-    console.error(error.stack); // Log the full stack trace
+    console.error(error.stack); 
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal Server Error' }),
+      body: JSON.stringify({ error: "Internal Server Error" }),
     };
   }
 };
