@@ -1,13 +1,13 @@
 {
-  "name": "gatsby-starbucks",
+  "name": "gatsby-robust",
   "version": "1.0.0",
   "private": true,
-  "description": "gatsby-starbucks",
+  "description": "gatsby-robust",
   "keywords": [
     "gatsby"
   ],
   "scripts": {
-    "scheduler": "node ./netlify/functions/token/node/getTokenWithServiceAccount/scheduler.js",
+    "scheduler": "node ./token/node/getTokenWithServiceAccount/scheduler.js",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
