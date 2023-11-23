@@ -600,7 +600,7 @@ const executeCommand = async (file, args) => {
 
 exports.handler = async (event, context) => {
   try {
-    const scriptDirectory = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount');
+    const scriptDirectory = path.resolve(__dirname, 'var','task','token', 'node', 'getTokenWithServiceAccount');
     const scriptPath = path.resolve(scriptDirectory, 'getTokenWithServiceAccount.js');
     const keyFilePath = path.resolve(scriptDirectory, 'inspiring-bonus-405815-b81c6343d863.json');
 
