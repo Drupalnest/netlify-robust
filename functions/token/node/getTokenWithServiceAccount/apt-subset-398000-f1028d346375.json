@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "apt-subset-398000",
+  "private_key_id": "f1028d34637559c2c2be76d1665ce298686e8675",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDDfeahh4bbIaC5\n3xt1kO0fkyGJIsP+qMBKX1PPSnIjD819Ms/h5JYtvt35DzqATJHy2Y5nQOPdwdI6\nSezxXdI2DdOO0H/Sy+ot9m8n6Nx3lf+DpqYVmtaf80EGAj8wEae/BGGvetRiwM6N\nlKoR2i868nLCK1WCcNwcKWW2est+BKrbkpvUlsA9by6hzYAjoYFzksB0XXe2czfu\npXYyCy/GWGy0ngljhuHVxORCXH3R7vN6ZtLcxw2v6bMkDFCL/owcVvPepPNGKq0A\nxtdqIKM1I16TXC5RElFgq7oo0vpV7yonx475cSL9YFvza2voo73WFV+jWrvS7svD\n0ke59tQ3AgMBAAECggEADuj+2qoSDIuTjSmpl/1uQH7By4pVxYoMZH/Bzikg7HCr\nnRVvioybMbEBkBnrvdZZOVsDg/eMiaDbTmvOARjFTC8gyB856JN58Hh/wNz/V7We\nj+V5fGNbZEay2mj4dcua7jRA2Rf2s/N9rYm9sO/hs07DlvCkLHc8Kn+zzMev1pQV\nbU+LAGFw71/aYNPNVf1RgpcwrGHayYXNRIybs/Rvp4h1Y7mbrvEkd70GkpsJDvzW\netECCccGFZr4S5By7rSWNY1LrCTAM1FEQ5B4ZdviAEN9y96Kfy+3qhO2bFvOwzgx\nmeTzGAaKpgKtMAwP9N7XSUcXjt0R54MePHbbXcGdSQKBgQDib/z90nCJoTkgivtT\n2WNqlgjqiY4dUa6teFmNk5QfA/7IWGXf+C9dAzkbktt7gnkfmsxJIFnArMdOTZzQ\ndIX6qttntMTmhYGfdnHdtT2Bi3mR0xmAWIMnhkaF1Jx8EGQC6LlqeeUdfXI+xiqA\nK2INOzSpVY7yYm8XEjzj5i+OWQKBgQDdA6T3QUz+J5rIYDQQFL180HFQx3hNzQmk\nIO1GfliPpZZCZsUV51fbOpcjR2Coejr7m9IdOL/Dv5qnFT0ax6APPynL2l4FoVF4\nb3urqcJV0W6xt2iV9wMFMYTbAXZt7rxa11386PeDfKK9i9Xn+ngmPZhg+zr2Mo1+\n40H4A1vFDwKBgHWwGt+ZVmBR6S0ezw1/eQpWvH+ZysE2SQFkAbdxspSEMRHTz+8e\nQQ+osy+/nk+NOoLQo8iGBd/8bQInmI9HYLMtxicabxQY44wLtZazsin4YdEG1MQ+\nPLx4L4MzQ7m/kxtn9aZ/gDNZld1GhaRj5+xUj0RLcaZMvsxQ8FDKvIDRAoGAWfKR\nwM8ito0HwWTly2WleJach3Om0oMP2WxNJNNm149ch8mrjC6K4v4FZKY4AFk+iAfy\ni1H9OX1RQ46xP6Tez1W1fPFyMnhk387/Ve3Q2XxSwKEUP3Q4FnUAzODbggIXRiFA\nbx2hHjIrSVkPxUl6fJW03kNgy7HnRCzZPEahoqECgYEAxQ6yTEWt0H3v1piNIgnd\nAoyCZl11eyQxcPW4OIrQSeh9g52xl/wbFUO+G5RcQMmmsMxp8CDJC05CtSBG9W7J\ntsKUVRG2DaNdH3qnjqlVcZ25pxkVdP8jxh/60OUcMqe0acOUz2ws0cNkfsodsv/r\nPwVw1tgj0gIMY6tDHVwgIpM=\n-----END PRIVATE KEY-----\n",
+  "client_email": "apigeeaccess@apt-subset-398000.iam.gserviceaccount.com",
+  "client_id": "101528007693365388325",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/apigeeaccess%40apt-subset-398000.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
