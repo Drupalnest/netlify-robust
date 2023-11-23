@@ -7,7 +7,7 @@
     "gatsby"
   ],
   "scripts": {
-    "scheduler": "node ./token/node/getTokenWithServiceAccount/scheduler.js",
+    "scheduler": "node ./netlify/functions/token/node/getTokenWithServiceAccount/scheduler.js",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
