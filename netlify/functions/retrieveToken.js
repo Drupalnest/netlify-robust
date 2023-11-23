@@ -586,76 +586,12 @@
 
 
 
-// const util = require('util');
-// const { execFile } = require('child_process');
-// const path = require('path');
-
-// const executeCommand = async (file, args) => {
-//   const { stdout, stderr } = await util.promisify(execFile)(file, args);
-
-//   if (stderr) {
-//     console.error(`Script stderr: ${stderr}`);
-//     throw new Error('Internal Server Error');
-//   }
-
-//   return stdout;
-// };
-
-// exports.handler = async (event, context) => {
-//   try {
-//     const scriptDirectory = path.resolve(__dirname, 'token/node/getTokenWithServiceAccounts');
-//     const scriptPath = path.resolve(scriptDirectory, 'getTokenWithServiceAccount.js');
-//     const keyFilePath = path.resolve(scriptDirectory, 'inspiring-bonus-405815-b81c6343d863.json');
-
-//     console.log('Script Path:', scriptPath);
-//     console.log('Key File Path:', keyFilePath);
-
-//     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
-//     const scriptStdout = await executeCommand('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
-
-//     const lines = scriptStdout.split('\n');
-//     const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
-
-//     if (!accessTokenLine) {
-//       console.error('No valid access_token found in the response.');
-//       throw new Error('Internal Server Error');
-//     }
-
-//     const accessToken = accessTokenLine.split('"')[3];
-
-//     if (!accessToken) {
-//       console.error('No valid access_token found in the response.');
-//       throw new Error('Internal Server Error');
-//     }
-
-//     return {
-//       statusCode: 200,
-//       headers: {
-//         'Access-Control-Allow-Origin': '*',
-//         'Access-Control-Allow-Headers': 'Content-Type',
-//       },
-//       body: JSON.stringify({ accessToken }),
-//     };
-//   } catch (error) {
-//     console.error(`Error: ${error.message}`);
-//     console.error(error.stack); // Log the full stack trace
-//     return {
-//       statusCode: 500,
-//       body: JSON.stringify({ error: 'Internal Server Error' }),
-//     };
-//   }
-// };
-
-
-
-
-
 const util = require('util');
 const { execFile } = require('child_process');
 const path = require('path');
 
-const executeCommand = async (file, args, options) => {
-  const { stdout, stderr } = await util.promisify(execFile)(file, args, options);
+const executeCommand = async (file, args) => {
+  const { stdout, stderr } = await util.promisify(execFile)(file, args);
 
   if (stderr) {
     console.error(`Script stderr: ${stderr}`);
@@ -667,23 +603,15 @@ const executeCommand = async (file, args, options) => {
 
 exports.handler = async (event, context) => {
   try {
-    const currentDirectory = process.cwd();
-    const scriptDirectory = path.resolve(currentDirectory, 'token/node/getTokenWithServiceAccounts');
+    const scriptDirectory = path.resolve(__dirname, 'token/node/getTokenWithServiceAccounts');
     const scriptPath = path.resolve(scriptDirectory, 'getTokenWithServiceAccount.js');
     const keyFilePath = path.resolve(scriptDirectory, 'inspiring-bonus-405815-b81c6343d863.json');
 
-    console.log('Current Directory:', currentDirectory);
-    console.log('Script Directory:', scriptDirectory);
     console.log('Script Path:', scriptPath);
     console.log('Key File Path:', keyFilePath);
 
-    const options = { cwd: scriptDirectory };
-
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
-    console.log('Command:', command);
-
-    const scriptStdout = await executeCommand('node', [scriptPath, '-v', '--keyfile', keyFilePath], options);
-    console.log('Script Output:', scriptStdout);
+    const scriptStdout = await executeCommand('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
 
     const lines = scriptStdout.split('\n');
     const accessTokenLine = lines.find(line => line.startsWith('  "access_token":'));
@@ -710,7 +638,7 @@ exports.handler = async (event, context) => {
     };
   } catch (error) {
     console.error(`Error: ${error.message}`);
-    console.error(error.stack);
+    console.error(error.stack); // Log the full stack trace
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Internal Server Error' }),
