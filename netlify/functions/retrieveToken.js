@@ -583,7 +583,6 @@
 
 
 
-
 const util = require('util');
 const { execFile } = require('child_process');
 const path = require('path');
@@ -601,10 +600,12 @@ const executeCommand = async (file, args) => {
 
 exports.handler = async (event, context) => {
   try {
-    const currentDirectory = process.cwd();
-    const scriptPath = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount', 'getTokenWithServiceAccount.js');
-const keyFilePath = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount', 'inspiring-bonus-405815-b81c6343d863.json');
+    const scriptDirectory = path.resolve(__dirname, 'token', 'node', 'getTokenWithServiceAccount');
+    const scriptPath = path.resolve(scriptDirectory, 'getTokenWithServiceAccount.js');
+    const keyFilePath = path.resolve(scriptDirectory, 'inspiring-bonus-405815-b81c6343d863.json');
 
+    console.log('Script Path:', scriptPath);
+    console.log('Key File Path:', keyFilePath);
 
     const command = `node ${scriptPath} -v --keyfile ${keyFilePath}`;
     const scriptStdout = await executeCommand('node', [scriptPath, '-v', '--keyfile', keyFilePath]);
