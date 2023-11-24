@@ -503,11 +503,11 @@ const UpdateCompanyName = () => {
     try {
       const serializedApiProduct = serializeData.join(",");
       const tokenResponse = await fetch(
-        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
+        "http://localhost:8888/.netlify/functions/hello"
       );
       const { accessToken } = await tokenResponse.json();
       const response = await fetch(
-        `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamDetails.name}`,
+        `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamDetails.name}`,
         {
           method: "PUT",
           headers: {

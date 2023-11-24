@@ -765,7 +765,7 @@ const EditApps = () => {
   //   consumerKey,
   //   apiProductName
   // ) => {
-  //   const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
+  //   const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
   //   const bearerToken = bearerToken; // Replace with your bearer token
 
   //   try {
@@ -802,10 +802,10 @@ const EditApps = () => {
     try {
       const { apiproduct, consumerKey, teamName, appName } = productToRemove;
       const tokenResponse = await fetch(
-        "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
+        "http://localhost:8888/.netlify/functions/hello"
       );
       const { accessToken } = await tokenResponse.json();
-      const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiproduct}`;
+      const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiproduct}`;
       // Replace with your bearer token
 
       await axios.delete(apiUrl, {
@@ -873,7 +873,7 @@ const EditApps = () => {
   //   consumerKey,
   //   apiProductName
   // ) => {
-  //   const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
+  //   const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiProductName}`;
   //   const bearerToken = bearerToken; // Replace with your bearer token
 
   //   try {
@@ -904,10 +904,10 @@ const EditApps = () => {
       return;
     }
     const tokenResponse = await fetch(
-      "https://robustapihub.netlify.app/.netlify/functions/retrieveToken"
+      "http://localhost:8888/.netlify/functions/hello"
     );
     const { accessToken } = await tokenResponse.json();
-    const apiUrl = `https://apigee.googleapis.com/v1/organizations/apt-subset-398000/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
+    const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
     const bearerToken = accessToken; // Replace with your bearer token
     //https://api.enterprise.apigee.com/v1/organizations/kenpatolia-a7241f81-eval/companies/asd/apps/aaaaaa/keys/h4yzMy90Rh3QI05yg1RvueSXfqf6dUGy?action=approve
 

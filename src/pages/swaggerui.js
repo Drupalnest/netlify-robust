@@ -185,7 +185,7 @@
 //     },
 //     servers: [
 //       {
-//         url: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
+//         url: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",
 //       },
 //     ],
 //     tags: [
@@ -1366,7 +1366,7 @@
 //     },
 //     servers: [
 //       {
-//         url: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
+//         url: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",
 //       },
 //     ],
 //     tags: [
@@ -1513,7 +1513,7 @@
 //     },
 //     servers: [
 //       {
-//         url: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
+//         url: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",
 //       },
 //     ],
 //     tags: [
@@ -2010,7 +2010,7 @@
 //     const fetchToken = async () => {
 //       try {
 //         const response = await fetch(
-//           "https://robustapihub.netlify.app/.netlify/functions/retrieveToken",
+//           "http://localhost:8888/.netlify/functions/hello",
 //           {
 //             method: "POST",
 //             // Add any required headers for retrieving the token
@@ -2102,7 +2102,7 @@
 //     const fetchToken = async () => {
 //       try {
 //         const response = await fetch(
-//           "https://robustapihub.netlify.app/.netlify/functions/retrieveToken",
+//           "http://localhost:8888/.netlify/functions/hello",
 //           {
 //             method: "POST",
 //             // Add any required headers for retrieving the token
@@ -2143,7 +2143,7 @@
 //     },
 //     servers: [
 //       {
-//         url: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
+//         url: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",
 //       },
 //     ],
 
@@ -3223,7 +3223,7 @@
 //   const fetchToken = async () => {
 //     try {
 //       const response = await fetch(
-//         "https://robustapihub.netlify.app/.netlify/functions/retrieveToken",
+//         "http://localhost:8888/.netlify/functions/hello",
 //         {
 //           method: "GET",
 //         }
@@ -3262,7 +3262,7 @@
 // //     },
 // //     servers: [
 // //       {
-// //         url: "https://apigee.googleapis.com/v1/organizations/apt-subset-398000",
+// //         url: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",
 // //         // Add authorization header with the bearer token to each request
 // //       },
 // //     ],
@@ -3845,7 +3845,7 @@
 // //       },
 // //       "petstore_auth": {
 // //             "type": "bearer",
-// //             "authorizationUrl": "https://robustapihub.netlify.app/.netlify/functions/retrieveToken",
+// //             "authorizationUrl": "http://localhost:8888/.netlify/functions/hello",
 // //             "flow": "implicit",
 // //             "scopes": {
 // //                   "read:appgroups": "read your appgroups",
@@ -4004,7 +4004,7 @@
 // //           flows: {
 // //             password: {
 // //               tokenUrl:
-// //                 "https://robustapihub.netlify.app/.netlify/functions/retrieveToken",
+// //                 "http://localhost:8888/.netlify/functions/hello",
 // //               scopes: {
 // //                 "write:pets": "modify pets in your account",
 // //                 "read:pets": "read your pets",
@@ -4045,7 +4045,7 @@
 // //     },
 // //     "servers": [
 // //       {
-// //         "url": "https://apigee.googleapis.com/v1/organizations/apt-subset-398000"
+// //         "url": "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815"
 // //       }
 // //     ],
 // //     "paths": {
@@ -4195,7 +4195,7 @@
 //   },
 //   "servers": [
 //     {
-//       "url": "https://apigee.googleapis.com/v1/organizations/apt-subset-398000"
+//       "url": "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815"
 //     }
 //   ],
 //   "paths": {
