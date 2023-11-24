@@ -180,7 +180,7 @@ const { GoogleToken } = require('gtoken');
 exports.handler = async function (event, context) {
   // Create a GoogleToken instance
   const gtoken = new GoogleToken({
-    keyFile: `./netlify/functions/${process.env.GOOGLE_KEY}`,
+    keyFile: './netlify/functions/inspiring-bonus-405815-b81c6343d863.json',
     email: 'apigee-acess@inspiring-bonus-405815.iam.gserviceaccount.com',
     scope: ['https://www.googleapis.com/auth/cloud-platform'],
     eagerRefreshThresholdMillis: 5 * 60 * 1000,
