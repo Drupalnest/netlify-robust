@@ -176,9 +176,8 @@
 
 // netlifyFunction.js
 const { GoogleToken } = require('gtoken');
-const path = require('path');
 
-const keyFilePath = path.join(__dirname, 'inspiring-bonus-405815-b81c6343d863.json');
+const keyFilePath = `${__dirname}/inspiring-bonus-405815-b81c6343d863.json`;
 
 
 exports.handler = async function (event, context) {
