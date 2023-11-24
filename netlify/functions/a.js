@@ -183,13 +183,14 @@ const { GoogleToken } = require('gtoken');
 const path = require('path');
 
 // Assuming the JSON file is in the netlify/functions directory when deployed
-const keyFilePath = path.resolve(__dirname, './inspiring-bonus-405815-b81c6343d863.json');
+const fileName = process.env.KEY_FILE_NAME || 'inspiring-bonus-405815-b81c6343d863.json';
+const filePath = path.resolve(__dirname, fileName);
 
 
 exports.handler = async function (event, context) {
   // Create a GoogleToken instance
   const gtoken = new GoogleToken({
-    keyFile: keyFilePath,
+    keyFile: filePath,
     email: 'apigee-acess@inspiring-bonus-405815.iam.gserviceaccount.com',
     scope: ['https://www.googleapis.com/auth/cloud-platform'],
     eagerRefreshThresholdMillis: 5 * 60 * 1000,
