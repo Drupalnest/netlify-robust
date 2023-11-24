@@ -64,24 +64,9 @@ exports.handler = function (event, context, callback) {
       });
     }
 
-    // Process the stdout if needed
-    console.log('Script Output:', stdout);
-
-    // Extract the access token using a regular expression
-    const accessTokenMatch = stdout.match(/"access_token":\s*"([^"]+)"/);
-    const accessToken = accessTokenMatch ? accessTokenMatch[1] : null;
-
-    if (!accessToken) {
-      console.error('No valid access_token found in the response.');
-      return callback(null, {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
-      });
-    }
-
     const response = {
       statusCode: 200,
-      body: JSON.stringify({ accessToken }),
+      body: JSON.stringify({ output: stdout }),
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -90,5 +75,4 @@ exports.handler = function (event, context, callback) {
     return callback(null, response);
   });
 };
-
 
