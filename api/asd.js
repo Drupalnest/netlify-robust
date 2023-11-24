@@ -37,11 +37,15 @@
 
 
 
-// api/hello.js
-exports.handler = async (event, context) => {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'Hello from Vercel Serverless Function!' }),
-    };
-  };
+
+
+
+// asd.js
+
+module.exports = async (req, res) => {
+  // Your serverless function logic here
+  res.status(200).json({ message: 'Hello from the /api/asd/ endpoint!' });
+};
+
+
   
