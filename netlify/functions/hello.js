@@ -47,7 +47,6 @@
 
 
 
-
 const { exec } = require('child_process');
 
 exports.handler = function (event, context, callback) {
@@ -55,18 +54,14 @@ exports.handler = function (event, context, callback) {
 
   const command = `node ./token/node/getTokenWithServiceAccount/getTokenWithServiceAccount.js -v --keyfile ${keyfilePath}`;
 
-  exec(command, (error, stdout, stderr) => {
-    if (error || stderr) {
-      console.error(`Error: ${error || stderr}`);
-      return callback(null, {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Internal Server Error' }),
-      });
+  exec(command, (error, stdout) => {
+    if (error) {
+      console.error(`Error: ${error}`);
     }
 
     const response = {
       statusCode: 200,
-      body: JSON.stringify({ output: stdout }),
+      body: JSON.stringify({ output: stdout || '', error: error ? 'Script Execution Error' : null }),
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -75,4 +70,3 @@ exports.handler = function (event, context, callback) {
     return callback(null, response);
   });
 };
-
