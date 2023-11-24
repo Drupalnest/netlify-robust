@@ -55,7 +55,7 @@ exports.handler = function (event, context, callback) {
     if (error || stderr) {
       console.error(`Error: ${error || stderr}`);
       return callback(null, {
-        statusCode: 600,
+        statusCode: 500,
         body: JSON.stringify({ error: 'Internal Server Error' }),
       });
     }
@@ -70,7 +70,7 @@ exports.handler = function (event, context, callback) {
     if (!accessToken) {
       console.error('No valid access_token found in the response.');
       return callback(null, {
-        statusCode: 700,
+        statusCode: 500,
         body: JSON.stringify({ error: 'Internal Server Error' }),
       });
     }
