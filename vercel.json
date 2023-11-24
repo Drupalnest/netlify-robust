@@ -1,6 +1,4 @@
-
-
 {
-    "functions": "api/asd.js"
+    "functions": "api/**/*.js"
   }
   
