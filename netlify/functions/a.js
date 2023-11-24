@@ -177,7 +177,10 @@
 // netlifyFunction.js
 const { GoogleToken } = require('gtoken');
 
-const keyFilePath = `${__dirname}/inspiring-bonus-405815-b81c6343d863.json`;
+const path = require('path');
+
+// Assuming the JSON file is in the netlify/functions directory when deployed
+const keyFilePath = path.resolve(__dirname, './inspiring-bonus-405815-b81c6343d863.json');
 
 
 exports.handler = async function (event, context) {
