@@ -325,6 +325,21 @@ const getToken = () =>
   });
 
 exports.handler = async function (event, context) {
+
+
+
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: '',
+    };
+  }
   try {
     // Get the initial token
     const initialToken = await getToken();

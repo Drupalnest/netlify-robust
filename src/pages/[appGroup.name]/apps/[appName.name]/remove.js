@@ -191,7 +191,7 @@ function RemovePage() {
   // You can also call handleRemovekey with the data
   const handleRemovekey = async (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
-    const tokenResponse = await fetch('http://localhost:8888/.netlify/functions/hello');
+    const tokenResponse = await fetch('https://robustapihub.netlify.app/.netlify/functions/a');
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
     const bearerToken = accessToken;

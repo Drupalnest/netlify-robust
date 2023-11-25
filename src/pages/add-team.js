@@ -2123,7 +2123,7 @@ const AddTeam = () => {
     try {
       // Fetch the bearer token
       const tokenResponse = await fetch(
-        "http://localhost:8888/.netlify/functions/hello"
+        "https://robustapihub.netlify.app/.netlify/functions/a"
       );
       const { accessToken } = await tokenResponse.json();
 

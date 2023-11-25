@@ -802,7 +802,7 @@ const EditApps = () => {
     try {
       const { apiproduct, consumerKey, teamName, appName } = productToRemove;
       const tokenResponse = await fetch(
-        "http://localhost:8888/.netlify/functions/hello"
+        "https://robustapihub.netlify.app/.netlify/functions/a"
       );
       const { accessToken } = await tokenResponse.json();
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}/apiproducts/${apiproduct}`;
@@ -904,7 +904,7 @@ const EditApps = () => {
       return;
     }
     const tokenResponse = await fetch(
-      "http://localhost:8888/.netlify/functions/hello"
+      "https://robustapihub.netlify.app/.netlify/functions/a"
     );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;

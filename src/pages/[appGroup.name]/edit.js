@@ -503,7 +503,7 @@ const UpdateCompanyName = () => {
     try {
       const serializedApiProduct = serializeData.join(",");
       const tokenResponse = await fetch(
-        "http://localhost:8888/.netlify/functions/hello"
+        "https://robustapihub.netlify.app/.netlify/functions/a"
       );
       const { accessToken } = await tokenResponse.json();
       const response = await fetch(

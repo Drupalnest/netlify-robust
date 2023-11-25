@@ -322,7 +322,7 @@ const ViewApp = () => {
       const randomSecret = generateRandomSecret();
 
       const tokenResponse = await fetch(
-        "http://localhost:8888/.netlify/functions/hello"
+        "https://robustapihub.netlify.app/.netlify/functions/a"
       );
       const { accessToken } = await tokenResponse.json();
       const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys`;
@@ -416,7 +416,7 @@ const ViewApp = () => {
 
   const handleAddAPIProduct = async () => {
     const tokenResponse = await fetch(
-      "http://localhost:8888/.netlify/functions/hello"
+      "https://robustapihub.netlify.app/.netlify/functions/a"
     );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${latestConsumerKey}`;
@@ -480,7 +480,7 @@ const ViewApp = () => {
 
   const handleRemovekey = async (teamName, appName, consumerKey) => {
     const tokenResponse = await fetch(
-      "http://localhost:8888/.netlify/functions/hello"
+      "https://robustapihub.netlify.app/.netlify/functions/a"
     );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}`;
@@ -517,7 +517,7 @@ const ViewApp = () => {
 
   const handleRevokeKey = async (teamName, appName, consumerKey) => {
     const tokenResponse = await fetch(
-      "http://localhost:8888/.netlify/functions/hello"
+      "https://robustapihub.netlify.app/.netlify/functions/a"
     );
     const { accessToken } = await tokenResponse.json();
     const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${teamName}/apps/${appName}/keys/${consumerKey}?action=revoke`;

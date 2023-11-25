@@ -728,7 +728,7 @@
 // export const fetchToken = () => async (dispatch) => {
 //   try {
 //     const response = await axiosInstance.get(
-//       "http://localhost:8888/.netlify/functions/hello"
+//       "https://robustapihub.netlify.app/.netlify/functions/a"
 //     );
 //     const token = response.data.accessToken;
 
@@ -1536,7 +1536,7 @@ const addAppReducer = (state = null, action) => {
 
 // const initializeAxios = async () => {
 //   try {
-//     const response = await axios.get('http://localhost:8888/.netlify/functions/hello');
+//     const response = await axios.get('https://robustapihub.netlify.app/.netlify/functions/a');
 //     const accessToken = response.data.accessToken;
 //     axiosInstance = axios.create({
 //       baseURL: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",
@@ -1558,7 +1558,7 @@ const addAppReducer = (state = null, action) => {
 
 export const initializeAxios = async () => {
   try {
-    const response = await axios.get('http://localhost:8888/.netlify/functions/hello');
+    const response = await axios.get('https://robustapihub.netlify.app/.netlify/functions/a');
     const accessToken = response.data.accessToken;
     axiosInstance = axios.create({
       baseURL: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",
@@ -1578,7 +1578,7 @@ export const initializeAxios = async () => {
 
 // export const initializeAxios = async () => {
 //   try {
-//     const response = await axios.get('http://localhost:8888/.netlify/functions/hello');
+//     const response = await axios.get('https://robustapihub.netlify.app/.netlify/functions/a');
 //     const accessToken = response.data.accessToken;
 //     axiosInstance = axios.create({
 //       baseURL: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",

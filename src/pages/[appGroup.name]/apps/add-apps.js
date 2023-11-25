@@ -1027,7 +1027,7 @@ const AddApps = () => {
     try {
       const oneYearInMilliseconds = 365 * 24 * 60 * 60 * 1000;
       const tokenResponse = await fetch(
-        "http://localhost:8888/.netlify/functions/hello"
+        "https://robustapihub.netlify.app/.netlify/functions/a"
       );
       const { accessToken } = await tokenResponse.json();
 
@@ -1076,7 +1076,7 @@ const AddApps = () => {
   const fetchData = async () => {
     try {
       const tokenResponse = await fetch(
-        "http://localhost:8888/.netlify/functions/hello"
+        "https://robustapihub.netlify.app/.netlify/functions/a"
       );
       const { accessToken } = await tokenResponse.json();
       const url = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${appgroupName}/apps/${newAppName}`;
@@ -1107,7 +1107,7 @@ const AddApps = () => {
   //   }
 
   //   try {
-  //     const tokenResponse = await fetch('http://localhost:8888/.netlify/functions/hello');
+  //     const tokenResponse = await fetch('https://robustapihub.netlify.app/.netlify/functions/a');
   //     const { accessToken } = await tokenResponse.json();
   //     const apiUrl = `https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815/appgroups/${appgroupName}/apps/${newAppName}/keys/${fetchedConsumerKey}`;
 
@@ -1147,7 +1147,7 @@ const AddApps = () => {
 
     try {
       const tokenResponse = await fetch(
-        "http://localhost:8888/.netlify/functions/hello"
+        "https://robustapihub.netlify.app/.netlify/functions/a"
       );
       const { accessToken } = await tokenResponse.json();
 

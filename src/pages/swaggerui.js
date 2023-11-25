@@ -2010,7 +2010,7 @@
 //     const fetchToken = async () => {
 //       try {
 //         const response = await fetch(
-//           "http://localhost:8888/.netlify/functions/hello",
+//           "https://robustapihub.netlify.app/.netlify/functions/a",
 //           {
 //             method: "POST",
 //             // Add any required headers for retrieving the token
@@ -2102,7 +2102,7 @@
 //     const fetchToken = async () => {
 //       try {
 //         const response = await fetch(
-//           "http://localhost:8888/.netlify/functions/hello",
+//           "https://robustapihub.netlify.app/.netlify/functions/a",
 //           {
 //             method: "POST",
 //             // Add any required headers for retrieving the token
@@ -3223,7 +3223,7 @@
 //   const fetchToken = async () => {
 //     try {
 //       const response = await fetch(
-//         "http://localhost:8888/.netlify/functions/hello",
+//         "https://robustapihub.netlify.app/.netlify/functions/a",
 //         {
 //           method: "GET",
 //         }
@@ -3845,7 +3845,7 @@
 // //       },
 // //       "petstore_auth": {
 // //             "type": "bearer",
-// //             "authorizationUrl": "http://localhost:8888/.netlify/functions/hello",
+// //             "authorizationUrl": "https://robustapihub.netlify.app/.netlify/functions/a",
 // //             "flow": "implicit",
 // //             "scopes": {
 // //                   "read:appgroups": "read your appgroups",
@@ -4004,7 +4004,7 @@
 // //           flows: {
 // //             password: {
 // //               tokenUrl:
-// //                 "http://localhost:8888/.netlify/functions/hello",
+// //                 "https://robustapihub.netlify.app/.netlify/functions/a",
 // //               scopes: {
 // //                 "write:pets": "modify pets in your account",
 // //                 "read:pets": "read your pets",
