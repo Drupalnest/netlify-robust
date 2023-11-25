@@ -250,6 +250,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { GoogleToken } = require('gtoken');
+const fetch = require('node-fetch');
 
 // Assuming the JSON file is in the netlify/functions directory when deployed
 const fileName = process.env.KEY_FILE_NAME || 'inspiring-bonus-405815-b81c6343d863.json';
