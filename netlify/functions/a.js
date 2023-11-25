@@ -233,7 +233,7 @@ exports.handler = async function (event, context) {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, accessToken: initialToken.access_token }),
+      body: JSON.stringify({  accessToken: initialToken.access_token }),
     };
   } catch (error) {
     console.error('Error:', error);
