@@ -174,40 +174,42 @@
 
 
 
-
-
-
 // netlifyFunction.js
 const { GoogleToken } = require('gtoken');
-
+const fs = require('fs-extra');
 const path = require('path');
 
-// Assuming the JSON file is in the netlify/functions directory when deployed
-const fileName = process.env.KEY_FILE_NAME || 'inspiring-bonus-405815-b81c6343d863.json';
-const filePath = path.resolve(__dirname, fileName);
+// Get the absolute path to the JSON key file
+const fileName = 'inspiring-bonus-405815-b81c6343d863.json';
+const filePath = path.join(process.cwd(), 'netlify/functions', fileName);
 
+// Check if the file exists
+if (!fs.existsSync(filePath)) {
+  console.error(`Error: File not found - ${filePath}`);
+  process.exit(1); // Exit the process with an error code
+}
 
-exports.handler = async function (event, context) {
-  // Create a GoogleToken instance
-  const gtoken = new GoogleToken({
-    keyFile: filePath,
-    email: 'apigee-acess@inspiring-bonus-405815.iam.gserviceaccount.com',
-    scope: ['https://www.googleapis.com/auth/cloud-platform'],
-    eagerRefreshThresholdMillis: 5 * 60 * 1000,
+// Create a GoogleToken instance
+const gtoken = new GoogleToken({
+  keyFile: filePath,
+  email: 'apigee-acess@inspiring-bonus-405815.iam.gserviceaccount.com',
+  scope: ['https://www.googleapis.com/auth/cloud-platform'],
+  eagerRefreshThresholdMillis: 5 * 60 * 1000,
+});
+
+// Function to get a token
+const getToken = () =>
+  new Promise((resolve, reject) => {
+    gtoken.getToken((err, tokens) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(tokens);
+    });
   });
 
-  // Function to get a token
-  const getToken = () =>
-    new Promise((resolve, reject) => {
-      gtoken.getToken((err, tokens) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(tokens);
-      });
-    });
-
+exports.handler = async function (event, context) {
   try {
     // Get the initial token
     const initialToken = await getToken();
@@ -215,9 +217,11 @@ exports.handler = async function (event, context) {
 
     // Your logic using the initial token
 
-    // Check if token needs refreshing
-    const now = Math.floor(Date.now() / 1000);
-    if (initialToken.expires_in < now) {
+    // Check if token needs refreshing based on expires_in
+    const expirationTime = initialToken.expires_in * 1000; // Convert seconds to milliseconds
+    const currentTime = Date.now();
+
+    if (currentTime + expirationTime < gtoken.eagerRefreshThresholdMillis) {
       // Refresh the token
       const refreshedToken = await getToken();
       console.log('Refreshed Token:', refreshedToken);
@@ -229,7 +233,7 @@ exports.handler = async function (event, context) {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({  accessToken: initialToken.access_token }),
+      body: JSON.stringify({ success: true, accessToken: initialToken.access_token }),
     };
   } catch (error) {
     console.error('Error:', error);
