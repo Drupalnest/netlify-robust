@@ -183,6 +183,7 @@ const path = require('path');
 const fileName = 'inspiring-bonus-405815-b81c6343d863.json';
 const filePath = path.join(process.cwd(), 'netlify/functions', fileName);
 
+
 // Check if the file exists
 if (!fs.existsSync(filePath)) {
   console.error(`Error: File not found - ${filePath}`);
