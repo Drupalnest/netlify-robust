@@ -843,6 +843,12 @@
 
 import React from "react";
 import logo from "./cssFolder/Images/logo-main.png";
+
+import i1 from "./cssFolder/Images/i1.jpg";
+import i2 from "./cssFolder/Images/i2.jpg";
+import i3 from "./cssFolder/Images/i3.jpg";
+import i4 from "./cssFolder/Images/i4.jpg";
+import i5 from "./cssFolder/Images/i5.jpg";
 import bannerpart from "./cssFolder/Images/bannerpart.png";
 import place2 from "./cssFolder/Images/place 2.png";
 import place1 from "./cssFolder/Images/place1.png";
@@ -1499,7 +1505,7 @@ const Startpage = () => {
                           <div className="field-content mb-3 justify-content-center">
                             <img
                               loading="lazy"
-                              src={place2}
+                              src={i2}
                               width="165"
                               height="123"
                               alt="authentication"
@@ -1539,7 +1545,7 @@ const Startpage = () => {
                           <div className="field-content mb-3 justify-content-center">
                             <img
                               loading="lazy"
-                              src={place2}
+                              src={i3}
                               width="165"
                               height="123"
                               alt="authentication"
@@ -1580,7 +1586,7 @@ const Startpage = () => {
                           <div className="field-content mb-3 justify-content-center">
                             <img
                               loading="lazy"
-                              src={place2}
+                              src={i4}
                               width="165"
                               height="123"
                               alt="authentication"
@@ -1621,7 +1627,7 @@ const Startpage = () => {
                           <div className="field-content mb-3 justify-content-center">
                             <img
                               loading="lazy"
-                              src={place2}
+                              src={i5}
                               width="165"
                               height="123"
                               alt="authentication"
@@ -1858,7 +1864,7 @@ const Startpage = () => {
                                   <div className="item-image p-2">
                                     <img
                                       loading="lazy"
-                                      src={place3}
+                                      src={i1}
                                       width="100"
                                       height="87"
                                       alt="verified"
@@ -1910,7 +1916,7 @@ const Startpage = () => {
                                   <div className="item-image p-2">
                                     <img
                                       loading="lazy"
-                                      src={place3}
+                                      src={i5}
                                       width="100"
                                       height="87"
                                       alt="verified"
