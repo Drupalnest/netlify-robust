@@ -2048,6 +2048,10 @@
 
 // export default AddTeam;
 
+
+
+
+
 import { Link, navigate } from "gatsby";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -2117,6 +2121,11 @@ const AddTeam = () => {
       //alert("Please provide a description.");
 
       toast.error("Please provide a description");
+      return;
+    }
+
+    if (checkedAttributes.length === 0) {
+      toast.error("Please provide appgroup product");
       return;
     }
 
