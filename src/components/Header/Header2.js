@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logout from "../Auth/Logout";
 import Logo from "../../images/logo-main.png";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import { useEffect } from "react";
 import "../../style/page.css";
 
@@ -34,6 +34,17 @@ const Header2 = () => {
   // When user logs in
   const userData = localStorage.getItem("logout_token");
   const isLoggedIn = userData;
+
+
+  const handleLoginClick = () => {
+    if (isLoggedIn) {
+      // User is logged in, redirect to Teams page
+     navigate("/teams");
+    } else {
+      // User is not logged in, redirect to Login page
+      navigate("/login");
+    }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top  ">
@@ -84,14 +95,20 @@ const Header2 = () => {
                 Help
               </Link>
             </li>
+            
+            
             <li
               className="nav-item  login-link bg-orange px-4 py-0.5  orange-background-color"
               style={{ borderRadius: "0.9rem" }}
             >
-              <Link className="nav-link  text-white" to="/login">
+              <Link className="nav-link  text-white"  to="/login"
+              onClick={handleLoginClick}>
                 Login
               </Link>
             </li>
+          
+          
+          
           </ul>
         </div>
       </div>

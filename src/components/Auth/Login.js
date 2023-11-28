@@ -2292,7 +2292,7 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Header from "../Header/Header";
-import { Link, navigate } from "gatsby";
+import { Link, navigate, } from "gatsby";
 import Cookies from "js-cookie";
 import Bearer from "./Bearer";
 import LoginResponse from "./LoginResponse";
@@ -2372,6 +2372,17 @@ const Login = () => {
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
+
+
+  const userData = localStorage.getItem("logout_token");
+  const isLoggedIn = userData;
+
+  useEffect(() => {
+    // If the user is logged in, redirect to the Teams page
+    if (isLoggedIn) {
+      navigate("/teams");
+    }
+  }, [isLoggedIn]);
 
   return (
     <>

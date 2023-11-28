@@ -843,6 +843,7 @@
 
 import React from "react";
 import logo from "./cssFolder/Images/logo-main.png";
+import bannerpart from "./cssFolder/Images/bannerpart.png";
 import place2 from "./cssFolder/Images/place 2.png";
 import place1 from "./cssFolder/Images/place1.png";
 import place3 from "./cssFolder/Images/place3.png";
@@ -921,7 +922,7 @@ const Startpage = () => {
                               <div className="p-2 field field--hidden image__field-media-image">
                                 <img
                                   loading="lazy"
-                                  src={place1}
+                                  src={bannerpart}
                                   //src="https://images.unsplash.com/photo-1623282033815-40b05d96c903?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1623282033815-40b05d96c903?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                   //width="713"
                                   //height="668"

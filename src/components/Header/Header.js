@@ -326,10 +326,10 @@ const Header = () => {
 
   // When user logs in
   const userData = localStorage.getItem("logout_token");
-const isLoggedIn =  userData
+  const isLoggedIn = userData;
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top  " >
+    <nav className="navbar navbar-expand-lg navbar-light custom-bg-indigo p-4 pl-5 pt-2 fixed-top  ">
       <div className="container-fluid  ">
         <button
           className={`navbar-toggler ${
@@ -361,36 +361,49 @@ const isLoggedIn =  userData
             />
           </Link>
 
+        
+        
+        
           <ul className="navbar-nav ml-auto mr-5 ">
-          <li className="nav-item">
-              <Link className="hover-effect nav-link text-dark" to="/usertrack">
-              Activity Log
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="hover-effect nav-link text-dark" to="/myapps">
-                My Apps
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-dark" to="/teams">
-                Appgroups
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-dark" to="#">
-                API Catalog
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link text-dark"
-                target="_blank"
-                to="https://login.sastoo.com/realms/sastoo/protocol/openid-connect/registrations?client_id=drupal&response_type=code&scope=openid%20email%20profile&redirect_uri=http%3A//userlogin.sastoo.com/openid-connect/generic"
-              >
-                Get Started
-              </Link>
-            </li>
+            {isLoggedIn && (
+              <>
+                <li className="nav-item">
+                  <Link
+                    className="hover-effect nav-link text-dark"
+                    to="/usertrack"
+                  >
+                    Activity Log
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="hover-effect nav-link text-dark"
+                    to="/myapps"
+                  >
+                    My Apps
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link text-dark" to="/teams">
+                    Appgroups
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link text-dark" to="#">
+                    API Catalog
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link text-dark"
+                    target="_blank"
+                    to="https://login.sastoo.com/realms/sastoo/protocol/openid-connect/registrations?client_id=drupal&response_type=code&scope=openid%20email%20profile&redirect_uri=http%3A//userlogin.sastoo.com/openid-connect/generic"
+                  >
+                    Get Started
+                  </Link>
+                </li>
+              </>
+            )}
 
             {/* <li className="nav-item">
               <Link
@@ -402,6 +415,8 @@ const isLoggedIn =  userData
               </Link>
             </li> */}
           </ul>
+
+          
 
           <div className="ml-2 d-flex mr-5">
             <Link className="link-secondary me-3" to="#">
@@ -476,9 +491,6 @@ const isLoggedIn =  userData
 };
 
 export default Header;
-
-
-
 
 // import React, { useState } from "react";
 // import Logout from "../Auth/Logout";
