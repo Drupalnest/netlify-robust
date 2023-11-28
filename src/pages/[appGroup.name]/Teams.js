@@ -1795,11 +1795,37 @@ const TeamList = ({ responseData }) => {
     setSearchTerm(event.target.value);
   };
 
+
+
+
+  // useEffect(() => {
+  //   dispatch(fetchTeams());
+  // }, [dispatch]);
+
+
+
   useEffect(() => {
-    dispatch(fetchTeams());
+    const fetchTeamsAndSetInterval = async () => {
+      // Fetch teams initially
+      await dispatch(fetchTeams());
+
+      // Set up an interval to fetch teams every 1 minute
+      const intervalId = setInterval(async () => {
+        await dispatch(fetchTeams());
+      }, 60000); // 60000 milliseconds = 1 minute
+
+      // Cleanup the interval when the component is unmounted
+      return () => clearInterval(intervalId);
+    };
+
+    // Call the function to set up the initial fetch and interval
+    fetchTeamsAndSetInterval();
+
+    // You can add dependencies if needed, like [dispatch, someOtherDependency]
   }, [dispatch]);
 
   
+
 
   const handleFetchApps = (appGroup) => {
     dispatch(fetchApps(appGroup));  // Use the parameter appGroup

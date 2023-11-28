@@ -5,8 +5,8 @@
   "openapi": "3.0.0",
 
   "info": {
-        "title": "Robust Api",
-        "description": "This service is responsible for Robust API",
+        "title": "Compute Service API",
+        "description": "This service is responsible for Compute Service API",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
               "name": "Ken Team",
@@ -21,13 +21,13 @@
   },
   "servers": [
         {
-              "url": "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815"
+              "url": "https://app.sastoo.com/"
         }
   ],
   "tags": [
         {
-              "name": "apigee",
-              "description": "the apigee Management API"
+              "name": "drupal",
+              "description": "the Drupal Management API"
         },
         {
               "name": "Actuator",
@@ -42,7 +42,7 @@
         "/compute/startTestEnvironment": {
               "post": {
                     "tags": [
-                          "apigee"
+                          "drupal"
                     ],
                     "operationId": "cloneTestEnvironment",
                     "requestBody": {
@@ -82,7 +82,7 @@
         "/compute/pod": {
               "post": {
                     "tags": [
-                          "apigee"
+                          "drupal"
                     ],
                     "summary": "Create Dev/Test Environments",
                     "description": "Create Drupal and MariaDB Environment",
@@ -122,7 +122,7 @@
               },
               "delete": {
                     "tags": [
-                          "apigee"
+                          "drupal"
                     ],
                     "summary": "Delete Dev/Test Environments",
                     "description": "Delete Drupal and MariaDB Environment",
