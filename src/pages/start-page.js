@@ -1156,7 +1156,7 @@ const Startpage = () => {
                         <Link to="#">
                           <div className="card-block d-flex border-dark text-dark">
                             <div className="card-body">
-                              <h3 className="card-title">Products</h3>
+                              <h3 className="card-title">API</h3>
                               <div className="field field--hidden card__field-text">
                                 <p>
                                   Learn about our APIs and try them out for
@@ -1199,7 +1199,7 @@ const Startpage = () => {
                         <Link to="#">
                           <div className="card-block d-flex border-dark text-dark">
                             <div className="card-body">
-                              <h3 className="card-title">Products</h3>
+                              <h3 className="card-title">Services</h3>
                               <div className="field field--hidden card__field-text">
                                 <p>
                                   Learn about our APIs and try them out for
