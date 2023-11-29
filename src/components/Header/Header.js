@@ -393,7 +393,12 @@ const Header = () => {
                     API Catalog
                   </Link>
                 </li>
-                <li className="nav-item">
+              
+              </>
+            )}
+
+
+            <li className="nav-item">
                   <Link
                     className="nav-link text-dark"
                     target="_blank"
@@ -402,8 +407,6 @@ const Header = () => {
                     Get Started
                   </Link>
                 </li>
-              </>
-            )}
 
             {/* <li className="nav-item">
               <Link
