@@ -1131,7 +1131,7 @@ const Startpage = () => {
                                     <div className="field field--hidden image__field-media-image">
                                       <img
                                         loading="lazy"
-                                        src={clipart2}
+                                        src={clipart1}
                                         width="350"
                                         height="300"
                                         alt="get started"
@@ -1174,7 +1174,7 @@ const Startpage = () => {
                                     <div className="field field--hidden image__field-media-image">
                                       <img
                                         loading="lazy"
-                                        src={clipart2}
+                                        src={clipart}
                                         width="350"
                                         height="300"
                                         alt="get started"
