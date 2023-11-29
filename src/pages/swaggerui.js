@@ -4653,7 +4653,7 @@ import React from 'react'
 
 const swaggerui = () => {
   return (
-    <div>swaggerui</div>
+    <div>swaggerUI</div>
   )
 }
 
