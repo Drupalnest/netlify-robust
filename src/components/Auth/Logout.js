@@ -1324,7 +1324,7 @@ const Logout = () => {
       headers: {
         "Content-Type": "application/json",
         "X-CSRF-Token": csrfToken,
-        withCredentials: true,
+        //withCredentials: true,
       },
       body: JSON.stringify({
         description: [JSON.stringify(combinedEvents)],

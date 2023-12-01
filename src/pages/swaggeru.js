@@ -31,23 +31,34 @@
 
 
 
-// components/SwaggerDocs.js
-import React from 'react';
-import SwaggerUI from 'swagger-ui-react';
-import 'swagger-ui-react/swagger-ui.css';
+// // components/SwaggerDocs.js
+// import React from 'react';
+// import SwaggerUI from 'swagger-ui-react';
+// import 'swagger-ui-react/swagger-ui.css';
 
-// Import your local Swagger JSON file
-import swaggerJson from './swagger.json';
+// // Import your local Swagger JSON file
+// import swaggerJson from './swagger.json';
 
-const SwaggerDocs = () => {
-  // Use the imported JSON file as the spec
-  const spec = swaggerJson;
+// const SwaggerDocs = () => {
+//   // Use the imported JSON file as the spec
+//   const spec = swaggerJson;
 
+//   return (
+//     <div>
+//       <SwaggerUI spec={spec} />
+//     </div>
+//   );
+// };
+
+// export default SwaggerDocs;
+
+
+import React from 'react'
+
+const swaggeru = () => {
   return (
-    <div>
-      <SwaggerUI spec={spec} />
-    </div>
-  );
-};
+    <div>swaggeru</div>
+  )
+}
 
-export default SwaggerDocs;
+export default swaggeru
