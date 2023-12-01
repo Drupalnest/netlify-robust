@@ -905,6 +905,9 @@
 
 // export default Layout;
 
+
+
+
 import React, { useEffect, useState } from "react";
 import Header from "./Header/Header";
 import InternetAlert from "./InternetAlert/internetAlert";
@@ -939,20 +942,22 @@ const Layout = ({ children }) => {
   const combinedEvents = events.concat(logoutEvent);
 
   
-  console.log("ninja")
-  useBeforeunload((event) => {
-    const message = "Are you sure you want to leave?";
+  // // console.log("ninja")
+  // useBeforeunload((event) => {
+  //   const message = "Are you sure you want to leave?";
 
-    console.log("log log")
-    if (window.confirm(message)) {
-      handleBeforeUnload();
-      event.preventDefault();
-      console.log("log log log")
+  //   // console.log("log log")
+  //   if (window.confirm(message)) {
+  //     handleBeforeUnload();
+  //     event.preventDefault();
+  //     // console.log("log log log")
      
-    } else {
-      event.preventDefault();
-    }
-  });
+  //   } else {
+  //     event.preventDefault();
+  //   }
+  // });
+
+
 
   const handleBeforeUnload = () => {
     if (csrfToken) {
@@ -961,7 +966,9 @@ const Layout = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
           "X-CSRF-Token": csrfToken,
-          withCredentials: true,
+          //withCredentials: true,
+          "Access-Control-Allow-Origin": true
+
         },
         body: JSON.stringify({
           description: [JSON.stringify(combinedEvents)],
@@ -985,6 +992,24 @@ const Layout = ({ children }) => {
     }
   };
 
+  
+  useEffect(() => {
+    const handleTabClose = event => {
+      event.preventDefault();
+      handleBeforeUnload()
+      console.log('beforeunload event triggered');
+  
+      return (event.returnValue =
+        'Are you sure you want to exit?');
+    };
+  
+    window.addEventListener('beforeunload', handleTabClose);
+  
+    return () => {
+      window.removeEventListener('beforeunload', handleTabClose);
+    };
+  }, []);
+  
 
 
   return (
