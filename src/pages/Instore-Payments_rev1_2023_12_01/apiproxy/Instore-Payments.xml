@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="Instore-Payments">
+    <Basepaths>/instore-payments</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1695747489937</CreatedAt>
+    <CreatedBy>swaroop12@gmail.com</CreatedBy>
+    <Description>Order of calling the APIs |
+    1. Get Payment Methods
+    2. Merchant Initiated Request
+  </Description>
+    <DisplayName>Instore-Payments</DisplayName>
+    <LastModifiedAt>1695860126238</LastModifiedAt>
+    <LastModifiedBy>swaroop12@gmail.com</LastModifiedBy>
+    <ManifestVersion>SHA-512:bb1e9a53cfb57b8f09e1657b3e05156e5ff808f90f227cf18f307b765c73e7a15eaf9d975d2d12a338c547a642aad18d1af799d3a83c9a792c2145cfcbc24201:us-east-1</ManifestVersion>
+    <Policies>
+        <Policy>add-cors</Policy>
+        <Policy>extractPayload</Policy>
+        <Policy>getExchangeRates</Policy>
+        <Policy>impose-quota</Policy>
+        <Policy>remove-header-authorization</Policy>
+        <Policy>setPayload</Policy>
+        <Policy>verify-oauth-v2-access-token</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>openapi://association.json</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

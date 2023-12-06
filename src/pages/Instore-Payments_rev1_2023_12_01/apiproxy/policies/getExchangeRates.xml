@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="getExchangeRates">
+    <DisplayName>getExchangeRates</DisplayName>
+    <Properties/>
+    <Request clearPayload="true" variable="myRequest">
+        <Set>
+            <QueryParams>
+                <QueryParam name="apikey">{request.queryparam.apikey}</QueryParam>
+                <QueryParam name="currencies">{request.queryparam.currencies}</QueryParam>
+                <QueryParam name="base_currency">{request.queryparam.base_currency}</QueryParam>
+            </QueryParams>
+        </Set>
+    </Request>
+    <Response>calloutResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://api.freecurrencyapi.com/v1/latest</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

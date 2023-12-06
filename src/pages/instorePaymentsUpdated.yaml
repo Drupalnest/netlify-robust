@@ -1,0 +1,383 @@
+openapi: 3.0.0
+
+# This is your document metadata.
+info:
+  version: 0.0.1
+  title: Instore Payments updated
+  description: |
+    Order of calling the APIs |
+    1. Get Payment Methods
+    2. Merchant Initiated Request
+servers: 
+  - url: https://api-dev.xxx.com
+    description: Sandbox Server
+  - url: https://api.xxx.com
+    description: Production Server
+
+tags:
+- name: Instore
+  description: Merchant initiated APIs
+
+paths:
+  '/v1/paymentMethods':
+    get:
+      tags:
+        - Instore
+      summary: 'Get payment methods country wise'
+      description: 'Get payment methods country wise'
+      security: 
+        - oAuth2ClientCredentials: [read]
+      parameters:
+        - in: header
+          name: apiKey
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: countryCode
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getProxyPaymentMethodsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+        '405':
+          description: Invalid Method
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMethod'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuotaViolation'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceUnavailable'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gatewayTimeout'
+  # InitiateMerchantPayment endpoint
+  '/v1/initiateMerchantPayment':
+    post:
+      tags:
+        - Instore
+      summary: 'Merchant Payments'
+      description: 'Merchant Payments'
+      security: 
+        - oAuth2ClientCredentials: [write]
+   
+      parameters:
+        - in: header
+          name: apiKey
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: Country-Code
+          schema:
+            type: string
+          required: true
+          example: IND
+        - in: header
+          name: Currency-Code
+          schema:
+            type: string
+          required: true
+          example: INR
+        - in: header
+          name: Initator-Location
+          schema:
+            type: string
+          required: true
+          example: Web Store
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chargeRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chargeResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+        '405':
+          description: Invalid Method 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMethod'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuotaViolation'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceUnavailable'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gatewayTimeout'
+                
+#components & schemas
+components:
+  schemas:
+    badRequest:
+      type: object
+      description: Response for failed validations
+      properties:
+        requestId:
+          type: string
+          example: 1122-3344-5566
+        errorCode:
+          type: number
+          example: 400
+        errorMessage:
+          type: string
+          example: Bad Request - username is empty
+        timestamp:
+          type: number
+          example: 20230304101220
+    ResourceNotFound:
+      type: object
+      description: Response for HTTP method not defined within the API
+      properties:
+        requestId:
+          type: string
+          example: 1122-3344-5566
+        errorCode:
+          type: number
+          example: 404
+        errorMessage:
+          type: string
+          example: /testapi Resource not found
+        timestamp:
+          type: number
+          example: 20230304101220
+    InvalidMethod:
+      type: object
+      description: Response for HTTP method not defined within the API
+      properties:
+        requestId:
+          type: string
+          example: 1122-3344-5566
+        errorCode:
+          type: number
+          example: 405
+        errorMessage:
+          type: string
+          example: PUT method not allowed
+        timestamp:
+          type: number
+          example: 20230304101220
+    QuotaViolation:
+      type: object
+      description: Response for Too many requests
+      properties:
+        requestId:
+          type: string
+          example: 1122-3344-5566
+        errorCode:
+          type: number
+          example: 429
+        errorMessage:
+          type: string
+          example: Quota limit Exceeded
+        timestamp:
+          type: number
+          example: 20230304101220
+    serviceUnavailable:
+      type: object
+      description: Response for service unavailable
+      properties:
+        requestId:
+          type: string
+          example: 1122-3344-5566
+        errorCode:
+          type: number
+          example: 503
+        errorMessage:
+          type: string
+          example: Server could not process your request. Try later
+        timestamp:
+          type: number
+          example: 20230304101220
+    gatewayTimeout:
+      type: object
+      description: Response for gateway timeout
+      properties:
+        requestId:
+          type: string
+          example: 1122-3344-5566
+        errorCode:
+          type: number
+          example: 504
+        errorMessage:
+          type: string
+          example: Request timed out
+        timestamp:
+          type: number
+          example: 20230304101220
+    getProxyPaymentMethodsResponse:
+      type: object
+      description: checkout request output
+      properties:
+        status:
+          type: string
+          example: success
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: "Service payment methods fetched successfully"
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              paymentMethodID:
+                type: string
+                example: 12
+              paymentAmount:
+                type: string
+                example: 120.50
+              acknowledgePayer:
+                type: string
+                example: true
+              type:
+                type: object
+                properties:
+                  paymentMethodTypeID:
+                    type: string
+                    example: 3
+                  paymentMethodTypeName:
+                    type: string
+                    example: Card
+                  paymentMethodTypeCode:
+                    type: string
+                    example: 1
+              customer:
+                type: object
+                properties:
+                  customerID:
+                    type: string
+                    example: 196
+                  customerName:
+                    type: string
+                    example: Arvind
+                  customerCode:
+                    type: string
+                    example: USA
+              currency:
+                type: object
+                properties:
+                  currencyID:
+                    type: string
+                    example: 203
+                  currencyName:
+                    type: string
+                    example: Rebased Zambian Kwacha
+                  currencyCode:
+                    type: string
+                    example: ZMW
+              countryTO:
+                type: object
+                properties:
+                  countryID:
+                    type: string
+                    example: 011
+                  countryName:
+                    type: string
+                    example: India
+                  countryCode:
+                    type: string
+                    example: INR
+                  countryAbbv:
+                    type: string
+                    example: IN
+                  
+    chargeResponse:
+          type: object
+          description: charge response
+          properties:
+            status:
+              type: string
+              example: success
+            statusCode:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: "payment completed successfully"
+
+    chargeRequest:
+      type: object
+      description: charge request input
+      properties:
+        counterCode:
+          type: string
+          example: "1111"
+        phoneNumber:
+          type: string
+          example: "260111111111"
+        amount:
+          type: string
+          example: "100"
+        payerClientCode:
+          type: string
+          example: "1844"
+     
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: See http://developers.gettyimages.com/api/docs/v3/oauth2.html
+      flows: 
+        clientCredentials: 
+          tokenUrl: https://api.gettyimages.com/oauth2/token/
+          scopes: {} # Getty Images does not use scopes

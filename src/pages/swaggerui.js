@@ -5368,562 +5368,562 @@
 
 
 
-// import React, { useState, useEffect } from "react";
-// import SwaggerUI from "swagger-ui-react";
-// import "swagger-ui-react/swagger-ui.css";
+import React, { useState, useEffect } from "react";
+import SwaggerUI from "swagger-ui-react";
+import "swagger-ui-react/swagger-ui.css";
 
-// const apiSpec = {
-//   openapi: "3.0.0",
-//   info: {
-//     title: "Robust Api - OpenAPI 3.0",
-//     description: "This service is responsible for Compute Service API",
-//     termsOfService: "http://swagger.io/terms/",
-//     contact: {
-//       email: "apiteam@swagger.io",
-//     },
-//     license: {
-//       name: "Apache 2.0",
-//       url: "http://www.apache.org/licenses/LICENSE-2.0.html",
-//     },
-//     version: "1.0.11",
-//   },
-//   externalDocs: {
-//     description: "Find out more about Swagger",
-//     url: "http://swagger.io",
-//   },
-//   servers: [
-//     {
-//       url: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",
-//     },
-//   ],
-//   paths: {
-//     "/appgroups": {
-//       get: {
-//         tags: ["All Appgroups"],
-//         summary: "Get a list of app groups",
-//         responses: {
-//           200: {
-//             description: "Successful response",
-//             content: {
-//               "application/json": {
-//                 schema: {
-//                   $ref: "#/components/schemas/AppGroupResponse",
-//                 },
+const apiSpec = {
+  openapi: "3.0.0",
+  info: {
+    title: "Robust Api - OpenAPI 3.0",
+    description: "This service is responsible for Compute Service API",
+    termsOfService: "http://swagger.io/terms/",
+    contact: {
+      email: "apiteam@swagger.io",
+    },
+    license: {
+      name: "Apache 2.0",
+      url: "http://www.apache.org/licenses/LICENSE-2.0.html",
+    },
+    version: "1.0.11",
+  },
+  externalDocs: {
+    description: "Find out more about Swagger",
+    url: "http://swagger.io",
+  },
+  servers: [
+    {
+      url: "https://apigee.googleapis.com/v1/organizations/inspiring-bonus-405815",
+    },
+  ],
+  paths: {
+    "/appgroups": {
+      get: {
+        tags: ["All Appgroups"],
+        summary: "Get a list of app groups",
+        responses: {
+          200: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/AppGroupResponse",
+                },
                
-//               },
-//             },
-//           },
-//         },
-//       },
-//     },
+              },
+            },
+          },
+        },
+      },
+    },
 
-//     "/appgroups/{appgroupName}": {
-//       get: {
-//         tags: ["appgroups"],
-//         summary: "Get details of appgroups",
-//         parameters: [
-//           {
-//             name: "appgroupName",
-//             in: "path",
-//             description: "Name of the appgroup",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//         ],
-//         responses: {
-//           200: {
-//             description: "Successful response",
-//             content: {
-//               "application/json": {
-//                 schema: {
-//                   $ref: "#/components/schemas/AppGroup",
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//       post: {
-//         tags: ["appgroups"],
-//         summary: "Create a new app group",
-//         requestBody: {
-//           description: "Name of the appgroup",
-//           content: {
-//             "application/json": {
-//               schema: {
-//                 $ref: "#/components/schemas/AppGroup",
-//               },
-//             },
-//           },
-//         },
-//         responses: {
-//           201: {
-//             description: "Successful response",
-//             content: {
-//               "application/json": {
-//                 schema: {
-//                   $ref: "#/components/schemas/AppGroup",
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//       put: {
-//         tags: ["appgroups"],
-//         summary: "Update an existing appgroup",
-//         parameters: [
-//           {
-//             name: "appgroupName",
-//             in: "path",
-//             description: "Name of the appgroup",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//         ],
-//         requestBody: {
-//           description: "Updated app group object",
-//           content: {
-//             "application/json": {
-//               schema: {
-//                 $ref: "#/components/schemas/AppGroup",
-//               },
-//             },
-//           },
-//         },
-//         responses: {
-//           200: {
-//             description: "Successful response",
-//             content: {
-//               "application/json": {
-//                 schema: {
-//                   $ref: "#/components/schemas/AppGroup",
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//       delete: {
-//         tags: ["appgroups"],
-//         summary: "Delete an appgroup",
-//         parameters: [
-//           {
-//             name: "appgroupName",
-//             in: "path",
-//             description: "Name of the appgroup",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//         ],
-//         responses: {
-//           204: {
-//             description: "Successful response",
-//           },
-//         },
-//       },
-//     },
+    "/appgroups/{appgroupName}": {
+      get: {
+        tags: ["appgroups"],
+        summary: "Get details of appgroups",
+        parameters: [
+          {
+            name: "appgroupName",
+            in: "path",
+            description: "Name of the appgroup",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/AppGroup",
+                },
+              },
+            },
+          },
+        },
+      },
+      post: {
+        tags: ["appgroups"],
+        summary: "Create a new app group",
+        requestBody: {
+          description: "Name of the appgroup",
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/AppGroup",
+              },
+            },
+          },
+        },
+        responses: {
+          201: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/AppGroup",
+                },
+              },
+            },
+          },
+        },
+      },
+      put: {
+        tags: ["appgroups"],
+        summary: "Update an existing appgroup",
+        parameters: [
+          {
+            name: "appgroupName",
+            in: "path",
+            description: "Name of the appgroup",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        requestBody: {
+          description: "Updated app group object",
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/AppGroup",
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/AppGroup",
+                },
+              },
+            },
+          },
+        },
+      },
+      delete: {
+        tags: ["appgroups"],
+        summary: "Delete an appgroup",
+        parameters: [
+          {
+            name: "appgroupName",
+            in: "path",
+            description: "Name of the appgroup",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          204: {
+            description: "Successful response",
+          },
+        },
+      },
+    },
 
-//     "/appgroups/{appgroupName}/apps": {
-//       get: {
-//         tags: ["Appgroup apps"],
-//         summary: "Get details of appgroup apps",
-//         parameters: [
-//           {
-//             name: "appgroupName",
-//             in: "path",
-//             description: "Name of the appgroup apps",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//         ],
-//         responses: {
-//           200: {
-//             description: "Successful response",
-//             content: {
-//               "application/json": {
-//                 schema: {
-//                   $ref: "#/components/schemas/AppGroupApps",
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//     },
+    "/appgroups/{appgroupName}/apps": {
+      get: {
+        tags: ["Appgroup apps"],
+        summary: "Get details of appgroup apps",
+        parameters: [
+          {
+            name: "appgroupName",
+            in: "path",
+            description: "Name of the appgroup apps",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/AppGroupApps",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
 
-//     "/appgroups/{appgroupName}/apps/{appgroupAppsName}": {
-//       get: {
-//         tags: ["appgroups apps"],
-//         summary: "Get details of appgroups apps",
-//         parameters: [
-//           {
-//             name: "appgroupName",
-//             in: "path",
-//             description: "Name of the appgroup",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//           {
-//             name: "appgroupAppsName",
-//             in: "path",
-//             description: "Name of the appgroup app",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//         ],
-//         responses: {
-//           200: {
-//             description: "Successful response",
-//             content: {
-//               "application/json": {
-//                 schema: {
-//                   $ref: "#/components/schemas/AppGroup",
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//       post: {
-//         tags: ["appgroups apps"],
-//         summary: "Create a new appgroup apps",
-//         requestBody: {
-//           description: "Name of the appgroup",
-//           content: {
-//             "application/json": {
-//               schema: {
-//                 $ref: "#/components/schemas/AppGroup",
-//               },
-//             },
-//           },
-//         },
-//         responses: {
-//           201: {
-//             description: "Successful response",
-//             content: {
-//               "application/json": {
-//                 schema: {
-//                   $ref: "#/components/schemas/AppGroup",
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//       put: {
-//         tags: ["appgroups apps"],
-//         summary: "Update an existing appgroup apps",
-//         parameters: [
-//           {
-//             name: "appgroup name",
-//             in: "path",
-//             description: "Name of the appgroup",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//           {
-//             name: "appgroup app name",
-//             in: "path",
-//             description: "Name of the appgroup app",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//         ],
-//         requestBody: {
-//           description: "Updated app group object",
-//           content: {
-//             "application/json": {
-//               schema: {
-//                 $ref: "#/components/schemas/AppGroup",
-//               },
-//             },
-//           },
-//         },
-//         responses: {
-//           200: {
-//             description: "Successful response",
-//             content: {
-//               "application/json": {
-//                 schema: {
-//                   $ref: "#/components/schemas/AppGroup",
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//       delete: {
-//         tags: ["appgroups apps"],
-//         summary: "Delete an appgroup apps",
-//         parameters: [
-//           {
-//             name: "appgroup name",
-//             in: "path",
-//             description: "Name of the appgroup",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//           {
-//             name: "appgroup app name",
-//             in: "path",
-//             description: "Name of the appgroup app",
-//             required: true,
-//             schema: {
-//               type: "string",
-//             },
-//           },
-//         ],
-//         responses: {
-//           204: {
-//             description: "Successful response",
-//           },
-//         },
-//       },
-//     },
+    "/appgroups/{appgroupName}/apps/{appgroupAppsName}": {
+      get: {
+        tags: ["appgroups apps"],
+        summary: "Get details of appgroups apps",
+        parameters: [
+          {
+            name: "appgroupName",
+            in: "path",
+            description: "Name of the appgroup",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+          {
+            name: "appgroupAppsName",
+            in: "path",
+            description: "Name of the appgroup app",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/AppGroup",
+                },
+              },
+            },
+          },
+        },
+      },
+      post: {
+        tags: ["appgroups apps"],
+        summary: "Create a new appgroup apps",
+        requestBody: {
+          description: "Name of the appgroup",
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/AppGroup",
+              },
+            },
+          },
+        },
+        responses: {
+          201: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/AppGroup",
+                },
+              },
+            },
+          },
+        },
+      },
+      put: {
+        tags: ["appgroups apps"],
+        summary: "Update an existing appgroup apps",
+        parameters: [
+          {
+            name: "appgroup name",
+            in: "path",
+            description: "Name of the appgroup",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+          {
+            name: "appgroup app name",
+            in: "path",
+            description: "Name of the appgroup app",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        requestBody: {
+          description: "Updated app group object",
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/AppGroup",
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/AppGroup",
+                },
+              },
+            },
+          },
+        },
+      },
+      delete: {
+        tags: ["appgroups apps"],
+        summary: "Delete an appgroup apps",
+        parameters: [
+          {
+            name: "appgroup name",
+            in: "path",
+            description: "Name of the appgroup",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+          {
+            name: "appgroup app name",
+            in: "path",
+            description: "Name of the appgroup app",
+            required: true,
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          204: {
+            description: "Successful response",
+          },
+        },
+      },
+    },
 
-//     "/apiproducts": {
-//       get: {
-//         summary: "Get a list of API products",
-//         tags: ["API Products"],
-//         responses: {
-//           200: {
-//             description: "Successful response",
-//             content: {
-//               "application/json": {
-//                 schema: {
-//                   $ref: "#/components/schemas/APIProductResponse",
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//     },
-//   },
+    "/apiproducts": {
+      get: {
+        summary: "Get a list of API products",
+        tags: ["API Products"],
+        responses: {
+          200: {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/APIProductResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 
-//   components: {
-//     schemas: {
-//       AppGroup: {
-//         type: "object",
-//         properties: {
-//           name: {
-//             type: "string",
-//             example: "string",
-//           },
-//           displayName: {
-//             type: "string",
-//             example: "string",
-//           },
-//           status: {
-//             type: "string",
-//             example: "string",
-//           },
-//           attributes: {
-//             type: "array",
-//             items: {
-//               type: "object",
-//               properties: {
-//                 name: {
-//                   type: "string",
-//                   example: "string",
-//                 },
-//                 value: {
-//                   type: "string",
-//                   example: "string",
-//                 },
-//               },
-//             },
-//           },
-//           createdAt: {
-//             type: "string",
-//             example: "1698308576720",
-//           },
-//           lastModifiedAt: {
-//             type: "string",
-//             example: "1698308626616",
-//           },
-//         },
-//       },
+  components: {
+    schemas: {
+      AppGroup: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+            example: "string",
+          },
+          displayName: {
+            type: "string",
+            example: "string",
+          },
+          status: {
+            type: "string",
+            example: "string",
+          },
+          attributes: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string",
+                  example: "string",
+                },
+                value: {
+                  type: "string",
+                  example: "string",
+                },
+              },
+            },
+          },
+          createdAt: {
+            type: "string",
+            example: "1698308576720",
+          },
+          lastModifiedAt: {
+            type: "string",
+            example: "1698308626616",
+          },
+        },
+      },
 
-//       AppGroupApps: {
-//         type: "object",
-//         properties: {
-//           appGroupApps: {
-//             type: "array",
-//             items: {
-//               type: "object",
-//               properties: {
-//                 appId: {
-//                   type: "string"
-//                 },
-//                 attributes: {
-//                   type: "array",
-//                   items: {
-//                     type: "object",
-//                     properties: {
-//                       name: {
-//                         type: "string"
-//                       },
-//                       value: {
-//                         type: "string"
-//                       }
-//                     },
-//                     required: ["name", "value"]
-//                   }
-//                 },
-//                 createdAt: {
-//                   type: "string"
-//                 },
-//                 credentials: {
-//                   type: "array",
-//                   items: {
-//                     type: "object",
-//                     properties: {
-//                       apiProducts: {
-//                         type: "array",
-//                         items: {
-//                           type: "object",
-//                           properties: {
-//                             apiproduct: {
-//                               type: "string"
-//                             },
-//                             status: {
-//                               type: "string"
-//                             }
-//                           },
-//                           required: ["apiproduct", "status"]
-//                         }
-//                       },
-//                       consumerKey: {
-//                         type: "string"
-//                       },
-//                       consumerSecret: {
-//                         type: "string"
-//                       },
-//                       expiresAt: {
-//                         type: "string"
-//                       },
-//                       issuedAt: {
-//                         type: "string"
-//                       },
-//                       status: {
-//                         type: "string"
-//                       }
-//                     },
-//                     required: ["apiProducts", "consumerKey", "consumerSecret", "expiresAt", "issuedAt", "status"]
-//                   }
-//                 },
-//                 lastModifiedAt: {
-//                   type: "string"
-//                 },
-//                 name: {
-//                   type: "string"
-//                 },
-//                 status: {
-//                   type: "string"
-//                 },
-//                 appGroup: {
-//                   type: "string"
-//                 }
-//               },
-//               required: ["appId", "attributes", "createdAt", "credentials", "lastModifiedAt", "name", "status", "appGroup"]
-//             }
-//           }
-//         }
-//       },
+      AppGroupApps: {
+        type: "object",
+        properties: {
+          appGroupApps: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                appId: {
+                  type: "string"
+                },
+                attributes: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      name: {
+                        type: "string"
+                      },
+                      value: {
+                        type: "string"
+                      }
+                    },
+                    required: ["name", "value"]
+                  }
+                },
+                createdAt: {
+                  type: "string"
+                },
+                credentials: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      apiProducts: {
+                        type: "array",
+                        items: {
+                          type: "object",
+                          properties: {
+                            apiproduct: {
+                              type: "string"
+                            },
+                            status: {
+                              type: "string"
+                            }
+                          },
+                          required: ["apiproduct", "status"]
+                        }
+                      },
+                      consumerKey: {
+                        type: "string"
+                      },
+                      consumerSecret: {
+                        type: "string"
+                      },
+                      expiresAt: {
+                        type: "string"
+                      },
+                      issuedAt: {
+                        type: "string"
+                      },
+                      status: {
+                        type: "string"
+                      }
+                    },
+                    required: ["apiProducts", "consumerKey", "consumerSecret", "expiresAt", "issuedAt", "status"]
+                  }
+                },
+                lastModifiedAt: {
+                  type: "string"
+                },
+                name: {
+                  type: "string"
+                },
+                status: {
+                  type: "string"
+                },
+                appGroup: {
+                  type: "string"
+                }
+              },
+              required: ["appId", "attributes", "createdAt", "credentials", "lastModifiedAt", "name", "status", "appGroup"]
+            }
+          }
+        }
+      },
 
-//       AppGroupResponse: {
-//         type: "object",
-//         properties: {
-//           appGroups: {
-//             type: "array",
-//             items: {
-//               $ref: "#/components/schemas/AppGroup",
-//             },
-//           },
-//         },
-//       },
-//       APIProductResponse: {
-//         type: "object",
-//         properties: {
-//           apiProduct: {
-//             type: "array",
-//             items: {
-//               type: "object",
-//               properties: {
-//                 name: {
-//                   type: "string",
+      AppGroupResponse: {
+        type: "object",
+        properties: {
+          appGroups: {
+            type: "array",
+            items: {
+              $ref: "#/components/schemas/AppGroup",
+            },
+          },
+        },
+      },
+      APIProductResponse: {
+        type: "object",
+        properties: {
+          apiProduct: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string",
                   
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       },
-//     },
-//   },
-// };
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+};
 
-// const SwaggerComponent = () => {
-//   return (
-//     <div>
-//       <SwaggerUI
-//         spec={apiSpec}
-//         requestInterceptor={async (req) => {
-//           try {
-//             const tokenResponse = await fetch(
-//               "https://robustapihub.netlify.app/.netlify/functions/a"
-//             );
-//             const { accessToken } = await tokenResponse.json();
-//             console.log("Bearer Token for Request:", accessToken);
-//             req.headers["Authorization"] = `Bearer ${accessToken}`;
-//           } catch (error) {
-//             console.error("Error getting Bearer token for request:", error);
-//           }
-//           return req;
-//         }}
-//         presets={[SwaggerUI.presets.apis]}
-//         auth={{
-//           apiKey: {
-//             name: "Authorization",
-//             value: "",
-//             type: "header",
-//           },
-//         }}
-//       />
-//     </div>
-//   );
-// };
-
-// export default SwaggerComponent;
-
-
-
-import React from 'react'
-
-const swaggerui = () => {
+const SwaggerComponent = () => {
   return (
-    <div>swaggerui</div>
-  )
-}
+    <div>
+      <SwaggerUI
+        spec={apiSpec}
+        requestInterceptor={async (req) => {
+          try {
+            const tokenResponse = await fetch(
+              "https://robustapihub.netlify.app/.netlify/functions/a"
+            );
+            const { accessToken } = await tokenResponse.json();
+            console.log("Bearer Token for Request:", accessToken);
+            req.headers["Authorization"] = `Bearer ${accessToken}`;
+          } catch (error) {
+            console.error("Error getting Bearer token for request:", error);
+          }
+          return req;
+        }}
+        presets={[SwaggerUI.presets.apis]}
+        auth={{
+          apiKey: {
+            name: "Authorization",
+            value: "",
+            type: "header",
+          },
+        }}
+      />
+    </div>
+  );
+};
 
-export default swaggerui
+export default SwaggerComponent;
+
+
+
+// import React from 'react'
+
+// const swaggerui = () => {
+//   return (
+//     <div>swaggerui</div>
+//   )
+// }
+
+// export default swaggerui

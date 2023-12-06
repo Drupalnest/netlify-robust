@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="setPayload">
+    <DisplayName>setPayload</DisplayName>
+    <Properties/>
+    <Add>
+        <Headers>
+            <!--<Header name="Exchange-Rates">{ServiceCallout.response.data.*}</Header>-->
+            <Header name="Exchange-Rates">{apigee.exchange}</Header>
+        </Headers>
+    </Add>
+    <!--<Set>-->
+    <!--    <Payload contentType="application/json">{response.content}{apigee.exchange}</Payload>-->
+    <!--</Set>-->
+    <!--<AssignVariable>-->
+    <!--    <Name>Exchange-Rates</Name>-->
+    <!--    <Value>$.ServiceCallout.response.data.*</Value>-->
+    <!--</AssignVariable>-->
+    <!--<AssignVariable>-->
+    <!--    <Name>Exchange</Name>-->
+    <!--    <Ref>apigee.exchange</Ref>-->
+    <!--</AssignVariable>-->
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>
