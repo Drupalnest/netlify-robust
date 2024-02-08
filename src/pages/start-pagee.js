@@ -308,24 +308,34 @@ const Startpagee = () => {
   ];
 
   const keyFeaturesData = [
-    { title: "Feature 1", description: "Description for Feature 1" },
-    { title: "Feature 2", description: "Description for Feature 2" },
-    { title: "Feature 3", description: "Description for Feature 3" },
+    {
+      title: "SEND PAYMENT REQUEST",
+      description: "Initiate a payment request in real-time schemes",
+    },
+    {
+      title: "RETRIEVE A PAYMENT REQUEST STATUS",
+      description:
+        "Retrieve a status report for a previously initiated payment request",
+    },
+    {
+      title: "LOAD A PAYMENT REQUEST",
+      description: "Load a payment request to view its details",
+    },
     // Add more features as needed
   ];
 
   return (
     <div className="container-fluid col-11  p-3 mt-5">
       <div className=" text-center mt-5 ">
-        <h3>Overview</h3>
+        <h1>Overview</h1>
         <p className="pt-5 pb-5 ">
           Set of APIs enabling payment request services in real-time schemes:
           includes the ability to retrieve the status of payment requests
         </p>
       </div>
       <div className="  border border-danger">
-        <div className="text-center m-4">
-          <span className=" ">Available APIs</span>
+        <div className="text-center p-5">
+          <h1 className=" ">Available APIs</h1>
         </div>
 
         <div className="   border border-danger row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -408,17 +418,19 @@ const Startpagee = () => {
           ))}
         </div>
 
-        <div className=" container-fluid mt-5 col-12 text-center p-5">
-          <h1>Key Features</h1>
+        <div className="container-fluid mt-5 col-12 text-center p-5">
+          <h1 className="p-5">Key Features</h1>
 
-          {keyFeaturesData.map((feature, index) => (
-            <Card key={index} className="mb-3">
-              <Card.Body>
-                <Card.Title>{feature.title}</Card.Title>
-                <Card.Text>{feature.description}</Card.Text>
-              </Card.Body>
-            </Card>
-          ))}
+          <div className="card-deck">
+            {keyFeaturesData.map((feature, index) => (
+              <div key={index} className="card mb-3  border border-warning">
+                <div className="card-body p-5">
+                  <h5 className="card-title">{feature.title}</h5>
+                  <p className="card-text">{feature.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="container p-5">
