@@ -3619,57 +3619,68 @@ const ViewApp = () => {
                                 </div> */}
 
                                 <div>
-  {coffeeOptions && coffeeOptions.length > 0 && (
-    <div className="p-4 fieldset-wrapper">
-      <div className="form-checkboxes">
-        {coffeeOptions.map((item) => (
-          <div
-            key={item}
-            className="form-item form-item-field-api-product-0-value-corp-iag-code-token form-check"
-          >
-            <ul
-              style={{
-                padding: 0,
-                margin: 0,
-              }}
-            >
-              <li
-                key={item}
-                style={{ listStyle: "none" }}
-              >
-                <input
-                  type="checkbox"
-                  value={item}
-                  style={{
-                    marginRight: "0.5em",
-                  }}
-                  checked={checkedAttributes.includes(item)}
-                  onChange={() =>
-                    handleCheckboxChangeForDuplicates(item)
-                  }
-                />
-                {item}
-              </li>
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  )}
+                                  {coffeeOptions &&
+                                    coffeeOptions.length > 0 && (
+                                      <div className="p-4 fieldset-wrapper">
+                                        <div className="form-checkboxes">
+                                          {coffeeOptions.map((item) => (
+                                            <div
+                                              key={item}
+                                              className="form-item form-item-field-api-product-0-value-corp-iag-code-token form-check"
+                                            >
+                                              <ul
+                                                style={{
+                                                  padding: 0,
+                                                  margin: 0,
+                                                }}
+                                              >
+                                                <li
+                                                  key={item}
+                                                  style={{ listStyle: "none" }}
+                                                >
+                                                  <input
+                                                    type="checkbox"
+                                                    value={item}
+                                                    style={{
+                                                      marginRight: "0.5em",
+                                                    }}
+                                                    checked={checkedAttributes.includes(
+                                                      item
+                                                    )}
+                                                    onChange={() =>
+                                                      handleCheckboxChangeForDuplicates(
+                                                        item
+                                                      )
+                                                    }
+                                                  />
+                                                  {item}
+                                                </li>
+                                              </ul>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
 
-  <div className="pl-4">
-    {coffeeOptions && coffeeOptions.length > 0 && (
-      <button
-        onClick={handleSubmit}
-        className="all-buttons-color text-white form-submit btn btn-md"
-        
-      >
-        Add Items
-      </button>
-    )}
-  </div>
-</div>
-
+                                  <div className="pl-4">
+                                    {coffeeOptions &&
+                                      coffeeOptions.length > 0 && (
+                                        <button
+                                          onClick={handleSubmit}
+                                          className="all-buttons-color text-white form-submit btn btn-md"
+                                        >
+                                          Add Items
+                                        </button>
+                                      )}
+                                  </div>
+                                  {/* <div class="container">
+  <p class="text text-sm-sm text-sm-md text-md-lg text-lg-xl">
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    like Aldus PageMaker including versions of Lorem Ipsum.
+   
+  </p>
+</div> */}
+                                </div>
                               </fieldset>
                             </div>
                           </div>
@@ -3688,3 +3699,6 @@ const ViewApp = () => {
 };
 
 export default ViewApp;
+
+
+
