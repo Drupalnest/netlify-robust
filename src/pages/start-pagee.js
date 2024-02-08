@@ -170,11 +170,114 @@
 
 // export default Startpagee;
 
+// import React from "react";
+// import cover from "../images/images/cover.png";
+// import cover1 from "../images/images/cover1.png";
+// import cover2 from "../images/images/cover2.png";
+// import cover3 from "../images/images/cover3.png";
+// import api from "../images/images/api.png";
+
+// const Startpagee = () => {
+//   const cardData = [
+//     {
+//       title: "Access Token​",
+//       description1: "ROBUSTAPIHUB",
+//       description2: "Create access token for subsequent requests",
+//       image: api,
+//     },
+//     {
+//       title: "Transactions​",
+//       description1: "ROBUSTAPIHUB",
+//       description2: "Transfer funds between payer and merchant​",
+//       image: cover1,
+//     },
+//     {
+//       title: "Risk Management​",
+//       description1: "ROBUSTAPIHUB",
+//       description2: "Fraud and risk management ​",
+//       image: cover2,
+//     },
+//     {
+//       title: "Payment methods​",
+//       description1: "ROBUSTAPIHUB",
+//       description2: "Secure storage for payment information​",
+//       image: cover3,
+//     },
+//   ];
+
+//   return (
+//     <div className="container mt-5">
+//       <div className="container text-center mt-5 ">
+//         <h3>Overview</h3>
+//         <p className="pt-5 pb-5 ">
+//           Set of APIs enabling payment request services in real-time schemes:
+//           includes the ability to retrieve the status of payment requests
+//         </p>
+//       </div>
+//       <div className="container bg mt-5 ">
+//         <div className="text-center">
+//           <span className="p-5 ">Available APIs</span>
+//         </div>
+
+//         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+//           {cardData.map((card, index) => (
+//             <div key={index} className="col">
+//               <div className="card p-1">
+//                 <div className="d-flex align-items-center p-0 border border-danger">
+//                   <img
+//                     src={card.image}
+//                     alt=""
+//                     className="card-img-top rounded-circle border border-danger mr-2"
+//                     style={{ width: "50px" }}
+//                   />
+//                   <div className="p-0 m-0">
+//                     <p className="card-title">{card.title}</p>
+//                     <p className="card-title">Abc</p>
+//                   </div>
+//                   <img
+//                     src={card.image}
+//                     alt=""
+//                     className="card-img-top rounded-circle border border-danger mr-2"
+//                     style={{ width: "50px" }}
+//                   />
+//                 </div>
+
+//                 <div className="card-body d-flex flex-row ">
+//                   <p className="border border-danger">{card.description1}</p>
+//                   <p className="border border-danger">{card.description2}</p>
+//                 </div>
+//                 <div className="card-body d-flex flex-row ">
+//                   <p>ahdusdcusuih idubfuye wejdfuir iefuer</p>
+//                 </div>
+//                 <div className="d-flex row">
+//                   <div className="card-body d-flex flex-row ">
+//                     <p>Api</p>
+//                   </div>
+
+//                   <div className="card-body d-flex flex-row ">
+//                     <p>Beta | v2</p>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Startpagee;
+
 import React from "react";
 import cover from "../images/images/cover.png";
 import cover1 from "../images/images/cover1.png";
 import cover2 from "../images/images/cover2.png";
 import cover3 from "../images/images/cover3.png";
+import api from "../images/images/api.png";
+import bookmark from "../images/images/bookmark_svg.svg";
+import diagram from "../images/images/diagram.png";
+import { Card } from "react-bootstrap";
 
 const Startpagee = () => {
   const cardData = [
@@ -182,44 +285,155 @@ const Startpagee = () => {
       title: "Access Token​",
       description1: "ROBUSTAPIHUB",
       description2: "Create access token for subsequent requests",
-      image: cover,
+      image: api,
     },
     {
       title: "Transactions​",
       description1: "ROBUSTAPIHUB",
       description2: "Transfer funds between payer and merchant​",
-      image: cover1,
+      image: api,
     },
     {
       title: "Risk Management​",
       description1: "ROBUSTAPIHUB",
       description2: "Fraud and risk management ​",
-      image: cover2,
+      image: api,
     },
     {
       title: "Payment methods​",
       description1: "ROBUSTAPIHUB",
       description2: "Secure storage for payment information​",
-      image: cover3,
+      image: api,
     },
   ];
 
+  const keyFeaturesData = [
+    { title: "Feature 1", description: "Description for Feature 1" },
+    { title: "Feature 2", description: "Description for Feature 2" },
+    { title: "Feature 3", description: "Description for Feature 3" },
+    // Add more features as needed
+  ];
+
   return (
-    <div className="container mt-5">
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-        {cardData.map((card, index) => (
-          <div key={index} className="col">
-            <div className="card">
-            <div></div>
-              <img src={card.image} alt={card.title} className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">{card.title}</h5>
-                <p className="card-text">{card.description1}</p>
-                <p className="card-text">{card.description2}</p>
+    <div className="container-fluid col-11  p-3 mt-5">
+      <div className=" text-center mt-5 ">
+        <h3>Overview</h3>
+        <p className="pt-5 pb-5 ">
+          Set of APIs enabling payment request services in real-time schemes:
+          includes the ability to retrieve the status of payment requests
+        </p>
+      </div>
+      <div className="  border border-danger">
+        <div className="text-center m-4">
+          <span className=" ">Available APIs</span>
+        </div>
+
+        <div className="   border border-danger row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+          {cardData.map((card, index) => (
+            <div key={index} className="col  border border-primary rounded  ">
+              <div className="card w-100 h-100  p-2">
+                <div className="w-100 d-flex  border border-danger">
+                  <img
+                    src={card.image}
+                    alt=""
+                    className="rounded-circle border"
+                    style={{ width: "50px" }}
+                  />
+                  <div className="d-flex flex-column justify-content-center border border-danger">
+                    <p className="card-title mb-0">{card.title}</p>
+                    <p className="card-title mb-0">Abc</p>
+                  </div>
+                  <img
+                    src={bookmark}
+                    alt=""
+                    className="border border-danger "
+                    style={{ width: "20px", height: "20px" }}
+                  />
+                </div>
+                <div className="w-100 card-body justify-content-between d-flex flex-row p-1">
+                  <p
+                    className=" px-1 mb-3"
+                    style={{
+                      border: "1px solid #dc3545",
+                      borderRadius: "15px",
+                      marginRight: "10px",
+                      fontSize: "13px",
+                      fontWeight: "lighter",
+                    }}
+                  >
+                    Fusion Global PAYplus
+                  </p>
+                  <p
+                    className="px-3  mb-3"
+                    style={{
+                      border: "1px solid #dc3545",
+                      borderRadius: "15px",
+                      marginRight: "10px",
+                      fontSize: "13px",
+                      fontWeight: "lighter",
+                    }}
+                  >
+                    Fusin Payments To Go
+                  </p>
+                </div>
+                <div className="mb-4">
+                  <p
+                    className="small"
+                    style={{ fontSize: "0.8rem", fontWeight: 300 }}
+                  >
+                    Initiate a request for payment in real-time schemes with
+                    Request and Response based on ISO20022
+                    pain.013.001.05/pain.014.001.05
+                  </p>
+                </div>
+
+                <div className="w-100 d-flex justify-content-between  border border-danger p-1">
+                  <div
+                    className="d-flex flex-column me-2"
+                    style={{
+                      border: "1px solid #dc3545",
+                      borderRadius: "15px",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <p className="mb-0 px-3">Api</p>
+                  </div>
+
+                  <div className="d-flex flex-column ">
+                    <p className="mb-0">Beta | v2</p>
+                  </div>
+                </div>
               </div>
             </div>
+          ))}
+        </div>
+
+        <div className=" container-fluid mt-5 col-12 text-center p-5">
+          <h1>Key Features</h1>
+
+          {keyFeaturesData.map((feature, index) => (
+            <Card key={index} className="mb-3">
+              <Card.Body>
+                <Card.Title>{feature.title}</Card.Title>
+                <Card.Text>{feature.description}</Card.Text>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
+
+        <div className="container p-5">
+          <div className="row">
+            <div className="col-12 text-center">
+              <h1>How It Works</h1>
+              <img
+                src={diagram}
+                alt=""
+                className="img-fluid"
+                style={{ width: "100%" }}
+              />
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
